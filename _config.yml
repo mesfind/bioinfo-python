@@ -9,7 +9,7 @@ carpentry: "swc"
 title: "Programming with Python"
 
 # Contact email address.
-email: lessons@software-carpentry.org
+email: trayc7@gmail.com
 
 #------------------------------------------------------------
 # Generic settings (should not need to change).
@@ -24,6 +24,7 @@ repository: <USERNAME>/<PROJECT>
 
 # Sites.
 amy_site: "https://amy.software-carpentry.org/workshops"
+bcb_site: "http://eeob-biodata.github.io/BCB546X-Spring2017"
 dc_site: "http://datacarpentry.org"
 swc_github: "https://github.com/swcarpentry"
 swc_site: "https://software-carpentry.org"
