@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      {% comment %} Select what logo to display. {% endcomment %}
+      {% comment %} Select what logo to display. 
       {% if page.carpentry == "swc" %}
       <a href="{{ site.swc_site }}" class="pull-left">
         <img class="navbar-logo" src="{{ page.root }}/assets/img/swc-icon-blue.svg" alt="Software Carpentry logo" />
@@ -26,6 +26,7 @@
         <img class="navbar-logo" src="{{ page.root }}/assets/img/dc-icon-black.svg" alt="Data Carpentry logo" />
       </a>
       {% endif %}
+      {% endcomment %}
 
       {% comment %} Always show link to home page. {% endcomment %}
       <a class="navbar-brand" href="{{ page.root }}/">Home</a>
@@ -34,8 +35,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
-	{% comment %} Always show code of conduct. {% endcomment %}
+	{% comment %} Always show code of conduct. 
         <li><a href="{{ page.root }}/conduct/">Code of Conduct</a></li>
+    {% endcomment %}
 
 	{% comment %} Show setup instructions, reference guide, and lesson episodes for lessons. {% endcomment %}
         {% if site.kind == "lesson" %}
