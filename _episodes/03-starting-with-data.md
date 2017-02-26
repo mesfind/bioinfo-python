@@ -3,7 +3,7 @@ title: Starting With Data
 teaching: 50
 exercises: 0
 questions:
-- "How do you import data in to Python?"
+- "How do you import data into Python?"
 - "How do you create a DataFrame and access its contents?"
 - "How do you create simple plots?"
 objectives:
