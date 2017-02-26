@@ -3,47 +3,27 @@ layout: lesson
 root: .
 ---
 
-The best way to learn how to program is to do something useful,
-so this introduction to Python is built around a common scientific task:
-data analysis.
+# Welcome to the Python part of the BCB546 course!
 
-Our real goal isn't to teach you Python,
-but to teach you the basic concepts that all programming depends on.
-We use Python in our lessons because:
+The materials we will work through are a sample of the lessons created for [Data Carpentry](http://www.datacarpentry.org/python-ecology-lesson/00-short-introduction-to-Python/) and [Software Carpentry](http://swcarpentry.github.io/python-novice-inflammation). 
+The goal of this section is to demonstrate the utility of Python for working with biological data. 
 
-1.  we have to use *something* for examples;
-2.  it's free, well-documented, and runs almost everywhere;
-3.  it has a large (and growing) user base among scientists; and
-4.  experience shows that it's easier for novices to pick up than most other languages.
+## Why Python?
 
-But the two most important things are
-to use whatever language your colleagues are using,
-so that you can share your work with them easily,
-and to use that language *well*.
+Python is a great programming language that is relatively easy to learn and also very easy to read. 
+For bioinformatics, you will find yourself needing to know this language. Many tools for dealing with genomic data are written in Python and knowing how to progam in Python allows you to modify these tools and assemble them together in cohesive pipelines. 
+[Ethan White](http://whitelab.weecology.org/) outlines some nice reasons for using Python on his [Programming for Biologists site](http://www.programmingforbiologists.org/about/why-python/). Where he also references this [xkcd](https://xkcd.com/) comic:
 
-We are studying inflammation in patients who have been given a new treatment for arthritis,
-and need to analyze the first dozen data sets of their daily inflammation.
-The data sets are stored in [comma-separated values]({{ page.root }}/reference/#comma-separated-values) (CSV) format:
-each row holds information for a single patient,
-and the columns represent successive days.
-The first few rows of our first file look like this:
+![xkcd](http://imgs.xkcd.com/comics/python.png)
 
-~~~
-0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0
-0,1,2,1,2,1,3,2,2,6,10,11,5,9,4,4,7,16,8,6,18,4,12,5,12,7,11,5,11,3,3,5,4,4,5,5,1,1,0,1
-0,1,1,3,3,2,6,2,5,9,5,7,4,5,4,15,5,11,9,10,19,14,12,17,7,12,11,7,4,2,10,5,4,2,2,3,2,2,1,1
-0,0,2,0,4,2,2,1,6,7,10,7,9,13,8,8,15,10,10,7,17,4,4,7,6,15,6,4,9,11,3,5,6,3,3,4,2,3,2,1
-0,1,1,3,3,1,3,5,2,4,4,7,6,5,3,10,8,10,6,17,9,14,9,7,13,9,12,6,7,7,9,6,3,2,2,4,2,0,1,1
-~~~
-{: .source}
+## The Lessons
 
-We want to:
+Most of the lessons we will use for this course were written for the [Data Carpentry](http://www.datacarpentry.org/) series of workshops. In particular, we are using the [Data Analysis & Visualization in Python: Python for Ecologists](http://www.datacarpentry.org/python-ecology-lesson/) set of lessons. It is worth noting that one of the primary contributors and maintainers of this teaching material is [April Wright](http://wrightaprilm.github.io/pages/about_me.html), a postdoc in EEOB at Iowa State. 
 
-*   load that data into memory,
-*   calculate the average inflammation per day across all patients, and
-*   plot the result.
+The data we are using for this lesson are from the Portal Project Teaching Database -
+[available on FigShare](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459).
+More details about the files we'll use and where to downlod them are available on the "[Setup](setup/)" page
 
-To do all that, we'll have to learn a little bit about programming.
 
 > ## Prerequisites
 >
@@ -55,4 +35,6 @@ To do all that, we'll have to learn a little bit about programming.
 {: .prereq}
 
 ### Getting Started
-To get started, follow the directions in the "[Setup](setup/)" tab to download data to your computer and follow any installation instructions. 
+To get started with installing Python, follow the directions given in the [Week 8](https://github.com/EEOB-BioData/BCB546X-Spring2017/tree/master/Week_8)
+folder of the class repository.
+You will also have to create a directory to work from and download some files. You can find instructions for doing that in the "[Setup](setup/)" page. 

@@ -53,7 +53,7 @@
         </li>
 	{% endif %}
 
-	{% comment %} Show extras for lessons or if this is the main workshop-template repo (where they contain documentation). {% endcomment %}
+	{% comment %} Show extras for lessons or if this is the main workshop-template repo (where they contain documentation). 
 	{% if site.kind == "lesson" or site.github.repository_name == "workshop-template" %}
         <li class="dropdown">
           <a href="{{ page.root }}/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
@@ -64,6 +64,7 @@
           </ul>
         </li>
 	{% endif %}
+	{% endcomment %}
 
 	{% comment %} Always show license. {% endcomment %}
         <li><a href="{{ page.root }}/license/">License</a></li>
