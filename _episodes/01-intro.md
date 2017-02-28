@@ -116,14 +116,25 @@ IndexError: string index out of range
 ~~~
 {: .output}
 
-If we try to access index 5 of our string, we get an error. The error indicates that we accessed an element outside of the range of our variable. 
+If we try to access index 5 of our string, we get an error. The error indicates that we accessed an element outside of the range of our variable. Instead we need to access index 4:
+
+~~~
+print(s[len(s) - 1])
+~~~
+{: .python}
+
+~~~
+o
+~~~
+{: .output}
+
 
 
 # Python vs. R
 
 > ## Count the Gs using R
 >
-> Count the number of Gs in the sequence above using a `for` loop.
+> Count the number of Gs in the sequence above using a `for` loop. What is the difference between R and Python implmentations?
 >
 > > <!-- ## Solution
 > > ~~~
