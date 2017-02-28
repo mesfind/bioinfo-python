@@ -38,3 +38,29 @@ More details about the files we'll use and where to downlod them are available o
 To get started with installing Python, follow the directions given in the [Week 8](https://github.com/EEOB-BioData/BCB546X-Spring2017/tree/master/Week_8)
 folder of the class repository.
 You will also have to create a directory to work from and download some files. You can find instructions for doing that in the "[Setup](setup/)" page. 
+
+### Format
+
+These lessons will provide command line text and code in specific formats.
+
+All commands that are intended to be executed in your Unix terminal will be shown with the `$` prompt. For example:
+
+```
+$ cd my_directory
+$ pwd
+```
+
+All output from any execution will be shown with a black bar on the side:
+
+~~~
+/home/my_directory
+~~~
+{: .output}
+
+All Python code will be given in boxes with a purple bar on the side and in purple text, with no prompt:
+
+~~~
+import numpy as np
+a = 12
+~~~
+{: .python}
