@@ -42,8 +42,8 @@ You will want to use a Jupyter notebook or the Spyder IDE console to run this le
 To start a new Python session in a Jupyter notebook:
 
 ```
-cd python-bcb546
-jupyter notebook
+$ cd python-bcb546
+$ jupyter notebook
 ```
 
 Then select **_New->Python 3_**. Name this session `03-starting-wtih-data`.

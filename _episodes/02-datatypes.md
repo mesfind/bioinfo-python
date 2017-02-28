@@ -164,18 +164,23 @@ my_list = [0,1,2]
 {: .python}
 
 
-> ## What happens when you try to change a tuple versus a list?
+> ## What happens when you try to change a list versus a tuple?
 >
-> Change the value of a single element in `my_tuple ` and `my_tuple `. 
+> Change the value of a single element in `my_list ` and `my_tuple `. 
 >
 > > <!--## Solution
 > > 
 > > ~~~
+> > my_list[1] = 5
+> > print("my_list =", my_list)
+> > 
 > > my_tuple[1] = 5
 > > ~~~
 > > {: .python}
 > > 
 > > ~~~
+> > my_list = [0, 5, 2]
+> > 
 > >Traceback (most recent call last):
 > >  File "<stdin>", line 1, in <module>
 > >TypeError: 'tuple' object does not support item assignment
@@ -363,7 +368,7 @@ There are an immense number of Python packages (also called libraries) out there
 Anaconda helps install many important Python packages. You can use `conda` to install others that do not come with the default install. One very useful Python library for bioinformatics is [biopython](http://biopython.org/). You can install this it easily with `conda` from your terminal window.
 
 ```
-conda install biopython
+$ conda install biopython
 ```
 
 The prompt will ask you if you want to proceed with installing this package. Simply type `y` followed by the enter key and `conda` will manage the download and installation. 
@@ -371,7 +376,7 @@ The prompt will ask you if you want to proceed with installing this package. Sim
 For packages that are not available via Anaconda, you may also be able to use the application `pip` to install. We will use the Python version of [ggplot](http://ggplot.yhathq.com/) in later lessons, so install it now:
 
 ```
-pip install ggplot
+$ pip install ggplot
 ```
 
 ## Updating Packages
@@ -379,19 +384,19 @@ pip install ggplot
 Anaconda makes it easy to update packages in `conda`. For any individual package, you can use `update`. The example below updates the package [pandas](http://pandas.pydata.org/), which allows us to deal with complex data structures.
 
 ```
-conda update pandas
+$ conda update pandas
 ```
 
 Alternatively, you can update all of the packages managed by Anaconda using:
 
 ```
-conda update --all
+$ conda update --all
 ```
 
 For packages installed using `pip`, you can use the `-U` flag or `--upgrade`.
 
 ```
-pip install ggplot -U
+$ pip install ggplot -U
 ```
 
 ## Importing Packages
@@ -444,7 +449,7 @@ That course provides an easy script that you can use to check your environment.
 2. Now run the file by executing it in your terminal window (make sure you're in the `python-bcb546` directory:
 
 ```
-python check_env.py
+$ python check_env.py
 ```
 
 If everything is installed properly you should get:

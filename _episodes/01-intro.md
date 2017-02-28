@@ -231,7 +231,7 @@ When you hit enter after a colon `:`, the prompt changes, indicating that you ar
 One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called _01-intro.py_. You can run this whole script from the command line in your terminal:
 
 ```
-python 01-intro.py
+$ python 01-intro.py
 ```
 ~~~
 13
