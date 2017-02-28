@@ -318,7 +318,7 @@ or
 >
 > Try to reassign the second value (in the *key value pair*) so that it no longer reads "two" but instead reads "spam and eggs". What does your dictionary look like after you make this change?
 >
-> > ## Solution
+> > <!--## Solution
 > > 
 > > ~~~
 > > rev[2] = 'spam and eggs'
@@ -330,7 +330,7 @@ or
 > >{1: 'one', 2: 'spam and eggs', 3: 'three', 4: 'four'}
 > > ~~~
 > > {: .output}
-> {: .solution}
+> {: .solution}-->
 {: .challenge}
 
 It is important to note that dictionaries are _unordered_ and do not remember the
