@@ -156,7 +156,7 @@ o
 >
 > Count the number of Gs in the sequence above using either R or Python in a simpler way.
 >
-> > <!-- ## Python Solution
+> > <!--## Python Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA
 > > print(seq.count('G'))
@@ -164,24 +164,22 @@ o
 > > {: .python}
 > {: .solution} -->
 > 
-> > <!-- ## R Solution
+> > <!--## R Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA
 > > ???
 > > ~~~
 > > {: .python}
-> {: .solution} -->
+> {: .solution}-->
 {: .challenge}
 
 There are a lot of blogs and articles comparing R and Python. Many of these comparisons (like this [infographic](https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis#gs.3P0PoiY)) do not tell you which is "better". That's because this is up to you. It really depends on what you're trying to do. Typically for a lot of bioinformatics projects, you will find yourself needing to know both. This is simply because many of the very useful tools for working with biological data are written in a variety of languages. Thus, it is up to the researcher to interact with them and develop cohesive pipelines for data curation and analysis. 
 
 # Getting Started with Python
 
-For this class we will primarily use Jupyter notebooks or the interactive interpreter. 
-
 ## Interactive Interpeter
 
-You can run python in various tools. Perhaps the most straightforward is to use the interactive Python interpreter. To enter the Python console, simple open a terminal window and type `python`.
+You can run python in various tools. Perhaps the most straightforward is to use the interactive Python interpreter. To enter the Python console, simple open a terminal window and type `python`. [In Mac OS X, it is sometimes good to use `pythonw` which is required if you want to use any Python function that requires opening new windows (e.g., plotting).]
 
 ```
 $ python
@@ -216,7 +214,7 @@ When using the interactive console, it's important to remember that indentation 
 ~~~
 {: .python}
 
-When you hit enter after a colon `:`, the prompt changes, indicating that you are within a loop. Enter the loop contents after indenting and end the loop by adding an extra newline.
+When you hit enter after a colon `:`, the prompt changes to `...`, indicating that you are within a loop. Enter the loop contents after indenting and end the loop by adding an extra newline.
 
 ~~~
 >>> for i in range(5):
@@ -239,7 +237,7 @@ When you hit enter after a colon `:`, the prompt changes, indicating that you ar
 
 ### Executing Scripts
 
-One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called _01-intro.py_. You can run this whole script from the command line in your terminal:
+One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called [`Week_8/scripts/01-intro.py`](https://github.com/EEOB-BioData/BCB546X-Spring2017/tree/master/Week_8/scripts) (in the course GitHub repository). You can run this whole script from the command line in your terminal:
 
 ```
 $ python 01-intro.py
