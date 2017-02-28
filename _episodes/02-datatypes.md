@@ -265,7 +265,7 @@ rev
 ~~~
 {: .output}
 
-Tt is often necessary to check if the dictionary has a key before adding it, otherwise you will overwrite the value associated with that key:
+It is often necessary to check if the dictionary has a key before adding it, otherwise you will overwrite the value associated with that key:
 
 ~~~
 if 4 not in rev:
