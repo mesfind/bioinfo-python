@@ -351,7 +351,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > 
 > 2. What is a much simpler approach to this?
 >
-> > <!--## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > # 1
@@ -362,7 +362,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > > print(surveys_df['plot_id'].nunique())
 > > ~~~
 > > {: .python}
-> {: .solution}-->
+> {: .solution}
 {: .challenge}
 
 
@@ -530,13 +530,13 @@ summaries of categorical data.
 > Using the `.describe()` method on the DataFrame sorted by sex, 
 > determine how many individuals were observed for each.
 >
-> > <!--## Solution
+> > ## Solution
 > > 
 > > * *Female* = 15690
 > > 
 > > * *Male* = 17348
 > > 
-> {: .solution}-->
+> {: .solution}
 {: .challenge}
 
 
@@ -547,14 +547,14 @@ summaries of categorical data.
 > then grab mean values:
 > - Hint: you can use a list in the arguments of the `groupby` method, `['plot_id','sex']`
 > 
-> > <!--## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > sorted_data2 = surveys_df.groupby(['plot_id','sex'])
 > > sorted_data2.mean()
 > > ~~~
 > > {: .python}
-> {: .solution}-->
+> {: .solution}
 {: .challenge}
 
 
@@ -562,14 +562,14 @@ summaries of categorical data.
 >
 > Summarize weight values for each plot in your data.
 > 
-> > <!--## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > by_plot = surveys_df.groupby('plot_id')
 > > by_plot['weight'].describe()
 > > ~~~
 > > {: .python}
-> {: .solution}-->
+> {: .solution}
 {: .challenge}
 
 
@@ -654,28 +654,28 @@ Number captured per plot
 >
 > Create a bar plot that shows the average weight of all of the animals captured in that plot
 > 
-> > <!--## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > plot_weight_means = surveys_df['weight'].groupby(surveys_df['plot_id']).mean()
 > > plot_weight_means.plot(kind='bar')
 > > ~~~
 > > {: .python}
-> {: .solution}-->
+> {: .solution}
 {: .challenge}
 
 > ## Plot the number of females and the number of males in the dataset
 >
 > Create a bar plot that shows the total number of each sex captured for the entire dataset.
 > 
-> > <!--## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > counts_by_sex = surveys_df['record_id'].groupby(surveys_df['sex']).count()
 > > counts_by_sex.plot(kind='bar')
 > > ~~~
 > > {: .python}
-> {: .solution}-->
+> {: .solution}
 {: .challenge}
 
 

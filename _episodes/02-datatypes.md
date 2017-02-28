@@ -168,7 +168,7 @@ my_list = [0,1,2]
 >
 > Change the value of a single element in `my_list ` and `my_tuple `. 
 >
-> > <!--## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > my_list[1] = 5
@@ -186,7 +186,7 @@ my_list = [0,1,2]
 > >TypeError: 'tuple' object does not support item assignment
 > > ~~~
 > > {: .output}
-> {: .solution}-->
+> {: .solution}
 {: .challenge}
 
 
@@ -318,7 +318,7 @@ or
 >
 > Try to reassign the second value (in the *key value pair*) so that it no longer reads "two" but instead reads "spam and eggs". What does your dictionary look like after you make this change?
 >
-> > <!--## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > rev[2] = 'spam and eggs'
@@ -330,7 +330,7 @@ or
 > >{1: 'one', 2: 'spam and eggs', 3: 'three', 4: 'four'}
 > > ~~~
 > > {: .output}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 It is important to note that dictionaries are _unordered_ and do not remember the
