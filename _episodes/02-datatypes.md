@@ -198,14 +198,23 @@ my_list = [0,1,2]
 > {: .solution}
 {: .challenge}
 
+### Mixing Types
+
+In Python, it is also possible to mix types in a list or tuple. This makes it easy to store data of variable type. 
+Thus, you can have a list that contains both natural numbers, floating point numbers, strings, lists, and tuples:
+
+~~~
+my_data = [('Manidae', 'Phataginus', 'tricuspis', 1821), 23.56, 30, [10.8,8.45,9.33]]
+~~~
+{: .python}
 
 ## Dictionaries
 
 A **dictionary** is a container that holds pairs of objects - keys and values.
 
 ~~~
-translation = {"one" : 1, "two" : 2}
-translation["one"]
+numbers = {"one" : 1, "two" : 2}
+numbers["one"]
 ~~~
 {: .python}
 
@@ -217,13 +226,13 @@ translation["one"]
 Dictionaries work a lot like lists - except that you index them with *keys*. 
 You can think about a key as a name for or a unique identifier for a set of values
 in the dictionary. Keys can only have particular types - they have to be 
-"hashable". Strings, numeric types, and tuples are acceptable, but lists aren't.
+"hashable". Strings, numeric types, and tuples are acceptable, but lists are not.
 
 Here is a dictionary with natural numbers as keys. You access the values associated with each key, by providing the key in `[]`
 
 ~~~
-rev = {1 : "one", 2 : "two"}
-rev[1]
+numbers2 = {1 : "one", 2 : "two"}
+numbers2[1]
 ~~~
 {: .python}
 
@@ -232,7 +241,7 @@ rev[1]
 ~~~
 {: .output}
 
-You can also use a tuple as a key
+You can also use a tuple as a key, but only if the tuple contains hashable elements (strings, numbers, tuples):
 
 ~~~
 my_dict2 = {(1,2,3) : 3}
@@ -263,9 +272,9 @@ TypeError: unhashable type: 'list'
 To add an item to the dictionary we assign a value to a new key:
 
 ~~~
-rev = {1 : 'one', 2 : 'two'}
-rev[3] = 'three'
-rev
+numbers2 = {1 : 'one', 2 : 'two'}
+numbers2[3] = 'three'
+numbers2
 ~~~
 {: .python}
 
@@ -277,9 +286,9 @@ rev
 It is often necessary to check if the dictionary has a key before adding it, otherwise you will overwrite the value associated with that key:
 
 ~~~
-if 4 not in rev:
-    rev[4] = 'four'
-rev
+if 4 not in numbers2:
+    numbers2[4] = 'four'
+numbers2
 ~~~
 {: .python}
 
@@ -290,10 +299,12 @@ rev
 
 
 Using `for` loops with dictionaries is a little more complicated. We can do this
-in two ways:
+in two ways.
+
+We can use the method `.items()` to return the key-value pair (this is the recommended way of iterating over a dictionary in Python):
 
 ~~~
-for key, value in rev.items():
+for key, value in numbers2.items():
     print(key, "->", value)
 ~~~
 {: .python}
@@ -306,11 +317,11 @@ for key, value in rev.items():
 ~~~
 {: .output}
 
-or
+Alternatively, you can iterate over the keys. When you loop over the dictionary in this way, Python just assigns the key value to the iterator variable:
 
 ~~~
->>> for key in rev.keys():
-...     print(key, "->", rev[key])
+for key in numbers2:
+    print(key, "->", numbers2[key])
 ~~~
 {: .python}
 
@@ -346,6 +357,42 @@ It is important to note that dictionaries are _unordered_ and do not remember th
 sequence of their items (i.e. the order in which key:value pairs were added to 
 the dictionary). Because of this, the order in which items are returned from loops
 over dictionaries might appear random and can even change with time.
+If the dictionary's keys are of a single type that can be sorted (numbers or strings), then you can get a sorted list of the keys and iterate over it in a loop. 
+
+A loop over the unordered dictionary:
+
+~~~
+d = {3 : 'three', 2 : 'two', 6 : 'six', 5 : 'five'}
+for key, value in d.items():
+    print(key, ' = ', value)
+~~~
+{: .python}
+
+~~~
+3  =  three
+2  =  two
+6  =  six
+5  =  five
+~~~
+{: .output}
+
+To get a list of sorted keys, you can use the `sorted()` function on the list returned by the `.keys()` method:
+
+~~~
+d = {3 : 'three', 2 : 'two', 6 : 'six', 5 : 'five'}
+for key in sorted(d.keys()):
+    print(key, ' = ', d[key])
+~~~
+{: .python}
+
+~~~
+2  =  two
+3  =  three
+5  =  five
+6  =  six
+~~~
+{: .output}
+
 
 ## Functions
 
