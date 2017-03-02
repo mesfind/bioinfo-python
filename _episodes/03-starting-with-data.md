@@ -1,5 +1,5 @@
 ---
-title: Starting With Data
+title: Working With Pandas DataFrames in Python
 teaching: 50
 exercises: 0
 questions:
@@ -22,10 +22,10 @@ keypoints:
 - "There are ways to readily visualize summaries."
 ---
 
-# Working With Pandas DataFrames in Python
+# Starting with Data
 
 We can automate much of our research workflow using Python. It's efficient to spend time
-building the code to perform these tasks because once it's built, we can use it
+building the code to perform these tasks because once it is built, we can use it
 over and over on different datasets that use a similar format. This makes our
 methods easy to reproduce and easy to adapt to new projects. We can also share our code with colleagues
 and they can replicate the same analysis.
@@ -69,8 +69,9 @@ Specifically, we will be using files from the [Portal Project Teaching Database]
 * This section will use the `surveys.csv` file that can be downloaded from the 
 [`Week_8/data`](https://raw.githubusercontent.com/EEOB-BioData/BCB546X-Spring2017/master/Week_8/data/surveys.csv) folder of the course repository.
 Download this file (either directly using the link or by pulling from the course repo) and copy it to your `python-bcb546` directory.
+* Be sure that `surveys.csv` is in `python-bcb546` and not `python-bcb546/data`. Otherwise, you must change your directory to `python-bcb546/data` before starting the exercises or include the `data` directory in your file path when opening the file in Python.
 
-In this lesson, we are studying the species and weight of (_vertebrate_) animals caught in plots in our study
+In this lesson, we are studying the species and weight of (_vertebrate_) animals captured in plots in our study
 area. The observed data are stored as a `.csv` file (comma-separated value): each row holds information for a
 single animal, and the columns represent:
 
@@ -113,8 +114,9 @@ that use [NumPy](http://www.numpy.org/) (which is another Python library) arrays
 Python doesn't load all of the libraries available to it by default. We have to
 add an `import` statement to our code in order to use library functions. To import
 a library, we use the syntax `import libraryName`. If we want to give the
-library a nickname to shorten the command, we can add `as myNickName`.  An
-example of importing the pandas library using the common nickname `pd` is below.
+library a nickname to shorten the command, we can add `as myNickName`.  
+
+Import the pandas library using the common nickname `pd` is below.
 
 
 ~~~
@@ -263,15 +265,15 @@ dtype: object
 
 <!--We'll talk a bit more about what the different formats mean in a different lesson.
 -->
+
 ### Useful Ways to View DataFrame objects in Python
 
 There are multiple methods that can be used to summarize and access the data
-stored in DataFrames. Let's try out a few. Note that we call the method by using
-the object name `surveys_df.method`. So `surveys_df.columns` provides an index
+stored in DataFrames. Note that we call the method by using
+the object or method name `surveys_df.object` or `surveys_df.method()`. So `surveys_df.columns` provides an index
 of all of the column names in our DataFrame.
 
-<!--HINT: [More on tuples, here](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences).
--->
+
 > ## Querying DataFrames
 >
 > There are several methods that allow you to inspect your DataFrame. 
@@ -347,7 +349,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 >
 > 1. Create a list of unique plot ID's found in the surveys data. 
 > Call it `plot_names`. How many unique plots are there in the data? 
-> How many unique species are in the data?
+> <!--How many unique species are in the data?-->
 > 
 > 2. What is a much simpler approach to this?
 >
@@ -373,7 +375,7 @@ within fields of our data. For example, we might want to calculate the average
 weight of all individuals per plot.
 
 We can calculate basic statistics for all records in a single column using the
-syntax below:
+`.describe()` method:
 
 ~~~
 surveys_df['weight'].describe()
@@ -457,7 +459,7 @@ surveys_df['weight'].count()
 {: .output}
 
 But if we want to summarize by one or more variables, for example sex, we can
-use Pandas' `.groupby` method. Once we've created a groupby DataFrame, we
+use the Pandas DataFrame `.groupby()` method. Once we've created a re-orgaized DataFrame, we
 can quickly calculate summary statistics by a group of our choice.
 
 ~~~
@@ -466,9 +468,9 @@ sorted_data = surveys_df.groupby('sex')
 ~~~
 {: .python}
 
-The Pandas function `describe` will return descriptive stats including: mean,
+The method `.describe()` will return descriptive stats including: mean,
 median, max, min, std and count for a particular column in the data. Pandas'
-`describe` method will only return summary values for columns containing
+`.describe()` method will only return summary values for columns containing
 numeric data.
 This provides summary statistics for each column separated by sex. 
 
@@ -522,7 +524,7 @@ M          29.709578  42.995379
 ~~~
 {: .output}
 
-The `groupby` command is powerful in that it allows us to quickly generate
+The `.groupby()` method is powerful in that it allows us to quickly generate
 summaries of categorical data.
 
 > ## How many individuals were recorded as female and how many were male?
@@ -545,7 +547,7 @@ summaries of categorical data.
 >
 > What happens when you group by two columns using the following syntax and 
 > then grab mean values:
-> - Hint: you can use a list in the arguments of the `groupby` method, `['plot_id','sex']`
+> - Hint: you can use a list in the arguments of the `.groupby()` method, `['plot_id','sex']`
 > 
 > > <!--## Solution
 > > 
