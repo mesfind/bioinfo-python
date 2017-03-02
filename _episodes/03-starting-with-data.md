@@ -582,7 +582,6 @@ ways, but we'll use `groupby` combined with a `count()` method.
 
 
 ~~~
-# count the number of samples by species
 species_counts = surveys_df.groupby('species_id')['record_id'].count()
 ~~~
 {: .python}
@@ -607,8 +606,9 @@ example let's multiply all weight values by 2. A more practical use of this migh
 be to normalize the data according to a mean, area, or some other value
 calculated from our data.
 
+Multiply all weight values by 2:
+
 ~~~
-# multiply all weight values by 2
 surveys_df['weight'] * 2
 ~~~
 {: .python}
