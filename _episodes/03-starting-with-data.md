@@ -457,7 +457,7 @@ surveys_df['weight'].count()
 ~~~
 {: .output}
 
-But if we want to summarize by one or more variables, for example sex, we can
+But if we want to summarize by one or more variables, for example sex, we need to
 use the Pandas DataFrame `.groupby()` method. Once we've created a re-orgaized DataFrame, we
 can quickly calculate summary statistics by a group of our choice.
 
@@ -480,7 +480,25 @@ sorted_data.describe()
 {: .python}
 
 ~~~
-...
+                    day  hindfoot_length         month       plot_id  \
+sex                                                                    
+F   count  15690.000000     14894.000000  15690.000000  15690.000000   
+    mean      16.007138        28.836780      6.583047     11.440854   
+    std        8.271144         9.463789      3.367350      6.870684   
+    min        1.000000         7.000000      1.000000      1.000000   
+    25%        9.000000        21.000000      4.000000      5.000000   
+    50%       16.000000        27.000000      7.000000     12.000000   
+    75%       23.000000        36.000000     10.000000     17.000000   
+    max       31.000000        64.000000     12.000000     24.000000   
+M   count  17348.000000     16476.000000  17348.000000  17348.000000   
+    mean      16.184286        29.709578      6.392668     11.098282   
+    std        8.199274         9.629246      3.420806      6.728713   
+    min        1.000000         2.000000      1.000000      1.000000   
+    25%        9.000000        21.000000      3.000000      5.000000   
+    50%       16.000000        34.000000      6.000000     11.000000   
+    75%       23.000000        36.000000      9.000000     17.000000   
+    max       31.000000        58.000000     12.000000     24.000000   
+
               record_id        weight          year  
 sex                                                  
 F   count  15690.000000  15303.000000  15690.000000  
