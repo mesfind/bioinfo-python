@@ -1,6 +1,6 @@
 ---
 title: Working With Pandas DataFrames in Python
-teaching: 50
+teaching: 60
 exercises: 0
 questions:
 - "How do you import data into Python?"
@@ -314,10 +314,9 @@ statistics to learn more about the data that we're working with. We might want
 to know how many animals were collected in each plot, or how many of each
 species were caught. We can perform summary statistics quickly using groups. But first we need to figure out what we want to group by.
 
-Let's begin by exploring our data:
+Let's begin by exploring our data and view the column names:
 
 ~~~
-# Look at the column names
 surveys_df.columns.values
 ~~~
 {: .python}
@@ -462,8 +461,9 @@ But if we want to summarize by one or more variables, for example sex, we can
 use the Pandas DataFrame `.groupby()` method. Once we've created a re-orgaized DataFrame, we
 can quickly calculate summary statistics by a group of our choice.
 
+Group data by the sex of each observed individual:
+
 ~~~
-# Group data by sex
 sorted_data = surveys_df.groupby('sex')
 ~~~
 {: .python}
