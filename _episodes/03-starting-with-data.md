@@ -528,7 +528,10 @@ sorted_data.mean()
 ~~~
 {: .python}
 
-~~~
+![Means grouped by sex](../fig/group_mean_jn-table.png)
+
+
+<!--~~~
         record_id     month        day         year    plot_id  \
 sex                                                              
 F    18036.412046  6.583047  16.007138  1990.644997  11.440854   
@@ -541,7 +544,7 @@ M          29.709578  42.995379
 
 ~~~
 {: .output}
-
+-->
 The `.groupby()` method is powerful in that it allows us to quickly generate
 summaries of categorical data.
 
@@ -601,19 +604,33 @@ ways, but we'll use `groupby` combined with a `count()` method.
 
 ~~~
 species_counts = surveys_df.groupby('species_id')['record_id'].count()
-~~~
-{: .python}
-
-
-Or, we can also count just the rows that have the species "DO":
-
-~~~
-surveys_df.groupby('species_id')['record_id'].count()['DO']
+species_counts
 ~~~
 {: .python}
 
 ~~~
-3027
+species_id
+AB      303
+AH      437
+AS        2
+BA       46
+CB       50
+CM       13
+CQ       16
+...
+~~~
+{: .output}
+
+
+Or, we can also count just the rows that have the species "PL" (_Peromyscus leucopus_):
+
+~~~
+surveys_df.groupby('species_id')['record_id'].count()['PL']
+~~~
+{: .python}
+
+~~~
+36
 ~~~
 {: .output}
 
@@ -733,8 +750,6 @@ plot_id  sex
 Then we'll use `.unstack()` on our grouped data to figure out the total weight that each sex contributed to each plot.
 
 ~~~
-by_plot_sex = surveys_df.groupby(['plot_id','sex'])
-plot_sex_count = by_plot_sex['weight'].sum()
 plot_sex_count.unstack()
 ~~~
 {: .python}
@@ -758,8 +773,6 @@ plot_id
 Now, create a stacked bar plot with those data where the weights for each sex are stacked by plot.
 
 ~~~
-by_plot_sex = surveys_df.groupby(['plot_id','sex'])
-plot_sex_count = by_plot_sex['weight'].sum()
 spc = plot_sex_count.unstack()
 s_plot = spc.plot(kind='bar',stacked=True,title="Total weight by plot and sex")
 s_plot.set_ylabel("Weight")
