@@ -672,7 +672,7 @@ Number of individuals per species
 We can also look at how many animals were captured in each plot:
 
 ~~~
-total_count = surveys_df['record_id'].groupby(surveys_df['plot_id']).nunique()
+total_count = surveys_df.groupby('plot_id')['record_id'].nunique()
 ~~~
 {: .python}
 
