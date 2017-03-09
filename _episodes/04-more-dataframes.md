@@ -365,18 +365,18 @@ surveys_df.head(5)
 
 Did both DataFrames get altered this time?
 
-<!--## Slicing Subsets of Rows and Columns in Python
+## Slicing Subsets of Rows and Columns
 
 We can select specific ranges of our data in 
 both the row and column directions
 using either label or integer-based indexing.
 
-- `loc`: indexing via *labels* or *integers*
-- `iloc`: indexing via *integers*
+- `iloc`: indexing via *integer indices*
+- `loc`: indexing via *labels* 
 
-To select a subset of rows AND columns from our DataFrame, we can use the `iloc`
+To select a subset of rows AND columns from our DataFrame, we can use the `.iloc[]`
 index. For example, we can select month, day and year (columns 2, 3 and 4 if we
-start counting at 1), like this:
+start counting at 1) for the first 3 rows in the DataFrame, like this:
 
 ~~~
 surveys_df.iloc[0:3, 1:4]
@@ -396,62 +396,129 @@ Notice that we asked for a slice from 0:3. This yielded 3 rows of data. When you
 ask for 0:3, you are actually telling python to start at index 0 and select rows
 0, 1, 2 **up to but not including 3**.
 
-Let's next explore some other ways to index and select subsets of data:
+Alternatively, `.loc[]` requires that you use labels to access the rows (row labels are their integer indices) and columns (column names). 
+
+Here we can access the `species_id` for row number `5`:
 
 ~~~
-# select all columns for rows of index values 0 and 10
-surveys_df.loc[[0, 10], :]
-# what does this do?
-surveys_df.loc[0, ['species_id', 'plot_id', 'weight']]
-
-# What happens when you type the code below?
-surveys_df.loc[[0, 10, 35549], :]
+surveys_df.loc[5, 'species_id']
 ~~~
 {: .python}
 
+~~~
+'PF'
+~~~
+{: .output}
+
+If we want to use `.iloc[]` to access that same cell we would use:
+
+
+~~~
+surveys_df.iloc[5, 5]
+~~~
+{: .python}
+
+~~~
+'PF'
+~~~
+{: .output}
+
+Thus there are many different ways to access our DataFrame. Here's another example: we can select all the columns for rows with index labels `0` and `10`:
+
+~~~
+surveys_df.loc[[0, 10], :]
+~~~
+{: .python}
+
+
+~~~
+    record_id  month  day  year  plot_id species_id sex  hindfoot_length  \
+0           1      7   16  1977        2         NL   M             32.0   
+10         11      7   16  1977        5         DS   F             53.0   
+
+    weight  
+0      NaN  
+10     NaN  
+~~~
+{: .output}
+
+Or we can just view the `species_id`, `plot_id`, and `weight` of observation `777`:
+
+~~~
+surveys_df.loc[777, ['species_id', 'plot_id', 'weight']]
+~~~
+{: .python}
+
+~~~
+species_id    DM
+plot_id        8
+weight        36
+Name: 777, dtype: object
+~~~
+{: .output}
 
 NOTE: Labels must be found in the DataFrame or you will get a `KeyError`. The
-start bound and the stop bound are **included**.  When using `loc`, integers
-*can* also be used, but they refer to the index label and not the position. Thus
-when you use `loc`, and select 1:4, you will get a different result than using
-`iloc` to select rows 1:4.
+start bound and the stop bound are _included_.  When using `.loc[]` to access ros, integer indices
+but they refer to the index label and not the position. Thus
+when you use `.loc[]`, and select `1:4`, you will get a different result than using
+`.iloc[]` to select rows `1:4`.
 
-We can also select a specific data value according to the specific row and
-column location within the data frame using the `iloc` function:
-`dat.iloc[row,column]`.
-
+Here we use `.iloc[] to get the first 2 columns for rows 1, 2, and 3:
 
 ~~~
-surveys_df.iloc[2,6]
+surveys_df.iloc[1:4, :2]
 ~~~
 {: .python}
 
+~~~
+   record_id  month
+1          2      7
+2          3      7
+3          4      7
+~~~
+{: .output}
+
+If we use `.loc[]` to select `1:4`, then this will include all of the elements with the specified labels:
 
 ~~~
-'F'
+surveys_df.loc[1:4, ['record_id','month']]
+~~~
+{: .python}
+
+~~~
+   record_id  month
+1          2      7
+2          3      7
+3          4      7
+4          5      7
 ~~~
 {: .output}
 
 
-Remember that Python indexing begins at 0. So, the index location [2, 6] selects
-the element that is 3 rows down and 7 columns over in the DataFrame.-->
+> ## Access specific values using `.loc[]` and `.iloc[]`
+>
+> 1. Use `.loc[]` to view the `species_id` and `sex` of the animals observed in
+> row 1, 3, and 5
+> 
+> 2. Use `.iloc[]` to view the same thing.
+>
+> > <!--## Solution
+> > 
+> > ~~~
+> > # 1
+> > surveys_df.loc[[1, 3, 5], ['species_id','sex']]
+> > 
+> > # 2
+> > surveys_df.iloc[1:6:2, [5,6]]
+> > ~~~
+> > {: .python}
+> {: .solution}-->
+{: .challenge}
 
-<!--## Challenge Activities
 
-1. What happens when you type:
+## Subsetting Data using Criteria
 
-	- surveys_df[0:3]
-	- surveys_df[:5]
-	- surveys_df[-1:]
-
-2. What happens when you call:
-    - `dat.iloc[0:4, 1:4]`
-    - `dat.loc[0:4, 1:4]`
-    - How are the two commands different?
--->
-<!--## Subsetting Data Using Criteria
-
-We can also select a subset of our data using criteria. For example, we can
+We can also select a subset of our data using specific criteria. For example, we can
 select all rows that have a year value of 2002.
 
 ~~~
@@ -489,13 +556,42 @@ surveys_df[surveys_df.year != 2002]
 We can define sets of criteria too:
 
 ~~~
-surveys_df[(surveys_df.year >= 1980) & (surveys_df.year <= 1985)]
+surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 ~~~
 {: .python}
 
+> ## Records by weight and year
+>
+> Select a subset of rows in the `surveys_df` DataFrame that contain data from
+> the year 1999 and that contain weight values less than or equal to 8. How
+> many rows did you end up with?
+>
+> > <!--## Solution
+> > 
+> > ~~~
+> > surveys_df[(surveys_df.weight <= 8.0) & (surveys_df.year == 1999)]
+> > ~~~
+> > {: .python}
+> > ~~~
+> >        record_id  month  day  year  plot_id species_id sex  hindfoot_length  \
+> > 29082      29083      1   16  1999       21         RM   M             16.0   
+> > 29196      29197      2   20  1999       18         RM   M             18.0   
+> > 29421      29422      3   15  1999       16         RM   M             15.0   
+> > 29903      29904     10   10  1999        4         PP   M             20.0   
+> > 29905      29906     10   10  1999        4         PP   M             21.0   
+> > 
+> >        weight  
+> > 29082     8.0  
+> > 29196     8.0  
+> > 29421     8.0  
+> > 29903     7.0  
+> > 29905     4.0  
+> > ~~~
+> > {: .output}
+> {: .solution}-->
+{: .challenge}
 
-
-## Challenge Activities
+<!--## Challenge Activities
 
 1. Select a subset of rows in the `surveys_df` DataFrame that contain data from
    the year 1999 and that contain weight values less than or equal to 8. How
@@ -509,25 +605,38 @@ surveys_df[(surveys_df.year >= 1980) & (surveys_df.year <= 1985)]
 4. The `~` symbol in Python can be used to return the OPPOSITE of the selection that you specify in python. 
 It is equivalent to **is not in**. Write a query that selects all rows that are NOT equal to 'M' or 'F' in the surveys
 data.
-
-
+-->
+<!--
 # Using Masks
 
 A mask can be useful to locate where a particular subset of values exist or
 don't exist - for example,  NaN, or "Not a Number" values. To understand masks,
-we also need to understand `BOOLEAN` objects in python.
+we also need to understand boolean objects in python.
 
 Boolean values include `true` or `false`. So for example
 
 ~~~
-# set x to 5
 x = 5
-# what does the code below return?
 x > 5
-# how about this?
+~~~
+{: .python}
+
+~~~
+False
+~~~
+{: .output}
+
+The statement `x > 5` returns true or false once the conditional has been evaluated. 
+
+~~~
 x == 5
 ~~~
 {: .python}
+
+~~~
+True
+~~~
+{: .output}
 
 
 When we ask python what the value of `x > 5` is, we get `False`. This is because x
@@ -538,7 +647,7 @@ not (False). Python creates an output object that is the same shape as
 the original object, but with a True or False value for each index location.
 
 Let's try this out. Let's identify all locations in the survey data that have
-null (missing or NaN) data values. We can use the `isnull` method to do this.
+null (missing or NaN) data values. We can use the `.isnull()` method to do this.
 Each cell with a null value will be assigned a value of  `True` in the new
 boolean object.
 
