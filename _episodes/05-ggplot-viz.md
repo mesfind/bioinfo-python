@@ -179,7 +179,7 @@ ggplot(aes(x = 'weight', y = 'hindfoot_length', color='species_id'),data = surve
 > Remember how to access subsets of a DataFrame based on conditional criteria?
 > Plot the scatter plot above for only the species `RM` and color by `sex`.
 >
-> > <!--## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > ggplot(aes(x = 'weight', y = 'hindfoot_length', color='sex'),data = surveys_complete[surveys_complete.species_id == 'RM']) + \
@@ -188,7 +188,7 @@ ggplot(aes(x = 'weight', y = 'hindfoot_length', color='species_id'),data = surve
 > > {: .python}
 > > 
 > > ![png](../fig/ggplot6.png)
-> {: .solution}-->
+> {: .solution}
 {: .challenge}
 
 
