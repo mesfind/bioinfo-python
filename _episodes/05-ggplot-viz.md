@@ -40,7 +40,7 @@ Also, remember that you need to include an inline command if you're using a Jupy
 ~~~
 {: .python}
 
-For this exercise, we will use a different data file containing all the complete data observations from the plot surveys used in previous lessons. 
+For this exercise, we will use a different data file containing all the complete data observations from the plot surveys used in previous lessons. Download this file from the [`Week_10`](https://github.com/EEOB-BioData/BCB546X-Spring2017/tree/master/Week_10) folder on the course repository. 
 
 ~~~
 surveys_complete = pd.read_csv( 'surveys_complete.csv', index_col=0)
