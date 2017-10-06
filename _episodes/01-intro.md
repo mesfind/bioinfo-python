@@ -105,7 +105,8 @@ h
 This means that the last element in an array has the index `n-1`, where `n` is the length of the array.
 
 ~~~
-print(s[len(s)])
+n = len(s)
+print(s[n])
 ~~~
 {: .python}
 
@@ -119,7 +120,7 @@ IndexError: string index out of range
 If we try to access index 5 of our string, we get an error. The error indicates that we accessed an element outside of the range of our variable. Instead we need to access index 4:
 
 ~~~
-print(s[len(s) - 1])
+print(s[n - 1])
 ~~~
 {: .python}
 
@@ -134,7 +135,7 @@ o
 
 > ## Count the Gs using R
 >
-> Count the number of Gs in the sequence above using a `for` loop. What is the difference between R and Python implmentations?
+> Count the number of Gs in the sequence above using a `for` loop. What is the difference between Python (see above) and R (in solution below) implmentations?
 >
 > > ## Solution
 > > ~~~
@@ -148,7 +149,6 @@ o
 > > }
 > > print(count)
 > > ~~~
-> > {: .python}
 > {: .solution}
 {: .challenge}
 
@@ -167,9 +167,9 @@ o
 > > ## R Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
-> > ???
+> > library(stringr)
+> > str_count(seq,'G')
 > > ~~~
-> > {: .python}
 > {: .solution}
 {: .challenge}
 
@@ -185,8 +185,8 @@ You can run python in various tools. Perhaps the most straightforward is to use 
 $ python
 ```
 ~~~
-Python 3.6.0 |Anaconda custom (x86_64)| (default, Dec 23 2016, 13:19:00) 
-[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin
+Python 3.6.2 |Anaconda custom (x86_64)| (default, Oct  5 2017, 03:00:07) 
+[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>> 
 ~~~
@@ -237,7 +237,7 @@ When you hit enter after a colon `:`, the prompt changes to `...`, indicating th
 
 ### Executing Scripts
 
-One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called [`Week_8/scripts/01-intro.py`](https://github.com/EEOB-BioData/BCB546X-Spring2017/tree/master/Week_8/scripts) (in the course GitHub repository). You can run this whole script from the command line in your terminal:
+One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called [`Week_08/scripts/01-intro.py`](https://github.com/EEOB-BioData/BCB546X-Fall2017/blob/master/Week_08/scripts/01-intro.py) (in the course GitHub repository). You can run this whole script from the command line in your terminal:
 
 ```
 $ python 01-intro.py
@@ -246,6 +246,28 @@ $ python 01-intro.py
 13
 13
 HELLO
+~~~
+{: .output}
+
+### Python on the Cluster
+
+Our HPC systems do not use the Anaconda install of Python. Additionally, the default verions of Python that is available globally is Python 2.7. Thus, if you would like to use HPC-Class to interact with Python, you will have to load the Python 3 module after logging on to the cluster (`ssh <ISU Net ID>@hpc-class.its.iastate.edu`).
+
+```
+$ module load python/3
+```
+
+Once you have loaded the Python 3 module, you can open the `python3` interpreter:
+
+```
+$ python3
+```
+
+~~~
+Python 3.6.0 (default, Feb  4 2017, 15:08:23) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-4)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
 ~~~
 {: .output}
 
@@ -275,6 +297,15 @@ Another great thing about IPython is that you can also use Unix commands like `l
 
 **To exit** the interactive console, type **_control+D_**.
 
+## Spyder
+
+The Anaconda install also comes with a Python IDE that is similar to RStudio. It is called Spyder. You can open a Spyder instance by executing the command in your terminal window:
+
+```
+$ spyder
+```
+
+Alternatively, you can open the Anaconda navigator to open Spyder.
 
 ## Jupyter Notebooks
 
@@ -290,7 +321,9 @@ This should open your default browser. You can start a new Python notebook by se
 
 ![jupyter browser](../fig/jupyter1.png)
 
-A new Python 3 Jupyter notebook will open. This now allows you integrate Python code with Markdown to fully integrate documentation with your code. 
+Note that I have additional options for Jupyter notebooks and can create a notebook for code written in Bash or [RevBayes](http://revbayes.github.io/about.html). This is because a [Jupyter kernel](http://jupyter-client.readthedocs.io/en/latest/kernels.html) can be written for any language. If you like working in the Jupyter environment, you may be interested in installing the [Bash kernel](https://github.com/takluyver/bash_kernel) or the [R kernel](https://irkernel.github.io/). If you develop software that involves a new language, you can also create a Jupyter kernel like we have done for [RevBayes](https://github.com/revbayes/revbayes_kernel).
+
+When you select **_New->Python 3_**, new Python 3 Jupyter notebook will open. This now allows you combine Python code with Markdown to fully integrate documentation with your code. 
 
 ![jupyter browser](../fig/jupyter2.png)
 
@@ -306,10 +339,3 @@ Each cell in a Jupyter notebook can be executed and you can choose the type of c
 > {: .solution}
 {: .challenge}
 
-## Spyder
-
-The Anaconda install also comes with a Python IDE that is similar to RStudio. It is called Spyder. You can open a Spyder instance by executing the command in your terminal window:
-
-```
-$ spyder
-```

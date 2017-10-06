@@ -210,7 +210,7 @@ my_data = [('Manidae', 'Phataginus', 'tricuspis', 1821), 23.56, 30, [10.8,8.45,9
 
 ## Dictionaries
 
-A **dictionary** is a container that holds pairs of objects - keys and values.
+A **dictionary** is a container that holds pairs of objects - keys and values. This datatype is one of the most useful types in Python.
 
 ~~~
 numbers = {"one" : 1, "two" : 2}
@@ -336,13 +336,13 @@ for key in numbers2:
 
 > ## Can you reassign the value of an element in a dictionary?
 >
-> Try to reassign the second value (in the *key value pair*) so that it no longer reads "two" but instead reads "spam and eggs". What does your dictionary look like after you make this change?
+> Try to reassign the second value of `numbers2` (in the *key value pair*) so that it no longer reads "two" but instead reads "spam and eggs". What does your dictionary look like after you make this change?
 >
 > > ## Solution
 > > 
 > > ~~~
-> > rev[2] = 'spam and eggs'
-> > rev
+> > numbers2[2] = 'spam and eggs'
+> > numbers2
 > > ~~~
 > > {: .python}
 > > 
@@ -354,7 +354,7 @@ for key in numbers2:
 {: .challenge}
 
 It is important to note that dictionaries are _unordered_ and do not remember the
-sequence of their items (i.e. the order in which key:value pairs were added to 
+sequence of their items (i.e., the order in which key:value pairs were added to 
 the dictionary). Because of this, the order in which items are returned from loops
 over dictionaries might appear random and can even change with time.
 If the dictionary's keys are of a single type that can be sorted (numbers or strings), then you can get a sorted list of the keys and iterate over it in a loop. 
@@ -429,7 +429,7 @@ $ conda install biopython
 
 The prompt will ask you if you want to proceed with installing this package. Simply type `y` followed by the enter key and `conda` will manage the download and installation. 
 
-For packages that are not available via Anaconda, you may also be able to use the application `pip` to install. We will use the Python version of [ggplot](http://ggplot.yhathq.com/) in later lessons, so install it now:
+For packages that are not available via Anaconda, you may also be able to use the application `pip` to install. If you like using ggplot2 in R, you may like to use it in Python. The Python [ggplot](http://ggplot.yhathq.com/) package can be installed using `pip install`:
 
 ```
 $ pip install ggplot
