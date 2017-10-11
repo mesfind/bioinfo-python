@@ -21,7 +21,7 @@ The official [introduction](https://docs.python.org/3.6/tutorial/) to Python sta
 
 >Python is an easy to learn, powerful programming language. It has efficient high-level data structures and a simple but effective approach to object-oriented programming. Python’s elegant syntax and dynamic typing, together with its interpreted nature, make it an ideal language for scripting and rapid application development in many areas on most platforms.
 
-The simplicity of Python really comes from its very clean (i.e., uncluttered) syntax. This makes programming in Python similar to writing [pseudocode](https://en.wikipedia.org/wiki/Pseudocode), which is writing an algorithm in a readable way. 
+The simplicity of Python really comes from its very clean (i.e., uncluttered) syntax. This makes programming in Python similar to writing [pseudocode](https://en.wikipedia.org/wiki/Pseudocode), which is writing an algorithm in a readable way.
 
 For example, let's say we want to use a `for` loop to count the number of Gs in a DNA sequence. In pseudocode, we would write:
 
@@ -34,7 +34,7 @@ for base in seq
 print count
 ```
 
-The simple syntax of Python requires very few changes to make it work. 
+The simple syntax of Python requires very few changes to make it work.
 
 ~~~
 seq = 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGACAA'
@@ -52,11 +52,11 @@ print(count)
 ~~~
 {: .output}
 
-What are the main differences between the pseudocode and the Python code? 
+What are the main differences between the pseudocode and the Python code?
 
 ## Python Syntax
 
-To program in Python you must follow the rules of its syntax. Additionally, it is helpful to think carefully about variable and function names as well as providing clear comments. All of these things will result in nice, human-readable code. 
+To program in Python you must follow the rules of its syntax. Additionally, it is helpful to think carefully about variable and function names as well as providing clear comments. All of these things will result in nice, human-readable code.
 
 ### Code Layout
 
@@ -69,7 +69,7 @@ for char in s:
    capital_letter = char.upper()
    capital_s += capital_letter
 
-print(capital_s) 
+print(capital_s)
 ~~~
 {: .python}
 
@@ -78,13 +78,13 @@ HELLO
 ~~~
 {: .output}
 
-The code above creates a `for` loop where the loop iterates over the letters in `s`, and changes them from lowercase to uppercase using the string method `.upper()`. 
-The capitalized letter is assigned to a variable called `capital_letter`. Then `capital_letter` is appended to the string `capital_s`. 
+The code above creates a `for` loop where the loop iterates over the letters in `s`, and changes them from lowercase to uppercase using the string method `.upper()`.
+The capitalized letter is assigned to a variable called `capital_letter`. Then `capital_letter` is appended to the string `capital_s`.
 When the loop ends, we print `capital_s`.
 
-Look carefully at the placement of the colon `:` and the indentation and notice how these elements define the loop. 
+Look carefully at the placement of the colon `:` and the indentation and notice how these elements define the loop.
 
-**Tabs or spaces?** Spaces are the preferred way to format indentation. The standard is to use 4 spaces. Tabs will work, but you absolutely cannot mix tabs and spaces. 
+**Tabs or spaces?** Spaces are the preferred way to format indentation. The standard is to use 4 spaces. Tabs will work, but you absolutely cannot mix tabs and spaces.
 
 ### Indexing
 
@@ -138,7 +138,7 @@ o
 > Count the number of Gs in the sequence above using a `for` loop. What is the difference between Python (see above) and R (in solution below) implmentations?
 >
 > > ## Solution
-> > ~~~
+<!-- > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGACAA'
 > > seq_split <- strsplit(seq, "")[[1]]
 > > count <- 0
@@ -148,7 +148,7 @@ o
 > >     }
 > > }
 > > print(count)
-> > ~~~
+> > ~~~ -->
 > {: .solution}
 {: .challenge}
 
@@ -157,23 +157,23 @@ o
 > Count the number of Gs in the sequence above using either R or Python in a simpler way.
 >
 > > ## Python Solution
-> > ~~~
+<!-- > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > print(seq.count('G'))
-> > ~~~
+> > ~~~ -->
 > > {: .python}
-> {: .solution} 
-> 
+> {: .solution}
+>
 > > ## R Solution
-> > ~~~
+<!-- > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > library(stringr)
 > > str_count(seq,'G')
-> > ~~~
+> > ~~~ -->
 > {: .solution}
 {: .challenge}
 
-There are a lot of blogs and articles comparing R and Python. Many of these comparisons (like this [infographic](https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis#gs.3P0PoiY)) do not tell you which is "better". That's because this is up to you. It really depends on what you're trying to do. Typically for a lot of bioinformatics projects, you will find yourself needing to know both. This is simply because many of the very useful tools for working with biological data are written in a variety of languages. Thus, it is up to the researcher to interact with them and develop cohesive pipelines for data curation and analysis. 
+There are a lot of blogs and articles comparing R and Python. Many of these comparisons (like this [infographic](https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis#gs.3P0PoiY)) do not tell you which is "better". That's because this is up to you. It really depends on what you're trying to do. Typically for a lot of bioinformatics projects, you will find yourself needing to know both. This is simply because many of the very useful tools for working with biological data are written in a variety of languages. Thus, it is up to the researcher to interact with them and develop cohesive pipelines for data curation and analysis.
 
 # Getting Started with Python
 
@@ -185,10 +185,10 @@ You can run python in various tools. Perhaps the most straightforward is to use 
 $ python
 ```
 ~~~
-Python 3.6.2 |Anaconda custom (x86_64)| (default, Oct  5 2017, 03:00:07) 
+Python 3.6.2 |Anaconda custom (x86_64)| (default, Oct  5 2017, 03:00:07)
 [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
->>> 
+>>>
 ~~~
 {: .output}
 
@@ -204,7 +204,7 @@ In the console, you will always have `>>>` as the command prompt. Now you can ty
 ~~~
 {: .output}
 
-Like R, Python makes a handy desktop calculator. 
+Like R, Python makes a handy desktop calculator.
 
 When using the interactive console, it's important to remember that indentation still matters. (In Python, it is common to use `range()` to loop for a specific number of times.)
 
@@ -264,16 +264,16 @@ $ python3
 ```
 
 ~~~
-Python 3.6.0 (default, Feb  4 2017, 15:08:23) 
+Python 3.6.0 (default, Feb  4 2017, 15:08:23)
 [GCC 4.8.5 20150623 (Red Hat 4.8.5-4)] on linux
 Type "help", "copyright", "credits" or "license" for more information.
->>> 
+>>>
 ~~~
 {: .output}
 
 ## IPython Interactive Console
 
-IPython is another interpreter comes with Anaconda that makes typing in code blocks (like loops) easier. It also uses a prompt to distinctly label input and output. 
+IPython is another interpreter comes with Anaconda that makes typing in code blocks (like loops) easier. It also uses a prompt to distinctly label input and output.
 
 Open an IPython console from your terminal window:
 
@@ -281,7 +281,7 @@ Open an IPython console from your terminal window:
 $ ipython
 ```
 
-You will see that the initial prompt is waiting for input. 
+You will see that the initial prompt is waiting for input.
 
 ~~~
 In [1]: 100 * 20
@@ -323,19 +323,18 @@ This should open your default browser. You can start a new Python notebook by se
 
 Note that I have additional options for Jupyter notebooks and can create a notebook for code written in Bash or [RevBayes](http://revbayes.github.io/about.html). This is because a [Jupyter kernel](http://jupyter-client.readthedocs.io/en/latest/kernels.html) can be written for any language. If you like working in the Jupyter environment, you may be interested in installing the [Bash kernel](https://github.com/takluyver/bash_kernel) or the [R kernel](https://irkernel.github.io/). If you develop software that involves a new language, you can also create a Jupyter kernel like we have done for [RevBayes](https://github.com/revbayes/revbayes_kernel).
 
-When you select **_New->Python 3_**, new Python 3 Jupyter notebook will open. This now allows you combine Python code with Markdown to fully integrate documentation with your code. 
+When you select **_New->Python 3_**, new Python 3 Jupyter notebook will open. This now allows you combine Python code with Markdown to fully integrate documentation with your code.
 
 ![jupyter browser](../fig/jupyter2.png)
 
-Each cell in a Jupyter notebook can be executed and you can choose the type of cell using the pull-down menu in the toolbar. By default the cell is **_Code_**. Any thing you enter in a cell can be executed by using the "play" button in the tool bar or with **_Shift+Enter_** via the keyboard. 
+Each cell in a Jupyter notebook can be executed and you can choose the type of cell using the pull-down menu in the toolbar. By default the cell is **_Code_**. Any thing you enter in a cell can be executed by using the "play" button in the tool bar or with **_Shift+Enter_** via the keyboard.
 
 > ## Count the Gs using Python in a Jupyter Notebook
 >
 > Replicate one of the solutions give above in a Jupyter notebook. Add some Markdown text to describe your program.
 >
 > > ## Solution
-> > 
+> >
 > > ![jupyter browser](../fig/jupyter3.png)
 > {: .solution}
 {: .challenge}
-

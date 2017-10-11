@@ -33,7 +33,7 @@ pi_value = 3.1415
 Here we've assigned data to variables, namely `text`, `number` and `pi_value`,
 using the assignment operator `=`. The variable called `text` is a string which
 means it can contain letters and numbers. We could reassign the variable `text`
-to an integer too - but be careful reassigning variables as this can get 
+to an integer too - but be careful reassigning variables as this can get
 confusing.
 
 To print out the value stored in a variable we can simply type the name of the
@@ -99,7 +99,7 @@ for num in numbers:
 {: .output}
 
 **Remember** _indentation_ is very important in Python. Note that the second line in the
-example above is indented. This is Python's way of marking a block of code. 
+example above is indented. This is Python's way of marking a block of code.
 
 To add elements to the end of a list, we can use the `append` method:
 
@@ -114,8 +114,8 @@ print(numbers)
 ~~~
 {: .output}
 
-Methods are a way to interact with an object (a list, for example). We can invoke 
-a method using the dot `.` followed by the method name and a list of arguments in parentheses. 
+Methods are a way to interact with an object (a list, for example). We can invoke
+a method using the dot `.` followed by the method name and a list of arguments in parentheses.
 To find out what methods are available for an object, we can use the built-in `help` command (you can exit the help page by typing `q`:
 
 ~~~
@@ -166,41 +166,41 @@ my_list = [0,1,2]
 
 > ## What happens when you try to change a list versus a tuple?
 >
-> Change the value of a single element in `my_list ` and `my_tuple `. 
+> Change the value of a single element in `my_list ` and `my_tuple `.
 >
 > > ## Solution: List
-> > 
-> > ~~~
+> >
+<!-- > > ~~~
 > > my_list[1] = 5
 > > print("my_list =", my_list)
-> > ~~~
+> > ~~~ -->
 > > {: .python}
-> > 
-> > ~~~
+> >
+<!-- > > ~~~
 > > my_list = [0, 5, 2]
-> > ~~~
+> > ~~~ -->
 > > {: .output}
 > {: .solution}
-> 
+>
 > > ## Solution: Tuple
-> > 
-> > ~~~
+> >
+<!-- > > ~~~
 > > my_tuple[1] = 5
-> > ~~~
+> > ~~~ -->
 > > {: .python}
-> > 
-> > ~~~
+> >
+<!-- > > ~~~
 > >Traceback (most recent call last):
 > >  File "<stdin>", line 1, in <module>
 > >TypeError: 'tuple' object does not support item assignment
-> > ~~~
+> > ~~~ -->
 > > {: .output}
 > {: .solution}
 {: .challenge}
 
 ### Mixing Types
 
-In Python, it is also possible to mix types in a list or tuple. This makes it easy to store data of variable type. 
+In Python, it is also possible to mix types in a list or tuple. This makes it easy to store data of variable type.
 Thus, you can have a list that contains both natural numbers, floating point numbers, strings, lists, and tuples:
 
 ~~~
@@ -223,9 +223,9 @@ numbers["one"]
 ~~~
 {: .output}
 
-Dictionaries work a lot like lists - except that you index them with *keys*. 
+Dictionaries work a lot like lists - except that you index them with *keys*.
 You can think about a key as a name for or a unique identifier for a set of values
-in the dictionary. Keys can only have particular types - they have to be 
+in the dictionary. Keys can only have particular types - they have to be
 "hashable". Strings, numeric types, and tuples are acceptable, but lists are not.
 
 Here is a dictionary with natural numbers as keys. You access the values associated with each key, by providing the key in `[]`
@@ -339,25 +339,25 @@ for key in numbers2:
 > Try to reassign the second value of `numbers2` (in the *key value pair*) so that it no longer reads "two" but instead reads "spam and eggs". What does your dictionary look like after you make this change?
 >
 > > ## Solution
-> > 
-> > ~~~
+> >
+<!-- > > ~~~
 > > numbers2[2] = 'spam and eggs'
 > > numbers2
-> > ~~~
+> > ~~~ -->
 > > {: .python}
-> > 
-> > ~~~
+> >
+<!-- > > ~~~
 > >{1: 'one', 2: 'spam and eggs', 3: 'three', 4: 'four'}
-> > ~~~
+> > ~~~ -->
 > > {: .output}
 > {: .solution}
 {: .challenge}
 
 It is important to note that dictionaries are _unordered_ and do not remember the
-sequence of their items (i.e., the order in which key:value pairs were added to 
+sequence of their items (i.e., the order in which key:value pairs were added to
 the dictionary). Because of this, the order in which items are returned from loops
 over dictionaries might appear random and can even change with time.
-If the dictionary's keys are of a single type that can be sorted (numbers or strings), then you can get a sorted list of the keys and iterate over it in a loop. 
+If the dictionary's keys are of a single type that can be sorted (numbers or strings), then you can get a sorted list of the keys and iterate over it in a loop.
 
 A loop over the unordered dictionary:
 
@@ -417,7 +417,7 @@ print(z)
 
 # Python Packages
 
-There are an immense number of Python packages (also called libraries) out there that do a lot of different things. Python doesn't have a heavily managed central resource like CRAN for R, but you can find a long and probably incomplete [list of packages for Python online](https://pypi.python.org/pypi/). Additionally, Anaconda provides easy installs of over 620 packages listed [here](https://docs.continuum.io/anaconda/pkg-docs). 
+There are an immense number of Python packages (also called libraries) out there that do a lot of different things. Python doesn't have a heavily managed central resource like CRAN for R, but you can find a long and probably incomplete [list of packages for Python online](https://pypi.python.org/pypi/). Additionally, Anaconda provides easy installs of over 620 packages listed [here](https://docs.continuum.io/anaconda/pkg-docs).
 
 ## Installing New Packages
 
@@ -427,7 +427,7 @@ Anaconda helps install many important Python packages. You can use `conda` to in
 $ conda install biopython
 ```
 
-The prompt will ask you if you want to proceed with installing this package. Simply type `y` followed by the enter key and `conda` will manage the download and installation. 
+The prompt will ask you if you want to proceed with installing this package. Simply type `y` followed by the enter key and `conda` will manage the download and installation.
 
 For packages that are not available via Anaconda, you may also be able to use the application `pip` to install. If you like using ggplot2 in R, you may like to use it in Python. The Python [ggplot](http://ggplot.yhathq.com/) package can be installed using `pip install`:
 
@@ -457,7 +457,7 @@ $ pip install ggplot -U
 
 ## Importing Packages
 
-Once you have a package installed, you don't have to do that again (except you may have to update them from time-to-time). However, you cannot use a package in any Python instance without importing it first. This is quite simple. 
+Once you have a package installed, you don't have to do that again (except you may have to update them from time-to-time). However, you cannot use a package in any Python instance without importing it first. This is quite simple.
 
 Open a Python interpreter and type:
 
@@ -497,8 +497,8 @@ import this
 
 ## Check your Python Environment
 
-Now that we have installed ggplot, let's check that our Python environment is ready for the lessons we'll do in class. 
-These lessons were mainly adapted from [Data Carpentry](http://datacarpentry.org/) lessons on Python. 
+Now that we have installed ggplot, let's check that our Python environment is ready for the lessons we'll do in class.
+These lessons were mainly adapted from [Data Carpentry](http://datacarpentry.org/) lessons on Python.
 That course provides an easy script that you can use to check your environment.
 
 1. Download this file and save it to your `python-bcb546` directory: [check_env.py](https://raw.githubusercontent.com/datacarpentry/python-ecology-lesson/gh-pages/_includes/scripts/check_env.py).
@@ -515,5 +515,4 @@ All checks passed. Your Anaconda installation is up and running and ready for Da
 ~~~
 {: .output}
 
-Otherwise you will get an error. If you do not get the message above, let's take some time to make sure everyone is on the same page. 
-
+Otherwise you will get an error. If you do not get the message above, let's take some time to make sure everyone is on the same page.
