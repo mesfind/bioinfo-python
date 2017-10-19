@@ -135,10 +135,10 @@ o
 
 > ## Count the Gs using R
 >
-> Count the number of Gs in the sequence above using a `for` loop. What is the difference between Python (see above) and R (in solution below) implmentations?
+> Count the number of Gs in the sequence above using a `for` loop. What is the difference between Python (see above) and R (in solution below) implementations?
 >
 > > ## Solution
-<!-- > > ~~~
+> > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGACAA'
 > > seq_split <- strsplit(seq, "")[[1]]
 > > count <- 0
@@ -148,7 +148,7 @@ o
 > >     }
 > > }
 > > print(count)
-> > ~~~ -->
+> > ~~~
 > {: .solution}
 {: .challenge}
 
@@ -157,19 +157,19 @@ o
 > Count the number of Gs in the sequence above using either R or Python in a simpler way.
 >
 > > ## Python Solution
-<!-- > > ~~~
+> > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > print(seq.count('G'))
-> > ~~~ -->
+> > ~~~
 > > {: .python}
 > {: .solution}
 >
 > > ## R Solution
-<!-- > > ~~~
+> > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > library(stringr)
 > > str_count(seq,'G')
-> > ~~~ -->
+> > ~~~
 > {: .solution}
 {: .challenge}
 
