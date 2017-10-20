@@ -170,30 +170,30 @@ my_list = [0,1,2]
 >
 > > ## Solution: List
 > >
-<!-- > > ~~~
+> > ~~~
 > > my_list[1] = 5
 > > print("my_list =", my_list)
-> > ~~~ -->
+> > ~~~
 > > {: .python}
 > >
-<!-- > > ~~~
+> > ~~~
 > > my_list = [0, 5, 2]
-> > ~~~ -->
+> > ~~~
 > > {: .output}
 > {: .solution}
 >
 > > ## Solution: Tuple
 > >
-<!-- > > ~~~
+> > ~~~
 > > my_tuple[1] = 5
-> > ~~~ -->
+> > ~~~
 > > {: .python}
 > >
-<!-- > > ~~~
+> > ~~~
 > >Traceback (most recent call last):
 > >  File "<stdin>", line 1, in <module>
 > >TypeError: 'tuple' object does not support item assignment
-> > ~~~ -->
+> > ~~~
 > > {: .output}
 > {: .solution}
 {: .challenge}
@@ -340,15 +340,15 @@ for key in numbers2:
 >
 > > ## Solution
 > >
-<!-- > > ~~~
+> > ~~~
 > > numbers2[2] = 'spam and eggs'
 > > numbers2
-> > ~~~ -->
+> > ~~~
 > > {: .python}
 > >
-<!-- > > ~~~
+> > ~~~
 > >{1: 'one', 2: 'spam and eggs', 3: 'three', 4: 'four'}
-> > ~~~ -->
+> > ~~~
 > > {: .output}
 > {: .solution}
 {: .challenge}
