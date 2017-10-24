@@ -34,8 +34,8 @@ and they can replicate the same analysis.
 
 To help the lesson run smoothly, let's ensure everyone is in the same directory.
 This should help us avoid path and file name issues. At this time please
-navigate to the `python-bcb546` directory. If you working in Jupyter Notebook be sure
-that you start your notebook in the `python-bcb546` directory. 
+navigate to the `python-bcb546` directory on your computer. If you working in Jupyter Notebook be sure
+that you start your notebook in the `python-bcb546` directory. If you do not have this directory, please see the instructions in the [Setup](../setup/) page.
 
 You will want to use a Jupyter notebook or the Spyder IDE console to run this lesson. Both of these tools make it easy to view in-line plots.
 
@@ -67,9 +67,8 @@ from the ecological study by Ernst et al. (2009):
 Specifically, we will be using files from the [Portal Project Teaching Database](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459).
 
 * This section will use the `surveys.csv` file that can be downloaded from the 
-[`Week_8/data`](https://raw.githubusercontent.com/EEOB-BioData/BCB546X-Spring2017/master/Week_8/data/surveys.csv) folder of the course repository.
-Download this file (either directly using the link or by pulling from the course repo) and copy it to your `python-bcb546` directory.
-* Be sure that `surveys.csv` is in `python-bcb546` and not `python-bcb546/data`. Otherwise, you must change your directory to `python-bcb546/data` before starting the exercises or include the `data` directory in your file path when opening the file in Python.
+[`python-bcb546`](https://github.com/EEOB-BioData/BCB546X-Fall2017/tree/master/python-bcb546) folder of the course repository.
+Pull from the course repository and change to to `python-bcb546` or copy the `surveys.csv` file to the directory from which you would like to work.
 
 In this lesson, we are studying the species and weight of (_vertebrate_) animals captured in plots in our study
 area. The observed data are stored as a `.csv` file (comma-separated value): each row holds information for a
@@ -111,7 +110,7 @@ Pandas library provides data structures, produces high quality plots with
 [matplotlib](http://matplotlib.org/) and integrates nicely with other libraries
 that use [NumPy](http://www.numpy.org/) (which is another Python library) arrays.
 
-Python doesn't load all of the libraries available to it by default. We have to
+Python does not load all available libraries by default. We have to
 add an `import` statement to our code in order to use library functions. To import
 a library, we use the syntax `import libraryName`. If we want to give the
 library a nickname to shorten the command, we can add `as myNickName`.  
@@ -309,10 +308,9 @@ of all of the column names in our DataFrame.
 
 ## Summarizing Data in a Pandas DataFrame
 
-We've read our data into Python. Next, let's perform some quick summary
-statistics to learn more about the data that we're working with. We might want
+We've read our data into Python. Next, let's perform some quick summaries of the DataFrame to learn more about the data that we're working with. We might want
 to know how many animals were collected in each plot, or how many of each
-species were caught. We can perform summary statistics quickly using groups. But first we need to figure out what we want to group by.
+species were caught. We can summarize different aspects of our data using groups. But first we need to figure out what we want to group by.
 
 Let's begin by exploring our data and view the column names:
 
@@ -328,7 +326,7 @@ array(['record_id', 'month', 'day', 'year', 'plot_id', 'species_id', 'sex',
 {: .output}
 
 Let's get a list of all the species. The `pd.unique` method tells us all of
-the unique values in the `species_id` column. These are two-character identifiers of the species names (e.g., `NL` represents the rodent _Neotoma albigula_).
+the unique values in the `species_id` column. These are two-character identifiers of the species names (e.g., `NL` represents the rodent [_Neotoma albigula_](https://en.wikipedia.org/wiki/White-throated_woodrat)).
 
 ~~~
 pd.unique(surveys_df['species_id'])
@@ -354,7 +352,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 >
 > > ## Solution
 > > 
-> > ~~~
+> > <!-- ~~~
 > > # 1
 > > plot_names = list(pd.unique(surveys_df['plot_id']))
 > > print(len(plot_names))
@@ -362,7 +360,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > > # 2
 > > print(surveys_df['plot_id'].nunique())
 > > ~~~
-> > {: .python}
+> > {: .python} -->
 > {: .solution}
 {: .challenge}
 
@@ -555,9 +553,9 @@ summaries of categorical data.
 >
 > > ## Solution
 > > 
-> > * *Female* = 15690
+> > <!-- * *Female* = 15690
 > > 
-> > * *Male* = 17348
+> > * *Male* = 17348 -->
 > > 
 > {: .solution}
 {: .challenge}
@@ -572,11 +570,11 @@ summaries of categorical data.
 > 
 > > ## Solution
 > > 
-> > ~~~
+> > <!-- ~~~
 > > sorted_data2 = surveys_df.groupby(['plot_id','sex'])
 > > sorted_data2.mean()
 > > ~~~
-> > {: .python}
+> > {: .python} -->
 > {: .solution}
 {: .challenge}
 
@@ -587,11 +585,11 @@ summaries of categorical data.
 > 
 > > ## Solution
 > > 
-> > ~~~
+> > <!-- ~~~
 > > by_plot = surveys_df.groupby('plot_id')
 > > by_plot['weight'].describe()
 > > ~~~
-> > {: .python}
+> > {: .python} -->
 > {: .solution}
 {: .challenge}
 
@@ -641,13 +639,32 @@ example let's multiply all weight values by 2. A more practical use of this migh
 be to normalize the data according to a mean, area, or some other value
 calculated from our data.
 
-Multiply all weight values by 2:
+Multiply all weight values by 2 and store values in a Pandas object called `double_weight`:
 
 ~~~
-surveys_df['weight'] * 2
+double_weight = surveys_df['weight'] * 2
 ~~~
 {: .python}
 
+If we summarize `double_weight`, then the summary will indicate that these values are twice the original weights:
+
+~~~
+double_weight.describe()
+~~~
+{: .python}
+
+~~~
+count    32283.000000
+mean        85.344856
+std         73.262519
+min          8.000000
+25%         40.000000
+50%         74.000000
+75%         96.000000
+max        560.000000
+Name: weight, dtype: float64
+~~~
+{: .output}
 
 
 # Quick & Easy Plotting Using Pandas
@@ -693,13 +710,13 @@ Number captured per plot
 > 
 > > ## Solution
 > > 
-> > ~~~
+> > <!-- ~~~
 > > plot_weight_means = surveys_df.groupby('plot_id')['weight'].mean()
 > > plot_weight_means.plot(kind='bar')
 > > ~~~
 > > {: .python}
 > > 
-> > ![Solution](../fig/plot_ave_weight.png)
+> > ![Solution](../fig/plot_ave_weight.png) -->
 > {: .solution}
 {: .challenge}
 
@@ -709,13 +726,13 @@ Number captured per plot
 > 
 > > ## Solution
 > > 
-> > ~~~
+> > <!-- ~~~
 > > counts_by_sex = surveys_df['record_id'].groupby(surveys_df['sex']).count()
 > > counts_by_sex.plot(kind='bar')
 > > ~~~
 > > {: .python}
 > > 
-> > ![Solution](../fig/counts_by_sex.png)
+> > ![Solution](../fig/counts_by_sex.png) -->
 > {: .solution}
 {: .challenge}
 
