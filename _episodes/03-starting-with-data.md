@@ -49,15 +49,9 @@ $ jupyter notebook
 Then select **_New->Python 3_**. Name this session `03-starting-wtih-data`.
 
 
-Alternatively, you can start a Spyder instance and navigate to the `python-bcb546` directory from the console using unix commands. 
+Alternatively, you can start a Spyder instance and navigate to the `python-bcb546` directory from the console using Unix commands. 
 
 
-
-<!--
-A quick aside that there are Python libraries like [OS
-Library](https://docs.python.org/3/library/os.html) that can work with our
-directory structure, however, that is not our focus today.
--->
 
 ### Our Data 
 
@@ -262,8 +256,6 @@ dtype: object
 ~~~
 {: .output}
 
-<!--We'll talk a bit more about what the different formats mean in a different lesson.
--->
 
 ### Useful Ways to View DataFrame objects in Python
 
@@ -352,7 +344,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 >
 > > ## Solution
 > > 
-> > <!-- ~~~
+> > ~~~
 > > # 1
 > > plot_names = list(pd.unique(surveys_df['plot_id']))
 > > print(len(plot_names))
@@ -360,7 +352,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > > # 2
 > > print(surveys_df['plot_id'].nunique())
 > > ~~~
-> > {: .python} -->
+> > {: .python}
 > {: .solution}
 {: .challenge}
 
@@ -553,9 +545,9 @@ summaries of categorical data.
 >
 > > ## Solution
 > > 
-> > <!-- * *Female* = 15690
+> > * *Female* = 15690
 > > 
-> > * *Male* = 17348 -->
+> > * *Male* = 17348
 > > 
 > {: .solution}
 {: .challenge}
@@ -570,11 +562,11 @@ summaries of categorical data.
 > 
 > > ## Solution
 > > 
-> > <!-- ~~~
+> > ~~~
 > > sorted_data2 = surveys_df.groupby(['plot_id','sex'])
 > > sorted_data2.mean()
 > > ~~~
-> > {: .python} -->
+> > {: .python}
 > {: .solution}
 {: .challenge}
 
@@ -585,11 +577,11 @@ summaries of categorical data.
 > 
 > > ## Solution
 > > 
-> > <!-- ~~~
+> > ~~~
 > > by_plot = surveys_df.groupby('plot_id')
 > > by_plot['weight'].describe()
 > > ~~~
-> > {: .python} -->
+> > {: .python}
 > {: .solution}
 {: .challenge}
 
@@ -775,8 +767,6 @@ plot_sex_count.unstack()
 ~~~
 {: .python}
 
-<!--The `unstack` function above will display the following output:
--->
 ~~~
 sex            F        M
 plot_id                  
