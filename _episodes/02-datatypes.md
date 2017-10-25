@@ -495,7 +495,7 @@ import this
 
 
 
-## Check your Python Environment
+<!-- ## Check your Python Environment
 
 Now that we have installed ggplot, let's check that our Python environment is ready for the lessons we'll do in class.
 These lessons were mainly adapted from [Data Carpentry](http://datacarpentry.org/) lessons on Python.
@@ -515,4 +515,4 @@ All checks passed. Your Anaconda installation is up and running and ready for Da
 ~~~
 {: .output}
 
-Otherwise you will get an error. If you do not get the message above, let's take some time to make sure everyone is on the same page.
+Otherwise you will get an error. If you do not get the message above, let's take some time to make sure everyone is on the same page. -->
