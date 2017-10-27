@@ -245,7 +245,7 @@ surveys_df[0:3]
 >
 > > ## Solution
 > > 
-> > ~~~
+> > <!-- ~~~
 > > surveys_df[['plot_id', 'species_id','sex']][20:61:5]
 > > ~~~
 > > {: .python}
@@ -262,7 +262,7 @@ surveys_df[0:3]
 > > 55       20         DM   M
 > > 60       23         DM   M
 > > ~~~
-> > {: .output}
+> > {: .output} -->
 > {: .solution}
 {: .challenge}
 
@@ -463,7 +463,7 @@ but they refer to the index label and not the position. Thus
 when you use `.loc[]`, and select `1:4`, you will get a different result than using
 `.iloc[]` to select rows `1:4`.
 
-Here we use `.iloc[] to get the first 2 columns for rows 1, 2, and 3:
+Here we use `.iloc[]` to get the first 2 columns for rows 1, 2, and 3:
 
 ~~~
 surveys_df.iloc[1:4, :2]
@@ -504,14 +504,14 @@ surveys_df.loc[1:4, ['record_id','month']]
 >
 > > ## Solution
 > > 
-> > ~~~
+> > <!-- ~~~
 > > # 1
 > > surveys_df.loc[[1, 3, 5], ['species_id','sex']]
 > > 
 > > # 2
 > > surveys_df.iloc[1:6:2, [5,6]]
 > > ~~~
-> > {: .python}
+> > {: .python} -->
 > {: .solution}
 {: .challenge}
 
@@ -568,7 +568,7 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 >
 > > ## Solution
 > > 
-> > ~~~
+> > <!-- ~~~
 > > surveys_df[(surveys_df.weight <= 8.0) & (surveys_df.year == 1999)]
 > > ~~~
 > > {: .python}
@@ -587,124 +587,7 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 > > 29903     7.0  
 > > 29905     4.0  
 > > ~~~
-> > {: .output}
+> > {: .output} -->
 > {: .solution}
 {: .challenge}
 
-<!--## Challenge Activities
-
-1. Select a subset of rows in the `surveys_df` DataFrame that contain data from
-   the year 1999 and that contain weight values less than or equal to 8. How
-   many columns did you end up with? What did your neighbor get?
-2. You can use the `isin` command in python to query a DataFrame based upon a
-   list of values as follows:
-   `surveys_df[surveys_df['species_id'].isin([listGoesHere])]`. Use the `isin` function
-   to find all plots that contain particular species in
-   the surveys DataFrame. How many records contain these values?
-3. Experiment with other queries. Create a query that finds all rows with a weight value > or equal to 0.
-4. The `~` symbol in Python can be used to return the OPPOSITE of the selection that you specify in python. 
-It is equivalent to **is not in**. Write a query that selects all rows that are NOT equal to 'M' or 'F' in the surveys
-data.
--->
-<!--
-# Using Masks
-
-A mask can be useful to locate where a particular subset of values exist or
-don't exist - for example,  NaN, or "Not a Number" values. To understand masks,
-we also need to understand boolean objects in python.
-
-Boolean values include `true` or `false`. So for example
-
-~~~
-x = 5
-x > 5
-~~~
-{: .python}
-
-~~~
-False
-~~~
-{: .output}
-
-The statement `x > 5` returns true or false once the conditional has been evaluated. 
-
-~~~
-x == 5
-~~~
-{: .python}
-
-~~~
-True
-~~~
-{: .output}
-
-
-When we ask python what the value of `x > 5` is, we get `False`. This is because x
-is not greater than 5 it is equal to 5. To create a boolean mask, you first create the
-True / False criteria (e.g. values > 5 = True). Python will then assess each
-value in the object to determine whether the value meets the criteria (True) or
-not (False). Python creates an output object that is the same shape as
-the original object, but with a True or False value for each index location.
-
-Let's try this out. Let's identify all locations in the survey data that have
-null (missing or NaN) data values. We can use the `.isnull()` method to do this.
-Each cell with a null value will be assigned a value of  `True` in the new
-boolean object.
-
-
-~~~
-pd.isnull(surveys_df)
-~~~
-{: .python}
-
-
-~~~
-      record_id  month    day   year plot_id species_id    sex  hindfoot_length weight
-0         False  False  False  False   False      False  False   False      True
-1         False  False  False  False   False      False  False   False      True
-2         False  False  False  False   False      False  False   False      True
-3         False  False  False  False   False      False  False   False      True
-4         False  False  False  False   False      False  False   False      True
-
-[35549 rows x 9 columns]
-~~~
-{: .output}
-
-
-To select the rows where there are null values,  we can use 
-the mask as an index to subset our data as follows:
-
-~~~
-#To select just the rows with NaN values, we can use the .any() method
-surveys_df[pd.isnull(surveys_df).any(axis=1)]
-~~~
-{: .python}
-
-
-Note that there are many null or NaN values in the `weight` column of our DataFrame.
-We will explore different ways of dealing with these in Lesson 03.
-
-We can apply `isnull()` to a particular column too. What does the code below do?
-
-~~~
-# what does this do?
-empty_weights = surveys_df[pd.isnull(surveys_df).any(axis=1)]['weight']
-~~~
-{: .python}
-
-
-Let's take a minute to look at the statement above. We are using the Boolean
-object as an index. We are asking python to select rows that have a `NaN` value
-for weight.
-
-
-# Challenges
-
-1. Create a new DataFrame that only contains observations with sex values that
-   are **not** female or male. Assign each sex value in the new DataFrame to a
-   new value of 'x'. Determine the number of null values in the subset.
-2. Create a new DataFrame that contains only observations that are of sex male
-   or female and where weight values are greater than 0. Create a stacked bar
-   plot of average weight by plot with male vs female values stacked for each
-   plot.
--->
