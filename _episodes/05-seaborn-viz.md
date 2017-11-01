@@ -163,14 +163,14 @@ my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 >
 > > ## Solution
 > > 
-> > ~~~
+> > <!-- ~~~
 > > my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete[surveys_complete.plot_id == 12], fit_reg=False, size=8, 
                     aspect=1.5, scatter_kws={'alpha':0.3,"s": 200}, hue='sex', markers='8')
 my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 > > ~~~
 > > {: .python}
 > > 
-> > ![png](../fig/05-seaborn-scatter-9.png)
+> > ![png](../fig/05-seaborn-scatter-9.png) -->
 > {: .solution}
 {: .challenge}
 
