@@ -155,45 +155,106 @@ my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 
 
 
-> ## Scatter plot for a single species
+> ## Scatter plot for a single plot
 >
-> How would you plot the hind foot length and weight for just a single species?
+> How would you plot the hind foot length and weight for just a single plot?
 > Remember how to access subsets of a DataFrame based on conditional criteria?
-> Plot the scatter plot above for only the species `RM` and color by `sex`. (Make the markers larger circles.)
+> Plot the scatter plot above for only plot number `12` and color by `sex`. (Make the markers larger circles.)
 >
 > > ## Solution
 > > 
-> > <!-- ~~~
-> > my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete[surveys_complete.species_id == 'RM'], fit_reg=False, size=8, 
+> > ~~~
+> > my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete[surveys_complete.plot_id == 12], fit_reg=False, size=8, 
                     aspect=1.5, scatter_kws={'alpha':0.3,"s": 200}, hue='sex', markers='8')
 my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 > > ~~~
 > > {: .python}
 > > 
-> > ![png](../fig/05-seaborn-scatter-9.png) -->
+> > ![png](../fig/05-seaborn-scatter-9.png)
 > {: .solution}
 {: .challenge}
 
 
-<!-- # Box Plots & Violin Plots
+# Box Plots & Violin Plots
 
 We often like to compare the distributions of values across different categorical variables. Box plots and violin plots are often used to do this in a simple way. 
 
+In seaborn, both the `.boxplot()` and `.violinplot()` functions return matplotlib Axes objects. Thus, these plot functions do not have arguments for `size` and `aspect` like the scatter plot function above. 
+
+In order to change the size of these plots, we must create a matplotlib figure and axes and set the dimentions of the figure. First, let's decide on the figure size we will use for the rest of our seaborn plots.
 
 ~~~
 plot_dims = (14, 9)
 ~~~
 {: .python}
 
+Now, every time we create a new plot that returns a matplotlib Axes object, we can call the `.subplots()` function to change some of the aesthetics. Because of the iteritve way in which figures are built using matplotlib, we need to always execute our creation of the figure and the plot function in a single notebook cell. 
 
 ~~~
 fig, ax = plt.subplots(figsize=plot_dims)
-sns.boxplot('species_id','hindfoot_length',data=surveys_complete)
+sns.boxplot('species_id','hindfoot_length', data=surveys_complete)
 ax.set(xlabel='Species ID', ylabel='Hindfoot Length')
 ~~~
 {: .python}
 
-![png](../fig/05-seaborn-boxplot-1.png) -->
+![png](../fig/05-seaborn-boxplot-1.png)
+
+Note that for the `.boxplot()` function, we can simply set the x and y values by giving the column names from our DataFrame. Then we must use the `data=surveys_complete` argument to indicate our DataFrame object.
+
+Now let's use a violin plot to visualize the weight data. For these data, we would also like the weight to be on the log10 scale. We will make this plot horizontal, so we'll set the x-axis to be on the log scale. 
+An easy way to do this is to create a new graph variable from our `.violinplot()` function and then call the `.set_xscale()` that is a member method of the graph variable.
+
+~~~
+fig, ax = plt.subplots(figsize=dims)
+g = sns.violinplot('weight','species_id', data=surveys_complete, linewidth=0.2, orient="h", cut=0)
+g.set_xscale('log', basex=10)
+ax.set(ylabel='Species ID', xlabel='Weight')
+~~~
+{: .python}
+
+![png](../fig/05-seaborn-violinplot-1.png)
+
+> ## Violin plot for a single species
+>
+> Use seaborn to make a violin plot comparing the relative distributions of weight 
+> measurements for different sexed animals from a single 
+> species, [*Onychomys leucogaster* (OL)](https://en.wikipedia.org/wiki/Northern_grasshopper_mouse), one of the coolest rodent species:
+>
+> > ## Solution
+> > 
+> > <!-- ~~~
+> > fig, ax = plt.subplots(figsize=dims)
+sns.violinplot(x = 'sex', y = 'weight', data=surveys_complete[surveys_complete.species_id == 'OL'])
+> > ~~~
+> > {: .python}
+> > 
+> > ![png](../fig/05-seaborn-violinplot-2.png) -->
+> {: .solution}
+{: .challenge}
+
+<!-- # Histograms
+
+Often, a histogram is a better way to visualize a distribution. This is relatively simple using seaborn's `.distplot()` function. This function does not take a Pandas DataFrame, but can take a Pandas Series (i.e., column in our DataFrame). This function also can take come other arguments like `color`, which takes values that specify the color of histogram based on [matplotlib's colors](https://matplotlib.org/api/colors_api.html). We will make our plot cyan using the `'c'` color code.
+
+~~~
+fig, ax = plt.subplots(figsize=dims)
+sns.distplot(surveys_complete['weight'], color='c')
+~~~
+{: .python}
+
+![png](../fig/05-seaborn-distplot-1.png)
+
+By default, the `.distplot()` function plots the histogram as a density plot with the kernel density estimate overlaid as a darker line on the graph. This may not be necessary and we may instead want the y-axis to represent the counts in each bin. We can further adjust the appearance of the histogram to make the bars more apparent and increase the number of bins.
+
+~~~
+fig, ax = plt.subplots(figsize=dims)
+sns.distplot(surveys_complete['weight'], kde=False, color='c', hist_kws=dict(edgecolor="k", linewidth=1), bins=100)
+~~~
+{: .python}
+
+![png](../fig/05-seaborn-distplot-2.png) -->
+
+
 
 ### To be continued...
 
