@@ -10,6 +10,7 @@ You need to download some files to follow this lesson:
 2. Download the following files into this folder:
     3. [surveys.csv](https://raw.githubusercontent.com/EEOB-BioData/BCB546X-Spring2017/master/Week_8/data/surveys.csv)
     4. [species.csv](https://raw.githubusercontent.com/EEOB-BioData/BCB546X-Spring2017/master/Week_8/data/species.csv)
+    5. [surveys_complete.csv](https://raw.githubusercontent.com/EEOB-BioData/BCB546X-Fall2017/master/python-bcb546/surveys_complete.csv)
 
 Or, you can pull from the course repository and change to the directory containing the data files:
 1. `cd BCB546X-Fall2017`

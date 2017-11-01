@@ -245,7 +245,7 @@ surveys_df[0:3]
 >
 > > ## Solution
 > > 
-> > <!-- ~~~
+> > ~~~
 > > surveys_df[['plot_id', 'species_id','sex']][20:61:5]
 > > ~~~
 > > {: .python}
@@ -262,7 +262,7 @@ surveys_df[0:3]
 > > 55       20         DM   M
 > > 60       23         DM   M
 > > ~~~
-> > {: .output} -->
+> > {: .output}
 > {: .solution}
 {: .challenge}
 
@@ -325,13 +325,15 @@ proper copy of the DataFrame?
 We might have thought that we were creating a fresh copy of the `surveys_df` values when we 
 used `surveys_copy = surveys_df`. However, for objects of certain datatypes (like lists and 
 DataFrames) the assignment operator `=` only copies by reference. 
-That is, it creates a new variable `surveys_copy` that refers to the **same** 
+That is, it creates a new variable name "`surveys_copy`" that refers to the **same** 
 object `surveys_df` refers to. 
 This means that there is only one object 
 (the DataFrame), and both `surveys_df` and `surveys_copy` refer to it. So when we assign 
 the first 3 rows 
 the value of 0 using the 
-`surveys_copy` DataFrame, the `surveys_df` DataFrame is modified too. To create a fresh, _duplicate_ 
+`surveys_copy` DataFrame, the `surveys_df` DataFrame is modified too. 
+
+To create a fresh, _duplicate_ 
 copy of the `surveys_df`
 DataFrame we use the syntax `surveys_copy = surveys_df.copy()`. 
 But first we have to read the `surveys_df` again 
@@ -591,3 +593,13 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 > {: .solution}
 {: .challenge}
 
+<!-- ## Looping Over a DataFrame
+
+To loop over a data frame we can access the row and its index using the `.iterrows()` method.
+
+~~~
+for index, row in surveys_df.iterrows():
+  
+~~~
+{: .python}
+ -->

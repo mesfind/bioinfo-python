@@ -702,13 +702,13 @@ Number captured per plot
 > 
 > > ## Solution
 > > 
-> > <!-- ~~~
+> > ~~~
 > > plot_weight_means = surveys_df.groupby('plot_id')['weight'].mean()
 > > plot_weight_means.plot(kind='bar')
 > > ~~~
 > > {: .python}
 > > 
-> > ![Solution](../fig/plot_ave_weight.png) -->
+> > ![Solution](../fig/plot_ave_weight.png)
 > {: .solution}
 {: .challenge}
 
@@ -718,13 +718,13 @@ Number captured per plot
 > 
 > > ## Solution
 > > 
-> > <!-- ~~~
+> > ~~~
 > > counts_by_sex = surveys_df['record_id'].groupby(surveys_df['sex']).count()
 > > counts_by_sex.plot(kind='bar')
 > > ~~~
 > > {: .python}
 > > 
-> > ![Solution](../fig/counts_by_sex.png) -->
+> > ![Solution](../fig/counts_by_sex.png)
 > {: .solution}
 {: .challenge}
 
