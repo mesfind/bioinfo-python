@@ -506,14 +506,14 @@ surveys_df.loc[1:4, ['record_id','month']]
 >
 > > ## Solution
 > > 
-> > <!-- ~~~
+> > ~~~
 > > # 1
 > > surveys_df.loc[[1, 3, 5], ['species_id','sex']]
 > > 
 > > # 2
 > > surveys_df.iloc[1:6:2, [5,6]]
 > > ~~~
-> > {: .python} -->
+> > {: .python}
 > {: .solution}
 {: .challenge}
 
@@ -570,7 +570,7 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 >
 > > ## Solution
 > > 
-> > <!-- ~~~
+> > ~~~
 > > surveys_df[(surveys_df.weight <= 8.0) & (surveys_df.year == 1999)]
 > > ~~~
 > > {: .python}
@@ -589,7 +589,7 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 > > 29903     7.0  
 > > 29905     4.0  
 > > ~~~
-> > {: .output} -->
+> > {: .output}
 > {: .solution}
 {: .challenge}
 
