@@ -33,10 +33,11 @@ For this exercise, we will use a different data file, called "`surveys_complete.
 ## Getting Started
 
 Create a new Jupyter notebook for this lesson and
-begin by importing the Pandas package and seaborn.
+begin by importing the Pandas package and seaborn. We also need to import the matplotlib plotting functions `pyplot` in order to directly call any of the plotting functions for matplotlib
 
 ~~~
 import pandas as pd
+import matplotlib.pyplot as plt
 import seaborn as sns
 ~~~
 {: .python}
@@ -163,14 +164,14 @@ my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 >
 > > ## Solution
 > > 
-> > <!-- ~~~
+> > ~~~
 > > my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete[surveys_complete.plot_id == 12], fit_reg=False, size=8, 
                     aspect=1.5, scatter_kws={'alpha':0.3,"s": 200}, hue='sex', markers='8')
 my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 > > ~~~
 > > {: .python}
 > > 
-> > ![png](../fig/05-seaborn-scatter-9.png) -->
+> > ![png](../fig/05-seaborn-scatter-9.png)
 > {: .solution}
 {: .challenge}
 
@@ -205,7 +206,7 @@ Now let's use a violin plot to visualize the weight data. For these data, we wou
 An easy way to do this is to create a new graph variable from our `.violinplot()` function and then call the `.set_xscale()` that is a member method of the graph variable.
 
 ~~~
-fig, ax = plt.subplots(figsize=dims)
+fig, ax = plt.subplots(figsize=plot_dims)
 g = sns.violinplot('weight','species_id', data=surveys_complete, linewidth=0.2, orient="h", cut=0)
 g.set_xscale('log', basex=10)
 ax.set(ylabel='Species ID', xlabel='Weight')
@@ -222,13 +223,13 @@ ax.set(ylabel='Species ID', xlabel='Weight')
 >
 > > ## Solution
 > > 
-> > <!-- ~~~
+> > ~~~
 > > fig, ax = plt.subplots(figsize=dims)
 sns.violinplot(x = 'sex', y = 'weight', data=surveys_complete[surveys_complete.species_id == 'OL'])
 > > ~~~
 > > {: .python}
 > > 
-> > ![png](../fig/05-seaborn-violinplot-2.png) -->
+> > ![png](../fig/05-seaborn-violinplot-2.png)
 > {: .solution}
 {: .challenge}
 
@@ -237,7 +238,7 @@ sns.violinplot(x = 'sex', y = 'weight', data=surveys_complete[surveys_complete.s
 Often, a histogram is a better way to visualize a distribution. This is relatively simple using seaborn's `.distplot()` function. This function does not take a Pandas DataFrame, but can take a Pandas Series (i.e., column in our DataFrame). This function also can take come other arguments like `color`, which takes values that specify the color of histogram based on [matplotlib's colors](https://matplotlib.org/api/colors_api.html). We will make our plot cyan using the `'c'` color code.
 
 ~~~
-fig, ax = plt.subplots(figsize=dims)
+fig, ax = plt.subplots(figsize=plot_dims)
 sns.distplot(surveys_complete['weight'], color='c')
 ~~~
 {: .python}
@@ -247,7 +248,7 @@ sns.distplot(surveys_complete['weight'], color='c')
 By default, the `.distplot()` function plots the histogram as a density plot with the kernel density estimate overlaid as a darker line on the graph. This may not be necessary and we may instead want the y-axis to represent the counts in each bin. We can further adjust the appearance of the histogram to make the bars more apparent and increase the number of bins.
 
 ~~~
-fig, ax = plt.subplots(figsize=dims)
+fig, ax = plt.subplots(figsize=plot_dims)
 sns.distplot(surveys_complete['weight'], kde=False, color='c', hist_kws=dict(edgecolor="k", linewidth=1), bins=100)
 ~~~
 {: .python}
@@ -281,6 +282,13 @@ output_notebook()
 
 ![png](../fig/bokeh1.png)
 
+This figure also uses the histogram function from numpy. So we have to first import that package:
+
+~~~
+import numpy as np
+~~~
+{: .python}
+
 We can reproduce the histogram of the weights of all our observations.
 
 ~~~
@@ -312,7 +320,8 @@ out.close()
 {: .python}
 
 ## Comparing densities in bokeh using ridgeline plots
-A cool way of visualizing multiple histograms is to use what is called a "ridgeline" plot. Here is the additional code needed to make this plot.
+
+A cool way of visualizing multiple histograms is to use what is called a "ridgeline" plot. There is a nice package in R called [`ggridges`](https://github.com/clauswilke/ggridges) that allows you to create these plot. Here is the additional code needed to make this plot using bokeh in Python. (To get this to work, you must first install the package `colorcet` using: `conda install colorcet`.)
 
 ~~~
 from numpy import linspace
