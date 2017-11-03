@@ -59,7 +59,7 @@ surveys_complete = pd.read_csv('surveys_complete.csv', index_col=0)
 
 ## A Simple Scatterplot
 
-Let's start with a basic scatterplot. We'll simply plot the weight on the x-axis and the hindfoot length on the y-axis. This uses the seaborn function `.lmplot()`. This function can take a Pandas DataFrame directly. It also will fit a regression line, by default. Since we may not want to visualize these data with a regression line, we will use the `fit_reg=False` argument.
+Let's start with a basic scatterplot. We'll simply plot the weight on the x-axis and the hind foot length on the y-axis. This uses the seaborn function `.lmplot()`. This function can take a Pandas DataFrame directly. It also will fit a regression line, by default. Since we may not want to visualize these data with a regression line, we will use the `fit_reg=False` argument.
 
 ~~~
 sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False)
@@ -181,7 +181,7 @@ We often like to compare the distributions of values across different categorica
 
 In seaborn, both the `.boxplot()` and `.violinplot()` functions return matplotlib Axes objects. Thus, these plot functions do not have arguments for `size` and `aspect` like the scatter plot function above. 
 
-In order to change the size of these plots, we must create a matplotlib figure and axes and set the dimentions of the figure. First, let's decide on the figure size we will use for the rest of our seaborn plots.
+In order to change the size of these plots, we must create a matplotlib figure and axes and set the dimensions of the figure. First, let's decide on the figure size we will use for the rest of our seaborn plots.
 
 ~~~
 plot_dims = (14, 9)
@@ -232,7 +232,7 @@ sns.violinplot(x = 'sex', y = 'weight', data=surveys_complete[surveys_complete.s
 > {: .solution}
 {: .challenge}
 
-<!-- # Histograms
+# Histograms
 
 Often, a histogram is a better way to visualize a distribution. This is relatively simple using seaborn's `.distplot()` function. This function does not take a Pandas DataFrame, but can take a Pandas Series (i.e., column in our DataFrame). This function also can take come other arguments like `color`, which takes values that specify the color of histogram based on [matplotlib's colors](https://matplotlib.org/api/colors_api.html). We will make our plot cyan using the `'c'` color code.
 
@@ -252,11 +252,99 @@ sns.distplot(surveys_complete['weight'], kde=False, color='c', hist_kws=dict(edg
 ~~~
 {: .python}
 
-![png](../fig/05-seaborn-distplot-2.png) -->
+![png](../fig/05-seaborn-distplot-2.png)
+
+# Plotting with `bokeh`
+
+Another library called `bokeh` can create amazing, interactive graphics using D3.js (javascript). This package is also easy to install with `conda`:
+
+```
+$ conda install bokeh
+```
+
+Return to your Jupyter notebook and import the necessary bokeh plotting tools:
+
+~~~
+from bokeh.plotting import figure 
+from bokeh.io import output_notebook, show
+~~~
+{: .python}
+
+Here we are importing functions to create a figure and to output that figure to our Jupyter notebook.
+
+We can now execute the `output_notebook()` function that will ensure that our Javascript images are displayed in our html notebook.
+
+~~~
+output_notebook()
+~~~
+{: .python}
+
+![png](../fig/bokeh1.png)
+
+We can reproduce the histogram of the weights of all our observations.
+
+~~~
+hist, edges = np.histogram(surveys_complete['weight'], density=True, bins=100)
+my_fig = figure(title="Weight",background_fill_color="#E8DDCB")
+my_fig.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],fill_color="#036564", line_color="#033649")
+show(my_fig)
+~~~
+{: .python}
+
+{% include bokeh-html.html %}
+
+We can also save this file as an html file that we can share with others or embed in files on the web. To do this, we need to include some other bokeh functions:
+
+~~~
+from bokeh.resources import CDN
+from bokeh.embed import file_html
+~~~
+{: .python}
+
+And create an html object and save it to a file using standard Python file i/o:
+
+~~~
+html = file_html(my_fig, CDN, "Weight Histogram")
+out = open('weight_hist_bokeh.html','w')
+out.write(html)
+out.close()
+~~~
+{: .python}
+
+## Comparing densities in bokeh using ridgeline plots
+A cool way of visualizing multiple histograms is to use what is called a "ridgeline" plot. Here is the additional code needed to make this plot.
+
+~~~
+from numpy import linspace
+from scipy.stats.kde import gaussian_kde
+import colorcet as cc
+
+def ridge(category, data, scale=20):
+    return list(zip([category]*len(data), scale*data))
+
+cats = list(pd.unique(surveys_complete['species_id']))
+palette = [cc.rainbow[i * 15] for i in range(len(cats))]
+ridgeline = figure(y_range=cats, plot_width=900, x_range=(-5, 300))
+x = linspace(-20,500, 500)
+for i, cat in enumerate(reversed(cats)):
+    pdf = gaussian_kde(surveys_complete[surveys_complete.species_id==cat]['weight'])
+    y = ridge(cat, pdf(x))
+    ridgeline.patch(x, y, color=palette[i], alpha=0.6, line_color="black")
+
+ridgeline.outline_line_color = None
+ridgeline.background_fill_color = "#efefef"
+ridgeline.y_range.range_padding = 0.32
+ridge_html = file_html(ridgeline, CDN, "ridges")
+out = open('weight_ridgeline_bokeh.html','w')
+out.write(ridge_html)
+out.close()
+show(ridgeline)
+~~~
+{: .python}
+
+{% include weight_ridgeline_bokeh.html %}
 
 
-
-### To be continued...
 
 <!-- 
 The points plotted show the spread of measurements. However, you will notice that box plots do not allow you to really visualize the relative distributions of your data. Thus, if you had some species that had strongly bimodal hind-foot length distributions, that would not be captured here. 
