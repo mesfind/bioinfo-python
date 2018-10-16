@@ -11,7 +11,7 @@ The goal of this section is to demonstrate the utility of Python for working wit
 ## Why Python?
 
 Python is a great programming language that is relatively easy to learn and also very easy to read. 
-For bioinformatics, you will find yourself needing to know this language. Many tools for dealing with genomic data are written in Python and knowing how to progam in Python allows you to modify these tools and assemble them together in cohesive pipelines. 
+For bioinformatics, you will find yourself needing to know this language. Many tools for dealing with genomic data are written in Python and knowing how to program in Python allows you to modify these tools and assemble them together in cohesive pipelines. 
 [Ethan White](http://whitelab.weecology.org/) outlines some nice reasons for using Python on his [Programming for Biologists site](http://www.programmingforbiologists.org/about/why-python/). Where he also references this [xkcd](https://xkcd.com/) comic:
 
 ![xkcd](http://imgs.xkcd.com/comics/python.png)
@@ -22,7 +22,7 @@ Most of the lessons we will use for this course were written for the [Data Carpe
 
 The data we are using for this lesson are from the Portal Project Teaching Database -
 [available on FigShare](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459).
-More details about the files we'll use and where to downlod them are available on the "[Setup](setup/)" page
+More details about the files we'll use and where to download them are available on the "[Setup](setup/)" page
 
 
 > ## Prerequisites
@@ -36,7 +36,7 @@ More details about the files we'll use and where to downlod them are available o
 
 ### Getting Started
 To get started with installing Python, follow the directions given in the [Python section of the course Software page](https://eeob-biodata.github.io/EEOB-BCB-546X/software#python).
-In addition to installing Python on your own computer, you will also need to download the data files used in the tutorials. Deatils for doing this are found in the [Setup](setup/) page.
+In addition to installing Python on your own computer, you will also need to download the data files used in the tutorials. Details for doing this are found in the [Setup](setup/) page.
 
 ### Format
 
