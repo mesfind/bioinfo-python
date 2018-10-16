@@ -29,15 +29,14 @@ More details about the files we'll use and where to downlod them are available o
 >
 > Learners need to understand the concepts of files and directories
 > (including the working directory) and how to start a Python
-> interpreter before tackling this lesson. This lesson references the Jupyter (IPython)
-> Notebook although it can be taught through any Python interpreter.
+> interpreter before tackling this lesson. This lesson references the Jupyter
+> notebook although it can be taught through any Python interpreter.
 > The commands in this lesson pertain to **Python 3**.
 {: .prereq}
 
 ### Getting Started
-To get started with installing Python, follow the directions given in the [Week 08](https://eeob-biodata.github.io/BCB546X-Fall2017/Week_08)
-folder of the class repository.
-You will also have to create a directory to work from and download some files. You can find instructions for doing that in the "[Setup](setup/)" page. 
+To get started with installing Python, follow the directions given in the [Python section of the course Software page](https://eeob-biodata.github.io/EEOB-BCB-546X/software#python).
+In addition to installing Python on your own computer, you will also need to download the data files used in the tutorials. Deatils for doing this are found in the [Setup](setup/) page.
 
 ### Format
 
