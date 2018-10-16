@@ -23,7 +23,7 @@ The official [introduction](https://docs.python.org/3.6/tutorial/) to Python sta
 
 The simplicity of Python really comes from its very clean (i.e., uncluttered) syntax. This makes programming in Python similar to writing [pseudocode](https://en.wikipedia.org/wiki/Pseudocode), which is writing an algorithm in a readable way.
 
-For example, let's say we want to use a `for` loop to count the number of Gs in a DNA sequence. In pseudocode, we would write:
+For example, let's say we want to use a `for` loop to count the number of `G`s in a DNA sequence. In pseudocode, we would write:
 
 ```
 seq = "...ACGT..."
@@ -84,7 +84,7 @@ When the loop ends, we print `capital_s`.
 
 Look carefully at the placement of the colon `:` and the indentation and notice how these elements define the loop.
 
-**Tabs or spaces?** Spaces are the preferred way to format indentation. The standard is to use 4 spaces. Tabs will work, but you absolutely cannot mix tabs and spaces.
+**Tabs or spaces?** Spaces are the preferred way to format indentation. The standard is to use 4 spaces. Tabs will work, but _you absolutely cannot mix tabs and spaces_.
 
 ### Indexing
 
@@ -137,7 +137,7 @@ o
 >
 > Count the number of Gs in the sequence above using a `for` loop. What is the difference between Python (see above) and R (in solution below) implementations?
 >
-> > ## Solution
+<!-- > > ## Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGACAA'
 > > seq_split <- strsplit(seq, "")[[1]]
@@ -149,28 +149,28 @@ o
 > > }
 > > print(count)
 > > ~~~
-> {: .solution}
+> {: .solution}-->
 {: .challenge}
 
 > ## What is the simplest way to count the Gs?
 >
 > Count the number of Gs in the sequence above using either R or Python in a simpler way.
 >
-> > ## Python Solution
+<!-- > > ## Python Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > print(seq.count('G'))
 > > ~~~
 > > {: .python}
-> {: .solution}
+> {: .solution} -->
 >
-> > ## R Solution
+<!-- > > ## R Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > library(stringr)
 > > str_count(seq,'G')
 > > ~~~
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 There are a lot of blogs and articles comparing R and Python. Many of these comparisons (like this [infographic](https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis#gs.3P0PoiY)) do not tell you which is "better". That's because this is up to you. It really depends on what you're trying to do. Typically for a lot of bioinformatics projects, you will find yourself needing to know both. This is simply because many of the very useful tools for working with biological data are written in a variety of languages. Thus, it is up to the researcher to interact with them and develop cohesive pipelines for data curation and analysis.
@@ -185,7 +185,7 @@ You can run python in various tools. Perhaps the most straightforward is to use 
 $ python
 ```
 ~~~
-Python 3.6.2 |Anaconda custom (x86_64)| (default, Oct  5 2017, 03:00:07)
+Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 11:07:29) 
 [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
@@ -237,7 +237,7 @@ When you hit enter after a colon `:`, the prompt changes to `...`, indicating th
 
 ### Executing Scripts
 
-One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called [`Week_08/scripts/01-intro.py`](https://github.com/EEOB-BioData/BCB546X-Fall2017/blob/master/Week_08/scripts/01-intro.py) (in the course GitHub repository). You can run this whole script from the command line in your terminal:
+One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called [`01-intro.py`](https://github.com/EEOB-BioData/BCB546X-Fall2018/blob/master/course-files/python/scripts/01-intro.py) (in the `course-files/python/scripts` directory of the course GitHub repository). You can run this whole script from the command line in your terminal:
 
 ```
 $ python 01-intro.py
@@ -254,7 +254,7 @@ HELLO
 Our HPC systems do not use the Anaconda install of Python. Additionally, the default verions of Python that is available globally is Python 2.7. Thus, if you would like to use HPC-Class to interact with Python, you will have to load the Python 3 module after logging on to the cluster (`ssh <ISU Net ID>@hpc-class.its.iastate.edu`).
 
 ```
-$ module load python/3
+$ module load python/3.6.5-fwk5uaj
 ```
 
 Once you have loaded the Python 3 module, you can open the `python3` interpreter:
@@ -264,8 +264,8 @@ $ python3
 ```
 
 ~~~
-Python 3.6.0 (default, Feb  4 2017, 15:08:23)
-[GCC 4.8.5 20150623 (Red Hat 4.8.5-4)] on linux
+Python 3.6.5 (default, May 29 2018, 16:28:47) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ~~~
@@ -333,8 +333,8 @@ Each cell in a Jupyter notebook can be executed and you can choose the type of c
 >
 > Replicate one of the solutions give above in a Jupyter notebook. Add some Markdown text to describe your program.
 >
-> > ## Solution
+<!-- > > ## Solution
 > >
 > > ![jupyter browser](../fig/jupyter3.png)
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
