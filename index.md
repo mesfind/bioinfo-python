@@ -22,7 +22,7 @@ Most of the lessons we will use for this course were written for the [Data Carpe
 
 The data we are using for this lesson are from the Portal Project Teaching Database -
 [available on FigShare](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459).
-More details about the files we'll use and where to download them are available on the "[Setup](setup/)" page
+More details about the files we'll use and where to download them are available on the [Setup](setup/) page
 
 
 > ## Prerequisites
