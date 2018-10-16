@@ -177,7 +177,7 @@ There are a lot of blogs and articles comparing R and Python. Many of these comp
 
 # Getting Started with Python
 
-## Interactive Interpeter
+## Interactive Interpreter
 
 You can run python in various tools. Perhaps the most straightforward is to use the interactive Python interpreter. To enter the Python console, simple open a terminal window and type `python`. [In Mac OS X, it is sometimes good to use `pythonw` which is required if you want to use any Python function that requires opening new windows (e.g., plotting).]
 
@@ -251,7 +251,7 @@ HELLO
 
 ### Python on the Cluster
 
-Our HPC systems do not use the Anaconda install of Python. Additionally, the default verions of Python that is available globally is Python 2.7. Thus, if you would like to use HPC-Class to interact with Python, you will have to load the Python 3 module after logging on to the cluster (`ssh <ISU Net ID>@hpc-class.its.iastate.edu`).
+Our HPC systems do not use the Anaconda install of Python. Additionally, the default versions of Python that is available globally is Python 2.7. Thus, if you would like to use HPC-Class to interact with Python, you will have to load the Python 3 module after logging on to the cluster (`ssh <ISU Net ID>@hpc-class.its.iastate.edu`).
 
 ```
 $ module load python/3.6.5-fwk5uaj
@@ -327,7 +327,7 @@ When you select **_New->Python 3_**, new Python 3 Jupyter notebook will open. Th
 
 ![jupyter browser](../fig/jupyter2.png)
 
-Each cell in a Jupyter notebook can be executed and you can choose the type of cell using the pull-down menu in the toolbar. By default the cell is **_Code_**. Any thing you enter in a cell can be executed by using the "play" button in the tool bar or with **_Shift+Enter_** via the keyboard.
+Each cell in a Jupyter notebook can be executed and you can choose the type of cell using the pull-down menu in the tool bar. By default the cell is **_Code_**. Any thing you enter in a cell can be executed by using the "play" button in the tool bar or with **_Shift+Enter_** via the keyboard.
 
 > ## Count the Gs using Python in a Jupyter Notebook
 >
