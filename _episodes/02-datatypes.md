@@ -116,7 +116,7 @@ print(numbers)
 
 Methods are a way to interact with an object (a list, for example). We can invoke
 a method using the dot `.` followed by the method name and a list of arguments in parentheses.
-To find out what methods are available for an object, we can use the built-in `help` command (you can exit the help page by typing `q`:
+To find out what methods are available for an object, we can use the built-in `help` command (you can exit the help page by typing `q`):
 
 ~~~
 help(numbers)
@@ -151,7 +151,7 @@ dir(numbers)
 ### Tuples
 
 A tuple is similar to a list in that it's an ordered sequence of elements. However,
-tuples can not be changed once created (they are "immutable"). Tuples are
+tuples cannot be changed once created (they are "immutable"). Tuples are
 created by placing comma-separated values inside parentheses `()`.
 
 ~~~
@@ -166,9 +166,9 @@ my_list = [0,1,2]
 
 > ## What happens when you try to change a list versus a tuple?
 >
-> Change the value of a single element in `my_list ` and `my_tuple `.
+> Change the value of a single element in `my_list ` and `my_tuple`.
 >
-> > ## Solution: List
+<!-- > > ## Solution: List
 > >
 > > ~~~
 > > my_list[1] = 5
@@ -180,9 +180,9 @@ my_list = [0,1,2]
 > > my_list = [0, 5, 2]
 > > ~~~
 > > {: .output}
-> {: .solution}
+> {: .solution} -->
 >
-> > ## Solution: Tuple
+<!-- > > ## Solution: Tuple
 > >
 > > ~~~
 > > my_tuple[1] = 5
@@ -195,7 +195,7 @@ my_list = [0,1,2]
 > >TypeError: 'tuple' object does not support item assignment
 > > ~~~
 > > {: .output}
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 ### Mixing Types
@@ -338,7 +338,7 @@ for key in numbers2:
 >
 > Try to reassign the second value of `numbers2` (in the *key value pair*) so that it no longer reads "two" but instead reads "spam and eggs". What does your dictionary look like after you make this change?
 >
-> > ## Solution
+<!-- > > ## Solution
 > >
 > > ~~~
 > > numbers2[2] = 'spam and eggs'
@@ -350,29 +350,31 @@ for key in numbers2:
 > >{1: 'one', 2: 'spam and eggs', 3: 'three', 4: 'four'}
 > > ~~~
 > > {: .output}
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
-It is important to note that dictionaries are _unordered_ and do not remember the
+It is important to note that dictionaries in Python 3.6 or greater are now _ordered_ and preserve the
 sequence of their items (i.e., the order in which key:value pairs were added to
-the dictionary). Because of this, the order in which items are returned from loops
+the dictionary). In previous versions of Python, dictionaries are unordered, where the order in which items are returned from loops
 over dictionaries might appear random and can even change with time.
-If the dictionary's keys are of a single type that can be sorted (numbers or strings), then you can get a sorted list of the keys and iterate over it in a loop.
 
-A loop over the unordered dictionary:
+
+Regardless of the order in which they were entered, if the dictionary's keys are of a single type that can be sorted (numbers or strings), then you can get a sorted list of the keys and iterate over it in a loop.
+
+A loop over the values of an unsorted dictionary:
 
 ~~~
 d = {3 : 'three', 2 : 'two', 6 : 'six', 5 : 'five'}
-for key, value in d.items():
-    print(key, ' = ', value)
+for value in d.values():
+    print(value)
 ~~~
 {: .python}
 
 ~~~
-3  =  three
-2  =  two
-6  =  six
-5  =  five
+three
+two
+six
+five
 ~~~
 {: .output}
 
@@ -417,7 +419,7 @@ print(z)
 
 # Python Packages
 
-There are an immense number of Python packages (also called libraries) out there that do a lot of different things. Python doesn't have a heavily managed central resource like CRAN for R, but you can find a long and probably incomplete [list of packages for Python online](https://pypi.python.org/pypi/). Additionally, Anaconda provides easy installs of over 620 packages listed [here](https://docs.continuum.io/anaconda/pkg-docs).
+There is an immense number of Python packages (also called libraries) out there that do a lot of different things. Python doesn't have a heavily managed central resource like CRAN for R, but you can find a long and probably incomplete [list of packages for Python online](https://pypi.python.org/pypi/). Additionally, Anaconda provides easy installs of over 600 packages listed [here](https://anaconda.org/anaconda/repo).
 
 ## Installing New Packages
 
@@ -494,25 +496,3 @@ import this
 {: .python}
 
 
-
-<!-- ## Check your Python Environment
-
-Now that we have installed ggplot, let's check that our Python environment is ready for the lessons we'll do in class.
-These lessons were mainly adapted from [Data Carpentry](http://datacarpentry.org/) lessons on Python.
-That course provides an easy script that you can use to check your environment.
-
-1. Download this file and save it to your `python-bcb546` directory: [check_env.py](https://raw.githubusercontent.com/datacarpentry/python-ecology-lesson/gh-pages/_includes/scripts/check_env.py).
-2. Now run the file by executing it in your terminal window (make sure you're in the `python-bcb546` directory:
-
-```
-$ python check_env.py
-```
-
-If everything is installed properly you should get:
-
-~~~
-All checks passed. Your Anaconda installation is up and running and ready for Data Carpentry!
-~~~
-{: .output}
-
-Otherwise you will get an error. If you do not get the message above, let's take some time to make sure everyone is on the same page. -->
