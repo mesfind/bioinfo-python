@@ -34,22 +34,26 @@ and they can replicate the same analysis.
 
 To help the lesson run smoothly, let's ensure everyone is in the same directory.
 This should help us avoid path and file name issues. At this time please
-navigate to the `python-bcb546` directory on your computer. If you working in Jupyter Notebook be sure
-that you start your notebook in the `python-bcb546` directory. If you do not have this directory, please see the instructions in the [Setup](../setup/) page.
+navigate to the directory containing the [course repository](https://github.com/EEOB-BioData/BCB546X-Fall2018) on your computer. 
+Before starting, be sure to **pull** the most recent changes from the repository using `git pull origin master`.
+If you're working in Jupyter Notebook be sure
+that you start your notebook in the `course-files/python` directory. If you do not have this directory, please see the instructions in the [Setup](../setup/) page.
 
 You will want to use a Jupyter notebook or the Spyder IDE console to run this lesson. Both of these tools make it easy to view in-line plots.
 
 To start a new Python session in a Jupyter notebook:
 
 ```
-$ cd python-bcb546
+$ cd course-files/python
 $ jupyter notebook
 ```
 
-Then select **_New->Python 3_**. Name this session `03-starting-wtih-data`.
+This typically brings up your default web browser and opens the Jupyter home screen.
+Select **_New->Python 3_**. Name this session `03-starting-wtih-data`.
 
+Note that you can also start a Jupyter notebook from the Anaconda Navigator launch screen. This will likely open the notebook in your home directory and you can then navigate through your file system to get to the `course-files/python` directory.
 
-Alternatively, you can start a Spyder instance and navigate to the `python-bcb546` directory from the console using Unix commands. 
+Alternatively, you can start a Spyder instance and navigate to the `course-files/python` directory from the console using Unix commands. 
 
 
 
@@ -61,8 +65,8 @@ from the ecological study by Ernst et al. (2009):
 Specifically, we will be using files from the [Portal Project Teaching Database](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459).
 
 * This section will use the `surveys.csv` file that can be downloaded from the 
-[`python-bcb546`](https://github.com/EEOB-BioData/BCB546X-Fall2017/tree/master/python-bcb546) folder of the course repository.
-Pull from the course repository and change to to `python-bcb546` or copy the `surveys.csv` file to the directory from which you would like to work.
+[`course-files/python`](https://github.com/EEOB-BioData/BCB546X-Fall2018/tree/master/course-files/python) folder of the course repository.
+Pull from the course repository and change to to `course-files/python` or copy the `surveys.csv` file to the directory from which you would like to work.
 
 In this lesson, we are studying the species and weight of (_vertebrate_) animals captured in plots in our study
 area. The observed data are stored as a `.csv` file (comma-separated value): each row holds information for a
@@ -342,7 +346,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > 
 > 2. What is a much simpler approach to this?
 >
-> > ## Solution
+<!-- > > ## Solution
 > > 
 > > ~~~
 > > # 1
@@ -353,7 +357,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > > print(surveys_df['plot_id'].nunique())
 > > ~~~
 > > {: .python}
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 
@@ -543,13 +547,13 @@ summaries of categorical data.
 > Using the `.describe()` method on the DataFrame sorted by sex, 
 > determine how many individuals were observed for each.
 >
-> > ## Solution
+<!-- > > ## Solution
 > > 
 > > * *Female* = 15690
 > > 
 > > * *Male* = 17348
 > > 
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 
@@ -560,14 +564,14 @@ summaries of categorical data.
 > then grab mean values:
 > - Hint: you can use a list in the arguments of the `.groupby()` method, `['plot_id','sex']`
 > 
-> > ## Solution
+<!-- > > ## Solution
 > > 
 > > ~~~
 > > sorted_data2 = surveys_df.groupby(['plot_id','sex'])
 > > sorted_data2.mean()
 > > ~~~
 > > {: .python}
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 
@@ -575,14 +579,14 @@ summaries of categorical data.
 >
 > Summarize weight values for each plot in your data.
 > 
-> > ## Solution
+<!-- > > ## Solution
 > > 
 > > ~~~
 > > by_plot = surveys_df.groupby('plot_id')
 > > by_plot['weight'].describe()
 > > ~~~
 > > {: .python}
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 
@@ -671,12 +675,12 @@ We can plot our summary stats using Pandas, too. First, we must ensure that the 
 Now, we can make a quick bar chart of the species counts
 
 ~~~
-species_counts.plot(kind='bar')
+species_counts.plot(kind='bar',title='Number of individuals per species')
 ~~~
 {: .python}
 
 ![Weight by Species Plot](../fig/species-counts-bar.png)
-Number of individuals per species
+
 
 We can also look at how many animals were captured in each plot:
 
@@ -685,47 +689,47 @@ total_count = surveys_df.groupby('plot_id')['record_id'].nunique()
 ~~~
 {: .python}
 
-And plot a bar chart describing
+And plot a bar chart describing the number of individuals captured at each plot. Also, let's make it so that all of the bars are colored green.
 
 ~~~
-total_count.plot(kind='bar')
+total_count.plot(kind='bar',title='Number captured per plot', color='green')
 ~~~
 {: .python}
 
 ![Number Captured Plot](../fig/num-captured.png)
-Number captured per plot
 
 
 > ## Plot the average weight across all species in each plot
 >
-> Create a bar plot that shows the average weight of all of the animals captured in that plot
+> Create a bar plot that shows the average weight of all of the animals captured in that plot.
+> Also, choose an interesting or pleasing color from the list of [named web colors](https://en.wikipedia.org/wiki/Web_colors).
 > 
-> > ## Solution
+<!-- > > ## Solution
 > > 
 > > ~~~
 > > plot_weight_means = surveys_df.groupby('plot_id')['weight'].mean()
-> > plot_weight_means.plot(kind='bar')
+> > plot_weight_means.plot(kind='bar',title='Average Weight',color='LightSeaGreen')
 > > ~~~
 > > {: .python}
 > > 
 > > ![Solution](../fig/plot_ave_weight.png)
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 > ## Plot the number of females and the number of males in the dataset
 >
 > Create a bar plot that shows the total number of each sex captured for the entire dataset.
 > 
-> > ## Solution
+<!-- > > ## Solution
 > > 
 > > ~~~
 > > counts_by_sex = surveys_df['record_id'].groupby(surveys_df['sex']).count()
-> > counts_by_sex.plot(kind='bar')
+> > counts_by_sex.plot(kind='bar',title='Number captured for each sex')
 > > ~~~
 > > {: .python}
 > > 
 > > ![Solution](../fig/counts_by_sex.png)
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 
