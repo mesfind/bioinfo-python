@@ -168,7 +168,7 @@ my_list = [0,1,2]
 >
 > Change the value of a single element in `my_list ` and `my_tuple`.
 >
-<!-- > > ## Solution: List
+> > ## Solution: List
 > >
 > > ~~~
 > > my_list[1] = 5
@@ -180,9 +180,9 @@ my_list = [0,1,2]
 > > my_list = [0, 5, 2]
 > > ~~~
 > > {: .output}
-> {: .solution} -->
+> {: .solution}
 >
-<!-- > > ## Solution: Tuple
+> > ## Solution: Tuple
 > >
 > > ~~~
 > > my_tuple[1] = 5
@@ -195,7 +195,7 @@ my_list = [0,1,2]
 > >TypeError: 'tuple' object does not support item assignment
 > > ~~~
 > > {: .output}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 ### Mixing Types
@@ -338,7 +338,7 @@ for key in numbers2:
 >
 > Try to reassign the second value of `numbers2` (in the *key value pair*) so that it no longer reads "two" but instead reads "spam and eggs". What does your dictionary look like after you make this change?
 >
-<!-- > > ## Solution
+> > ## Solution
 > >
 > > ~~~
 > > numbers2[2] = 'spam and eggs'
@@ -350,7 +350,7 @@ for key in numbers2:
 > >{1: 'one', 2: 'spam and eggs', 3: 'three', 4: 'four'}
 > > ~~~
 > > {: .output}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 It is important to note that dictionaries in Python 3.6 or greater are now _ordered_ and preserve the
@@ -494,5 +494,3 @@ And sage advice:
 import this
 ~~~
 {: .python}
-
-

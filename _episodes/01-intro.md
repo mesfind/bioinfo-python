@@ -137,7 +137,7 @@ o
 >
 > Count the number of Gs in the sequence above using a `for` loop. What is the difference between Python (see above) and R (in solution below) implementations?
 >
-<!-- > > ## Solution
+> > ## Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGACAA'
 > > seq_split <- strsplit(seq, "")[[1]]
@@ -149,20 +149,20 @@ o
 > > }
 > > print(count)
 > > ~~~
-> {: .solution}-->
+> {: .solution}
 {: .challenge}
 
 > ## What is the simplest way to count the Gs?
 >
 > Count the number of Gs in the sequence above using either R or Python in a simpler way.
 >
-<!-- > > ## Python Solution
+> > ## Python Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > print(seq.count('G'))
 > > ~~~
 > > {: .python}
-> {: .solution} -->
+> {: .solution}
 >
 <!-- > > ## R Solution
 > > ~~~
@@ -185,7 +185,7 @@ You can run python in various tools. Perhaps the most straightforward is to use 
 $ python
 ```
 ~~~
-Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 11:07:29) 
+Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 11:07:29)
 [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
@@ -264,7 +264,7 @@ $ python3
 ```
 
 ~~~
-Python 3.6.5 (default, May 29 2018, 16:28:47) 
+Python 3.6.5 (default, May 29 2018, 16:28:47)
 [GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
@@ -333,8 +333,8 @@ Each cell in a Jupyter notebook can be executed and you can choose the type of c
 >
 > Replicate one of the solutions give above in a Jupyter notebook. Add some Markdown text to describe your program.
 >
-<!-- > > ## Solution
+> > ## Solution
 > >
 > > ![jupyter browser](../fig/jupyter3.png)
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
