@@ -593,13 +593,74 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 > {: .solution} -->
 {: .challenge}
 
-<!-- ## Looping Over a DataFrame
+## Looping Over a DataFrame
 
-To loop over a data frame we can access the row and its index using the `.iterrows()` method.
+To loop over a data frame we can access the row and its index using the `.iterrows()` method. First, create a variable that just contains the data for observations of the species _Onychomys torridus_. 
 
 ~~~
-for index, row in surveys_df.iterrows():
-  
+surveys_OT = surveys_df[surveys_df.species_id == 'OT']  
 ~~~
 {: .python}
- -->
+
+Let's say that we want to calculate the average hind foot length. 
+With this subset DataFrame, we can iterate over the rows and calculate the sum of the hind foot length and count the number of observations we have (remember that we might not have gotten that measurement for every observation).
+
+~~~
+sum_hfl = 0.0
+count = 0
+for index, row in surveys_OT.iterrows():
+    hfl = row['hindfoot_length']
+    if(pd.isna(hfl) != True): 
+        sum_hfl += hfl
+        count += 1
+~~~
+{: .python}
+
+The Pandas method `.iterrows()` returns the index of the row and the row as a Pandas series object.
+This allows us to access the column values easily.
+We use the Pandas function `pd.isna()` to check if the row has a value for `hindfoot_length`. If that cell is empty, it is not factored into the calculation of the average.
+
+Now we can compute the average hind-foot length:
+
+~~~
+ave_OT_hfl = sum_hfl / count
+print(ave_OT_hfl)
+~~~
+{: .python}
+
+Let's compare this value to the one calculated by Pandas:
+
+
+~~~
+print(surveys_OT.hindfoot_length.mean())
+~~~
+{: .python}
+
+## Adding a New Column to a DataFrame
+
+Perhaps we want to add a value, notation, or other information to our DataFrame. This is easily done by just initializing the value. 
+We will do this for our copy of the DataFrame.
+
+~~~
+surveys_2000 = surveys_df[surveys_df.year == 2000].copy()
+~~~
+{: .python}
+
+Now we can iterate over the rows in our new DataFrame, compute the value and add it to the DataFrame in the column 'new_value'.
+
+~~~
+for index, row in surveys_2000.iterrows():
+    hfl = row['hindfoot_length']
+    weight = row['weight']
+    if(pd.isna(hfl) != True and pd.isna(weight) != True): 
+        surveys_2000.loc[index,'new_value'] = hfl / weight
+~~~
+{: .python}
+
+View the summary of this new column:
+
+~~~
+surveys_2000.new_value.describe()
+~~~
+{: .python}
+
