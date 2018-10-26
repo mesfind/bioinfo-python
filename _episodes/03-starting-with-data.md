@@ -704,7 +704,7 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 > Create a bar plot that shows the average weight of all of the animals captured in that plot.
 > Also, choose an interesting or pleasing color from the list of [named web colors](https://en.wikipedia.org/wiki/Web_colors).
 > 
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > plot_weight_means = surveys_df.groupby('plot_id')['weight'].mean()
@@ -713,14 +713,14 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 > > {: .python}
 > > 
 > > ![Solution](../fig/plot_ave_weight.png)
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 > ## Plot the number of females and the number of males in the dataset
 >
 > Create a bar plot that shows the total number of each sex captured for the entire dataset.
 > 
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > counts_by_sex = surveys_df['record_id'].groupby(surveys_df['sex']).count()
@@ -729,7 +729,7 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 > > {: .python}
 > > 
 > > ![Solution](../fig/counts_by_sex.png)
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 

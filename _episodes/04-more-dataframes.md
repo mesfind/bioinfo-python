@@ -244,7 +244,7 @@ surveys_df[0:3]
 > Combine selecting a subset with column headings and slice syntax for rows. Get
 > every 5th row for rows 20-60, from the columns `plot_id`, `species_id`, and `sex`. 
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > surveys_df[['plot_id', 'species_id','sex']][20:61:5]
@@ -264,7 +264,7 @@ surveys_df[0:3]
 > > 60       23         DM   M
 > > ~~~
 > > {: .output}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 ## Changing Values in a DataFrame
