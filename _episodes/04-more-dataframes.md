@@ -1,5 +1,5 @@
 ---
-title: Indexing, Slicing, and Subsetting DataFrames in Python
+title: Indexing, Slicing, Subsetting, and Iterating DataFrames in Python
 teaching: 60
 exercises: 0
 questions:
@@ -12,6 +12,7 @@ objectives:
 - "Use label and integer-based indexing to select ranges of data in a DataFrame."
 - "Create a copy of a DataFrame."
 - "Locate subsets of data using masks."
+- "Loop over rows and update values."
 keypoints:
 - "Python can be used to work with complex data structures."
 ---
