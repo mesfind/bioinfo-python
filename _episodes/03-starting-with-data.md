@@ -591,6 +591,7 @@ summaries of categorical data.
 
 
 ## Quickly Creating Summary Counts in Pandas
+{: #quicksumm }
 
 Let's next count the number of samples for each species. We can do this in a few
 ways, but we'll use `groupby` combined with a `count()` method.
@@ -661,7 +662,6 @@ max        560.000000
 Name: weight, dtype: float64
 ~~~
 {: .output}
-
 
 # Quick & Easy Plotting Using Pandas
 
