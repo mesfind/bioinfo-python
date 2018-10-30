@@ -28,7 +28,7 @@ To install the package, use `conda`:
 $ conda install seaborn
 ```
 
-For this exercise, we will use a different data file, called "`surveys_complete.csv`", containing all the complete data observations from the plot surveys used in previous lessons. Download this file from the [`python-bcb546`](https://github.com/EEOB-BioData/BCB546X-Fall2017/tree/master/python-bcb546) folder on the course repository or pull the all new changes from the repository if you haven't done so already. 
+For this exercise, we will use a different data file, called "`surveys_complete.csv`", containing all the complete data observations from the plot surveys used in previous lessons. Download this file from the [course repository](https://github.com/EEOB-BioData/BCB546X-Fall2018) or pull the all new changes from the repository if you haven't done so already. 
 
 ## Getting Started
 
@@ -90,7 +90,7 @@ The plot size is small, by default, and with seaborn, there isn't a way to chang
 For `.lmplot()`, we can set the plot size directly as arguments in the function call using the `size` and `aspect` arguments. These arguments control the height and width of the object, respectively.  
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, size=8, aspect=1.5)
+sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5)
 ~~~
 {: .python}
 
@@ -101,7 +101,7 @@ sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, si
 One issue with this plot is that because we have a large dataset, it is difficult to adequately visualize the points on our graph. This is called "[overplotting](https://python-graph-gallery.com/134-how-to-avoid-overplotting-with-python/)". One way to avoid this is to change the size of the marker. Here we use the argument `scatter_kws` that takes a _dictionary_ of keywords and values that are passed to the matplotlib `scatter` function.
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, size=8, aspect=1.5, scatter_kws={"s": 5})
+sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5, scatter_kws={"s": 5})
 ~~~
 {: .python}
 
@@ -110,7 +110,7 @@ sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, si
 Alternatively, we can change the marker type using the `markers` keyword argument. By default, `lmplot()` sets `markers='8'`. If we want to change the marker, we must use the correct [matplotlib code](https://matplotlib.org/examples/lines_bars_and_markers/marker_reference.html). Let's change the markers to X-es:
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, size=8, aspect=1.5, markers='x')
+sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5, markers='x')
 ~~~
 {: .python}
 
@@ -119,7 +119,7 @@ sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, si
 Another way to avoid overplotting is to use transparency so that regions of the plot with many points are darker. This is achieved using the `scatter_kws` argument and setting the alpha value. (This is using [alpha compositing](https://en.wikipedia.org/wiki/Alpha_compositing).)
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, size=8, aspect=1.5, scatter_kws={'alpha':0.3})
+sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5, scatter_kws={'alpha':0.3})
 ~~~
 {: .python}
 
@@ -131,7 +131,7 @@ sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, si
 We can also specify that the `species_id` labels indicate categories that determine a point's color:
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, size=8,
+sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8,
            aspect=1.5, scatter_kws={'alpha':0.3,"s": 50}, hue='species_id', markers='D')
 ~~~
 {: .python}
@@ -145,7 +145,7 @@ sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, si
 There are different ways to set figure properties using seaborn. For `.lmplot()`, we can create a figure variable and use a member method of tat variable to set the axis labels. 
 
 ~~~
-my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, size=8, 
+my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, 
                     aspect=1.5, scatter_kws={'alpha':0.3,"s": 50}, hue='species_id', markers='D')
 my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 ~~~
@@ -162,17 +162,18 @@ my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 > Remember how to access subsets of a DataFrame based on conditional criteria?
 > Plot the scatter plot above for only plot number `12` and color by `sex`. (Make the markers larger circles.)
 >
-> > ## Solution
+<!-- > > ## Solution
 > > 
 > > ~~~
-> > my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete[surveys_complete.plot_id == 12], fit_reg=False, size=8, 
-                    aspect=1.5, scatter_kws={'alpha':0.3,"s": 200}, hue='sex', markers='8')
+> > my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete[surveys_complete.plot_id == 12], 
+                    fit_reg=False, height=8, aspect=1.5, scatter_kws={'alpha':0.3,"s": 200}, 
+                    hue='sex', markers='8')
 my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 > > ~~~
 > > {: .python}
 > > 
 > > ![png](../fig/05-seaborn-scatter-9.png)
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 
@@ -180,9 +181,11 @@ my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 
 We often like to compare the distributions of values across different categorical variables. Box plots and violin plots are often used to do this in a simple way. 
 
-In seaborn, both the `.boxplot()` and `.violinplot()` functions return matplotlib Axes objects. Thus, these plot functions do not have arguments for `size` and `aspect` like the scatter plot function above. 
+In seaborn, both the `.boxplot()` and `.violinplot()` functions return matplotlib Axes objects. Thus, these plot functions do not have arguments for `height` and `aspect` like the scatter plot function above. 
 
 In order to change the size of these plots, we must create a matplotlib figure and axes and set the dimensions of the figure. First, let's decide on the figure size we will use for the rest of our seaborn plots.
+
+We can put these dimensions into a tuple variable called `plot_dims`.
 
 ~~~
 plot_dims = (14, 9)
@@ -221,16 +224,16 @@ ax.set(ylabel='Species ID', xlabel='Weight')
 > measurements for different sexed animals from a single 
 > species, [*Onychomys leucogaster* (OL)](https://en.wikipedia.org/wiki/Northern_grasshopper_mouse), one of the coolest rodent species:
 >
-> > ## Solution
+<!-- > > ## Solution
 > > 
 > > ~~~
-> > fig, ax = plt.subplots(figsize=dims)
+> > fig, ax = plt.subplots(figsize=plot_dims)
 sns.violinplot(x = 'sex', y = 'weight', data=surveys_complete[surveys_complete.species_id == 'OL'])
 > > ~~~
 > > {: .python}
 > > 
 > > ![png](../fig/05-seaborn-violinplot-2.png)
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 # Histograms
@@ -293,7 +296,7 @@ We can reproduce the histogram of the weights of all our observations.
 
 ~~~
 hist, edges = np.histogram(surveys_complete['weight'], density=True, bins=100)
-my_fig = figure(title="Weight",background_fill_color="#E8DDCB")
+my_fig = figure(title="Weight",background_fill_color="#EBC8EB")
 my_fig.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],fill_color="#036564", line_color="#033649")
 show(my_fig)
 ~~~

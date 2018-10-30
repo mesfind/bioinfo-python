@@ -268,6 +268,7 @@ surveys_df[0:3]
 {: .challenge}
 
 ## Changing Values in a DataFrame
+{: #changingvals }
 
 We can reassign values within subsets of our DataFrame. But before we do that, let's make a 
 copy of our DataFrame so as not to modify our original imported data. 
@@ -461,8 +462,8 @@ Name: 777, dtype: object
 {: .output}
 
 NOTE: Labels must be found in the DataFrame or you will get a `KeyError`. The
-start bound and the stop bound are _included_.  When using `.loc[]` to access ros, integer indices
-but they refer to the index label and not the position. Thus
+start bound and the stop bound are _included_ when using `.loc[]` to access rows, integer indices
+because they refer to the index label and not the position. Thus
 when you use `.loc[]`, and select `1:4`, you will get a different result than using
 `.iloc[]` to select rows `1:4`.
 
@@ -611,7 +612,7 @@ sum_hfl = 0.0
 count = 0
 for index, row in surveys_OT.iterrows():
     hfl = row['hindfoot_length']
-    if(pd.isna(hfl) != True): 
+    if(pd.isna(hfl) is False): 
         sum_hfl += hfl
         count += 1
 ~~~
@@ -640,20 +641,20 @@ print(surveys_OT.hindfoot_length.mean())
 ## Adding a New Column to a DataFrame
 
 Perhaps we want to add a value, notation, or other information to our DataFrame. This is easily done by just initializing the value. 
-We will do this for our copy of the DataFrame.
+We will do this for our copy of the DataFrame, for only the observations made in the year 2000.
 
 ~~~
 surveys_2000 = surveys_df[surveys_df.year == 2000].copy()
 ~~~
 {: .python}
 
-Now we can iterate over the rows in our new DataFrame, compute the value and add it to the DataFrame in the column 'new_value'.
+Now we can iterate over the rows in our new DataFrame, compute the value and add it to the DataFrame in the column `'new_value'`.
 
 ~~~
 for index, row in surveys_2000.iterrows():
     hfl = row['hindfoot_length']
     weight = row['weight']
-    if(pd.isna(hfl) != True and pd.isna(weight) != True): 
+    if(pd.isna(hfl) is False and pd.isna(weight) is False): 
         surveys_2000.loc[index,'new_value'] = hfl / weight
 ~~~
 {: .python}
