@@ -506,7 +506,7 @@ surveys_df.loc[1:4, ['record_id','month']]
 > 
 > 2. Use `.iloc[]` to view the same thing.
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > # 1
@@ -516,7 +516,7 @@ surveys_df.loc[1:4, ['record_id','month']]
 > > surveys_df.iloc[1:6:2, [5,6]]
 > > ~~~
 > > {: .python}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 
@@ -570,7 +570,7 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 > the year 1999 and that contain weight values less than or equal to 8. How
 > many rows did you end up with?
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > surveys_df[(surveys_df.weight <= 8.0) & (surveys_df.year == 1999)]
@@ -592,7 +592,7 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 > > 29905     4.0  
 > > ~~~
 > > {: .output}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 ## Looping Over a DataFrame
