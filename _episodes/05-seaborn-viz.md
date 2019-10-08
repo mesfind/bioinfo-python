@@ -162,7 +162,7 @@ my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 > Remember how to access subsets of a DataFrame based on conditional criteria?
 > Plot the scatter plot above for only plot number `12` and color by `sex`. (Make the markers larger circles.)
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete[surveys_complete.plot_id == 12], 
@@ -173,7 +173,7 @@ my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 > > {: .python}
 > > 
 > > ![png](../fig/05-seaborn-scatter-9.png)
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 
@@ -224,7 +224,7 @@ ax.set(ylabel='Species ID', xlabel='Weight')
 > measurements for different sexed animals from a single 
 > species, [*Onychomys leucogaster* (OL)](https://en.wikipedia.org/wiki/Northern_grasshopper_mouse), one of the coolest rodent species:
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > fig, ax = plt.subplots(figsize=plot_dims)
@@ -233,7 +233,7 @@ sns.violinplot(x = 'sex', y = 'weight', data=surveys_complete[surveys_complete.s
 > > {: .python}
 > > 
 > > ![png](../fig/05-seaborn-violinplot-2.png)
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 # Histograms
