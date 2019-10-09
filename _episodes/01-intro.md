@@ -185,8 +185,8 @@ You can run python in various tools. Perhaps the most straightforward is to use 
 $ python
 ```
 ~~~
-Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 11:07:29)
-[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
+Python 3.7.3 (default, Mar 27 2019, 16:54:48) 
+[Clang 4.0.1 (tags/RELEASE_401/final)] :: Anaconda, Inc. on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ~~~
@@ -214,7 +214,7 @@ When using the interactive console, it's important to remember that indentation 
 ~~~
 {: .python}
 
-When you hit enter after a colon `:`, the prompt changes to `...`, indicating that you are within a loop. Enter the loop contents after indenting and end the loop by adding an extra newline.
+When you hit enter after a colon `:`, the prompt changes to `...`, indicating that you are within a loop. Enter the loop contents _after indenting_ and end the loop by adding an extra newline. 
 
 ~~~
 >>> for i in range(5):
@@ -293,7 +293,9 @@ Out [1]: 2000
 ~~~
 {: .output}
 
-Another great thing about IPython is that you can also use Unix commands like `ls` and `cd`.
+Another great thing about IPython is that you can also use Unix commands like `ls` and `cd`. 
+Additionally, when you create a loop in iPython, it automatically adds the indentation for you. Try the `for` loop from above.
+
 
 **To exit** the interactive console, type **_control+D_**.
 
@@ -321,13 +323,15 @@ This should open your default browser. You can start a new Python notebook by se
 
 ![jupyter browser](../fig/jupyter1.png)
 
-Note that I have additional options for Jupyter notebooks and can create a notebook for code written in Bash or [RevBayes](http://revbayes.github.io/about.html). This is because a [Jupyter kernel](http://jupyter-client.readthedocs.io/en/latest/kernels.html) can be written for any language. If you like working in the Jupyter environment, you may be interested in installing the [Bash kernel](https://github.com/takluyver/bash_kernel) or the [R kernel](https://irkernel.github.io/). If you develop software that involves a new language, you can also create a Jupyter kernel like we have done for [RevBayes](https://github.com/revbayes/revbayes_kernel).
+<!-- Note that I have additional options for Jupyter notebooks and can create a notebook for code written in Bash or [RevBayes](http://revbayes.github.io/about.html).  -->
+Note that a [Jupyter kernel](http://jupyter-client.readthedocs.io/en/latest/kernels.html) can be written for any language. If you like working in the Jupyter environment, you may be interested in installing the [Bash kernel](https://github.com/takluyver/bash_kernel) or the [R kernel](https://irkernel.github.io/). 
+<!-- If you develop software that involves a new language, you can also create a Jupyter kernel like we have done for [RevBayes](https://github.com/revbayes/revbayes_kernel). -->
 
 When you select **_New->Python 3_**, new Python 3 Jupyter notebook will open. This now allows you combine Python code with Markdown to fully integrate documentation with your code.
 
 ![jupyter browser](../fig/jupyter2.png)
 
-Each cell in a Jupyter notebook can be executed and you can choose the type of cell using the pull-down menu in the tool bar. By default the cell is **_Code_**. Any thing you enter in a cell can be executed by using the "play" button in the tool bar or with **_Shift+Enter_** via the keyboard.
+Each cell in a Jupyter notebook can be executed and you can choose the type of cell using the pull-down menu in the tool bar. By default the cell is **_Code_**. Anything you enter in a cell can be executed by using the "play" button in the tool bar or with **_Shift+Enter_** via the keyboard.
 
 > ## Count the Gs using Python in a Jupyter Notebook
 >
