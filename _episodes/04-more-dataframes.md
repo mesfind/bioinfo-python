@@ -1,6 +1,6 @@
 ---
 title: Indexing, Slicing, Subsetting, and Iterating DataFrames in Python
-teaching: 60
+teaching: 1
 exercises: 0
 questions:
 - "How do you extract data from columns and rows?"

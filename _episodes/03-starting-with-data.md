@@ -1,6 +1,6 @@
 ---
 title: Working With Pandas DataFrames in Python
-teaching: 60
+teaching: 1
 exercises: 0
 questions:
 - "How do you import data into Python?"

@@ -1,6 +1,6 @@
 ---
 title: Visualizing Data in Python
-teaching: 50
+teaching: 1
 exercises: 0
 questions:
 - "How do you create appealing plots in Python?"

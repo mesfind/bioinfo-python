@@ -1,7 +1,7 @@
 ---
 title: Introduction to Python
-teaching: 30
-exercises: 10
+teaching: 1
+exercises: 0
 questions:
 - "What is Python?"
 - "How is Python different from R?"
@@ -331,7 +331,7 @@ When you select **_New->Python 3_**, new Python 3 Jupyter notebook will open. Th
 
 ![jupyter browser](../fig/jupyter2.png)
 
-Each cell in a Jupyter notebook can be executed and you can choose the type of cell using the pull-down menu in the tool bar. By default the cell is **_Code_**. Anything you enter in a cell can be executed by using the "play" button in the tool bar or with **_Shift+Enter_** via the keyboard.
+Each cell in a Jupyter notebook can be executed and you can choose the type of cell using the pull-down menu in the tool bar. By default the cell is **_Code_**. Anything you enter in a cell can be executed by using the "Run" button in the tool bar or with **_Shift+Enter_** via the keyboard.
 
 > ## Count the Gs using Python in a Jupyter Notebook
 >

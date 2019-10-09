@@ -1,6 +1,6 @@
 ---
 title: Introduction to Python Datatypes and Packages
-teaching: 30
+teaching: 1
 exercises: 0
 questions:
 - "What are the basic datatypes I can use in Python?"
