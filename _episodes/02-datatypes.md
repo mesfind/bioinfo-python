@@ -98,7 +98,7 @@ for num in numbers:
 ~~~
 {: .output}
 
-**Remember** _indentation_ is very important in Python. Note that the second line in the
+**Remember _indentation_ is very important in Python.** Note that the second line in the
 example above is indented. This is Python's way of marking a block of code.
 
 To add elements to the end of a list, we can use the `append` method:
@@ -127,8 +127,17 @@ help(numbers)
 Help on list object:
 
 class list(object)
- |  list() -> new empty list
- |  list(iterable) -> new list initialized from iterable's items
+ |  list(iterable=(), /)
+ |
+ |  Built-in mutable sequence.
+ |  
+ |  If no argument is given, the constructor creates a new empty list.
+ |  The argument must be an iterable if specified.
+ |  
+ |  Methods defined here:
+ |  
+ |  __add__(self, value, /)
+ |      Return self+value.
  ...
 ~~~
 {: .output}
@@ -157,7 +166,7 @@ created by placing comma-separated values inside parentheses `()`.
 ~~~
 # tuples use parentheses
 my_tuple = (0,1,2)
-colours = ('red','blue','green')
+colors = ('red','blue','green')
 # Note: lists use square brackets
 my_list = [0,1,2]
 ~~~
@@ -257,7 +266,7 @@ my_dict2
 However, you cannot create a dictionary with a list as a key:
 
 ~~~
-bad = {[1,2,3] : 3}
+bad_dictionary = {[1,2,3] : 3}
 ~~~
 {: .python}
 
@@ -288,6 +297,7 @@ It is often necessary to check if the dictionary has a key before adding it, oth
 ~~~
 if 4 not in numbers2:
     numbers2[4] = 'four'
+
 numbers2
 ~~~
 {: .python}
@@ -353,7 +363,7 @@ for key in numbers2:
 > {: .solution}
 {: .challenge}
 
-It is important to note that dictionaries in Python 3.6 or greater are now _ordered_ and preserve the
+It is important to note that dictionaries in Python 3.6 or greater are insertion _ordered_ and preserve the
 sequence of their items (i.e., the order in which key:value pairs were added to
 the dictionary). In previous versions of Python, dictionaries are unordered, where the order in which items are returned from loops
 over dictionaries might appear random and can even change with time.
@@ -431,10 +441,12 @@ $ conda install biopython
 
 The prompt will ask you if you want to proceed with installing this package. Simply type `y` followed by the enter key and `conda` will manage the download and installation.
 
-For packages that are not available via Anaconda, you may also be able to use the application `pip` to install. If you like using ggplot2 in R, you may like to use it in Python. The Python [ggplot](http://ggplot.yhathq.com/) package can be installed using `pip install`:
+For packages that are not available via Anaconda, you may also be able to use the application `pip` to install. 
+<!-- If you like using ggplot2 in R, you may like to use it in Python. The Python [ggplot](http://ggplot.yhathq.com/) package can be installed using `pip`: -->
+One the package [`string-color`](https://pypi.org/project/string-color/) allows you to print strings to screen in different colors. 
 
 ```
-$ pip install ggplot
+$ pip install string-color
 ```
 
 ## Updating Packages
@@ -454,7 +466,7 @@ $ conda update --all
 For packages installed using `pip`, you can use the `-U` flag or `--upgrade`.
 
 ```
-$ pip install ggplot -U
+$ pip install string-color -U
 ```
 
 ## Importing Packages
@@ -464,9 +476,10 @@ Once you have a package installed, you don't have to do that again (except you m
 Open a Python interpreter and type:
 
 ~~~
-import ggplot
+import stringcolor
 ~~~
 {: .python}
+With this package, you can now try to print in color: `print(stringcolor.cs("PURPLE", "purple"))`
 
 For convenience, you can also give packages aliases in your scripts. That way you don't have to type out the whole name each time. The example below imports the Python package [numpy](http://www.numpy.org/) and uses the `numpy.sum()` function to add up the values in a list. Notice that `np` is an alias for `numpy`.
 
