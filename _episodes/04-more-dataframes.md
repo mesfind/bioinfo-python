@@ -239,6 +239,10 @@ surveys_df[0:3]
 > {: .output}
 {: .callout}
 
+
+<!-- Add in R exercise here -->
+
+
 > ## Select a subset of rows from a column
 >
 > Combine selecting a subset with column headings and slice syntax for rows. Get
@@ -269,6 +273,8 @@ surveys_df[0:3]
 
 ## Changing Values in a DataFrame
 {: #changingvals }
+
+<!-- Make distinction about shallow vs deep copy in Pandas and how it works diff -->
 
 We can reassign values within subsets of our DataFrame. But before we do that, let's make a 
 copy of our DataFrame so as not to modify our original imported data. 

@@ -34,7 +34,7 @@ and they can replicate the same analysis.
 
 To help the lesson run smoothly, let's ensure everyone is in the same directory.
 This should help us avoid path and file name issues. At this time please
-navigate to the directory containing the [course repository](https://github.com/EEOB-BioData/BCB546X-Fall2018) on your computer. 
+navigate to the directory containing the [course repository](https://github.com/EEOB-BioData/BCB546X-Fall2019) on your computer. 
 Before starting, be sure to **pull** the most recent changes from the repository using `git pull origin master`.
 If you're working in Jupyter Notebook be sure
 that you start your notebook in the `course-files/python` directory. If you do not have this directory, please see the instructions in the [Setup](../setup/) page.
@@ -65,7 +65,7 @@ from the ecological study by Ernst et al. (2009):
 Specifically, we will be using files from the [Portal Project Teaching Database](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459).
 
 * This section will use the `surveys.csv` file that can be downloaded from the 
-[`course-files/python`](https://github.com/EEOB-BioData/BCB546X-Fall2018/tree/master/course-files/python) folder of the course repository.
+[`course-files/python`](https://github.com/EEOB-BioData/BCB546X-Fall2019/tree/master/course-files/python) folder of the course repository.
 Pull from the course repository and change to to `course-files/python` or copy the `surveys.csv` file to the directory from which you would like to work.
 
 In this lesson, we are studying the species and weight of (_vertebrate_) animals captured in plots in our study
@@ -127,6 +127,34 @@ If you're using a Jupyter notebook for this lesson, it should look like this:
 
 Remember that the `import pandas as pd` syntax means that we have given the alias `pd` to the pandas library. Thus, we don't have to use the whole name when we invoke pandas functions.
 
+
+<!-- Add Documenting Code call out -->
+
+> ## Documenting Code
+> Let's take a moment to talk about proper documentation. 
+> One major benefit of using Jupyter Notebooks is that it gives 
+> us a way to provide clear and descriptive comments about our 
+> code. This is a good place to write a description of this 
+> notebook. 
+>
+> Add a new cell in your notebook and change the cell type to 
+> _Markdown_. 
+>
+> ![Create markdown cell](../fig/03-markdown-doc.png)
+>
+> You can also use the arrow buttons to move this cell to the 
+> top of your notebook.
+>
+> Now we can write a description of this notebook using Markdown.
+>
+> ```
+> # Lesson: Working with Pandas DataFrames in Python
+> 
+> In-class tutorial on Pandas.
+> ``` 
+>
+> ![Create markdown cell](../fig/03-markdown-doc2.png)
+{: .callout}
 
 # Reading CSV Data Using Pandas
 
@@ -311,12 +339,12 @@ species were caught. We can summarize different aspects of our data using groups
 Let's begin by exploring our data and view the column names:
 
 ~~~
-surveys_df.columns.values
+surveys_df.columns
 ~~~
 {: .python}
 
 ~~~
-array(['record_id', 'month', 'day', 'year', 'plot_id', 'species_id', 'sex',
+Index(['record_id', 'month', 'day', 'year', 'plot_id', 'species_id', 'sex',
        'hindfoot_length', 'weight'], dtype=object)
 ~~~
 {: .output}
@@ -344,7 +372,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > Call it `plot_names`. How many unique plots are there in the data? 
 > <!--How many unique species are in the data?-->
 > 
-> 2. What is a much simpler approach to this?
+> 2. Is there a simpler solution for doing this?
 >
 > > ## Solution
 > > 
@@ -357,6 +385,8 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > > print(surveys_df['plot_id'].nunique())
 > > ~~~
 > > {: .python}
+> > 
+> > Note that the `.nunique()` method does not count null (i.e., `nan`) values.
 > {: .solution}
 {: .challenge}
 
@@ -439,7 +469,7 @@ surveys_df['weight'].std()
 ~~~
 {: .output}
 
-Count the number of non-null observations made:
+Count the number of observations made for weight:
 
 ~~~
 surveys_df['weight'].count()
@@ -451,7 +481,7 @@ surveys_df['weight'].count()
 ~~~
 {: .output}
 
-But if we want to summarize by one or more variables, for example sex, we need to
+But if we want to summarize by one or more variables, for example the weight for each sex, we need to
 use the Pandas DataFrame `.groupby()` method. Once we've created a re-orgaized DataFrame, we
 can quickly calculate summary statistics by a group of our choice.
 
@@ -466,56 +496,23 @@ The method `.describe()` will return descriptive stats including: mean,
 median, max, min, std and count for a particular column in the data. Pandas'
 `.describe()` method will only return summary values for columns containing
 numeric data.
-This provides summary statistics for each column separated by sex. 
+With the sorted data, we can obtain the summary statistics for the weight column separated by sex. 
 
 ~~~
-sorted_data.describe()
+sorted_data['weight'].describe()
 ~~~
 {: .python}
 
 ~~~
-                    day  hindfoot_length         month       plot_id  \
-sex                                                                    
-F   count  15690.000000     14894.000000  15690.000000  15690.000000   
-    mean      16.007138        28.836780      6.583047     11.440854   
-    std        8.271144         9.463789      3.367350      6.870684   
-    min        1.000000         7.000000      1.000000      1.000000   
-    25%        9.000000        21.000000      4.000000      5.000000   
-    50%       16.000000        27.000000      7.000000     12.000000   
-    75%       23.000000        36.000000     10.000000     17.000000   
-    max       31.000000        64.000000     12.000000     24.000000   
-M   count  17348.000000     16476.000000  17348.000000  17348.000000   
-    mean      16.184286        29.709578      6.392668     11.098282   
-    std        8.199274         9.629246      3.420806      6.728713   
-    min        1.000000         2.000000      1.000000      1.000000   
-    25%        9.000000        21.000000      3.000000      5.000000   
-    50%       16.000000        34.000000      6.000000     11.000000   
-    75%       23.000000        36.000000      9.000000     17.000000   
-    max       31.000000        58.000000     12.000000     24.000000   
-
-              record_id        weight          year  
-sex                                                  
-F   count  15690.000000  15303.000000  15690.000000  
-    mean   18036.412046     42.170555   1990.644997  
-    std    10423.089000     36.847958      7.598725  
-    min        3.000000      4.000000   1977.000000  
-    25%     8917.500000     20.000000   1984.000000  
-    50%    18075.500000     34.000000   1990.000000  
-    75%    27250.000000     46.000000   1997.000000  
-    max    35547.000000    274.000000   2002.000000  
-M   count  17348.000000  16879.000000  17348.000000  
-    mean   17754.835601     42.995379   1990.480401  
-    std    10132.203323     36.184981      7.403655  
-    min        1.000000      4.000000   1977.000000  
-    25%     8969.750000     20.000000   1984.000000  
-    50%    17727.500000     39.000000   1990.000000  
-    75%    26454.250000     49.000000   1997.000000  
-    max    35548.000000    280.000000   2002.000000  
+       count       mean        std  min   25%   50%   75%    max
+sex                                                             
+F    15303.0  42.170555  36.847958  4.0  20.0  34.0  46.0  274.0
+M    16879.0  42.995379  36.184981  4.0  20.0  39.0  49.0  280.0
 ~~~
 {: .output}
 
 
-We can also get the mean for each numeric column, grouped by sex:
+We can also get the mean for each numeric-valued column, grouped by sex:
 
 ~~~
 sorted_data.mean()
@@ -560,8 +557,8 @@ summaries of categorical data.
 
 > ## Group by two columns
 >
-> What happens when you group by two columns using the following syntax and 
-> then grab mean values:
+> What happens when you group by two columns and 
+> then view mean values:
 > - Hint: you can use a list in the arguments of the `.groupby()` method, `['plot_id','sex']`
 > 
 > > ## Solution
@@ -708,7 +705,7 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 > > 
 > > ~~~
 > > plot_weight_means = surveys_df.groupby('plot_id')['weight'].mean()
-> > plot_weight_means.plot(kind='bar',title='Average Weight',color='LightSeaGreen')
+> > plot_weight_means.plot(kind='bar',title='Average Weight (g)',color='LightSeaGreen')
 > > ~~~
 > > {: .python}
 > > 
@@ -724,7 +721,7 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 > > 
 > > ~~~
 > > counts_by_sex = surveys_df['record_id'].groupby(surveys_df['sex']).count()
-> > counts_by_sex.plot(kind='bar',title='Number captured for each sex')
+> > counts_by_sex.plot(kind='bar',title='Number captured for each sex',color=['k', 'r'])
 > > ~~~
 > > {: .python}
 > > 
@@ -790,9 +787,10 @@ Now, create a stacked bar plot with those data where the weights for each sex ar
 ~~~
 spc = plot_sex_count.unstack()
 s_plot = spc.plot(kind='bar',stacked=True,title="Total weight by plot and sex")
-s_plot.set_ylabel("Weight")
+s_plot.set_ylabel("Weight (g)")
 s_plot.set_xlabel("Plot")
 ~~~
 {: .python}
+<!-- redo plot -->
 
 ![Stacked Bar Plot](../fig/stackedBar.png)
