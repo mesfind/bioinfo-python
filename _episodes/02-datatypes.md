@@ -209,6 +209,49 @@ my_list = [0,1,2]
 > {: .solution}
 {: .challenge}
 
+### Assigning Elements of a List or Tuple to New Variables
+
+One very handy feature in Python is that 
+the individual elements of a list or tuple can 
+be assigned to individual variable names.
+For example you can create a list:
+
+~~~
+my_list = ['Cyclones','Go','!']
+~~~
+{: .python}
+
+Then assign the individual values of that list 
+to new separate variables just by separating 
+the names with commas:
+
+~~~
+v1, v2, v3 = my_list
+print(v2, v1, v3)
+~~~
+{: .python}
+
+~~~
+Go Cyclones !
+~~~
+{: .output}
+
+This works the same for a tuple:
+
+~~~
+my_tup = ('U','I','S')
+c, a, b = my_tup
+print(a, b, c)
+~~~
+{: .python}
+
+~~~
+I S U
+~~~
+{: .output}
+
+
+
 ### Mixing Types
 
 In Python, it is also possible to mix types in a list or tuple. This makes it easy to store data of variable type.
@@ -428,6 +471,45 @@ print(z)
 42
 ~~~
 {: .output}
+
+The important members of a function are the input **arguments** and the **return values**. 
+(Note that not all functions have these components.)
+
+In the function called `add_function(a,b)` above
+the arguments are `a` and `b` and the returned
+variable is `result`.  
+
+One very handy feature of Python is that
+a function can return _multiple variables_. 
+This essentially returns the objects as
+a _tuple_. 
+
+~~~
+def fun_function(lett_str, num_str):
+    lett_up = lett_str.upper()        # string.upper() converts to uppercase
+    int_num = int(num_str)            # int(string) converts to an integer
+    return lett_up, int_num+1         # returns a tuple (increments num +1)
+~~~
+{: .python}
+
+Thus, you can assign the 
+multiple return values to different variables
+when calling the function.
+
+~~~
+a, b = fun_function("octothorpe", "1886")
+print(a)
+print(b)
+~~~
+{: .python}
+
+~~~
+OCTOTHORPE
+1887
+~~~
+{: .output}
+
+Fun fact: [_octothorpe_](https://en.wiktionary.org/wiki/octothorpe) is a word from the 1960s or 1970s that was used to describe a hash symbol: `#`.
 
 
 # Properly Documenting Your Code
