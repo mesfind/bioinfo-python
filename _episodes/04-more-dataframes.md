@@ -25,6 +25,14 @@ calculated summary statistics, and created plots of the data. In this
 lesson, we will explore ways to access different parts of the data using indexing,
 slicing and subsetting.
 
+## Create a New Jupyter Notebook
+
+Open a new notebook for this episode. 
+You can call it _04-More-Dataframes_.
+Remember to start this new notebook with a
+description of what it is for. You can do this 
+using a _Markdown_ cell at the very beginning.
+
 ## Import Pandas and Load the Data
 
 We will continue to use the surveys dataset that we worked with in the last
@@ -68,15 +76,18 @@ surveys_df.species_id
 2         DM
 3         DM
 4         DM
-5         PF
-6         PE
-7         DM
-...
+        ... 
+35544     AH
+35545     AH
+35546     RM
+35547     DO
+35548    NaN
+Name: species_id, Length: 35549, dtype: object
 ~~~
 {: .output}
 
 
-We can create an new object that contains the data within the `species_id`
+We can create a new object that contains the data within the `species_id`
 column as a pandas Series:
 
 ~~~
@@ -87,8 +98,7 @@ surveys_species = surveys_df['species_id']
 If we wish to view a set of columns, then
 we can pass a list of column names to select columns in the
 order we would like them in our subset. This is useful when we need to reorganize the data.
-_NOTE:_ If a column name is not contained in the DataFrame, an exception
-(error) will be raised.
+_NOTE:_ If a column name is not contained in the DataFrame, you will get an error.
 
 View the species and plot number columns from the DataFrame:
 
@@ -104,10 +114,14 @@ surveys_df[['species_id', 'plot_id']]
 2             DM        2
 3             DM        7
 4             DM        3
-5             PF        1
-6             PE        2
-7             DM        1
-...
+...          ...      ...
+35544         AH       15
+35545         AH       15
+35546         RM       10
+35547         DO        7
+35548        NaN        5
+
+[35549 rows x 2 columns]
 ~~~
 {: .output}
 
@@ -126,10 +140,14 @@ surveys_df[['plot_id', 'species_id']]
 2            2         DM
 3            7         DM
 4            3         DM
-5            1         PF
-6            2         PE
-7            1         DM
-...
+...        ...        ...
+35544       15         AH
+35545       15         AH
+35546       10         RM
+35547        7         DO
+35548        5        NaN
+
+[35549 rows x 2 columns]
 ~~~
 {: .output}
 
@@ -149,13 +167,8 @@ surveys_df[0:3]
 ~~~
 {: .python}
 
-~~~
-   record_id  month  day  year  plot_id species_id sex  hindfoot_length     weight
-0          1      7   16  1977        2         NL   M             32.0        NaN
-1          2      7   16  1977        3         NL   M             33.0        NaN
-2          3      7   16  1977        2         DM   F             37.0        NaN
-~~~
-{: .output}
+![First 3 Rows](../fig/03-surveys-first3-rows.png)
+
 
 > ## Python slice syntax
 > The rules of Python slice syntax are as follows and also apply to 
@@ -165,82 +178,146 @@ surveys_df[0:3]
 > First create a list:
 > 
 > ~~~
-> a = list(range(10))
-> a
+> x = ['A','B','C','D','E','F','G','H','I','J']
+> x
 > ~~~
 > {: .python}
 > 
 > ~~~
-> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+> ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
 > ~~~
 > {: .output}
 > 
-> Print the value of indices 1 through 4:
+> Print the values `A` through `E`:
 > 
 > ~~~
-> a[0:5]
+> x[0:5]
 > ~~~
 > {: .python}
 > 
 > ~~~
-> [0, 1, 2, 3, 4]
+> ['A', 'B', 'C', 'D', 'E']
 > ~~~
 > {: .output}
 > 
-> Print the list starting at index 4 through to the end:
+> Print the list starting at `E` through to the end:
 > 
 > ~~~
-> a[4:]
+> x[4:]
 > ~~~
 > {: .python}
 > 
 > ~~~
-> [4, 5, 6, 7, 8, 9]
+> ['E', 'F', 'G', 'H', 'I', 'J']
 > ~~~
 > {: .output}
 > 
-> Print the first 4 elements in the list:
+> Print the first 4 letters in the list 
+> (Note that this is the same as `x[0:4]`):
 > 
 > ~~~
-> a[:4]
+> x[:4]
 > ~~~
 > {: .python}
 > 
 > ~~~
-> [0, 1, 2, 3]
+> ['A', 'B', 'C', 'D']
 > ~~~
 > {: .output}
 > 
-> Print the _last_ element in the list:
+> Print the _last_ letter in the list:
 > 
 > ~~~
-> a[-1]
+> x[-1]
 > ~~~
 > {: .python}
 > 
 > ~~~
-> 9
+> 'J'
 > ~~~
 > {: .output}
 > 
 > The slice syntax includes a third component called the _step_. Where 
-> `a[start:stop:step]` returns the list from the `start` index for every `step` up to the index
-> before `stop`. The example below prints every third element in the list starting from `0`
+> `x[start:stop:step]` returns the list from the `start` index for every `step` up to the index
+> before `stop`. The example below prints every third letter in the list starting from `0`
 > all the way to the end.
 > 
 > ~~~
-> a[::3]
+> x[::3]
 > ~~~
 > {: .python}
 > 
 > ~~~
-> [0, 3, 6, 9]
+> ['A', 'D', 'G', 'J']
 > ~~~
 > {: .output}
 {: .callout}
 
 
 <!-- Add in R exercise here -->
+
+> ## Slice syntax in R
+>
+> It is important to be aware of the different
+> ways in which Python and R allow you to slice
+> and subset lists. 
+> Try to produce the same output as you just
+> did for Python above, but this time use R.
+> Start by creating the list of letters in your
+> R environment (RStudio or R terminal):
+>
+> ~~~
+> > x <- c('A','B','C','D','E','F','G','H','I','J')
+> > x
+> ~~~
+>
+> ~~~
+> [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J"
+> ~~~
+> {: .output}
+> 
+> _Remember: R begins indexing lists at 1._
+> 
+> > ## Solution
+> >
+> > With the same list:
+> > `['A','B','C','D','E','F','G','H','I','J']`, 
+> > Python and R will return the same output 
+> > given the syntax below:
+> > 
+> > |Result|| Python  || R  |
+> > |:---|:---:|:---|:---:|:---|
+> > |Print `A` through `E`||`x[0:5]`||`x[1:5]`|
+> > |Print `E` through to the end||`x[4:]`||`x[5:length(x)]`|
+> > |Print the first 4 letters||`x[:4]`||`x[1:4]`|
+> > |Print the last letter||`x[-1]`||`x[length(x)]`|
+> > |Print every 3rd letter||`x[::3]`||`x[seq(1,length(x),3)]`|
+> > 
+> > If you use Python slice syntax in R, most of
+> > what is in the above table will result in an 
+> > error. For example if you type `x[:4]` in R,
+> > you will get: 
+> > ~~~
+> > Error: unexpected ':' in "x[:"
+> > ~~~
+> > {: .output}
+> > 
+> > One exception is that `x[-1]` is a valid 
+> > statement in R. Try doing this. 
+> > **What is returned when you use a negative 
+> > value in the `[]` of a list in R?**
+> >
+> > The other exception is that `x[0:5]` 
+> > and `x[1:5]` **return the same output** in R
+> > even though `x[0]` is not one of the list
+> > elements! In R, the statement `x[0]` will
+> > return a 0-length vector of the same type. 
+> > This is ignored when you use the syntax
+> > `x[0:5]`, and the elements in `1` through
+> > `5` are printed. 
+> {: .solution}
+{: .challenge}
+
 
 
 > ## Select a subset of rows from a column
@@ -273,8 +350,6 @@ surveys_df[0:3]
 
 ## Changing Values in a DataFrame
 {: #changingvals }
-
-<!-- Make distinction about shallow vs deep copy in Pandas and how it works diff -->
 
 We can reassign values within subsets of our DataFrame. But before we do that, let's make a 
 copy of our DataFrame so as not to modify our original imported data. 
@@ -332,8 +407,8 @@ proper copy of the DataFrame?
 
 We might have thought that we were creating a fresh copy of the `surveys_df` values when we 
 used `surveys_copy = surveys_df`. However, for objects of certain datatypes (like lists and 
-DataFrames) the assignment operator `=` only copies by reference. 
-That is, it creates a new variable name "`surveys_copy`" that refers to the **same** 
+DataFrames) the assignment operator (`=`) only copies by reference. 
+That is, it creates a new variable name "`surveys_copy`" binds it to the **same** 
 object `surveys_df` refers to. 
 This means that there is only one object 
 (the DataFrame), and both `surveys_df` and `surveys_copy` refer to it. So when we assign 
@@ -374,6 +449,29 @@ surveys_df.head(5)
 
 
 Did both DataFrames get altered this time?
+
+<!-- 
+> ## Deep vs. Shallow Copy in Python
+> 
+> The way that the Pandas `DataFrame.copy()` 
+> method works is kind of confusing if you 
+> are familiar with Python. In Pandas, 
+> this method creates a _deep_ copy of the 
+> DataFrame. That is because there is an 
+> argument of the function that is by default:
+> `deep=True`. 
+>
+> This is counter to how the `.copy()` method
+> works in Python. 
+>
+{: .callout}
+ -->
+<!-- I am thinking that this distinction
+about deep vs shallow copy in Python
+is too confusing to go into. That's 
+because list.copy() does make a deep copy
+and I can't find a good example of where
+this will be an issue. -->
 
 ## Slicing Subsets of Rows and Columns
 
@@ -601,9 +699,13 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 > {: .solution}
 {: .challenge}
 
-## Looping Over a DataFrame
+## Iterating Over a DataFrame
 
-To loop over a data frame we can access the row and its index using the `.iterrows()` method. First, create a variable that just contains the data for observations of the species _Onychomys torridus_. 
+To iterate over a data frame using a loop, we
+can access the row and its index using the 
+`.iterrows()` method. First, create a variable 
+that just contains the data for observations of 
+the species [_Onychomys torridus_](https://en.wikipedia.org/wiki/Southern_grasshopper_mouse). 
 
 ~~~
 surveys_OT = surveys_df[surveys_df.species_id == 'OT']  
