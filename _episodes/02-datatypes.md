@@ -5,10 +5,12 @@ exercises: 0
 questions:
 - "What are the basic datatypes I can use in Python?"
 - "How do I define a function?"
+- "How do I write documentation for my Python code?"
 - "How do I install and manage packages?"
 objectives:
 - "Brief overview of basic datatypes like lists, tuples, & dictionaries."
 - "Syntax for defining a function."
+- "Recommendations for proper code documentation."
 - "Installing, updating, and importing packages."
 - "Verify that everyone's Python environment is ready."
 keypoints:
