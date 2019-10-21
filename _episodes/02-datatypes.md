@@ -427,6 +427,157 @@ print(z)
 ~~~
 {: .output}
 
+
+# Properly Documenting Your Code
+
+When writing programs, code, scripts, etc., it is very 
+important to provide good documentation of your work.
+This is because you want your science to be reproducible 
+by anyone who evaluates your work or wishes to build
+on your findings. But, even more importantly, you
+need to properly document your code so that **_you_**
+know what your own code does when you open your 
+code-base again after spending several months finishing
+some other project. 
+
+Here are some basic tips for writing code 
+documentation using comments and/or Markdown formatted
+descriptions in a notebook.
+
+## Header Documentation
+It is good to always provide a description of code files.
+This is done at the very top of the file or notebook. 
+The window below gives an example of header comments
+in a Jupyter notebook. This header provides a description
+of the contents of the file, lists any packages or files
+that it requires to execute without errors, and gives 
+the names of the authors and date it was written. 
+
+![Header docs](../fig/02-header-docs.png)
+
+## Function Documentation
+When writing functions in your code, it is important
+to provide details about how the function works. You 
+can do this as comments or Markdown formatted text in 
+your notebook. When written _above_ the function 
+definition, this helps to make it clear that the 
+code below is a function. An added benefit of using
+Jupyter notebooks is that you can create hyperlinks
+and other references in your documentation. This 
+is a nice way to cite sources and provide clear 
+information. See the example from a 
+Jupyter notebook below. 
+
+![Func docs](../fig/02-func-docs.png)
+
+
+
+## Function Docstrings
+While function comments and Markdown descriptions are 
+great for making it easy to find functions in a file
+and read information about them, Python also has
+a way for you to provide information about a function
+that can be retrieved from the function _itself_. 
+These are called *Docstrings* and are inserted right 
+after the first line instantiating the function. 
+
+~~~
+def my_cool_function(a, b):
+    """Description: Concatenates two strings
+    
+    Parameters: 
+       a  :  the first string
+       b  :  the second string
+    
+    Return: a string that is a + b
+    
+    Example of usage:
+       >string_a = "howdy "
+       >string_b = "world"
+       >cool_string = my_cool_function(string_a, string_b)
+       >print(cool_string)
+       
+       Output:
+          howdy world
+    """
+    return a + b
+~~~
+{: .python}
+
+The Docstring is contained within 
+triple quotes: `"""Docstring"""`. And after a function
+is defined, the information from the Docstring is 
+available using the `help()` function:
+
+~~~
+help(my_cool_function)
+~~~
+{: .python}
+
+~~~
+Help on function my_cool_function in module __main__:
+
+my_cool_function(a, b)
+     Description: Concatenates two strings
+    
+     Parameters: 
+        a  :  the first string
+        b  :  the second string
+    
+     Return: a string that is a + b
+    
+     Example of usage:
+        >string_a = "howdy "
+        >string_b = "world"
+        >cool_string = my_cool_function(string_a, string_b)
+        >print(cool_string)
+       
+        Output:
+          howdy world
+~~~
+{: .output}
+
+## In-line Comments
+You may also find it necessary to add comments
+within your code. In Python comments are 
+preceded by a `#`. It really is up to you 
+to decide when and how to use such comments.
+Ultimately, this type of documentation is 
+really for adding information or details 
+in places where it isn't obvious from the 
+code what is going on. Another use for
+in-line comments is to add flags for debugging
+or "to-dos" or something. In these cases,
+the comments should be written on the line
+above the code it refers to or just to the 
+right on the same line.
+
+~~~
+def my_cool_function(a, b):
+   return a + b    # TODO: verify that a & b are strings
+~~~
+{: .python}
+
+For experienced programmers, it is probably best to avoid too many superfluous comments in your code. 
+This is because code with lots of comments may be difficult to read. And you should work
+to write code that can be understood without comments. 
+
+Look at the comments below. Are they really all that necessary? Do these in-line comments distract from the actual written code?
+
+![Inline](../fig/02-excess-comments.png)
+
+Nevertheless, even the comments above may be helpful to someone new to Python. And as you learn
+a new programming language, you may find it helpful to annotate your scripts this way or to 
+add notes that help you remember important syntax details, etc. 
+
+<!-- ~~~
+# Below are some totally obvious in-line comments
+for i in range(10):  # a for-loop over a list of 10 elements
+    print(i)         # print element i
+~~~
+{: .python}
+ -->
+
 # Python Packages
 
 There is an immense number of Python packages (also called libraries) out there that do a lot of different things. Python doesn't have a heavily managed central resource like CRAN for R, but you can find a long and probably incomplete [list of packages for Python online](https://pypi.python.org/pypi/). Additionally, Anaconda provides easy installs of over 600 packages listed [here](https://anaconda.org/anaconda/repo).
