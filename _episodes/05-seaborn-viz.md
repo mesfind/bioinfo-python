@@ -147,7 +147,7 @@ There are different ways to set figure properties using seaborn. For `.lmplot()`
 ~~~
 my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, 
                     aspect=1.5, scatter_kws={'alpha':0.3,"s": 50}, hue='species_id', markers='D')
-my_fig.set_axis_labels('Weight', 'Hindfoot Length')
+my_fig.set_axis_labels('Weight (g)', 'Hindfoot Length (mm)')
 ~~~
 {: .python}
 
@@ -168,7 +168,7 @@ my_fig.set_axis_labels('Weight', 'Hindfoot Length')
 > > my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete[surveys_complete.plot_id == 12], 
                     fit_reg=False, height=8, aspect=1.5, scatter_kws={'alpha':0.3,"s": 200}, 
                     hue='sex', markers='8')
-my_fig.set_axis_labels('Weight', 'Hindfoot Length')
+my_fig.set_axis_labels('Weight (g)', 'Hindfoot Length (mm)')
 > > ~~~
 > > {: .python}
 > > 
@@ -197,7 +197,7 @@ Now, every time we create a new plot that returns a matplotlib Axes object, we c
 ~~~
 fig, ax = plt.subplots(figsize=plot_dims)
 sns.boxplot('species_id','hindfoot_length', data=surveys_complete)
-ax.set(xlabel='Species ID', ylabel='Hindfoot Length')
+ax.set(xlabel='Species ID', ylabel='Hindfoot Length (mm)')
 ~~~
 {: .python}
 
@@ -212,7 +212,7 @@ An easy way to do this is to create a new graph variable from our `.violinplot()
 fig, ax = plt.subplots(figsize=plot_dims)
 g = sns.violinplot('weight','species_id', data=surveys_complete, linewidth=0.2, orient="h", cut=0)
 g.set_xscale('log', basex=10)
-ax.set(ylabel='Species ID', xlabel='Weight')
+ax.set(ylabel='Species ID', xlabel='Weight (g)')
 ~~~
 {: .python}
 
@@ -296,7 +296,7 @@ We can reproduce the histogram of the weights of all our observations.
 
 ~~~
 hist, edges = np.histogram(surveys_complete['weight'], density=True, bins=100)
-my_fig = figure(title="Weight",background_fill_color="#EBC8EB")
+my_fig = figure(title="Weight (g)",background_fill_color="#EBC8EB")
 my_fig.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],fill_color="#036564", line_color="#033649")
 show(my_fig)
 ~~~
