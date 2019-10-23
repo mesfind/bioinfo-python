@@ -179,7 +179,7 @@ my_list = [0,1,2]
 >
 > Change the value of a single element in `my_list ` and `my_tuple`.
 >
-> > ## Solution: List
+<!-- > > ## Solution: List
 > >
 > > ~~~
 > > my_list[1] = 5
@@ -206,7 +206,7 @@ my_list = [0,1,2]
 > >TypeError: 'tuple' object does not support item assignment
 > > ~~~
 > > {: .output}
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 ### Assigning Elements of a List or Tuple to New Variables
@@ -393,7 +393,7 @@ for key in numbers2:
 >
 > Try to reassign the second value of `numbers2` (in the *key value pair*) so that it no longer reads "two" but instead reads "spam and eggs". What does your dictionary look like after you make this change?
 >
-> > ## Solution
+<!-- > > ## Solution
 > >
 > > ~~~
 > > numbers2[2] = 'spam and eggs'
@@ -405,7 +405,7 @@ for key in numbers2:
 > >{1: 'one', 2: 'spam and eggs', 3: 'three', 4: 'four'}
 > > ~~~
 > > {: .output}
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 It is important to note that dictionaries in Python 3.6 or greater are insertion _ordered_ and preserve the
@@ -520,8 +520,8 @@ This is because you want your science to be reproducible
 by anyone who evaluates your work or wishes to build
 on your findings. But, even more importantly, you
 need to properly document your code so that **_you_**
-know what your own code does when you open your 
-code-base again after spending several months finishing
+know what your own programs and scripts do when you open your 
+them again after spending several months finishing
 some other project. 
 
 Here are some basic tips for writing code 
@@ -566,7 +566,7 @@ These are called *Docstrings* and are inserted right
 after the first line instantiating the function. 
 
 ~~~
-def my_cool_function(a, b):
+def cat_two_strings(a, b):
     """Description: Concatenates two strings
     
     Parameters: 
@@ -576,10 +576,10 @@ def my_cool_function(a, b):
     Return: a string that is a + b
     
     Example of usage:
-       >string_a = "howdy "
-       >string_b = "world"
-       >cool_string = my_cool_function(string_a, string_b)
-       >print(cool_string)
+       >> string_a = "howdy "
+       >> string_b = "world"
+       >> ab_string = cat_two_strings(string_a, string_b)
+       >> print(ab_string)
        
        Output:
           howdy world
@@ -594,14 +594,14 @@ is defined, the information from the Docstring is
 available using the `help()` function:
 
 ~~~
-help(my_cool_function)
+help(cat_two_strings)
 ~~~
 {: .python}
 
 ~~~
-Help on function my_cool_function in module __main__:
+Help on function cat_two_strings in module __main__:
 
-my_cool_function(a, b)
+cat_two_strings(a, b)
      Description: Concatenates two strings
     
      Parameters: 
@@ -611,10 +611,10 @@ my_cool_function(a, b)
      Return: a string that is a + b
     
      Example of usage:
-        >string_a = "howdy "
-        >string_b = "world"
-        >cool_string = my_cool_function(string_a, string_b)
-        >print(cool_string)
+       >> string_a = "howdy "
+       >> string_b = "world"
+       >> ab_string = cat_two_strings(string_a, string_b)
+       >> print(ab_string)
        
         Output:
           howdy world
@@ -624,20 +624,20 @@ my_cool_function(a, b)
 ## In-line Comments
 You may also find it necessary to add comments
 within your code. In Python comments are 
-preceded by a `#`. It really is up to you 
+preceded by an octothorpe (i.e., `#`). It really is up to you 
 to decide when and how to use such comments.
 Ultimately, this type of documentation is 
 really for adding information or details 
 in places where it isn't obvious from the 
 code what is going on. Another use for
 in-line comments is to add flags for debugging
-or "to-dos" or something. In these cases,
-the comments should be written on the line
+or "to-dos" for work that is currently in progress. 
+In these cases, the comments should be written on the line
 above the code it refers to or just to the 
 right on the same line.
 
 ~~~
-def my_cool_function(a, b):
+def cat_two_strings(a, b):
    return a + b    # TODO: verify that a & b are strings
 ~~~
 {: .python}
