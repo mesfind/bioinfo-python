@@ -137,7 +137,7 @@ o
 >
 > Count the number of Gs in the sequence above using a `for` loop. What is the difference between Python (see above) and R (in solution below) implementations?
 >
-<!-- > > ## Solution
+> > ## Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGACAA'
 > > seq_split <- strsplit(seq, "")[[1]]
@@ -149,28 +149,28 @@ o
 > > }
 > > print(count)
 > > ~~~
-> {: .solution} -->
+> {: .solution} 
 {: .challenge}
 
 > ## What is the simplest way to count the Gs?
 >
 > Count the number of Gs in the sequence above using either R or Python in a simpler way.
 >
-<!-- > > ## Python Solution
+> > ## Python Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > print(seq.count('G'))
 > > ~~~
 > > {: .python}
 > {: .solution}
-> -->
-<!-- > > ## R Solution
+> 
+> > ## R Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > library(stringr)
 > > str_count(seq,'G')
 > > ~~~
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 There are a lot of blogs and articles comparing R and Python. Many of these comparisons (like this [infographic](https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis#gs.3P0PoiY)) do not tell you which is "better". That's because this is up to you. It really depends on what you're trying to do. Typically for a lot of bioinformatics projects, you will find yourself needing to know both. This is simply because many of the very useful tools for working with biological data are written in a variety of languages. Thus, it is up to the researcher to interact with them and develop cohesive pipelines for data curation and analysis.
@@ -339,8 +339,8 @@ Each cell in a Jupyter notebook can be executed and you can choose the type of c
 >
 > Replicate one of the solutions give above in a Jupyter notebook. Add some Markdown text to describe your program.
 >
-<!-- > > ## Solution
+> > ## Solution
 > >
 > > ![jupyter browser](../fig/jupyter3.png)
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
