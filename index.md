@@ -18,7 +18,8 @@ For bioinformatics, you will find yourself needing to know this language. Many t
 
 ## The Lessons
 
-Most of the lessons we will use for this course were written for the [Data Carpentry](http://www.datacarpentry.org/) series of workshops. In particular, we are using the [Data Analysis & Visualization in Python: Python for Ecologists](http://www.datacarpentry.org/python-ecology-lesson/) set of lessons. It is worth noting that one of the primary contributors and maintainers of this teaching material is [April Wright](https://paleantology.com/the-wright-lab/), a former postdoc in EEOB at Iowa State and now an assistant professor at Southeastern Louisiana University. 
+Most of the lessons we will use for this course were written for the [Data Carpentry](http://www.datacarpentry.org/) series of workshops. In particular, we are using the [Data Analysis & Visualization in Python: Python for Ecologists](http://www.datacarpentry.org/python-ecology-lesson/) set of lessons. 
+<!-- It is worth noting that one of the primary contributors and maintainers of this teaching material is [April Wright](https://paleantology.com/the-wright-lab/), a former postdoc in EEOB at Iowa State and now an assistant professor at Southeastern Louisiana University.  -->
 
 The data we are using for this lesson are from the Portal Project Teaching Database -
 [available on FigShare](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459).
