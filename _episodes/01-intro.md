@@ -179,7 +179,9 @@ There are a lot of blogs and articles comparing R and Python. Many of these comp
 
 ## Interactive Interpreter
 
-You can run python in various tools. Perhaps the most straightforward is to use the interactive Python interpreter. To enter the Python console, simple open a terminal window and type `python`. [In Mac OS X, it is sometimes good to use `pythonw` which is required if you want to use any Python function that requires opening new windows (e.g., plotting).]
+You can run python in various tools. Perhaps the most straightforward is to use the interactive Python interpreter. To enter the Python console, simple open a terminal window and type `python`. On Windows, you will want to launch the Anaconda Prompt application (see the [Anaconda docs](https://docs.anaconda.com/anaconda/user-guide/getting-started/#open-prompt-win) for more info).
+
+<!-- [In Mac OS X, it is sometimes good to use `pythonw` which is required if you want to use any Python function that requires opening new windows (e.g., plotting).] -->
 
 ```
 $ python
