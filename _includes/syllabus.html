@@ -40,12 +40,6 @@
   {% endfor %}
   {% assign hours = current | divided_by: 60 %}
   {% assign minutes = current | modulo: 60 %}
-  <tr>
-    {% if multiday %}<td></td>{% endif %}
-    <td class="col-md-1"></td>
-    <td class="col-md-3">BioPython</td>
-    <td class="col-md-7"></td>
-  </tr>
   </table>
 
 
