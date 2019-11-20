@@ -393,7 +393,7 @@ help(NCBIWWW.qblast)
 {: .python}
 
 
-Next we can read in a sequence that is stored in a FASTA file:
+Next we can read in a sequence that is stored in a FASTA file called [`test.fasta`](https://github.com/EEOB-BioData/BCB546X-Fall2019/blob/master/course-files/biopython/test.fasta).
 ~~~
 query = SeqIO.read("test.fasta", format="fasta")
 ~~~
