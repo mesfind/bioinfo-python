@@ -254,7 +254,7 @@ SeqRecord(seq=Seq('TGTAACGAACGGTGCAATAGTGATCCACACCCAACGCCTGAAATCAGATCCAGG...CTG'
 > Use string methods and the `SeqRecord` attributes to get the length of the sequence
 > and the species name.
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > Get the length using `len()`. 
 > > ~~~
@@ -276,7 +276,7 @@ SeqRecord(seq=Seq('TGTAACGAACGGTGCAATAGTGATCCACACCCAACGCCTGAAATCAGATCCAGG...CTG'
 > > ~~~
 > > {: .output}
 > > 
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 Using `SeqIO` we can read in several sequences from a file and store 
