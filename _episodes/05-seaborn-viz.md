@@ -60,7 +60,7 @@ surveys_complete = pd.read_csv('surveys_complete.csv', index_col=0)
 
 ## A Simple Scatterplot
 
-Let's start with a basic scatterplot. We'll simply plot the weight on the x-axis and the hind foot length on the y-axis. This uses the seaborn function `.lmplot()`. This function can take a Pandas DataFrame directly. It also will fit a regression line, by default. Since we may not want to visualize these data with a regression line, we will use the `fit_reg=False` argument.
+Let's start with a basic scatterplot. We'll simply plot the weight on the horizontal axis and the hind foot length on the vertical axis. This uses the seaborn function `.lmplot()`. This function can take a Pandas DataFrame directly. It also will fit a regression line, by default. Since we may not want to visualize these data with a regression line, we will use the `fit_reg=False` argument.
 
 ~~~
 sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False)
@@ -162,7 +162,7 @@ my_fig.set_axis_labels('Weight (g)', 'Hindfoot Length (mm)')
 > Remember how to access subsets of a DataFrame based on conditional criteria?
 > Plot the scatter plot above for only plot number `12` and color by `sex`. (Make the markers larger circles.)
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete[surveys_complete.plot_id == 12], 
@@ -173,7 +173,7 @@ my_fig.set_axis_labels('Weight (g)', 'Hindfoot Length (mm)')
 > > {: .python}
 > > 
 > > ![png](../fig/05-seaborn-scatter-9.png)
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 
@@ -205,7 +205,7 @@ ax.set(xlabel='Species ID', ylabel='Hindfoot Length (mm)')
 
 Note that for the `.boxplot()` function, we can simply set the x and y values by giving the column names from our DataFrame. Then we must use the `data=surveys_complete` argument to indicate our DataFrame object.
 
-Now let's use a violin plot to visualize the weight data. For these data, we would also like the weight to be on the log10 scale. We will make this plot horizontal, so we'll set the x-axis to be on the log scale. 
+Now let's use a violin plot to visualize the weight data. For these data, we would also like the weight to be on the log10 scale. We will make this plot horizontal, so we'll set the horizontal axis to be on the log scale. 
 An easy way to do this is to create a new graph variable from our `.violinplot()` function and then call the `.set_xscale()` that is a member method of the graph variable.
 
 ~~~
@@ -224,7 +224,7 @@ ax.set(ylabel='Species ID', xlabel='Weight (g)')
 > measurements for different sexed animals from a single 
 > species, [*Onychomys leucogaster* (OL)](https://en.wikipedia.org/wiki/Northern_grasshopper_mouse), one of the coolest rodent species:
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > fig, ax = plt.subplots(figsize=plot_dims)
@@ -233,7 +233,7 @@ sns.violinplot(x = 'sex', y = 'weight', data=surveys_complete[surveys_complete.s
 > > {: .python}
 > > 
 > > ![png](../fig/05-seaborn-violinplot-2.png)
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 # Histograms
@@ -248,7 +248,7 @@ sns.distplot(surveys_complete['weight'], color='c')
 
 ![png](../fig/05-seaborn-distplot-1.png)
 
-By default, the `.distplot()` function plots the histogram as a density plot with the kernel density estimate overlaid as a darker line on the graph. This may not be necessary and we may instead want the y-axis to represent the counts in each bin. We can further adjust the appearance of the histogram to make the bars more apparent and increase the number of bins.
+By default, the `.distplot()` function plots the histogram as a density plot with the kernel density estimate overlaid as a darker line on the graph. This may not be necessary and we may instead want the vertical axis to represent the counts in each bin. We can further adjust the appearance of the histogram to make the bars more apparent and increase the number of bins.
 
 ~~~
 fig, ax = plt.subplots(figsize=plot_dims)

@@ -373,7 +373,174 @@ Seq('ACACAAATTCTAACTGGCCTCCTACTGGCCGCCCACTACACTGCAGACACAACC...AGC', IUPACAmbiguo
 ~~~
 {: .output}
 
+## BLAST
+
+BioPython makes it easy to work with NCBI's BLAST. To run 
+blast over the internet, we can use `qblast()`. 
+For this we must import the `NCBIWWW` module:
+
+~~~
+from Bio.Blast import NCBIWWW
+~~~
+{: .python}
+
+You can call the `help()` function on `NCBIWWW.qblast` to inspect how this 
+function works. This will return all of the parameters of `qblast` so that
+you can understand how to specify your query correctly.
+~~~
+help(NCBIWWW.qblast)
+~~~
+{: .python}
 
 
+Next we can read in a sequence that is stored in a FASTA file:
+~~~
+query = SeqIO.read("test.fasta", format="fasta")
+~~~
+{: .python}
 
+The variable we created called `query` is a sequence stored in a `SeqRecord`
+object. 
+
+<!-- ~~~
+query.description
+~~~
+{: .python}
+ -->
+
+To run a BLAST search on the sequence from our FASTA file, we simply
+have to specify the search program (`blastn`) and the database (`nt`). 
+The last argument is the `Seq` object stored in our `query`. 
+~~~
+result_handle = NCBIWWW.qblast("blastn", "nt", query.seq)
+~~~
+{: .python}
+
+Note that this might not work for everyone in class. It is possible
+for NCBI to throttle non-interactive users.
+
+Once we have the results of our BLAST, we can store them in an XML file.
+~~~
+blast_file = open("my_blast.xml", "w")
+blast_file.write(result_handle.read())
+~~~
+{: .python}
+
+Once we have stored the results, it's best to close all of our open 
+file handles:
+~~~
+blast_file.close()
+result_handle.close()
+~~~
+{: .python}
+
+
+We created an XML file containing our BLAST results. This is now easy to 
+parse using the `NCBIXML` tools:
+~~~
+from Bio.Blast import NCBIXML
+handle = open("my_blast.xml")
+blast_record = NCBIXML.read(handle)
+~~~
+{: .python}
+
+
+Now that we have read in the file, we can 
+print each of the hits:
+~~~
+for hit in blast_record.descriptions: 
+    print(hit.title)
+    print(hit.e)
+~~~
+{: .python}
+
+~~~
+gi|1105484513|ref|XM_002284686.3| PREDICTED: Vitis vinifera cold-regulated 413 plasma membrane protein 2 (LOC100248690), mRNA
+0.0
+gi|1420088022|gb|MG722853.1| Vitis vinifera cold-regulated 413 inner membrane protein 2 mRNA, complete cds
+0.0
+gi|123704572|emb|AM483681.1| Vitis vinifera, whole genome shotgun sequence, contig VV78X045699.9, clone ENTAV 115
+0.0
+
+...
+
+gi|1027107741|ref|XM_008238505.2| PREDICTED: Prunus mume cold-regulated 413 plasma membrane protein 1-like (LOC103335494), mRNA
+1.04564e-118
+~~~
+{: .output}
+
+We can also view the alignments for each of the BLAST hits:
+~~~
+for hit in blast_record.alignments:
+    for hsp in hit.hsps:
+      print(hit.title) 
+      print(hsp.expect)
+      print(hsp.query[0:75] + '...')
+      print(hsp.match[0:75] + '...') 
+      print(hsp.sbjct[0:75] + '...')
+~~~
+{: .python}
+
+~~~
+gi|1105484513|ref|XM_002284686.3| PREDICTED: Vitis vinifera cold-regulated 413 plasma membrane protein 2 (LOC100248690), mRNA
+0.0
+TACTCTACAGTCTCTGACTTTGTAAGCTTCGCGCTTCTTCTCCTTTTTCTCTCTGGGGAAAGATTTTCCCTTTCT...
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||...
+TACTCTACAGTCTCTGACTTTGTAAGCTTCGCGCTTCTTCTCCTTTTTCTCTCTGGGGAAAGATTTTCCCTTTCT...
+
+...
+
+gi|1027107741|ref|XM_008238505.2| PREDICTED: Prunus mume cold-regulated 413 plasma membrane protein 1-like (LOC103335494), mRNA
+1.04564e-118
+ATTGAAGATGGGGAAAAAGGGTTACTTGGCGATGAGGACTGACACTGATACTACTGATTTGATCAGTTCTGATCT...
+|||| ||||||  ||| || | ||||||   |||| ||||||  | ||| | | ||| ||||||   || |||||...
+ATTGGAGATGGCAAAACAGAGCTACTTGAAAATGATGACTGAACCAGATGCAAATGAATTGATCCACTCCGATCT...
+~~~
+{: .output}
+
+Often a BLAST search will return many matches for a single query, as is the 
+case for this example. This is why it is best to save them in an XML file.
+Using `NCBIXML.parse()` enables us to evaluate each of the BLAST records.
+We can specify a threshold so that we can easily inspect the closest 
+matches.
+~~~
+E_VALUE_THRESH = 1e-150
+for record in NCBIXML.parse(open("my_blast.xml")):
+    for align in record.alignments: 
+        for hsp in align.hsps:
+            if hsp.expect < E_VALUE_THRESH: 
+                print("MATCH: %s " % align.title[:60]) 
+                print(hsp.expect)
+~~~
+{: .python}
+
+~~~
+MATCH: gi|1105484513|ref|XM_002284686.3| PREDICTED: Vitis vinifera  
+0.0
+MATCH: gi|1420088022|gb|MG722853.1| Vitis vinifera cold-regulated 4 
+0.0
+MATCH: gi|123704572|emb|AM483681.1| Vitis vinifera, whole genome sh 
+0.0
+MATCH: gi|1217007653|ref|XM_021787586.1| PREDICTED: Hevea brasilien 
+9.7761e-151
+MATCH: gi|1217007651|ref|XM_021787585.1| PREDICTED: Hevea brasilien 
+9.7761e-151
+~~~
+{: .output}
+
+
+Our BLAST search has matched our sequence with _Vitis vinifera_. 
+Let's check to see if it got it right:
+~~~
+query.description
+~~~
+{: .python}
+
+
+<!-- 
+~~~
+
+~~~
+{: .python}
+ -->
 
