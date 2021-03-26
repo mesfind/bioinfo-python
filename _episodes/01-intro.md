@@ -29,7 +29,7 @@ For example, let's say we want to use a `for` loop to count the number of `G`s i
 seq = "...ACGT..."
 count = 0
 for base in seq
-    if base is 'G'
+    if base is a 'G'
         increment count
 print count
 ```
@@ -40,7 +40,7 @@ The simple syntax of Python requires very few changes to make it work.
 seq = 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGACAA'
 count = 0
 for base in seq:
-    if base is 'G':
+    if base == 'G':
         count += 1
 
 print(count)
@@ -239,7 +239,7 @@ When you hit enter after a colon `:`, the prompt changes to `...`, indicating th
 
 ### Executing Scripts
 
-One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called [`01-intro.py`](https://github.com/EEOB-BioData/BCB546X-Fall2018/blob/master/course-files/python/scripts/01-intro.py) (in the `course-files/python/scripts` directory of the course GitHub repository). You can run this whole script from the command line in your terminal:
+One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called [`01-intro.py`](https://github.com/EEOB-BioData/BCB546-Spring2021/blob/main/course-files/python/scripts/01-intro.py) (in the `course-files/python/scripts` directory of the course GitHub repository). You can run this whole script from the command line in your terminal:
 
 ```
 $ python 01-intro.py
