@@ -6,7 +6,7 @@
 carpentry: "swc"
 
 # Overall title for pages.
-title: "EEOB/BCB 546X: Programming with Python"
+title: "EEOB/BCB 546: Programming with Python"
 
 # Contact email address.
 email: trayc7@gmail.com
@@ -24,7 +24,7 @@ repository: <USERNAME>/<PROJECT>
 
 # Sites.
 amy_site: "https://amy.software-carpentry.org/workshops"
-bcb_site: "http://eeob-biodata.github.io/BCB546X-Spring2017"
+bcb_site: "https://eeob-biodata.github.io/EEOB-BCB-546/"
 dc_site: "http://datacarpentry.org"
 swc_github: "https://github.com/swcarpentry"
 swc_site: "https://software-carpentry.org"
@@ -37,8 +37,8 @@ workshop_site: "https://swcarpentry.github.io/workshop-template"
 training_site: "https://swcarpentry.github.io/instructor-training"
 
 # Surveys.
-pre_survey: "https://www.surveymonkey.com/r/swc_pre_workshop_v1?workshop_id="
-post_survey: "https://www.surveymonkey.com/r/swc_post_workshop_v1?workshop_id="
+# pre_survey: "https://www.surveymonkey.com/r/swc_pre_workshop_v1?workshop_id="
+# post_survey: "https://www.surveymonkey.com/r/swc_post_workshop_v1?workshop_id="
 
 # Start time in minutes (0 to be clock-independent, 540 to show a start at 09:00 am)
 start_time: 0

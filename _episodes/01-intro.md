@@ -137,7 +137,7 @@ o
 >
 > Count the number of Gs in the sequence above using a `for` loop. What is the difference between Python (see above) and R (in solution below) implementations?
 >
-> > ## Solution
+<!-- > > ## Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGACAA'
 > > seq_split <- strsplit(seq, "")[[1]]
@@ -149,14 +149,14 @@ o
 > > }
 > > print(count)
 > > ~~~
-> {: .solution} 
+> {: .solution}  -->
 {: .challenge}
 
 > ## What is the simplest way to count the Gs?
 >
 > Count the number of Gs in the sequence above using either R or Python in a simpler way.
 >
-> > ## Python Solution
+<!-- > > ## Python Solution
 > > ~~~
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > print(seq.count('G'))
@@ -170,7 +170,7 @@ o
 > > library(stringr)
 > > str_count(seq,'G')
 > > ~~~
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 There are a lot of blogs and articles comparing R and Python. Many of these comparisons (like this [infographic](https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis#gs.3P0PoiY)) do not tell you which is "better". That's because this is up to you. It really depends on what you're trying to do. Typically for a lot of bioinformatics projects, you will find yourself needing to know both. This is simply because many of the very useful tools for working with biological data are written in a variety of languages. Thus, it is up to the researcher to interact with them and develop cohesive pipelines for data curation and analysis.
@@ -187,8 +187,8 @@ You can run python in various tools. Perhaps the most straightforward is to use 
 $ python
 ```
 ~~~
-Python 3.7.3 (default, Mar 27 2019, 16:54:48) 
-[Clang 4.0.1 (tags/RELEASE_401/final)] :: Anaconda, Inc. on darwin
+Python 3.8.5 (default, Sep  4 2020, 02:22:02) 
+[Clang 10.0.0 ] :: Anaconda, Inc. on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ~~~
@@ -253,21 +253,21 @@ HELLO
 
 ### Python on the Cluster
 
-Our HPC systems do not use the Anaconda install of Python. Additionally, the default versions of Python that is available globally is Python 2.7. Thus, if you would like to use HPC-Class to interact with Python, you will have to load the Python 3 module after logging on to the cluster (`ssh <ISU Net ID>@hpc-class.its.iastate.edu`).
+Our HPC systems do not use the Anaconda install of Python. Additionally, the default versions of Python that is available globally is Python 2.7. Thus, if you would like to use HPC-Class to interact with Python, it is recommended that you load the Python 3 module after logging on to the cluster (`ssh <ISU Net ID>@hpc-class.its.iastate.edu`).
 
 ```
-$ module load python/3.6.5-fwk5uaj
+$ module load python
 ```
 
 Once you have loaded the Python 3 module, you can open the `python3` interpreter:
 
 ```
-$ python3
+$ python
 ```
 
 ~~~
-Python 3.6.5 (default, May 29 2018, 16:28:47)
-[GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] on linux
+Python 3.7.7 (default, Jun 15 2020, 12:59:09) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-36)] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ~~~
@@ -339,8 +339,8 @@ Each cell in a Jupyter notebook can be executed and you can choose the type of c
 >
 > Replicate one of the solutions give above in a Jupyter notebook. Add some Markdown text to describe your program.
 >
-> > ## Solution
+<!-- > > ## Solution
 > >
 > > ![jupyter browser](../fig/jupyter3.png)
-> {: .solution}
+> {: .solution} -->
 {: .challenge}

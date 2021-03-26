@@ -5,7 +5,7 @@ root: .
 
 # Welcome to the Python part of the BCB546 course!
 
-The materials we will work through are a sample of the lessons created for [Data Carpentry](http://www.datacarpentry.org/python-ecology-lesson/00-short-introduction-to-Python/) and [Software Carpentry](http://swcarpentry.github.io/python-novice-inflammation). 
+The materials we will work through are a sample of the lessons created for [Data Carpentry](https://datacarpentry.org/python-ecology-lesson/) and [Software Carpentry](http://swcarpentry.github.io/python-novice-inflammation). 
 The goal of this section is to demonstrate the utility of Python for working with biological data. 
 
 ## Why Python?
@@ -36,7 +36,7 @@ More details about the files we'll use and where to download them are available 
 {: .prereq}
 
 ### Getting Started
-To get started with installing Python, follow the directions given in the [Python section of the course Software page](https://eeob-biodata.github.io/EEOB-BCB-546X/software#python).
+To get started with installing Python, follow the directions given in the [Python section of the course Software page](https://eeob-biodata.github.io/EEOB-BCB-546/software#python).
 In addition to installing Python on your own computer, you will also need to download the data files used in the tutorials. Details for doing this are found in the [Setup](setup/) page.
 
 ### Format
