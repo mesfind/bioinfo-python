@@ -280,7 +280,7 @@ numbers["one"]
 Dictionaries work a lot like lists - except that you index them with *keys*.
 You can think about a key as a name for or a unique identifier for a set of values
 in the dictionary. Keys can only have particular types - they have to be
-"hashable". Strings, numeric types, and tuples are acceptable, but lists are not.
+"hashable", which means they don't change. Strings, numeric types, and tuples are acceptable, but lists are not.
 
 Here is a dictionary with natural numbers as keys. You access the values associated with each key, by providing the key in `[]`
 
