@@ -742,3 +742,15 @@ And sage advice:
 import this
 ~~~
 {: .python}
+
+> ## Take-Home Challenge: Create a Documented Jupyter Notebook Exploring Python Strings and Lists
+>
+> Create a new Jupyter notebook and document the following exercises with explanations about your solutions.
+>
+> 1. Create a string `a = 'Go Cyclones'` and use python to extract the character `'l'` from that string and assign it to a new variable. What index is that character assigned in the string?
+>
+> 2. Convert your string `a` so that it is spelled out backwards `'senolcyC oG'`. (Try using a for loop, or you can find examples of how to do this with Python subsetting techniques.)
+>
+> 3. Create two lists `l1 = [53, 16, 1, 86, 3, 33, 41, 76, 71, 4]` and `l2 = [30, 100, 94, 90, 17, 11, 39, 23, 90, 52]`. Use python to create a new list that contains only the odd numbers from both lists. The third list should look like this: `[53, 1, 3, 33, 41, 71, 17, 11, 39, 23]`.
+>
+{: .challenge}
