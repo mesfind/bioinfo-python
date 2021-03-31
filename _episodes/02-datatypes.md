@@ -753,4 +753,8 @@ import this
 >
 > 3. Create two lists `l1 = [53, 16, 1, 86, 3, 33, 41, 76, 71, 4]` and `l2 = [30, 100, 94, 90, 17, 11, 39, 23, 90, 52]`. Use python to create a new list that contains only the odd numbers from both lists. The third list should look like this: `[53, 1, 3, 33, 41, 71, 17, 11, 39, 23]`.
 >
+> > ## Solutions
+> >
+> > The solutions will be posted in 4 days. Feel free to use the `#scripting_help` channel in Slack to discuss these exercises. 
+> {: .solution}
 {: .challenge}
