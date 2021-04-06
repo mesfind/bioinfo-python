@@ -374,7 +374,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > 
 > 2. Is there a simpler solution for doing this?
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > # 1
@@ -387,7 +387,7 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > > {: .python}
 > > 
 > > Note that the `.nunique()` method does not count null (i.e., `nan`) values.
-> {: .solution}  -->
+> {: .solution} 
 {: .challenge}
 
 
@@ -544,13 +544,13 @@ summaries of categorical data.
 > Using the `.describe()` method on the DataFrame sorted by sex, 
 > determine how many individuals were observed for each.
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > * *Female* = 15690
 > > 
 > > * *Male* = 17348
 > > 
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 
@@ -561,14 +561,14 @@ summaries of categorical data.
 > then view mean values:
 > - Hint: you can use a list in the arguments of the `.groupby()` method, `['plot_id','sex']`
 > 
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > sorted_data2 = surveys_df.groupby(['plot_id','sex'])
 > > sorted_data2.mean()
 > > ~~~
 > > {: .python}
-> {: .solution}  -->
+> {: .solution} 
 {: .challenge}
 
 
@@ -576,14 +576,14 @@ summaries of categorical data.
 >
 > Summarize weight values for each plot in your data.
 > 
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > by_plot = surveys_df.groupby('plot_id')
 > > by_plot['weight'].describe()
 > > ~~~
 > > {: .python}
-> {: .solution}  -->
+> {: .solution} 
 {: .challenge}
 
 
@@ -701,7 +701,7 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 > Create a bar plot that shows the average weight of all of the animals captured in that plot.
 > Also, choose an interesting or pleasing color from the list of [named web colors](https://en.wikipedia.org/wiki/Web_colors).
 > 
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > plot_weight_means = surveys_df.groupby('plot_id')['weight'].mean()
@@ -710,14 +710,14 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 > > {: .python}
 > > 
 > > ![Solution](../fig/plot_ave_weight.png)
-> {: .solution}  -->
+> {: .solution} 
 {: .challenge}
 
 > ## Plot the number of females and the number of males in the dataset
 >
 > Create a bar plot that shows the total number of each sex captured for the entire dataset.
 > 
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > counts_by_sex = surveys_df['record_id'].groupby(surveys_df['sex']).count()
@@ -726,7 +726,7 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 > > {: .python}
 > > 
 > > ![Solution](../fig/counts_by_sex.png)
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 
@@ -804,8 +804,8 @@ s_plot.set_xlabel("Plot")
 >
 > 2. Come up with another way to view and/or summarize the observations in this dataset. What do you learn from this?
 >
-<!-- > > ## Solutions
+> > ## Solutions
 > >
 > > The solutions will be posted in 4-6 days. Feel free to use the `#scripting_help` channel in Slack to discuss these exercises. 
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
