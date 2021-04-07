@@ -187,7 +187,7 @@ surveys_df[0:3]
 > ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
 > ~~~
 > {: .output}
-> 
+> <br>
 > Return the values `A` through `E`:
 > 
 > ~~~
@@ -199,7 +199,7 @@ surveys_df[0:3]
 > ['A', 'B', 'C', 'D', 'E']
 > ~~~
 > {: .output}
-> 
+> <br>
 > Return the list starting at `E` through to the end:
 > 
 > ~~~
@@ -211,7 +211,7 @@ surveys_df[0:3]
 > ['E', 'F', 'G', 'H', 'I', 'J']
 > ~~~
 > {: .output}
-> 
+> <br>
 > Return the first 4 letters in the list 
 > (Note that this is the same as `x[0:4]`):
 > 
@@ -224,7 +224,7 @@ surveys_df[0:3]
 > ['A', 'B', 'C', 'D']
 > ~~~
 > {: .output}
-> 
+> <br>
 > Return the _last_ letter in the list:
 > 
 > ~~~
@@ -236,7 +236,7 @@ surveys_df[0:3]
 > 'J'
 > ~~~
 > {: .output}
-> 
+> <br>
 > The slice syntax includes a third component called the _step_. Where 
 > `x[start:stop:step]` returns the list from the `start` index for every `step` up to the index
 > before `stop`. The example below gives us every third letter in the list starting from `0`
