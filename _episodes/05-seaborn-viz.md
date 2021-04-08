@@ -63,7 +63,7 @@ surveys_complete = pd.read_csv('surveys_complete.csv', index_col=0)
 Let's start with a basic scatterplot. We'll simply plot the weight on the horizontal axis and the hind foot length on the vertical axis. This uses the seaborn function `.lmplot()`. This function can take a Pandas DataFrame directly. It also will fit a regression line, by default. Since we may not want to visualize these data with a regression line, we will use the `fit_reg=False` argument.
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False)
+sns.lmplot(x="weight", y="hindfoot_length", data=surveys_complete, fit_reg=False)
 ~~~
 {: .python}
 
@@ -79,7 +79,7 @@ sns.set(font_scale=1.5)
 This will increase the font size of the labels by 50% in all of our subsequent plots.
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False)
+sns.lmplot(x="weight", y="hindfoot_length", data=surveys_complete, fit_reg=False)
 ~~~
 {: .python}
 
@@ -90,7 +90,7 @@ The plot size is small, by default, and with seaborn, there isn't a way to chang
 For `.lmplot()`, we can set the plot size directly as arguments in the function call using the `size` and `aspect` arguments. These arguments control the height and width of the object, respectively.  
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5)
+sns.lmplot(x="weight", y="hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5)
 ~~~
 {: .python}
 
@@ -101,7 +101,7 @@ sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, he
 One issue with this plot is that because we have a large dataset, it is difficult to adequately visualize the points on our graph. This is called "[overplotting](https://python-graph-gallery.com/134-how-to-avoid-overplotting-with-python/)". One way to avoid this is to change the size of the marker. Here we use the argument `scatter_kws` that takes a _dictionary_ of keywords and values that are passed to the matplotlib `scatter` function.
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5, scatter_kws={"s": 5})
+sns.lmplot(x="weight", y="hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5, scatter_kws={"s": 5})
 ~~~
 {: .python}
 
@@ -110,7 +110,7 @@ sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, he
 Alternatively, we can change the marker type using the `markers` keyword argument. By default, `lmplot()` sets `markers='8'`. If we want to change the marker, we must use the correct [matplotlib code](https://matplotlib.org/examples/lines_bars_and_markers/marker_reference.html). Let's change the markers to X-es:
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5, markers='x')
+sns.lmplot(x="weight", y="hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5, markers='x')
 ~~~
 {: .python}
 
@@ -119,7 +119,7 @@ sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, he
 Another way to avoid overplotting is to use transparency so that regions of the plot with many points are darker. This is achieved using the `scatter_kws` argument and setting the alpha value. (This is using [alpha compositing](https://en.wikipedia.org/wiki/Alpha_compositing).)
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5, scatter_kws={'alpha':0.3})
+sns.lmplot(x="weight", y="hindfoot_length", data=surveys_complete, fit_reg=False, height=8, aspect=1.5, scatter_kws={'alpha':0.3})
 ~~~
 {: .python}
 
@@ -131,8 +131,9 @@ sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, he
 We can also specify that the `species_id` labels indicate categories that determine a point's color:
 
 ~~~
-sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8,
-           aspect=1.5, scatter_kws={'alpha':0.3,"s": 50}, hue='species_id', markers='D')
+sns.lmplot(x="weight", y="hindfoot_length", data=surveys_complete, 
+           fit_reg=False, height=8, aspect=1.5, scatter_kws={'alpha':0.3,"s": 50}, 
+           hue='species_id', markers='D')
 ~~~
 {: .python}
 
@@ -145,8 +146,10 @@ sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, he
 There are different ways to set figure properties using seaborn. For `.lmplot()`, we can create a figure variable and use a member method of tat variable to set the axis labels. 
 
 ~~~
-my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete, fit_reg=False, height=8, 
-                    aspect=1.5, scatter_kws={'alpha':0.3,"s": 50}, hue='species_id', markers='D')
+my_fig = sns.lmplot(x="weight", y="hindfoot_length", data=surveys_complete, 
+                    fit_reg=False, height=8, aspect=1.5, 
+                    scatter_kws={'alpha':0.3,"s": 50}, 
+                    hue='species_id', markers='D')
 my_fig.set_axis_labels('Weight (g)', 'Hindfoot Length (mm)')
 ~~~
 {: .python}
@@ -165,8 +168,10 @@ my_fig.set_axis_labels('Weight (g)', 'Hindfoot Length (mm)')
 > > ## Solution
 > > 
 > > ~~~
-> > my_fig = sns.lmplot("weight", "hindfoot_length", data=surveys_complete[surveys_complete.plot_id == 12], 
-                    fit_reg=False, height=8, aspect=1.5, scatter_kws={'alpha':0.3,"s": 200}, 
+> > my_fig = sns.lmplot(x="weight", y="hindfoot_length", 
+                    data=surveys_complete[surveys_complete.plot_id == 12], 
+                    fit_reg=False, height=8, aspect=1.5, 
+                    scatter_kws={'alpha':0.3,"s": 200}, 
                     hue='sex', markers='8')
 my_fig.set_axis_labels('Weight (g)', 'Hindfoot Length (mm)')
 > > ~~~
@@ -196,7 +201,7 @@ Now, every time we create a new plot that returns a matplotlib Axes object, we c
 
 ~~~
 fig, ax = plt.subplots(figsize=plot_dims)
-sns.boxplot('species_id','hindfoot_length', data=surveys_complete)
+sns.boxplot(x='species_id', y='hindfoot_length', data=surveys_complete)
 ax.set(xlabel='Species ID', ylabel='Hindfoot Length (mm)')
 ~~~
 {: .python}
@@ -210,8 +215,9 @@ An easy way to do this is to create a new graph variable from our `.violinplot()
 
 ~~~
 fig, ax = plt.subplots(figsize=plot_dims)
-g = sns.violinplot('weight','species_id', data=surveys_complete, linewidth=0.2, orient="h", cut=0)
-g.set_xscale('log', basex=10)
+g = sns.violinplot(x='weight', y='species_id', data=surveys_complete, 
+                   linewidth=0.2, orient="h", cut=0)
+g.set_xscale('log', base=10)
 ax.set(ylabel='Species ID', xlabel='Weight (g)')
 ~~~
 {: .python}
@@ -228,7 +234,7 @@ ax.set(ylabel='Species ID', xlabel='Weight (g)')
 > > 
 > > ~~~
 > > fig, ax = plt.subplots(figsize=plot_dims)
-sns.violinplot(x = 'sex', y = 'weight', data=surveys_complete[surveys_complete.species_id == 'OL'])
+sns.violinplot(x='sex', y='weight', data=surveys_complete[surveys_complete.species_id == 'OL'])
 > > ~~~
 > > {: .python}
 > > 
@@ -238,21 +244,21 @@ sns.violinplot(x = 'sex', y = 'weight', data=surveys_complete[surveys_complete.s
 
 # Histograms
 
-Often, a histogram is a better way to visualize a distribution. This is relatively simple using seaborn's `.distplot()` function. This function does not take a Pandas DataFrame, but can take a Pandas Series (i.e., column in our DataFrame). This function also can take come other arguments like `color`, which takes values that specify the color of histogram based on [matplotlib's colors](https://matplotlib.org/api/colors_api.html). We will make our plot cyan using the `'c'` color code.
+Often, a histogram is a better way to visualize a distribution. This is relatively simple using seaborn's `.displot()` function. This function does not take a Pandas DataFrame, but can take a Pandas Series (i.e., column in our DataFrame). This function also can take come other arguments like `color`, which takes values that specify the color of histogram based on [matplotlib's colors](https://matplotlib.org/api/colors_api.html). We will make our plot cyan using the `'c'` color code. Additionally, we will specify `bins=50` so that our histogram is not plotted using too many or too few bins.
 
 ~~~
-fig, ax = plt.subplots(figsize=plot_dims)
-sns.distplot(surveys_complete['weight'], color='c')
+sns.displot(surveys_complete['weight'], color='c',bins=50, 
+            height=8, aspect=1.5)
 ~~~
 {: .python}
 
 ![png](../fig/05-seaborn-distplot-1.png)
 
-By default, the `.distplot()` function plots the histogram as a density plot with the kernel density estimate overlaid as a darker line on the graph. This may not be necessary and we may instead want the vertical axis to represent the counts in each bin. We can further adjust the appearance of the histogram to make the bars more apparent and increase the number of bins.
+By default, the `.displot()` function plots the density as a histogram, alternatively, you can plot a kernel density estimate by setting the `kind` argument to `kind="kde"` (the default is `kind="hist"`) and removing the `bins` argument.
 
 ~~~
-fig, ax = plt.subplots(figsize=plot_dims)
-sns.distplot(surveys_complete['weight'], kde=False, color='c', hist_kws=dict(edgecolor="k", linewidth=1), bins=100)
+sns.displot(surveys_complete['weight'], color='k', kind="kde", 
+            height=8, aspect=1.5)
 ~~~
 {: .python}
 
@@ -322,7 +328,23 @@ out.close()
 ~~~
 {: .python}
 
-## Comparing densities in bokeh using ridgeline plots
+If you open the file you created in your web browser, you now have an interactive version of your figure. You can then use this to embed in a website.
+
+> ## Take-Home Challenge: More Visualizations in Python
+>
+> Continue to use `seaborn` and `bokeh` to try out different visualizations. 
+>
+> 1. Produce a histogram of the hindfoot length for only the species observed in the genus _Peromyscus_. Note that this particular dataset includes a column called `"genus"`. So you can subset out only the entries for _Peromyscus_ individuals. Try making the histogram using both `seaborn` and `bokeh`. Consider altering the bin numbers to help visualize the distribution. 
+>
+> 2. This dataset also has a column called `"plot_type"`. That says what kind of plot in which the animal was captured. The different plot types are specific experimental set-ups for this kind of study. Create a visualization that helps us better understand how the species (`"species_id"`) might be influenced by the plot type. For example, are some species prevented from entering certain plot types? 
+>
+> > ## Solutions
+> >
+> > The solutions will be posted in 4 days. Feel free to use the `#scripting_help` channel in Slack to discuss these exercises. 
+> {: .solution}
+{: .challenge}
+
+<!-- ## Comparing densities in bokeh using ridgeline plots
 
 A cool way of visualizing multiple histograms is to use what is called a "ridgeline" plot. There is a nice package in R called [`ggridges`](https://github.com/clauswilke/ggridges) that allows you to create these plot. Here is the additional code needed to make this plot using bokeh in Python. (To get this to work, you must first install the package `colorcet` using: `conda install colorcet`.)
 
@@ -355,7 +377,7 @@ show(ridgeline)
 {: .python}
 
 {% include weight_ridgeline_bokeh.html %}
-
+ -->
 
 
 <!-- 
