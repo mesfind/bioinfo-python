@@ -58,6 +58,8 @@ surveys_complete = pd.read_csv('surveys_complete.csv', index_col=0)
 ~~~
 {: .python}
 
+For this exercise, we will use a different version of the ecological dataset from our previous lessons. This version has only the complete observations, without missing entries for any of the columns. There are also a few additional columns providing information about the taxonomy of the species collected and the type of plot/enclosure. 
+
 ## A Simple Scatterplot
 
 Let's start with a basic scatterplot. We'll simply plot the weight on the horizontal axis and the hind foot length on the vertical axis. This uses the seaborn function `.lmplot()`. This function can take a Pandas DataFrame directly. It also will fit a regression line, by default. Since we may not want to visualize these data with a regression line, we will use the `fit_reg=False` argument.
@@ -143,7 +145,7 @@ sns.lmplot(x="weight", y="hindfoot_length", data=surveys_complete,
 
 ### Setting the axis labels
 
-There are different ways to set figure properties using seaborn. For `.lmplot()`, we can create a figure variable and use a member method of tat variable to set the axis labels. 
+There are different ways to set figure properties using seaborn. For `.lmplot()`, we can create a figure variable and use a member method of that variable to set the axis labels. 
 
 ~~~
 my_fig = sns.lmplot(x="weight", y="hindfoot_length", data=surveys_complete, 
@@ -165,7 +167,7 @@ my_fig.set_axis_labels('Weight (g)', 'Hindfoot Length (mm)')
 > Remember how to access subsets of a DataFrame based on conditional criteria?
 > Plot the scatter plot above for only plot number `12` and color by `sex`. (Make the markers larger circles.)
 >
-> > ## Solution
+<!-- > > ## Solution
 > > 
 > > ~~~
 > > my_fig = sns.lmplot(x="weight", y="hindfoot_length", 
@@ -178,7 +180,7 @@ my_fig.set_axis_labels('Weight (g)', 'Hindfoot Length (mm)')
 > > {: .python}
 > > 
 > > ![png](../fig/05-seaborn-scatter-9.png)
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 
@@ -230,7 +232,7 @@ ax.set(ylabel='Species ID', xlabel='Weight (g)')
 > measurements for different sexed animals from a single 
 > species, [*Onychomys leucogaster* (OL)](https://en.wikipedia.org/wiki/Northern_grasshopper_mouse), one of the coolest rodent species:
 >
-> > ## Solution
+<!-- > > ## Solution
 > > 
 > > ~~~
 > > fig, ax = plt.subplots(figsize=plot_dims)
@@ -239,7 +241,7 @@ sns.violinplot(x='sex', y='weight', data=surveys_complete[surveys_complete.speci
 > > {: .python}
 > > 
 > > ![png](../fig/05-seaborn-violinplot-2.png)
-> {: .solution}
+> {: .solution} -->
 {: .challenge}
 
 # Histograms
