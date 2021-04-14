@@ -60,9 +60,9 @@ different tools in the package:
 ## Download Example Files
 
 This lesson will use the example files in the 
-[`biopython`](https://github.com/EEOB-BioData/BCB546X-Fall2019/tree/master/course-files/biopython) 
+[`biopython`](https://github.com/EEOB-BioData/BCB546-Spring2021/tree/master/course-files/biopython) 
 folder of the course 
-files in the `BCB546X-Fall2019` repository. 
+files in the `BCB546-Spring2021` repository. 
 Download these files and make sure they are in the same directory
 where you are creating your Jupyter notebook.
 
@@ -235,7 +235,7 @@ Seq('GATC')
 
 `SeqIO` enables reading in sequences from FASTA files and storing the data in a `SeqRecord`. Addtionally `SeqIO` provides tools for writing sequence data to a file.
 
-We will read in the example file [`NC_005816.fna`](https://github.com/EEOB-BioData/BCB546X-Fall2019/blob/master/course-files/biopython/NC_005816.fna) using `SeqIO`.
+We will read in the example file [`NC_005816.fna`](https://github.com/EEOB-BioData/BCB546-Spring2021/blob/master/course-files/biopython/NC_005816.fna) using `SeqIO`.
 
 ~~~
 from Bio import SeqIO
@@ -281,7 +281,7 @@ SeqRecord(seq=Seq('TGTAACGAACGGTGCAATAGTGATCCACACCCAACGCCTGAAATCAGATCCAGG...CTG'
 
 Using `SeqIO` we can read in several sequences from a file and store 
 them in a list of `SeqRecord` objects from a file. The file 
-[`example.fasta`](https://github.com/EEOB-BioData/BCB546X-Fall2019/blob/master/course-files/biopython/example.fasta) looks like this:
+[`example.fasta`](https://github.com/EEOB-BioData/BCB546-Spring2021/blob/master/course-files/biopython/example.fasta) looks like this:
 
 ```
 >EAS54_6_R1_2_1_413_324
@@ -393,7 +393,7 @@ help(NCBIWWW.qblast)
 {: .python}
 
 
-Next we can read in a sequence that is stored in a FASTA file called [`test.fasta`](https://github.com/EEOB-BioData/BCB546X-Fall2019/blob/master/course-files/biopython/test.fasta).
+Next we can read in a sequence that is stored in a FASTA file called [`test.fasta`](https://github.com/EEOB-BioData/BCB546-Spring2021/blob/master/course-files/biopython/test.fasta).
 ~~~
 query = SeqIO.read("test.fasta", format="fasta")
 ~~~
