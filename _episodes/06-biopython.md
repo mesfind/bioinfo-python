@@ -89,28 +89,27 @@ It contains a string (the sequence) and a defined alphabet for that string.
 The alphabets are actually defined objects such as `IUPACAmbiguousDNA` or 
 `IUPACProtein`. A Seq object with a DNA alphabet has some different methods than one with an Amino Acid alphabet.
 
-First, import the `Seq` and alphabet from Biopython
+First, import the `Seq` object from Biopython
 
 ~~~
 from Bio.Seq import Seq
-from Bio.Alphabet import IUPAC
 ~~~
 {: .python}
 
 Now we can create a `Seq` object: 
 
 ~~~
-my_seq = Seq("AGTACACTGGT", IUPAC.unambiguous_dna)
+my_seq = Seq("AGTACACTGGT")
 my_seq
 ~~~
 {: .python}
 
 ~~~
-Seq('AGTACACTGGT', IUPACUnambiguousDNA())
+Seq('AGTACACTGGT')
 ~~~
 {: .output}
 
-We can create protein sequence by specifying the alphabet:
+<!-- We can create protein sequence by specifying the alphabet:
 ~~~
 my_prot = Seq("AGTACACTGGT", IUPAC.protein)
 my_prot
@@ -120,7 +119,7 @@ my_prot
 ~~~
 Seq('AGTACACTGGT', IUPACProtein())
 ~~~
-{: .output}
+{: .output} -->
 
 The nice thing about the sequence object is 
 that it can be treated
@@ -160,7 +159,7 @@ len(my_seq)
 `Seq` objects also have special methods. For example, you can get the reverse complement of a sequence:
 
 ~~~
-my_seq = Seq("GATCGATGGGCCTATATAGGATCGAAAATCGC", IUPAC.unambiguous_dna)
+my_seq = Seq("GATCGATGGGCCTATATAGGATCGAAAATCGC")
 print(my_seq.reverse_complement())
 ~~~
 {: .python}
@@ -176,7 +175,7 @@ will need to create a `MutableSeq` object.
 
 ~~~
 from Bio.Seq import MutableSeq
-mutable_seq = MutableSeq("GCCATTGTAATGGGCCGCTGAAAGGGTGCCCGA", IUPAC.unambiguous_dna)
+mutable_seq = MutableSeq("GCCATTGTAATGGGCCGCTGAAAGGGTGCCCGA")
 ~~~
 {: .python}
 
