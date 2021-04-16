@@ -536,6 +536,20 @@ query.description
 {: .python}
 
 
+> ## Take-Home Challenge: Biopython
+>
+> Experiment with features of biopython using the sequence in the variable `query` that we loaded from `test.fasta`.
+>
+> 1. Print the reverse complement of the sequence to screen.
+>
+> 2. Write your own function to calculate the GC content of this sequence to screen.
+>
+> > ## Solutions
+> >
+> > The solutions will be posted in 4 days. Feel free to use the `#scripting_help` channel in Slack to discuss these exercises. 
+> {: .solution}
+{: .challenge}
+
 <!-- 
 ~~~
 
