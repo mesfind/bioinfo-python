@@ -754,7 +754,56 @@ import this
 > 3. Create two lists `l1 = [53, 16, 1, 86, 3, 33, 41, 76, 71, 4]` and `l2 = [30, 100, 94, 90, 17, 11, 39, 23, 90, 52]`. Use python to create a new list that contains only the odd numbers from both lists. The third list should look like this: `[53, 1, 3, 33, 41, 71, 17, 11, 39, 23]`.
 >
 > > ## Solutions
-> >
-> > The solutions will be posted in 4 days. Feel free to use the `#scripting_help` channel in Slack to discuss these exercises. 
+> > 
+> > (1) The index for character `l` is `a[6]`.
+> > 
+> > ~~~
+> > a = 'Go Cyclones'
+> > b = a[6]
+> > print(b)
+> > ~~~
+> > {: .python}
+> > 
+> > ~~~
+> > l
+> > ~~~
+> > {: .output}
+> > 
+> > <br> 
+> > 
+> > (2) Use list indexing notation to reverse the string.
+> > 
+> > ~~~
+> > print(a[::-1])
+> > ~~~
+> > {: .python}
+> > 
+> > ~~~
+> > senolcyC oG
+> > ~~~
+> > {: .output}
+> > 
+> > <br> 
+> > 
+> > (3) Use the modulo operator `%` to determine if the list element is divisible by `2`.
+> > 
+> > ~~~
+> > l1 = [53, 16, 1, 86, 3, 33, 41, 76, 71, 4]
+> > l2 = [30, 100, 94, 90, 17, 11, 39, 23, 90, 52]
+> > 
+> > for n in l1+l2:
+> >     if n % 2 != 0:
+> >         l3.append(n)
+> > 
+> > print(l3)
+> > ~~~
+> > {: .python}
+> > 
+> > ~~~
+> > [53, 1, 3, 33, 41, 71, 17, 11, 39, 23]
+> > ~~~
+> > {: .output}
+> > 
+> > 
 > {: .solution}
 {: .challenge}
