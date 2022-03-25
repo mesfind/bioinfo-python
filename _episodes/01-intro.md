@@ -239,7 +239,7 @@ When you hit enter after a colon `:`, the prompt changes to `...`, indicating th
 
 ### Executing Scripts
 
-One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called [`01-intro.py`](https://github.com/EEOB-BioData/BCB546-Spring2021/blob/main/course-files/python/scripts/01-intro.py) (in the `course-files/python/scripts` directory of the course GitHub repository). You can run this whole script from the command line in your terminal:
+One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called [`01-intro.py`](https://github.com/EEOB-BioData/BCB546-Spring2022/blob/main/course-files/python/scripts/01-intro.py) (in the `course-files/python/scripts` directory of the course GitHub repository). You can run this whole script from the command line in your terminal:
 
 ```
 $ python 01-intro.py
