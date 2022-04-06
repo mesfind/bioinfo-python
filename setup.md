@@ -6,11 +6,11 @@ permalink: /setup/
 
 You need to download some files to follow this lesson:
 
-1. Make a new folder in your Desktop (or anywhere else you like) called `python-bcb546`.
+1. Make a new folder in your Desktop (or anywhere else you like) called `python-bcb546`. Download from these links by saving in your web browser. Or if you are in a unix terminal you can use `wget <url>` and replace the `<url>` with the path to the file you wish to download.
 2. Download the following files into this folder:
-    3. [surveys.csv](https://github.com/EEOB-BioData/BCB546-Spring2022/raw/main/course-files/python/surveys.csv)
-    4. [species.csv](https://github.com/EEOB-BioData/BCB546-Spring2022/raw/main/course-files/python/species.csv)
-    5. [surveys_complete.csv](https://github.com/EEOB-BioData/BCB546-Spring2022/raw/main/course-files/python/surveys_complete.csv)
+    1. [surveys.csv](https://github.com/EEOB-BioData/BCB546-Spring2022/raw/main/course-files/python/surveys.csv)
+    2. [species.csv](https://github.com/EEOB-BioData/BCB546-Spring2022/raw/main/course-files/python/species.csv)
+    3. [surveys_complete.csv](https://github.com/EEOB-BioData/BCB546-Spring2022/raw/main/course-files/python/surveys_complete.csv)
 
 Or, you can pull from the [course repository](https://github.com/EEOB-BioData/BCB546-Spring2022) and change to the directory containing the data files:
 1. `cd BCB546-Spring2022`

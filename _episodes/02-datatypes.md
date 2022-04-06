@@ -179,7 +179,7 @@ my_list = [0,1,2]
 >
 > Change the value of a single element in `my_list ` and `my_tuple`.
 >
-<!-- > > ## Solution: List
+> > ## Solution: List
 > >
 > > ~~~
 > > my_list[1] = 5
@@ -206,7 +206,7 @@ my_list = [0,1,2]
 > >TypeError: 'tuple' object does not support item assignment
 > > ~~~
 > > {: .output}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 Once created, tuples cannot be changed in any way. This means you cannot add new values to your tuple container. As a result, Python stores these variables differently from lists since there is no need to allocate any additional memory for potential changes in size. This, in turn, makes tuples more memory efficient. 
@@ -395,7 +395,7 @@ for key in numbers2:
 >
 > Try to reassign the second value of `numbers2` (in the *key value pair*) so that it no longer reads "two" but instead reads "spam and eggs". What does your dictionary look like after you make this change?
 >
-<!-- > > ## Solution
+> > ## Solution
 > >
 > > ~~~
 > > numbers2[2] = 'spam and eggs'
@@ -407,7 +407,7 @@ for key in numbers2:
 > >{1: 'one', 2: 'spam and eggs', 3: 'three', 4: 'four'}
 > > ~~~
 > > {: .output}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 It is important to note that dictionaries in Python 3.6 or greater are insertion _ordered_ and preserve the
@@ -755,7 +755,7 @@ import this
 >
 > 3. Create two lists `l1 = [53, 16, 1, 86, 3, 33, 41, 76, 71, 4]` and `l2 = [30, 100, 94, 90, 17, 11, 39, 23, 90, 52]`. Use python to create a new list that contains only the odd numbers from both lists. The third list should look like this: `[53, 1, 3, 33, 41, 71, 17, 11, 39, 23]`.
 >
-<!-- > > ## Solutions
+> > ## Solutions
 > > 
 > > (1) The index for character `l` is `a[6]`.
 > > 
@@ -807,5 +807,5 @@ import this
 > > {: .output}
 > > 
 > > 
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
