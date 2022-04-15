@@ -279,7 +279,7 @@ surveys_df[0:3]
 > 
 > _Remember: R begins indexing lists at 1._
 > 
-<!-- > > ## Solution
+> > ## Solution
 > >
 > > With the same list:
 > > `['A','B','C','D','E','F','G','H','I','J']`, 
@@ -316,7 +316,7 @@ surveys_df[0:3]
 > > This is ignored when you use the syntax
 > > `x[0:5]`, and the elements in `1` through
 > > `5` are returned. 
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 
@@ -326,7 +326,7 @@ surveys_df[0:3]
 > Combine selecting a subset with column headings and slice syntax for rows. Get
 > every 5th row for rows 20-60, from the columns `plot_id`, `species_id`, and `sex`. 
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > surveys_df[['plot_id', 'species_id','sex']][20:61:5]
@@ -346,7 +346,7 @@ surveys_df[0:3]
 > > 60       23         DM   M
 > > ~~~
 > > {: .output}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 ## Changing Values in a DataFrame
@@ -611,7 +611,7 @@ surveys_df.loc[1:4, ['record_id','month']]
 > 
 > 2. Use `.iloc[]` to view the same thing.
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > # 1
@@ -621,7 +621,7 @@ surveys_df.loc[1:4, ['record_id','month']]
 > > surveys_df.iloc[1:6:2, [5,6]]
 > > ~~~
 > > {: .python}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 
@@ -675,7 +675,7 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 > the year 1999 and that contain weight values less than or equal to 8. How
 > many rows did you end up with?
 >
-<!-- > > ## Solution
+> > ## Solution
 > > 
 > > ~~~
 > > surveys_df[(surveys_df.weight <= 8.0) & (surveys_df.year == 1999)]
@@ -697,7 +697,7 @@ surveys_df[(surveys_df.sex == 'M') & (surveys_df.year <= 1985)]
 > > 29905     4.0  
 > > ~~~
 > > {: .output}
-> {: .solution} -->
+> {: .solution}
 {: .challenge}
 
 ## Iterating Over a DataFrame
