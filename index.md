@@ -60,9 +60,10 @@ To do all that, we'll have to learn a little bit about programming.
 > 3. If it's not unzipped yet, double-click on it to unzip it. You should end up with a new folder called `data`.
 > 4. You can access this folder from the Unix shell with:
 >
-> ~~~ {.input}
+> ~~~ 
 > $ cd && cd Desktop/python-novice-inflammation/data
 > ~~~
+{: .shell}
 
 ## Topics
 
