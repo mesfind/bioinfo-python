@@ -687,7 +687,7 @@ the graphs will actually be squeezed together more closely.)
 > age = age - 20
 > ~~~
 
-> ## Sorting out references {.challenge}
+> ## Sorting out references 
 >
 > What does the following program print out?
 >
@@ -697,7 +697,7 @@ the graphs will actually be squeezed together more closely.)
 > print third, fourth
 > ~~~
 
-> ## Slicing strings {.challenge}
+> ## Slicing strings 
 >
 > A section of an array is called a [slice](reference.html#slice).
 > We can take slices of character strings as well:
@@ -737,7 +737,7 @@ the graphs will actually be squeezed together more closely.)
 > Why do all of our plots stop just short of the upper end of our graph?
 {: .challenge}
 
-> ## Check your understanding: drawing straight lines {.challenge}
+> ## Check your understanding: drawing straight lines 
 >
 > Why are the vertical lines in our plot of the minimum inflammation per day not perfectly vertical?
 {: .challenge}
