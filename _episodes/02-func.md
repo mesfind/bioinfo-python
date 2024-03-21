@@ -1,10 +1,10 @@
 ---
-title: Creating Functions in python
+title: Creating Functions in Python
 teaching: 1
 exercises: 0
 questions:
 - "How do I define a function?"
-- "How do I write documentation for my Python code?"
+- "How do I write documentation for functions?"
 objectives:
 - "Define a function that takes parameters."
 - "Return a value from a function."
@@ -540,7 +540,7 @@ If we call the function with two arguments,
 it works as it did before:
 
 ~~~
-test_data = numpy.zeros((2, 2))
+test_data = np.zeros((2, 2))
 print(center(test_data, 3))
 ~~~
 {: .python}
@@ -604,7 +604,7 @@ and any that haven't been given a value explicitly get their default value.
 We can override this behavior by naming the value as we pass it in:
 
 ~~~
-print 'only setting the value of c'
+print('only setting the value of c')
 display(c=77)
 ~~~
 {: .python}
@@ -618,7 +618,7 @@ With that in hand,
 let's look at the help for `numpy.loadtxt`:
 
 ~~~
-help(numpy.loadtxt)
+help(np.loadtxt)
 ~~~
 {: .python}
 
@@ -745,7 +745,7 @@ the second parameter in the list.
 > A call to your function should look like this:
 >
 > ~~~
-> print fence('name', '*')
+> print(fence('name', '*'))
 > *name*
 > ~~~
 {: .python}
@@ -761,7 +761,7 @@ the second parameter in the list.
 > A call to your function should look like this:
 >
 > ~~~ 
-> print outer('helium')
+> print(outer('helium'))
 > hm
 > ~~~
 {: .python}
