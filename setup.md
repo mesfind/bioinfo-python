@@ -13,11 +13,12 @@ You need to download some files to follow this lesson:
     3. [surveys_complete.csv](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/surveys_complete.csv)
 
 Or, you can pull from the [course repository](https://github.com/mesfind/bioinfo-python) and change to the directory containing the data files:
-1. `cd bioinfo`
-2. `git pull origin main`
-3. `cd bioinfo-python`
+1. `$ mkdir bioinfo`
+2. `$ cd bioinfo`
+3. `$ git pull origin main`
+4. `$ cd bioinfo-python`
 
 
 Or if you haven't yet cloned the course repository:
-1. `git clone git@github.com:mesfind/bioinfo-python.git`
+1. `git clone https://github.com/mesfind/bioinfo-python.git`
 2. `cd bioinfo-python`
