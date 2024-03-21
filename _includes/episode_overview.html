@@ -1,0 +1,31 @@
+{% comment %}
+    Display an episode's timings and learning objectives.
+{% endcomment %}
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	{% for question in page.questions %}
+	<li>{{ question|markdownify }}</li>
+	{% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	{% for objective in page.objectives %}
+	<li>{{ objective|markdownify }}</li>
+	{% endfor %}
+      </ul>
+    </div>
+  </div>
+
+</blockquote>

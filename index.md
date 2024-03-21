@@ -1,86 +1,66 @@
 ---
-layout: page
-title: Programming with Python
+layout: lesson
+root: .
 ---
-The best way to learn how to program is to do something useful,
-so this introduction to Python is built around a common scientific task:
-data analysis.
 
-Our real goal isn't to teach you Python,
-but to teach you the basic concepts that all programming depends on.
-We use Python in our lessons because:
+# Welcome to the Python part of the BCB546 course!
 
-1.  we have to use *something* for examples;
-2.  it's free, well-documented, and runs almost everywhere;
-3.  it has a large (and growing) user base among scientists; and
-4.  experience shows that it's easier for novices to pick up than most other languages.
+The materials we will work through are a sample of the lessons created for [Data Carpentry](https://datacarpentry.org/python-ecology-lesson/) and [Software Carpentry](http://swcarpentry.github.io/python-novice-inflammation). 
+The goal of this section is to demonstrate the utility of Python for working with biological data. 
 
-But the two most important things are
-to use whatever language your colleagues are using,
-so that you can share your work with them easily,
-and to use that language *well*.
+## Why Python?
 
-We are studying inflammation in patients who have been given a new treatment for arthritis,
-and need to analyze the first dozen data sets of their daily inflammation.
-The data sets are stored in [comma-separated values](reference.html#comma-separated-values) (CSV) format:
-each row holds information for a single patient,
-and the columns represent successive days.
-The first few rows of our first file look like this:
+Python is a great programming language that is relatively easy to learn and also very easy to read. 
+For bioinformatics, you will find yourself needing to know this language. Many tools for dealing with genomic data are written in Python and knowing how to program in Python allows you to modify these tools and assemble them together in cohesive pipelines. 
+[Ethan White](http://whitelab.weecology.org/) outlines some nice reasons for using Python on his [Programming for Biologists site](http://www.programmingforbiologists.org/about/why-python/). Where he also references this [xkcd](https://xkcd.com/) comic:
 
-~~~
-0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0
-0,1,2,1,2,1,3,2,2,6,10,11,5,9,4,4,7,16,8,6,18,4,12,5,12,7,11,5,11,3,3,5,4,4,5,5,1,1,0,1
-0,1,1,3,3,2,6,2,5,9,5,7,4,5,4,15,5,11,9,10,19,14,12,17,7,12,11,7,4,2,10,5,4,2,2,3,2,2,1,1
-0,0,2,0,4,2,2,1,6,7,10,7,9,13,8,8,15,10,10,7,17,4,4,7,6,15,6,4,9,11,3,5,6,3,3,4,2,3,2,1
-0,1,1,3,3,1,3,5,2,4,4,7,6,5,3,10,8,10,6,17,9,14,9,7,13,9,12,6,7,7,9,6,3,2,2,4,2,0,1,1
-~~~
+![xkcd](http://imgs.xkcd.com/comics/python.png)
 
-We want to:
+## The Lessons
 
-*   load that data into memory,
-*   calculate the average inflammation per day across all patients, and
-*   plot the result.
+Most of the lessons we will use for this course were written for the [Data Carpentry](http://www.datacarpentry.org/) series of workshops. In particular, we are using the [Data Analysis & Visualization in Python: Python for Ecologists](http://www.datacarpentry.org/python-ecology-lesson/) set of lessons. 
+<!-- It is worth noting that one of the primary contributors and maintainers of this teaching material is [April Wright](https://paleantology.com/the-wright-lab/), a former postdoc in EEOB at Iowa State and now an assistant professor at Southeastern Louisiana University.  -->
 
-To do all that, we'll have to learn a little bit about programming.
+The data we are using for this lesson are from the Portal Project Teaching Database -
+[available on FigShare](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459).
+More details about the files we'll use and where to download them are available on the [Setup](setup/) page
 
-> ## Prerequisites {.prereq}
+
+> ## Prerequisites
 >
 > Learners need to understand the concepts of files and directories
 > (including the working directory) and how to start a Python
-> interpreter before tackling this lesson. This lesson references the Jupyter (IPython)
-> Notebook although it can be taught through any Python interpreter. The commands in this
-> this lesson pertain to Python 2.7.
+> interpreter before tackling this lesson. This lesson references the Jupyter
+> notebook although it can be taught through any Python interpreter.
+> The commands in this lesson pertain to **Python 3**.
+{: .prereq}
 
-> ## Getting ready {.getready}
->
-> You need to download some files to follow this lesson:
->
-> 1. Make a new folder in your Desktop called `python-novice-inflammation`.
-> 2. Download [python-novice-inflammation-data.zip](./python-novice-inflammation-data.zip) and move the file to this folder.
-> 3. If it's not unzipped yet, double-click on it to unzip it. You should end up with a new folder called `data`.
-> 4. You can access this folder from the Unix shell with:
->
-> ~~~ {.input}
-> $ cd && cd Desktop/python-novice-inflammation/data
-> ~~~
+### Getting Started
+To get started with installing Python, follow the directions given in the [Python section of the course Software page](https://eeob-biodata.github.io/EEOB-BCB-546/software#python).
+In addition to installing Python on your own computer, you will also need to download the data files used in the tutorials. Details for doing this are found in the [Setup](setup/) page.
 
-## Topics
+### Format
 
-1.  [Analyzing Patient Data](01-numpy.html)
-2.  [Repeating Actions with Loops](02-loop.html)
-3.  [Storing Multiple Values in Lists](03-lists.html)
-4.  [Analyzing Data from Multiple Files](04-files.html)
-5.  [Making Choices](05-cond.html)
-6.  [Creating Functions](06-func.html)
-7.  [Errors and Exceptions](07-errors.html)
-8.  [Defensive Programming](08-defensive.html)
-9.  [Debugging](09-debugging.html)
-10.  [Command-Line Programs](10-cmdline.html)
+These lessons will provide command line text and code in specific formats.
 
+All commands that are intended to be executed in your Unix terminal will be shown with the `$` prompt. For example:
 
-## Other Resources
+```
+$ cd my_directory
+$ pwd
+```
 
-*   [Motivation](motivation.html)
-*   [Reference](reference.html)
-*   [Discussion](discussion.html)
-*   [Instructor's Guide](instructors.html)
+All output from any execution will be shown with a black bar on the side:
+
+~~~
+/home/my_directory
+~~~
+{: .output}
+
+All Python code will be given in boxes with a purple bar on the side and in purple text, with no prompt:
+
+~~~
+import numpy as np
+a = 12
+~~~
+{: .python}
