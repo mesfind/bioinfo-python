@@ -1,5 +1,5 @@
 ---
-title: Working With Pandas DataFrames in Python
+title: Pandas DataFrames in Python
 teaching: 1
 exercises: 0
 questions:

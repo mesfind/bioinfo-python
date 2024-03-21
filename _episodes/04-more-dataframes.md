@@ -1,5 +1,5 @@
 ---
-title: Indexing, Slicing, Subsetting, and Iterating DataFrames in Python
+title: Indexing, Slicing, Subsetting, and Iterating DataFrames
 teaching: 1
 exercises: 0
 questions:
