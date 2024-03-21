@@ -45,6 +45,8 @@ we can ask the library to read our data file for us:
 ~~~ {.python}
 np.loadtxt(fname='inflammation-01.csv', delimiter=',')
 ~~~
+{: .python}
+
 ~~~ {.output}
 array([[ 0.,  0.,  1., ...,  3.,  0.,  0.],
        [ 0.,  1.,  2., ...,  1.,  0.,  1.],
@@ -96,12 +98,15 @@ The line below assigns the value `55` to a variable `weight_kg`:
 ~~~ {.python}
 weight_kg = 55
 ~~~
+{: .python}
 
 Once a variable has a value, we can print it to the screen:
 
 ~~~ {.python}
 print(weight_kg)
 ~~~
+{: .python}
+
 ~~~ {.output}
 55
 ~~~
@@ -111,6 +116,8 @@ and do arithmetic with it:
 ~~~ {.python}
 print('weight in pounds:', 2.2 * weight_kg)
 ~~~
+{: .python}
+
 ~~~ {.output}
 weight in pounds: 121.0
 ~~~
@@ -121,6 +128,8 @@ We can also change a variable's value by assigning it a new one:
 weight_kg = 57.5
 print('weight in kilograms is now:', weight_kg)
 ~~~
+{: .python}
+
 ~~~ {.output}
 weight in kilograms is now: 57.5
 ~~~
@@ -131,33 +140,37 @@ we can print several things at once by separating them with commas.
 If we imagine the variable as a sticky note with a name written on it,
 assignment is like putting the sticky note on a particular value:
 
-![Variables as Sticky Notes](fig/python-sticky-note-variables-01.svg)
+![Variables as Sticky Notes](../fig/python-sticky-note-variables-01.svg)
 
 This means that assigning a value to one variable does *not* change the values of other variables.
 For example,
 let's store the subject's weight in pounds in a variable:
 
-~~~ {.python}
+~~~
 weight_lb = 2.2 * weight_kg
 print('weight in kilograms:', weight_kg, 'and in pounds:', weight_lb)
 ~~~
+{: .python}
+
 ~~~ {.output}
 weight in kilograms: 57.5 and in pounds: 126.5
 ~~~
 
-![Creating Another Variable](fig/python-sticky-note-variables-02.svg)
+![Creating Another Variable](../fig/python-sticky-note-variables-02.svg)
 
 and then change `weight_kg`:
 
-~~~ {.python}
+~~~
 weight_kg = 100.0
 print('weight in kilograms is now:', weight_kg, 'and weight in pounds is still:', weight_lb)
 ~~~
+{: .python}
+
 ~~~ {.output}
 weight in kilograms is now: 100.0 and weight in pounds is still: 126.5
 ~~~
 
-![Updating a Variable](fig/python-sticky-note-variables-03.svg)
+![Updating a Variable](../fig/python-sticky-note-variables-03.svg)
 
 Since `weight_lb` doesn't "remember" where its value came from,
 it isn't automatically updated when `weight_kg` changes.
@@ -166,17 +179,20 @@ This is different from the way spreadsheets work.
 Just as we can assign a single value to a variable, we can also assign an array of values
 to a variable using the same syntax.  Let's re-run `numpy.loadtxt` and save its result:
 
-~~~ {.python}
+~~~ 
 data = np.loadtxt(fname='inflammation-01.csv', delimiter=',')
 ~~~
+{: .python}
 
 This statement doesn't produce any output because assignment doesn't display anything.
 If we want to check that our data has been loaded,
 we can print the variable's value:
 
-~~~ {.python}
+~~~
 print(data)
 ~~~
+{: .python}
+
 ~~~ {.output}
 [[ 0.  0.  1. ...,  3.  0.  0.]
  [ 0.  1.  2. ...,  1.  0.  1.]
@@ -192,9 +208,11 @@ we can start doing things with it.
 First,
 let's ask what [type](reference.html#type) of thing `data` refers to:
 
-~~~ {.python}
+~~~
 print(type(data))
 ~~~
+{: .python}
+
 ~~~ {.output}
 <type 'numpy.ndarray'>
 ~~~
@@ -202,9 +220,11 @@ print(type(data))
 The output tells us that `data` currently refers to an N-dimensional array created by the NumPy library.
 We can see what its [shape](reference.html#shape) is like this:
 
-~~~ {.python}
+~~~
 print(data.shape)
 ~~~
+{: .python}
+
 ~~~ {.output}
 (60, 40)
 ~~~
@@ -223,19 +243,25 @@ If we want to get a single number from the array,
 we must provide an [index](reference.html#index) in square brackets,
 just as we do in math:
 
-~~~ {.python}
+~~~ 
 print('first value in data:', data[0, 0])
 ~~~
+{: .python}
+
 ~~~ {.output}
 first value in data: 0.0
 ~~~
 
-~~~ {.python}
+~~~
 print('middle value in data:', data[30, 20])
 ~~~
+{: .python}
+
+
 ~~~ {.output}
 middle value in data: 13.0
 ~~~
+
 
 The expression `data[30, 20]` may not surprise you,
 but `data[0, 0]` might.
@@ -251,7 +277,7 @@ It takes a bit of getting used to,
 but one way to remember the rule is that
 the index is how many steps we have to take from the start to get the item we want.
 
-## In the Corner {.callout}
+## In the Corner
 >
 > What may also surprise you is that when Python displays an array,
 > it shows the element with index `[0, 0]` in the upper left corner
@@ -267,9 +293,12 @@ For example,
 we can select the first ten days (columns) of values
 for the first four (rows) patients like this:
 
-~~~ {.python}
+~~~
 print(data[0:4, 0:10])
 ~~~
+{: .python}
+
+
 ~~~ {.output}
 [[ 0.  0.  1.  3.  1.  2.  4.  7.  8.  3.]
  [ 0.  1.  2.  1.  2.  1.  3.  2.  2.  6.]
@@ -285,9 +314,11 @@ but the rule is that the difference between the upper and lower bounds is the nu
 
 We don't have to start slices at 0:
 
-~~~ {.python}
+~~~
 print(data[5:10, 0:10])
 ~~~
+{: .python}
+
 ~~~ {.output}
 [[ 0.  0.  1.  2.  2.  4.  2.  1.  6.  4.]
  [ 0.  0.  2.  2.  4.  2.  2.  5.  5.  8.]
@@ -305,11 +336,13 @@ and if we don't include either
 (i.e., if we just use ':' on its own),
 the slice includes everything:
 
-~~~ {.python}
+~~~
 small = data[:3, 36:]
 print('small is:')
 print(small)
 ~~~
+{: .python}
+
 ~~~ {.output}
 small is:
 [[ 2.  3.  0.  0.]
@@ -324,9 +357,11 @@ add, subtract, multiply, and divide.
 the operation is done on each individual element of the array.
 Thus:
 
-~~~ {.python}
+~~~
 doubledata = data * 2.0
 ~~~
+{: .python}
+
 
 will create a new array `doubledata`
 whose elements have the value of two times the value of the corresponding elements in `data`:
@@ -337,6 +372,8 @@ print(data[:3, 36:])
 print('doubledata:')
 print(doubledata[:3, 36:])
 ~~~
+{: .python}
+
 ~~~ {.output}
 original:
 [[ 2.  3.  0.  0.]
@@ -354,17 +391,21 @@ you did the arithmetic operation with another array of the same shape,
 the operation will be done on corresponding elements of the two arrays.
 Thus:
 
-~~~ {.python}
+~~~
 tripledata = doubledata + data
 ~~~
+{: .python}
 
 will give you an array where `tripledata[0,0]` will equal `doubledata[0,0]` plus `data[0,0]`,
 and so on for all other elements of the arrays.
 
-~~~ {.python}
+~~~
 print('tripledata:')
 print(tripledata[:3, 36:])
 ~~~
+{: .python}
+
+
 ~~~ {.output}
 tripledata:
 [[ 6.  9.  0.  0.]
@@ -378,9 +419,12 @@ If we want to find the average inflammation for all patients on all days,
 for example,
 we can just ask the array for its mean value
 
-~~~ {.python}
+~~~
 print(data.mean())
 ~~~
+{: .python}
+
+
 ~~~ {.output}
 6.14875
 ~~~
@@ -399,11 +443,13 @@ because it is an action.
 
 NumPy arrays have lots of useful methods:
 
-~~~ {.python}
+~~~
 print('maximum inflammation:', data.max())
 print('minimum inflammation:', data.min())
 print('standard deviation:', data.std())
 ~~~
+{: .python}
+
 ~~~ {.output}
 maximum inflammation: 20.0
 minimum inflammation: 0.0
@@ -418,10 +464,13 @@ or the average value per day.
 One way to do this is to create a new temporary array of the data we want,
 then ask it to do the calculation:
 
-~~~ {.python}
+~~~
 patient_0 = data[0, :] # 0 on the first axis, everything on the second
 print('maximum inflammation for patient 0:', patient_0.max())
 ~~~
+{: .python}
+
+
 ~~~ {.output}
 maximum inflammation for patient 0: 18.0
 ~~~
@@ -429,9 +478,11 @@ maximum inflammation for patient 0: 18.0
 We don't actually need to store the row in a variable of its own.
 Instead, we can combine the selection and the method call:
 
-~~~ {.python}
+~~~
 print('maximum inflammation for patient 2:', data[2, :].max())
 ~~~
+{: .python}
+
 ~~~ {.output}
 maximum inflammation for patient 2: 19.0
 ~~~
@@ -441,16 +492,19 @@ next diagram on the left), or the average for each day (as in the
 diagram on the right)? As the diagram below shows, we want to perform the
 operation across an axis:
 
-![Operations Across Axes](fig/python-operations-across-axes.svg)
+![Operations Across Axes](../fig/python-operations-across-axes.svg)
 
 To support this,
 most array methods allow us to specify the axis we want to work on.
 If we ask for the average across axis 0 (rows in our 2D example),
 we get:
 
-~~~ {.python}
+~~~
 print(data.mean(axis=0))
 ~~~
+{: .python}
+
+
 ~~~ {.output}
 [  0.           0.45         1.11666667   1.75         2.43333333   3.15
    3.8          3.88333333   5.23333333   5.51666667   5.95         5.9
@@ -465,9 +519,12 @@ print(data.mean(axis=0))
 As a quick check,
 we can ask this array what its shape is:
 
-~~~ {.python}
+~~~
 print(data.mean(axis=0).shape)
 ~~~
+{: .python}
+
+
 ~~~ {.output}
 (40,)
 ~~~
@@ -476,9 +533,11 @@ The expression `(40,)` tells us we have an N&times;1 vector,
 so this is the average inflammation per day for all patients.
 If we average across axis 1 (columns in our 2D example), we get:
 
-~~~ {.python}
+~~~
 print(data.mean(axis=1))
 ~~~
+{: .python}
+
 ~~~ {.output}
 [ 5.45   5.425  6.1    5.9    5.55   6.225  5.975  6.65   6.625  6.525
   6.775  5.8    6.225  5.75   5.225  6.3    6.55   5.7    5.85   6.55
@@ -501,26 +560,29 @@ First,
 we will import the `pyplot` module from `matplotlib`
 and use two of its functions to create and display a heat map of our data:
 
-~~~ {.python}
+~~~
 import matplotlib.pyplot as plt
 image  = plt.imshow(data)
 plt.show(image)
 ~~~
+{: .python}
 
-![Heatmap of the Data](fig/01-numpy_71_0.png)
+
+![Heatmap of the Data](../fig/01-numpy_71_0.png)
 
 Blue regions in this heat map are low values, while red shows high values.
 As we can see,
 inflammation rises and falls over a 40-day period.
 Let's take a look at the average inflammation over time:
 
-~~~ {.python}
+~~~
 ave_inflammation = data.mean(axis=0)
 ave_plot = plt.plot(ave_inflammation)
 plt.show(ave_plot)
 ~~~
+{: .python}
 
-![Average Inflammation Over Time](fig/01-numpy_73_0.png)
+![Average Inflammation Over Time](../fig/01-numpy_73_0.png)
 
 Here,
 we have put the average per day across all patients in the variable `ave_inflammation`,
@@ -531,19 +593,21 @@ based on other studies,
 we expect a sharper rise and slower fall.
 Let's have a look at two other statistics:
 
-~~~ {.python}
+~~~
 max_plot = plt.plot(data.max(axis=0))
 plt.show(max_plot)
 ~~~
+{: .python}
 
-![Maximum Value Along The First Axis](fig/01-numpy_75_1.png)
+![Maximum Value Along The First Axis](../fig/01-numpy_75_1.png)
 
-~~~ {.python}
+~~~
 min_plot =plt.plot(data.min(axis=0))
 plt.show(min_plot)
 ~~~
+{: .python}
 
-![Minimum Value Along The First Axis](fig/01-numpy_75_3.png)
+![Minimum Value Along The First Axis](../fig/01-numpy_75_3.png)
 
 The maximum value rises and falls perfectly smoothly,
 while the minimum seems to be a step function.
@@ -563,7 +627,7 @@ axes3). Once a subplot is created, the axes are can be titled using the
 `set_xlabel()` command (or `set_ylabel()`).
 Here are our three plots side by side:
 
-~~~ {.python}
+~~~
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -588,8 +652,10 @@ fig.tight_layout()
 
 plt.show(fig)
 ~~~
+{: .python}
 
-![The Previous Plots as Subplots](fig/01-numpy_80_0.png)
+
+![The Previous Plots as Subplots](../fig/01-numpy_80_0.png)
 
 The [call](reference.html#function-call) to `loadtxt` reads our data,
 and the rest of the program tells the plotting library
@@ -655,6 +721,7 @@ the graphs will actually be squeezed together more closely.)
 > What is `element[-2]`?
 > Given those answers,
 > explain what `element[1:-1]` does.
+{: .challenge}
 
 > ## Thin slices 
 >
@@ -663,21 +730,24 @@ the graphs will actually be squeezed together more closely.)
 > If `data` holds our array of patient data,
 > what does `data[3:3, 4:4]` produce?
 > What about `data[3:3, :]`?
+{: .challenge}
 
 > ## Check your understanding: plot scaling 
 >
 > Why do all of our plots stop just short of the upper end of our graph?
+{: .challenge}
 
 > ## Check your understanding: drawing straight lines {.challenge}
 >
 > Why are the vertical lines in our plot of the minimum inflammation per day not perfectly vertical?
+{: .challenge}
 
 > ## Make your own plot 
 >
 > Create a plot showing the standard deviation (`numpy.std`) of the inflammation data for each day across all patients.
+{: .challenge}
 
 > ## Moving plots around 
 >
 > Modify the program to display the three plots on top of one another instead of side by side.
-
 {: .challenge}

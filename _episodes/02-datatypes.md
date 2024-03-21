@@ -673,8 +673,9 @@ There is an immense number of Python packages (also called libraries) out there 
 Anaconda helps install many important Python packages. You can use `conda` to install others that do not come with the default install. One very useful Python library for bioinformatics is [biopython](http://biopython.org/). You can install this it easily with `conda` from your terminal window.
 
 ```
-$ conda install biopython
+%conda install conda-forge::biopython  -y
 ```
+{: .python}
 
 The prompt will ask you if you want to proceed with installing this package. Simply type `y` followed by the enter key and `conda` will manage the download and installation.
 
@@ -683,27 +684,29 @@ For packages that are not available via Anaconda, you may also be able to use th
 One the package [`string-color`](https://pypi.org/project/string-color/) allows you to print strings to screen in different colors. 
 
 ```
-$ pip install string-color
+%pip install string-color
 ```
+{: .python}
 
 ## Updating Packages
 
 Anaconda makes it easy to update packages in `conda`. For any individual package, you can use `update`. The example below updates the package [pandas](http://pandas.pydata.org/), which allows us to deal with complex data structures.
 
 ```
-$ conda update pandas
+%conda update pandas -y
 ```
+{: .python}
 
 Alternatively, you can update all of the packages managed by Anaconda using:
 
 ```
-$ conda update --all
+%conda update --all -y
 ```
 
 For packages installed using `pip`, you can use the `-U` flag or `--upgrade`.
 
 ```
-$ pip install string-color -U
+%pip install string-color -U
 ```
 
 ## Importing Packages
