@@ -3,7 +3,7 @@ layout: lesson
 root: .
 ---
 
-# Welcome to Data Science and Cloud Computing course!
+# Welcome to Data Science and Cloud Computing!
 
 The materials we will work through are a sample of the lessons created for [Data Carpentry](https://datacarpentry.org/python-ecology-lesson/) and [Software Carpentry](http://swcarpentry.github.io/python-novice-inflammation). 
 The goal of this section is to demonstrate the utility of Python for working with biological data. 
@@ -36,7 +36,7 @@ More details about the files we'll use and where to download them are available 
 {: .prereq}
 
 ### Getting Started
-To get started with installing Python, follow the directions given in the [Python section of the course Software page](https://mesfind.github.io/bioinfo/software#python).
+To get started with installing Python, follow the directions given in the [Python section of the course Software page](https://mesfind.github.io/bioinfo/bioninfo-python).
 In addition to installing Python on your own computer, you will also need to download the data files used in the tutorials. Details for doing this are found in the [Setup](setup/) page.
 
 ### Format
@@ -46,14 +46,14 @@ These lessons will provide command line text and code in specific formats.
 All commands that are intended to be executed in your Unix terminal will be shown with the `$` prompt. For example:
 
 ```
-$ cd my_directory
+$ cd bioinfo
 $ pwd
 ```
 
 All output from any execution will be shown with a black bar on the side:
 
 ~~~
-/home/my_directory
+/home/admin/bioinfo
 ~~~
 {: .output}
 
