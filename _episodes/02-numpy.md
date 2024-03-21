@@ -1,18 +1,24 @@
 ---
-layout: page
-title: Programming with Python
-subtitle: Analyzing Patient Data
-minutes: 30
+title: Introduction to numpy
+teaching: 1
+exercises: 0
+questions:
+- "What are the basic datatypes in numpy?"
+objectives:
+- Explain what a library is, and what libraries are used for.
+- Load a Python library and use the things it contains.
+- Read tabular data from a file into a program.
+- Assign values to variables.
+- Select individual values and subsections from data.
+- Perform operations on arrays of data.
+- Display simple graphs.
+keypoints:
+- "Are you flying yet ?"
 ---
-> ## Learning Objectives {.objectives}
->
-> *   Explain what a library is, and what libraries are used for.
-> *   Load a Python library and use the things it contains.
-> *   Read tabular data from a file into a program.
-> *   Assign values to variables.
-> *   Select individual values and subsections from data.
-> *   Perform operations on arrays of data.
-> *   Display simple graphs.
+
+
+
+
 
 Words are useful,
 but what's more useful are the sentences and stories we build with them.
