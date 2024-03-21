@@ -12,12 +12,12 @@ You need to download some files to follow this lesson:
     2. [species.csv](https://github.com/EEOB-BioData/BCB546-Spring2022/raw/main/course-files/python/species.csv)
     3. [surveys_complete.csv](https://github.com/EEOB-BioData/BCB546-Spring2022/raw/main/course-files/python/surveys_complete.csv)
 
-Or, you can pull from the [course repository](https://github.com/EEOB-BioData/BCB546-Spring2022) and change to the directory containing the data files:
+Or, you can pull from the [course repository](https://github.com/mesfind/bioinfo) and change to the directory containing the data files:
 1. `cd BCB546-Spring2022`
 2. `git pull origin main`
 3. `cd course-files/python`
 
 
 Or if you haven't yet cloned the course repository:
-1. `git clone git@github.com:EEOB-BioData/BCB546-Spring2022.git`
-2. `cd BCB546-Spring2021/course-files/python`
+1. `git clone git@github.com:mesfind/bioinfo.git`
+2. `cd bioinfo/course-files/python`
