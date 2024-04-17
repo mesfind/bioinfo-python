@@ -11,7 +11,7 @@ You need to download some files to follow this lesson:
     1. [surveys.csv](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/surveys.csv)
     2. [species.csv](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/species.csv)
     3. [surveys_complete.csv](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/surveys_complete.csv)
-    4. [inflammation data](https://swcarpentry.github.io/python-novice-inflammation/data/python-novice-inflammation-data.zip)
+    4. [inflammation data](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/python-novice-inflammation-data.zip)
 
 Or, you can pull from the [course repository](https://github.com/mesfind/bioinfo-python) and change to the directory containing the data files:
 1. ```$ mkdir bioinfo```
