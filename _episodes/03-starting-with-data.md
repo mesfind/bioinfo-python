@@ -393,10 +393,69 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 
 
 # Groups in Pandas
+n Pandas, grouping refers to the process of splitting a DataFrame or Series into multiple groups based on one or more criteria. The resulting groups can then be used to perform various operations, such as aggregation, transformation, or filtering. For instance, By using `value_counts()` in Pandas, you can efficiently group data by a specific column, such as 'species_id', and obtain a clear overview of the distribution of values within that column. This is a valuable tool for understanding the composition of categorical data and identifying patterns or imbalances in the dataset.
 
-We often want to calculate summary statistics grouped by subsets or attributes
-within fields of our data. For example, we might want to calculate the average
-weight of all individuals per plot.
+~~~
+# Values with their counts in a particular column
+df['species_id'].value_counts()
+~~~
+{: .python}
+~~~
+species_id
+DM    10596
+PP     3123
+DO     3027
+PB     2891
+RM     2609
+DS     2504
+OT     2249
+PF     1597
+PE     1299
+NL     1252
+OL     1006
+PM      899
+AH      437
+AB      303
+SS      248
+SH      147
+SA       75
+RF       75
+CB       50
+BA       46
+SO       43
+SF       43
+DX       40
+PC       39
+PL       36
+PH       32
+CQ       16
+CM       13
+OX       12
+UR       10
+PI        9
+UP        8
+PG        8
+RO        8
+PX        6
+SU        5
+PU        5
+US        4
+UL        4
+AS        2
+RX        2
+ZL        2
+ST        1
+CU        1
+SC        1
+CS        1
+CT        1
+CV        1
+Name: count, dtype: int64
+~~~
+{: .output}
+
+We also often want to calculate summary statistics grouped by subsets or attributes
+within fields of our data. For example, we might want to calculate the average weight of all individuals per plot.
 
 We can calculate basic statistics for all records in a single column using the
 `.describe()` method:
@@ -626,6 +685,83 @@ surveys_df.groupby('species_id')['record_id'].count()['PL']
 36
 ~~~
 {: .output}
+
+## Treating missing values
+
+Treating missing values in a dataset is a crucial step in data preprocessing to ensure the accuracy and reliability of the analysis. When dealing with missing values in Pandas, there are several common strategies for handling them effectively
+
+### Identifying Missing Values
+
+Use methods like `isnull()`` or `isna()`` to identify missing values in the dataset. Apply `sum()`` to count the number of missing values in each column, as shown in `df.isnull().sum()` on the entire dataframe.
+
+~~~
+# on whole df.
+df.isnull().sum()
+~~~
+{: .python}
+
+~~~
+record_id             0
+month                 0
+day                   0
+year                  0
+plot_id               0
+species_id          763
+sex                2511
+hindfoot_length    4111
+weight             3266
+~~~
+{: .output}
+
+Knowing the distribution of missing values across different columns is crucial for making informed decisions about data quality and the appropriate data handling techniques to use in your analysis.
+
+~~~
+# on a particular column
+df['sex'].isnull().sum()
+
+~~~
+{: .python}
+
+
+~~~
+2511
+~~~
+{: .output}
+
+The code `df['sex'].isnull().sum()` in Pandas is used to count the number of missing or null values in the `sex` column of the DataFrame df.
+
+### Handling Missing Values
+
+Handling missing values in a dataset is a critical aspect of data preprocessing to ensure the accuracy and reliability of data analysis. Various methods can be employed to effectively manage missing values in a dataset. Here are some common strategies for handling missing values:
+
+Handling missing values in a dataset is a critical aspect of data preprocessing to ensure the accuracy and reliability of data analysis. Various methods can be employed to effectively manage missing values in a dataset. Here are some common strategies for handling missing values:
+
+1. **Dropping Missing Values**:
+   - One approach is to remove rows or columns with missing values using the `dropna()` function.
+   - This method can be effective when the missing values are sporadic and removing them does not significantly impact the analysis.
+
+2. **Imputing Missing Values**:
+   - Missing values can be replaced with a specific value like the mean, median, mode, or a constant using the `fillna()` function.
+   - Imputation helps retain data integrity and can be beneficial for maintaining dataset size and structure.
+
+3. **Interpolation**:
+   - Interpolation methods, such as the `interpolate()` function, estimate missing values based on existing data points.
+   - This method is useful for filling missing values in ordered datasets or time series data.
+
+4. **Replacing Missing Values**:
+   - Instead of deleting entire rows, missing values can be replaced with a specified value using the `fillna()` function.
+   - This approach helps maintain the dataset's completeness while handling missing values effectively.
+
+5. **Domain Knowledge**:
+   - Consider the domain-specific context to determine the most appropriate method for handling missing values.
+   - Understanding the data and the implications of different strategies is crucial for making informed decisions.
+
+6. **Evaluation**:
+   - Always evaluate the impact of the chosen method on the dataset and the analysis results.
+   - Monitor changes in data distribution and statistical properties after treating missing values.
+
+
+
 
 ## Basic Math Functions
 
