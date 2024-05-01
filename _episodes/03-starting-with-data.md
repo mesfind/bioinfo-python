@@ -34,7 +34,7 @@ and they can replicate the same analysis.
 
 To help the lesson run smoothly, let's ensure everyone is in the same directory.
 This should help us avoid path and file name issues. At this time please
-navigate to the directory containing the [course repository](https://github.com/EEOB-BioData/BCB546-Spring2022) on your computer. 
+navigate to the directory containing the [course repository](https://github.com/mesfind/bioinfo-python/) on your computer. 
 Before starting, be sure to **pull** the most recent changes from the repository using `git pull origin master`.
 If you're working in Jupyter Notebook be sure
 that you start your notebook in the `course-files/python` directory. If you do not have this directory, please see the instructions in the [Setup](../setup/) page.
@@ -44,16 +44,16 @@ You will want to use a Jupyter notebook or the Spyder IDE console to run this le
 To start a new Python session in a Jupyter notebook:
 
 ```
-$ cd course-files/python
+$ cd bioinfo-python
 $ jupyter notebook
 ```
 
 This typically brings up your default web browser and opens the Jupyter home screen.
-Select **_New->Python 3_**. Name this session `03-starting-wtih-data`.
+Select **_New->Python 3_**. Name this session `03-pandas`.
 
-Note that you can also start a Jupyter notebook from the Anaconda Navigator launch screen. This will likely open the notebook in your home directory and you can then navigate through your file system to get to the `course-files/python` directory.
+Note that you can also start a Jupyter notebook from the Anaconda Navigator launch screen. This will likely open the notebook in your home directory and you can then navigate through your file system to get to the `bioinfo-python` directory.
 
-Alternatively, you can start a Spyder instance and navigate to the `course-files/python` directory from the console using Unix commands. 
+Alternatively, you can start a Spyder instance and navigate to the `bioinfo-python` directory from the console using Unix commands. 
 
 
 
@@ -63,10 +63,11 @@ For this lesson, we will be using the Portal Teaching data, a subset of the data
 from the ecological study by Ernst et al. (2009):
 [Long-term monitoring and experimental manipulation of a Chihuahuan Desert ecosystem near Portal, Arizona, USA](http://www.esapubs.org/archive/ecol/E090/118/default.htm)
 Specifically, we will be using files from the [Portal Project Teaching Database](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459).
-
+https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/python-novice-inflammation-data.zip
 * This section will use the `surveys.csv` file that can be downloaded from the 
-[`course-files/python`](https://github.com/EEOB-BioData/BCB546-Spring2022/tree/master/course-files/python) folder of the course repository.
-Pull from the course repository and change to to `course-files/python` or copy the `surveys.csv` file to the directory from which you would like to work.
+[`bioinfo-python`](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/surveys.csv) 
+folder of the course repository.
+Pull from the course repository and change to to `bioinfo-python` or copy the `surveys.csv` file to the directory from which you would like to work.
 
 In this lesson, we are studying the species and weight of (_vertebrate_) animals captured in plots in our study
 area. The observed data are stored as a `.csv` file (comma-separated value): each row holds information for a
