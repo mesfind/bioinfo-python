@@ -839,33 +839,20 @@ The code `df['sex'].isnull().sum()` in Pandas is used to count the number of mis
 
 ### Handling Missing Values
 
-Handling missing values in a dataset is a critical aspect of data preprocessing to ensure the accuracy and reliability of data analysis. Various methods can be employed to effectively manage missing values in a dataset. Here are some common strategies for handling missing values:
+Handling missing values in a dataset is a critical aspect of data preprocessing to ensure the accuracy and reliability of data analysis. Various methods can be employed to effectively manage missing values in a dataset.
 
-Handling missing values in a dataset is a critical aspect of data preprocessing to ensure the accuracy and reliability of data analysis. Various methods can be employed to effectively manage missing values in a dataset. Here are some common strategies for handling missing values:
 
-1. **Dropping Missing Values**:
-   - One approach is to remove rows or columns with missing values using the `dropna()` function.
-   - This method can be effective when the missing values are sporadic and removing them does not significantly impact the analysis.
+There are several methods to handle missing values. Each method has its own advantages and disadvantages. The choice of the method is subjective and depends on the nature of data and the missing values. In this section, I have listed the most commonly used methods to deal with missing values. They are as follows:-
 
-2. **Imputing Missing Values**:
-   - Missing values can be replaced with a specific value like the mean, median, mode, or a constant using the `fillna()` function.
-   - Imputation helps retain data integrity and can be beneficial for maintaining dataset size and structure.
+- Drop missing values with dropna() method
 
-3. **Interpolation**:
-   - Interpolation methods, such as the `interpolate()` function, estimate missing values based on existing data points.
-   - This method is useful for filling missing values in ordered datasets or time series data.
+- Fill missing values with zeros
 
-4. **Replacing Missing Values**:
-   - Instead of deleting entire rows, missing values can be replaced with a specified value using the `fillna()` function.
-   - This approach helps maintain the dataset's completeness while handling missing values effectively.
+- Fill missing values with a test statistic (e.g zscore)
 
-5. **Domain Knowledge**:
-   - Consider the domain-specific context to determine the most appropriate method for handling missing values.
-   - Understanding the data and the implications of different strategies is crucial for making informed decisions.
+- Fill missing values backward or forward
 
-6. **Evaluation**:
-   - Always evaluate the impact of the chosen method on the dataset and the analysis results.
-   - Monitor changes in data distribution and statistical properties after treating missing values.
+
 
 #### Drop Missing Values
 
@@ -1238,7 +1225,22 @@ All         15347  16936  32283
 
 ~~~
 import seaborn as sns
-sns.countplot(x="species_id", hue="sex", data=df);
+import matplotlib.pyplot as plt
+
+# Set the figure size to (10, 5)
+fig, ax = plt.subplots(figsize=(10, 5))
+
+# Create the countplot
+sns.countplot(x="species_id", hue="sex", data=df, ax=ax)
+
+# Adjusting the facet grid layout
+plt.tight_layout()
+
+# Save the plot
+plt.savefig("species_id_sex_countplot.png")
+
+# Show the plot
+plt.show()
 ~~~
 
 ![Number Captured Plot](../fig/species_id_sex_countplot.png)
