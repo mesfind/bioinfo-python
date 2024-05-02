@@ -780,6 +780,16 @@ df_sex = df.dropna(subset=['sex'])
 df_sex.head()
 ~~~
 
+~~~
+   record_id  month  day  year  plot_id species_id sex  hindfoot_length  weight
+0          1      7   16  1977        2         NL   M             32.0     NaN
+1          2      7   16  1977        3         NL   M             33.0     NaN
+2          3      7   16  1977        2         DM   F             37.0     NaN
+3          4      7   16  1977        7         DM   M             36.0     NaN
+4          5      7   16  1977        3         DM   M             35.0     NaN
+~~~
+{: .output}
+
 #### Missing values imputation with zscore
 
 The z-score method is a common approach for identifying and imputing missing values in a dataset. The key steps involved are:
@@ -793,6 +803,8 @@ The z-score method is a common approach for identifying and imputing missing val
     - Once the potential imputation values are identified, the missing values can be replaced with the most appropriate value, such as the mean or median of the similar z-score data points.
 
 ~~~
+# Import the zscore function from scipy.stats
+from scipy.stats import zscore
 
 # Drop rows with missing values in the 'weight' column
 df.dropna(subset=['weight'], inplace=True)
@@ -800,21 +812,36 @@ df.dropna(subset=['weight'], inplace=True)
 # Calculate z-scores for the 'weight' column
 df['weight_zscore'] = zscore(df['weight'])
 mean_weight = df['weight'].mean()
-sd_weight = df['weight'].sd()
+std_weight = df['weight'].std()
 
 # Function to impute missing values using z-score
 def impute_missing_with_zscore(row):
-    if pd.isnull(row['weight']:
+    if pd.isnull(row['weight']):
         return (row['weight_zscore'] * std_weight) + mean_weight
     else:
         return row['weight']
+
 # Apply the imputation function to fill missing values in 'weight' column
 df['weight_imputed'] = df.apply(impute_missing_with_zscore, axis=1)
 
 # Drop the intermediate 'weight_zscore' column if needed
 df.drop(columns=['weight_zscore'], inplace=True)
+df.head()
 ~~~
 {: .python}
+
+
+~~~
+
+    record_id  month  day  year  plot_id species_id sex  hindfoot_length  weight  weight_imputed
+62         63      8   19  1977        3         DM   M             35.0    40.0            40.0
+63         64      8   19  1977        7         DM   M             37.0    48.0            48.0
+64         65      8   19  1977        4         DM   F             34.0    29.0            29.0
+65         66      8   19  1977        4         DM   F             35.0    46.0            46.0
+66         67      8   19  1977        7         DM   M             35.0    36.0            36.0
+
+~~~
+{: .output}
 
 
 #### imputation with median
@@ -825,14 +852,24 @@ df.head()
 ~~~
 {: .python}
 
+~~~
+    record_id  month  day  year  plot_id species_id sex  hindfoot_length  weight  weight_imputed
+62         63      8   19  1977        3         DM   M             35.0    40.0            40.0
+63         64      8   19  1977        7         DM   M             37.0    48.0            48.0
+64         65      8   19  1977        4         DM   F             34.0    29.0            29.0
+65         66      8   19  1977        4         DM   F             35.0    46.0            46.0
+66         67      8   19  1977        7         DM   M             35.0    36.0            36.0
+~~~
+{: .output}
 
 #### forward fill impuation 
 
 ~~~
 # Impute missing values using forward fill (ffill)
-df['sex'] = df['sex'].fillna(method='ffill')
+df['sex'] = df['sex'].ffill()
 
 ~~~
+{: .python}
 
 
 
@@ -847,7 +884,7 @@ calculated from our data.
 Multiply all weight values by 2 and store values in a Pandas object called `double_weight`:
 
 ~~~
-double_weight = surveys_df['weight'] * 2
+double_weight = df['weight'] * 2
 ~~~
 {: .python}
 
@@ -875,11 +912,6 @@ Name: weight, dtype: float64
 
 We can plot our summary stats using Pandas, too. 
 
-<!-- First, we must ensure that the plots will appear in our Jupyter notebook or IPython console (using Spyder):
-~~~
-%matplotlib inline
-~~~
-{: .python} -->
 
 Now, we can make a quick bar chart of the species counts
 
@@ -918,15 +950,32 @@ plot_sex_count = df.groupby(['plot_id', 'sex'])['weight'].sum().reset_index()
 # Unstacking the dataframe
 spc = plot_sex_count.pivot(index='plot_id', columns='sex', values='weight')
 
-# Creating the facet grid
-g = sns.FacetGrid(plot_sex_count, col="sex", col_wrap=10, height=5)
-g.map_dataframe(sns.barplot, x='plot_id', y='weight', hue='sex')
-#g.map_dataframe(sns.barplot, x='plot_id', y='weight')
+# Define custom colors for the sex categories
+custom_palette = {"M": "blue", "F": "red"}
+
+# Creating the facet grid with adjusted size and aspect ratio
+g = sns.FacetGrid(plot_sex_count, col="sex", height=5, aspect=2)
+g.map_dataframe(sns.barplot, x='plot_id', y='weight', hue='sex', palette=custom_palette,alpha=0.5)
 g.set_axis_labels("Plot", "Weight(g)")
-plt.savefig("pandas_plot_sex_count_survy.png")
+
+# Adjusting the facet grid layout
+g.fig.tight_layout()
+
+# Applying the figure size to the FacetGrid object
+g.fig.set_figwidth(15)
+g.fig.set_figheight(5)
+
+plt.savefig("pandas_plot_sex_count_survey.png")
 plt.show()
+
+
 ~~~
 {: .python}
+
+
+![Number Captured Plot](../fig/pandas_plot_sex_count_survey.png)
+
+
 
 
 
