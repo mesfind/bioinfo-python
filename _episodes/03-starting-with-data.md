@@ -939,57 +939,6 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 
 ![Number Captured Plot](../fig/num-captured.png)
 
-### Facet Plot
-
-A facet plot, also known as a trellis plot or small multiple plot, is a visualization technique that displays multiple plots or graphs in a grid arrangement. Each subplot in the grid represents a subset of the data, often distinguished by one or more categorical variables
-
-~~~
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# Grouping by plot_id and sex, and summing the weight
-plot_sex_count = df.groupby(['plot_id', 'sex'])['weight'].sum().reset_index()
-
-# Unstacking the dataframe
-spc = plot_sex_count.pivot(index='plot_id', columns='sex', values='weight')
-
-# Define custom colors for the sex categories
-custom_palette = {"M": "blue", "F": "red"}
-
-# Creating the facet grid with adjusted size and aspect ratio
-g = sns.FacetGrid(plot_sex_count, col="sex", height=5, aspect=2)
-g.map_dataframe(sns.barplot, x='plot_id', y='weight', hue='sex', palette=custom_palette,alpha=0.5)
-g.set_axis_labels("Plot", "Weight(g)")
-
-# Adjusting the facet grid layout
-g.fig.tight_layout()
-
-# Applying the figure size to the FacetGrid object
-g.fig.set_figwidth(15)
-g.fig.set_figheight(5)
-
-plt.savefig("pandas_plot_sex_count_survey.png")
-plt.show()
-
-
-~~~
-{: .python}
-
-The above code snippet is  :
-
-- A facet grid plot is generated using the Seaborn library in Python.
-- The data is grouped by 'plot_id' and 'sex', and the weight is summed within each group.
-- Subplots are created for each unique value of the 'sex' variable, arranged in a grid layout.
-- Bar plots are plotted within each subplot, showing the distribution of weight across different plot IDs.
-- Customization options such as axis labels and color palettes are applied to enhance readability and interpretation.
-- The size of the entire figure is adjusted to ensure proper visualization.
-- Finally, the plot is saved as an image file and displayed for analysis.
-
-![Number Captured Plot](../fig/pandas_plot_sex_count_survey.png)
-
-
-
-
 
 
 > ## Plot the average weight across all species in each plot
@@ -1090,6 +1039,59 @@ s_plot.set_xlabel("Plot")
 <!-- redo plot -->
 
 ![Stacked Bar Plot](../fig/stackedBar.png)
+
+
+### Facet Plot
+
+A facet plot, also known as a trellis plot or small multiple plot, is a visualization technique that displays multiple plots or graphs in a grid arrangement. Each subplot in the grid represents a subset of the data, often distinguished by one or more categorical variables
+
+~~~
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Grouping by plot_id and sex, and summing the weight
+plot_sex_count = df.groupby(['plot_id', 'sex'])['weight'].sum().reset_index()
+
+# Unstacking the dataframe
+spc = plot_sex_count.pivot(index='plot_id', columns='sex', values='weight')
+
+# Define custom colors for the sex categories
+custom_palette = {"M": "blue", "F": "red"}
+
+# Creating the facet grid with adjusted size and aspect ratio
+g = sns.FacetGrid(plot_sex_count, col="sex", height=5, aspect=2)
+g.map_dataframe(sns.barplot, x='plot_id', y='weight', hue='sex', palette=custom_palette,alpha=0.5)
+g.set_axis_labels("Plot", "Weight(g)")
+
+# Adjusting the facet grid layout
+g.fig.tight_layout()
+
+# Applying the figure size to the FacetGrid object
+g.fig.set_figwidth(15)
+g.fig.set_figheight(5)
+
+plt.savefig("pandas_plot_sex_count_survey.png")
+plt.show()
+
+
+~~~
+{: .python}
+
+The above code snippet is  :
+
+- A facet grid plot is generated using the Seaborn library in Python.
+- The data is grouped by 'plot_id' and 'sex', and the weight is summed within each group.
+- Subplots are created for each unique value of the 'sex' variable, arranged in a grid layout.
+- Bar plots are plotted within each subplot, showing the distribution of weight across different plot IDs.
+- Customization options such as axis labels and color palettes are applied to enhance readability and interpretation.
+- The size of the entire figure is adjusted to ensure proper visualization.
+- Finally, the plot is saved as an image file and displayed for analysis.
+
+![Number Captured Plot](../fig/pandas_plot_sex_count_survey.png)
+
+
+
+
 
 
 > ## Take-Home Challenge: More Fun with DataFrames and Plotting
