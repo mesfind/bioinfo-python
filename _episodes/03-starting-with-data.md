@@ -894,7 +894,7 @@ species_counts.plot(kind='bar',title='Number of individuals per species')
 We can also look at how many animals were captured in each plot:
 
 ~~~
-total_count = surveys_df.groupby('plot_id')['record_id'].nunique()
+total_count = df.groupby('plot_id')['record_id'].nunique()
 ~~~
 {: .python}
 
@@ -906,6 +906,28 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 {: .python}
 
 ![Number Captured Plot](../fig/num-captured.png)
+
+
+~~~
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Grouping by plot_id and sex, and summing the weight
+plot_sex_count = df.groupby(['plot_id', 'sex'])['weight'].sum().reset_index()
+
+# Unstacking the dataframe
+spc = plot_sex_count.pivot(index='plot_id', columns='sex', values='weight')
+
+# Creating the facet grid
+g = sns.FacetGrid(plot_sex_count, col="sex", col_wrap=10, height=5)
+g.map_dataframe(sns.barplot, x='plot_id', y='weight', hue='sex')
+#g.map_dataframe(sns.barplot, x='plot_id', y='weight')
+g.set_axis_labels("Plot", "Weight(g)")
+plt.savefig("pandas_plot_sex_count_survy.png")
+plt.show()
+~~~
+{: .python}
+
 
 
 > ## Plot the average weight across all species in each plot
