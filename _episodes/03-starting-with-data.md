@@ -939,6 +939,9 @@ total_count.plot(kind='bar',title='Number captured per plot', color='green')
 
 ![Number Captured Plot](../fig/num-captured.png)
 
+### Facet Plot
+
+A facet plot, also known as a trellis plot or small multiple plot, is a visualization technique that displays multiple plots or graphs in a grid arrangement. Each subplot in the grid represents a subset of the data, often distinguished by one or more categorical variables
 
 ~~~
 import seaborn as sns
@@ -972,8 +975,18 @@ plt.show()
 ~~~
 {: .python}
 
+The above code snippet is  :
+
+- A facet grid plot is generated using the Seaborn library in Python.
+- The data is grouped by 'plot_id' and 'sex', and the weight is summed within each group.
+- Subplots are created for each unique value of the 'sex' variable, arranged in a grid layout.
+- Bar plots are plotted within each subplot, showing the distribution of weight across different plot IDs.
+- Customization options such as axis labels and color palettes are applied to enhance readability and interpretation.
+- The size of the entire figure is adjusted to ensure proper visualization.
+- Finally, the plot is saved as an image file and displayed for analysis.
 
 ![Number Captured Plot](../fig/pandas_plot_sex_count_survey.png)
+
 
 
 
