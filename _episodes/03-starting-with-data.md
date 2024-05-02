@@ -217,7 +217,7 @@ We need to assign the DataFrame to a variable.
 Remember that a variable is a name for a value, such as `x`, 
 or  `data`. We can create a new object with a variable name by assigning a value to it using the `=` operator.
 
-Let's call the imported survey data `surveys_df`:
+Let's call the imported survey data `df`:
 
 ~~~
 df = pd.read_csv("surveys.csv")
@@ -225,7 +225,7 @@ df = pd.read_csv("surveys.csv")
 {: .python}
 
 Notice when you assign the imported DataFrame to a variable, Python does not
-produce any output on the screen. We can print the value of the `surveys_df`
+produce any output on the screen. We can print the value of the `df`
 object by typing its name into the Python command prompt. This will print the data frame just like above.
 
 ~~~
@@ -237,8 +237,8 @@ df
 ## Inspecting Our Species Survey DataFrame
 
 Now we can start working with our data. First, let's check the data type of the
-data stored in `surveys_df` using the `type` function. The `type` function and
-`__class__` attribute tell us that `surveys_df` is `<class 'pandas.core.frame.DataFrame'>`.
+data stored in `df` using the `type` function. The `type` function and
+`__class__` attribute tell us that `df` is `<class 'pandas.core.frame.DataFrame'>`.
 
 ~~~
 type(df)
@@ -253,7 +253,7 @@ pandas.core.frame.DataFrame
 The output is the same if you use this:
 
 ~~~
-surveys_df.__class__
+df.__class__
 ~~~
 {: .python}
 
@@ -264,7 +264,7 @@ pandas.core.frame.DataFrame
 
 
 
-We can also enter `surveys_df.dtypes` at our prompt to view the data type for each
+We can also enter `df.dtypes` at our prompt to view the data type for each
 column in our DataFrame. `int64` represents numeric integer values - `int64` cells
 cannot store decimals. `object` represents strings (letters and numbers). `float64`
 represents numbers with decimals.
@@ -288,6 +288,37 @@ weight             float64
 dtype: object
 ~~~
 {: .output}
+
+We can also use the `info()` method to output some general information about the dataframe:
+
+
+~~~
+print(df.info())
+~~~
+{: .python}
+
+~~~
+<class 'pandas.core.frame.DataFrame'>
+Index: 32283 entries, 62 to 35547
+Data columns (total 10 columns):
+ #   Column           Non-Null Count  Dtype  
+---  ------           --------------  -----  
+ 0   record_id        32283 non-null  int64  
+ 1   month            32283 non-null  int64  
+ 2   day              32283 non-null  int64  
+ 3   year             32283 non-null  int64  
+ 4   plot_id          32283 non-null  int64  
+ 5   species_id       32283 non-null  object 
+ 6   sex              32283 non-null  object 
+ 7   hindfoot_length  32283 non-null  float64
+ 8   weight           32283 non-null  float64
+ 9   weight_imputed   32283 non-null  float64
+dtypes: float64(3), int64(5), object(2)
+memory usage: 2.7+ MB
+None
+~~~
+{: .output}
+
 
 
 ### Useful Ways to View DataFrame objects in Python
@@ -379,11 +410,11 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
 > > 
 > > ~~~
 > > # 1
-> > plot_names = list(pd.unique(surveys_df['plot_id']))
+> > plot_names = list(pd.unique(df['plot_id']))
 > > print(len(plot_names))
 > > 
 > > # 2
-> > print(surveys_df['plot_id'].nunique())
+> > print(df['plot_id'].nunique())
 > > ~~~
 > > {: .python}
 > > 
@@ -453,6 +484,46 @@ CV        1
 Name: count, dtype: int64
 ~~~
 {: .output}
+
+
+To calculate fractions, pass `normalize=True` to the value_counts function.
+
+~~~
+df["species_id"].value_counts(normalize=True)
+~~~
+{: .python}
+
+~~~
+species_id
+DM    0.317876
+PP    0.093672
+DO    0.089954
+PB    0.087043
+RM    0.078524
+DS    0.072608
+OT    0.066908
+PF    0.047951
+PE    0.039030
+NL    0.035684
+OL    0.030047
+PM    0.027135
+SH    0.004368
+RF    0.002323
+BA    0.001394
+SF    0.001270
+SO    0.001270
+PL    0.001115
+PH    0.000960
+RO    0.000248
+PI    0.000248
+OX    0.000186
+SS    0.000062
+RX    0.000062
+PX    0.000062
+Name: proportion, dtype: float64
+~~~
+{: .output}
+
 
 We also often want to calculate summary statistics grouped by subsets or attributes
 within fields of our data. For example, we might want to calculate the average weight of all individuals per plot.
@@ -613,6 +684,42 @@ summaries of categorical data.
 > {: .solution}
 {: .challenge}
 
+
+A DataFrame can be sorted by the value of one of the variables (i.e columns). For example, we can sort by Total day charge (use ascending=False to sort in descending order):
+
+~~~
+df.sort_values(by="species_id", ascending=False).head()
+~~~
+{: .python}
+
+~~~
+     record_id  month  day  year  plot_id species_id sex  hindfoot_length  weight  weight_imputed
+4874        4875     10   24  1981       20         SS   F             31.0    57.0            57.0
+1001        1002      6    9  1978       14         SS   M             31.0   130.0           130.0
+19732      19733      2    7  1992        3         SO   F             25.0    39.0            39.0
+19977      19978      5    3  1992        3         SO   F             27.0   105.0           105.0
+19216      19217     11   13  1991        2         SO   F             21.0    42.0            42.0
+~~~
+{: .output}
+
+
+We can also sort by multiple columns:
+
+
+~~~
+df.sort_values(by=["species_id","sex"], ascending=[True, False]).head()
+~~~
+{: .python}
+
+~~~
+      record_id  month  day  year  plot_id species_id sex  hindfoot_length  weight  weight_imputed
+16597      16598     11    4  1989       21         BA   M             13.0     7.0             7.0
+16598      16599     11    4  1989       21         BA   M             12.0     6.0             6.0
+16853      16854     12    5  1989        3         BA   M             14.0     8.0             8.0
+17173      17174      2   25  1990        5         BA   M             14.0     7.0             7.0
+17373      17374      4   24  1990        1         BA   M             14.0     7.0             7.0
+~~~
+{: .output}
 
 
 > ## Group by two columns
@@ -1089,10 +1196,52 @@ The above code snippet is  :
 
 ![Number Captured Plot](../fig/pandas_plot_sex_count_survey.png)
 
+Let's also make a summary table and a picture with cross tabulation
 
+~~~
+ pd.crosstab(df["species"], df["sex"], margins=True)
+~~~
+{: .python}
 
+~~~
+sex             F      M    All
+species_id                     
+BA             31     14     45
+DM           4444   5818  10262
+DO           1280   1624   2904
+DS           1118   1226   2344
+NL            659    493   1152
+OL            472    498    970
+OT           1031   1129   2160
+OX              2      4      6
+PB           1621   1189   2810
+PE            569    691   1260
+PF            745    803   1548
+PH             20     11     31
+PI              1      7      8
+PL             16     20     36
+PM            375    501    876
+PP           1585   1439   3024
+PX              1      1      2
+RF             57     18     75
+RM           1189   1346   2535
+RO              4      4      8
+RX              0      2      2
+SF             17     24     41
+SH             78     63    141
+SO             31     10     41
+SS              1      1      2
+All         15347  16936  32283
 
+~~~
+{: .output}
 
+~~~
+import seaborn as sns
+sns.countplot(x="species_id", hue="sex", data=df);
+~~~
+
+![Number Captured Plot](../fig/species_id_sex_countplot.png)
 
 > ## Take-Home Challenge: More Fun with DataFrames and Plotting
 >
