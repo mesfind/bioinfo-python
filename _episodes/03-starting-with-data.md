@@ -785,7 +785,7 @@ df_sex.head()
 The z-score method is a common approach for identifying and imputing missing values in a dataset. The key steps involved are:
 1. Calculating the z-score for each data point:
     -  The z-score is a standardized measure that represents how many standard deviations a data point is from the mean.
-    -  It is calculated as: $z = (x - \mu) / \sigma$, where x is the data point, μ is the mean, and σ is the standard deviation.
+    -  It is calculated as: \(z = (x - \mu) / \sigma\), where x is the data point, μ is the mean, and σ is the standard deviation.
 2. Identifying potential values to impute missing data:
    - The z-score method compares the z-scores of the non-missing values to identify potential values that could be used to impute the missing ones.
     - This is based on the idea that data points with similar z-scores are likely to have similar underlying values.
