@@ -1067,7 +1067,7 @@ g.set_axis_labels("Plot", "Weight(g)")
 g.fig.tight_layout()
 
 # Applying the figure size to the FacetGrid object
-g.fig.set_figwidth(15)
+g.fig.set_figwidth(10)
 g.fig.set_figheight(5)
 
 plt.savefig("pandas_plot_sex_count_survey.png")
