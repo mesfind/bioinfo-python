@@ -220,7 +220,7 @@ or  `data`. We can create a new object with a variable name by assigning a value
 Let's call the imported survey data `surveys_df`:
 
 ~~~
-surveys_df = pd.read_csv("surveys.csv")
+df = pd.read_csv("surveys.csv")
 ~~~
 {: .python}
 
@@ -229,7 +229,7 @@ produce any output on the screen. We can print the value of the `surveys_df`
 object by typing its name into the Python command prompt. This will print the data frame just like above.
 
 ~~~
-surveys_df
+df
 ~~~
 {: .python}
 
@@ -241,7 +241,7 @@ data stored in `surveys_df` using the `type` function. The `type` function and
 `__class__` attribute tell us that `surveys_df` is `<class 'pandas.core.frame.DataFrame'>`.
 
 ~~~
-type(surveys_df)
+type(df)
 ~~~
 {: .python}
 
@@ -270,7 +270,7 @@ cannot store decimals. `object` represents strings (letters and numbers). `float
 represents numbers with decimals.
 
 ~~~
-surveys_df.dtypes
+df.dtypes
 ~~~
 {: .python}
 
@@ -294,7 +294,7 @@ dtype: object
 
 There are multiple methods that can be used to summarize and access the data
 stored in DataFrames. Note that we call the method by using
-the object or method name `surveys_df.object` or `surveys_df.method()`. So `surveys_df.columns` provides an index
+the object or method name `df.object` or `df.method()`. So `df.columns` provides an index
 of all of the column names in our DataFrame.
 
 
@@ -305,28 +305,28 @@ of all of the column names in our DataFrame.
 > Print the column names:
 > 
 > ~~~
-> surveys_df.columns
+> df.columns
 > ~~~
 > {: .python}
 > 
 > Print the _first_ `4` lines of the DataFrame
 > 
 > ~~~
-> surveys_df.head(4)
+> df.head(4)
 > ~~~
 > {: .python}
 > 
 > Print the _last_ `4` lines of the DataFrame
 > 
 > ~~~
-> surveys_df.tail(4)
+> df.tail(4)
 > ~~~
 > {: .python}
 > 
 >  Print the dimensions of the DataFrame
 > 
 > ~~~
-> surveys_df.shape
+> df.shape
 > ~~~
 > {: .python}
 {: .callout}
@@ -340,7 +340,7 @@ species were caught. We can summarize different aspects of our data using groups
 Let's begin by exploring our data and view the column names:
 
 ~~~
-surveys_df.columns
+df.columns
 ~~~
 {: .python}
 
@@ -354,7 +354,7 @@ Let's get a list of all the species. The `pd.unique` method tells us all of
 the unique values in the `species_id` column. These are two-character identifiers of the species names (e.g., `NL` represents the rodent [_Neotoma albigula_](https://en.wikipedia.org/wiki/White-throated_woodrat)).
 
 ~~~
-pd.unique(surveys_df['species_id'])
+pd.unique(df['species_id'])
 ~~~
 {: .python}
 
@@ -461,7 +461,7 @@ We can calculate basic statistics for all records in a single column using the
 `.describe()` method:
 
 ~~~
-surveys_df['weight'].describe()
+df['weight'].describe()
 ~~~
 {: .python}
 
@@ -484,7 +484,7 @@ We can also extract one specific metric if we wish:
 Like the lowest `weight` 
 
 ~~~
-surveys_df['weight'].min()
+df['weight'].min()
 ~~~
 {: .python}
 
@@ -496,7 +496,7 @@ surveys_df['weight'].min()
 The maximum `weight`
 
 ~~~
-surveys_df['weight'].max()
+df['weight'].max()
 ~~~
 {: .python}
 
@@ -508,7 +508,7 @@ surveys_df['weight'].max()
 The `mean` of the `weight` column
 
 ~~~
-surveys_df['weight'].mean()
+df['weight'].mean()
 ~~~
 {: .python}
 
@@ -520,7 +520,7 @@ surveys_df['weight'].mean()
 The standard deviation of the `weight`
 
 ~~~
-surveys_df['weight'].std()
+df['weight'].std()
 ~~~
 {: .python}
 
@@ -532,7 +532,7 @@ surveys_df['weight'].std()
 Count the number of observations made for weight:
 
 ~~~
-surveys_df['weight'].count()
+df['weight'].count()
 ~~~
 {: .python}
 
@@ -548,7 +548,7 @@ can quickly calculate summary statistics by a group of our choice.
 Group data by the sex of each observed individual:
 
 ~~~
-sorted_data = surveys_df.groupby('sex')
+sorted_df = df.groupby('sex')
 ~~~
 {: .python}
 
@@ -559,7 +559,7 @@ numeric data.
 With the sorted data, we can obtain the summary statistics for the weight column separated by sex. 
 
 ~~~
-sorted_data['weight'].describe()
+sorted_df['weight'].describe()
 ~~~
 {: .python}
 
@@ -575,7 +575,7 @@ M    16879.0  42.995379  36.184981  4.0  20.0  39.0  49.0  280.0
 We can also get the mean for each numeric-valued column, grouped by sex:
 
 ~~~
-sorted_data.mean()
+sorted_df.mean()
 ~~~
 {: .python}
 
@@ -624,8 +624,8 @@ summaries of categorical data.
 > > ## Solution
 > > 
 > > ~~~
-> > sorted_data2 = surveys_df.groupby(['plot_id','sex'])
-> > sorted_data2.mean()
+> > sorted_df2 = surveys_df.groupby(['plot_id','sex'])
+> > sorted_df2.mean()
 > > ~~~
 > > {: .python}
 > {: .solution} 
@@ -639,7 +639,7 @@ summaries of categorical data.
 > > ## Solution
 > > 
 > > ~~~
-> > by_plot = surveys_df.groupby('plot_id')
+> > by_plot = df.groupby('plot_id')
 > > by_plot['weight'].describe()
 > > ~~~
 > > {: .python}
@@ -655,7 +655,7 @@ ways, but we'll use `groupby` combined with a `count()` method.
 
 
 ~~~
-species_counts = surveys_df.groupby('species_id')['record_id'].count()
+species_counts = df.groupby('species_id')['record_id'].count()
 species_counts
 ~~~
 {: .python}
@@ -677,7 +677,7 @@ CQ       16
 Or, we can also count just the rows that have the species "PL" (_Peromyscus leucopus_):
 
 ~~~
-surveys_df.groupby('species_id')['record_id'].count()['PL']
+df.groupby('species_id')['record_id'].count()['PL']
 ~~~
 {: .python}
 
@@ -759,6 +759,80 @@ Handling missing values in a dataset is a critical aspect of data preprocessing 
 6. **Evaluation**:
    - Always evaluate the impact of the chosen method on the dataset and the analysis results.
    - Monitor changes in data distribution and statistical properties after treating missing values.
+
+#### Drop Missing Values
+
+~~~
+# You can also check the percentage of missing values
+missing_percentage_sex = df['sex'].isnull().mean() * 100
+missing_percentage_sex
+~~~
+{: .python}
+
+~~~
+7.063489830937579
+~~~
+{: .output}
+
+
+~~~
+df_sex = df.dropna(subset=['sex'])
+df_sex.head()
+~~~
+
+#### Missing values imputation with zscore
+
+The z-score method is a common approach for identifying and imputing missing values in a dataset. The key steps involved are:
+1. Calculating the z-score for each data point:
+    -  The z-score is a standardized measure that represents how many standard deviations a data point is from the mean.
+    -  It is calculated as: $z = (x - \mu) / \sigma$, where x is the data point, μ is the mean, and σ is the standard deviation.
+2. Identifying potential values to impute missing data:
+   - The z-score method compares the z-scores of the non-missing values to identify potential values that could be used to impute the missing ones.
+    - This is based on the idea that data points with similar z-scores are likely to have similar underlying values.
+3. Imputing the missing values:
+    - Once the potential imputation values are identified, the missing values can be replaced with the most appropriate value, such as the mean or median of the similar z-score data points.
+
+~~~
+
+# Drop rows with missing values in the 'weight' column
+df.dropna(subset=['weight'], inplace=True)
+
+# Calculate z-scores for the 'weight' column
+df['weight_zscore'] = zscore(df['weight'])
+mean_weight = df['weight'].mean()
+sd_weight = df['weight'].sd()
+
+# Function to impute missing values using z-score
+def impute_missing_with_zscore(row):
+    if pd.isnull(row['weight']:
+        return (row['weight_zscore'] * std_weight) + mean_weight
+    else:
+        return row['weight']
+# Apply the imputation function to fill missing values in 'weight' column
+df['weight_imputed'] = df.apply(impute_missing_with_zscore, axis=1)
+
+# Drop the intermediate 'weight_zscore' column if needed
+df.drop(columns=['weight_zscore'], inplace=True)
+~~~
+{: .python}
+
+
+#### imputation with median
+
+~~~
+df['hindfoot_length'] = df['hindfoot_length'].fillna(df['hindfoot_length'].median())
+df.head()
+~~~
+{: .python}
+
+
+#### forward fill impuation 
+
+~~~
+# Impute missing values using forward fill (ffill)
+df['sex'] = df['sex'].fillna(method='ffill')
+
+~~~
 
 
 
