@@ -13,6 +13,62 @@ objectives:
 keypoints:
 - "There are many tools for plotting in Python."
 ---
+Visualization is meant to convey information.
+
+> The power of a graph is its ability to enable one to take in the quantitative information, organize it, and see patterns and structure not readily revealed by other means of studying the data.
+>
+> - Cleveland and McGill, 1984
+
+# Plotting with `matplotlib`
+
+Now, we'll start learning how to create visualizations in Python. We'll start by using a popular python package called matplotlib, and later on use a second package called seaborn that builds on matplotlib First we'll import matplotlib, along with several other Python packages we'll be using during this workshop.
+
+~~~
+import math
+import random
+
+import numpy as np
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+~~~
+{: .python}
+
+One of the nice features of Jupyter notebooks is that figures can be plotted inline, which means they appear below the code cell that creates them. This is not the default behavior however, and so we'll use the below "Magic" statement to tell the Jupyter notebook to plot the figures inline (instead of opening a separate browser window to show them).
+
+~~~
+%matplotlib inline
+~~~
+{: .python}
+
+To illustrate what matplotlib can do, we'll need to use a dataset. We've decided to use the so-called Gapminder dataset, which was compiled by Jennifer Bryan. This dataset contains several key demographic and economic statistics for many countries, across many years. For more information, see the gapminder repository.
+
+We'll use the pandas Python package to load the .csv (comma separated values) file that contains the dataset. The pandas package provides DataFrame objects that organize datasets in tabular form (think Microsoft Excel spreedsheets). We've created an alias for the pandas package, called pd, which is the convention. To read in a .csv file we simply use pd.read_csv. This .csv file happens to be tab-delimited, so we need to specify sep=\t.
+
+~~~
+df = pd.read_csv('data/gapminder.tsv', sep='\t')
+~~~
+{: .python}
+
+
+To look at the first few rows of the dataset we'll use the .head() method of the dataframe.
+
+~~~
+df.head()
+~~~
+{: .python}
+
+~~~
+   population  fertility  ...  child_mortality                      Region
+0  34811059.0       2.73  ...             29.5  Middle East & North Africa
+1  19842251.0       6.43  ...            192.0          Sub-Saharan Africa
+2  40381860.0       2.24  ...             15.4                     America
+3   2975029.0       1.40  ...             20.0       Europe & Central Asia
+4  21370348.0       1.96  ...              5.2         East Asia & Pacific
+
+[5 rows x 10 columns]
+~~~
+{: .output}
 
 # Plotting with `seaborn`
 
@@ -22,13 +78,6 @@ package, which facilitates the creation of highly-informative plots of
 structured data.
 The `seaborn` library is built on `matplotlib` and features very nice color palettes. This library makes manipulating the features of a `matplotlib` plot somewhat easier. For an introduction to this package, see the [`seaborn` documentation](https://seaborn.pydata.org/introduction.html).
 
-To install the package, use `conda`:
-
-```
-$ conda install seaborn
-```
-
-For this exercise, we will use a different data file, called "`surveys_complete.csv`", containing all the complete data observations from the plot surveys used in previous lessons. Download this file from the [course repository](https://github.com/EEOB-BioData/BCB546X-Fall2018) or pull the all new changes from the repository if you haven't done so already. 
 
 ## Getting Started
 
