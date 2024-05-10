@@ -21,12 +21,11 @@ Visualization is meant to convey information.
 
 # Plotting with `matplotlib`
 
-Now, we'll start learning how to create visualizations in Python. We'll start by using a popular python package called matplotlib, and later on use a second package called seaborn that builds on matplotlib First we'll import matplotlib, along with several other Python packages we'll be using during this workshop.
+Now, we'll start learning how to create visualizations in Python. We'll start by using a popular python package called matplotlib, and later on use a second package called seaborn that builds on matplotlib First we'll import matplotlib, along with several other Python packages.
 
 ~~~
 import math
 import random
-
 import numpy as np
 import pandas as pd
 import matplotlib as mpl
@@ -43,7 +42,7 @@ One of the nice features of Jupyter notebooks is that figures can be plotted inl
 
 To illustrate what matplotlib can do, we'll need to use a dataset. We've decided to use the so-called Gapminder dataset, which was compiled by Jennifer Bryan. This dataset contains several key demographic and economic statistics for many countries, across many years. For more information, see the gapminder repository.
 
-We'll use the pandas Python package to load the .csv (comma separated values) file that contains the dataset. The pandas package provides DataFrame objects that organize datasets in tabular form (think Microsoft Excel spreedsheets). We've created an alias for the pandas package, called pd, which is the convention. To read in a .csv file we simply use pd.read_csv. This .csv file happens to be tab-delimited, so we need to specify sep=\t.
+We'll use the pandas Python package to load the .csv (comma separated values) file that contains the dataset. The pandas package provides DataFrame objects that organize datasets in tabular form (think Microsoft Excel spreedsheets). We've created an alias for the pandas package, called pd, which is the convention. To read in a .csv file we simply use `pd.read_csv`. This .csv file happens to be tab-delimited, so we need to specify `sep=\t`.
 
 ~~~
 df = pd.read_csv('data/gapminder.tsv', sep='\t')
@@ -51,7 +50,7 @@ df = pd.read_csv('data/gapminder.tsv', sep='\t')
 {: .python}
 
 
-To look at the first few rows of the dataset we'll use the .head() method of the dataframe.
+To look at the first few rows of the dataset we'll use the `.head()` method of the dataframe.
 
 ~~~
 df.head()
@@ -137,7 +136,7 @@ Protip: Use a semicolon (;) at the end of the last line in a Jupyter notebook ce
 
 This histogram tells us that many of the countries had a low GDP, which was less than 5,000. There is also a second "bump" in the histrogram around 30,000. This type of distribution is known as bi-modal, since there are two modes, or common values.
 
-To make this histogram more interpretable let's add a title and labels for the  and  axes. We'll pass strings to plt.title(), plt.xlabel(), and plt.ylabel() to do so.
+To make this histogram more interpretable let's add a title and labels for the  and  axes. We'll pass strings to `plt.title()`, plt.xlabel(), and `plt.ylabel()` to do so.
 
 
 ~~~
