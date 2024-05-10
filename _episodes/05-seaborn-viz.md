@@ -70,6 +70,122 @@ df.head()
 ~~~
 {: .output}
 
+It looks like we have information about life expectancy (lifeExp), population (pop) and per-capita GDP (gdpPercap), across multiple years per country.
+
+To start off, let's say we want to explore the data from the most recent year in the dataset. 
+
+~~~
+latest_year = df['year'].max()
+latest_year
+~~~
+{: .python}
+
+~~~
+2007
+~~~
+{: .output}
+
+~~~
+df_latest = df[df['year']==latest_year]
+df_latest.shape
+~~~
+{: .python}
+
+~~~
+(142, 6)
+~~~
+{: .output}
+
+Ok, looks like we have 142 values, or rows, across our 6 variables, or columns. Let's get an idea of how per-capita GDP was distributed across all of the countries during 2007 by calculating some summary statistics. We'll do that using the DataFrame's `.describe()` method.
+
+~~~
+df_latest['gdpPercap'].describe()
+~~~
+{: .python}
+
+~~~
+count      142.000000
+mean     11680.071820
+std      12859.937337
+min        277.551859
+25%       1624.842248
+50%       6124.371109
+75%      18008.835640
+max      49357.190170
+Name: gdpPercap, dtype: float64
+~~~
+{: .output}
+
+Across 142 countries the mean GDP was ~$11680, and the standard deviation was ~$12860! There was a lot of deviation in GDP across countries, but these summary statistics don't give us the whole picture. To get the whole picture, let's draw a picture! Or plot a figure more accurately.
+
+## Histograms
+
+Histograms plot an discretized distribution of a one-dimensional dataset across all the values it has taken. They visualize how the many data points are in each of  bins, each of which has a pre-defined range.
+
+To create a histogram plot in matplotlib we'll use pyplot, which is a collection of command style functions that make matplotlib work like MATLAB and save many lines of repeated code. By convention, pyplot is aliased to plt, which we've alread done in the above import cell.
+
+Let's use `plt.hist()` to create a histogram of the per-capita GDP in 2007.
+
+~~~
+plt.hist(df_latest['gdpPercap']);
+~~~
+{: .python}
+
+![png](../fig/05-plt-hist.png)
+
+Protip: Use a semicolon (;) at the end of the last line in a Jupyter notebook cell to suppress the notebooks from printing the return value of the last line. This was done in the above cell. Try removing the ; to see how the output changes.
+
+This histogram tells us that many of the countries had a low GDP, which was less than 5,000. There is also a second "bump" in the histrogram around 30,000. This type of distribution is known as bi-modal, since there are two modes, or common values.
+
+To make this histogram more interpretable let's add a title and labels for the  and  axes. We'll pass strings to plt.title(), plt.xlabel(), and plt.ylabel() to do so.
+
+
+~~~
+plt.hist(df_latest['gdpPercap']);
+plt.title('Distribution of Global Per-Capita GDP in 2007')
+plt.xlabel('Per-Capita GDP (Millions of USD)')
+plt.ylabel('# of Countries');
+~~~
+{: .python}
+
+![png](../fig/05-plt-hist2.png)
+
+Each line in the histogram represents a bin. The height of the line represents the number of items (countries in this case) within the range of values spanned by the bin. In the last plots we used the default number of bins (10), now let's use more bins by specifying the bin=20 parameter.
+
+~~~
+plt.hist(df_latest['gdpPercap'], bins=30);
+plt.title('Distribution of Global Per-Capita GDP in 2007')
+plt.xlabel('Per-Capita GDP (Millions of USD)')
+plt.ylabel('# of Countries');
+~~~
+{: .python}
+
+
+![png](../fig/05-plt-hist3.png)
+
+
+We can see this histogram doesn't look as "smooth" as the last one. There's no "right" way to display a histogram, but some bin counts definitely are more informative than others. For example, using only 3 bins we cannot see the bi-modal nature of the GDP distribution
+
+~~~
+plt.hist(df_latest['gdpPercap'], bins=3);
+plt.title('Distribution of Global Per-Capita GDP in 2007')
+plt.xlabel('Per-Capita GDP (Millions of USD)')
+plt.ylabel('# of Countries');
+~~~
+{: .python}
+
+![png](../fig/05-plt-hist4.png)
+
+The styling that you see in the plot above are the matplotlib defaults. For now, we'll continue to use those defaults as the first portion of this workshop is geared toward getting you familiar with the API-how to actually create the plots you're interested in. Then, we'll cover how to customize plot styles in a later section.)
+
+
+As you can see, we can call functions in the plt module multiple times within a single cell and those functions will all work on, and modify, the current figure associated with the current cell. This is because `pyplot` (or `plt`) keeps an internal variable for the current figure which is unique to each cell plt is used in.
+
+NOTE Unless specified in the help function, the order of these function calls doesn't matter. See that the cell below produces the same plot as the one above even though the calls to `plt` functions are in a different order.
+
+
+
+
 # Plotting with `seaborn`
 
 Python has powerful built-in plotting capabilities and
