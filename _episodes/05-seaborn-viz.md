@@ -182,7 +182,53 @@ As you can see, we can call functions in the plt module multiple times within a 
 
 NOTE Unless specified in the help function, the order of these function calls doesn't matter. See that the cell below produces the same plot as the one above even though the calls to `plt` functions are in a different order.
 
+## Bar Plots
 
+Next, it might be interesting to get a sense of how many countries per continent we have data for. Let's create a country DataFrame that includes only the unique combinations of country and continent by dropping all duplicate rows using drop_duplicates()
+
+~~~
+countries = df[['country', 'continent']]
+countries = countries.drop_duplicates()
+countries
+~~~
+{: .python}
+
+~~~
+                 country continent
+0            Afghanistan      Asia
+12               Albania    Europe
+24               Algeria    Africa
+36                Angola    Africa
+48             Argentina  Americas
+...                  ...       ...
+1644             Vietnam      Asia
+1656  West Bank and Gaza      Asia
+1668         Yemen, Rep.      Asia
+1680              Zambia    Africa
+1692            Zimbabwe    Africa
+
+[142 rows x 2 columns]
+
+~~~
+{: .output}
+
+To get the number of countries per continent we'll use the .groupby() method to group by continent, then count the unique countries in each continent. We'll use the as_index=False argument so that the contininent name gets it's own column, and is not used as the index. This will create a new DataFrame that we'll call country_counts.
+
+~~~
+country_counts = countries.groupby('continent', as_index=False)['country'].count()
+country_counts
+~~~
+{: .python}
+
+~~~
+  continent  country
+0    Africa       52
+1  Americas       25
+2      Asia       33
+3    Europe       30
+4   Oceania        2
+~~~
+{: .output}
 
 
 # Plotting with `seaborn`
@@ -429,6 +475,80 @@ sns.displot(surveys_complete['weight'], color='k', kind="kde",
 {: .python}
 
 ![png](../fig/05-seaborn-distplot-2.png)
+
+## Exploratory Analysis
+
+A quick way to analyze the distribution of numerical columns in a DataFrame is to calculate summary statistics (skewness and kurtosis), creates histograms to visualize the distribution, uses box plots to identify outliers, and generates normal probability plots to assess normality. This information can be useful for understanding the characteristics of the data and determining appropriate statistical methods for further analysis. 
+
+~~~
+from scipy.stats import probplot
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+for col in df.select_dtypes(np.number).columns:
+    plt.figure(figsize=(14,4))
+    print(f"Skewness of {col}:",df[col].skew())
+    print(f"Kurtosis of {col}:",df[col].kurtosis())
+    plt.subplot(131)
+    sns.distplot(df[col])
+    plt.subplot(132)
+    sns.boxplot(df[col])
+    plt.subplot(133)
+    probplot(df[col],dist='norm',rvalue=True,plot=plt)
+    plt.suptitle(col)
+    plt.show()
+~~~
+{: .python}
+
+
+
+
+### Countplot
+
+A count plot, also known as a bar plot, is a type of plot that displays the count or frequency of each category in a categorical variable. In this case, the 'continent' column is a categorical variable, and the count plot shows the number of occurrences for each continent in the DataFrame
+
+~~~
+import matplotlib.pyplot as plt
+import seaborn as sns
+import gc
+plt.figure(figsize=(10,6))
+sns.countplot(data=df, x='continent')
+plt.xticks(rotation=90)
+plt.show()
+plt.close('all')
+gc.collect()
+~~~
+{: .Python}
+
+### HeatMap
+
+A heatmap is a graphical representation of data where the individual values contained in a matrix are represented as colors. It is a powerful tool for visualizing and analyzing complex data, especially when dealing with large datasets. The  heatmap provides a visual representation of the correlations between numerical columns in the DataFrame, helping to identify relationships and patterns in the data.
+
+~~~
+import matplotlib.pyplot as plt
+import seaborn as sns
+import gc
+
+# Filter out only the numerical columns
+numerical_df = df.select_dtypes(include=['float64', 'int64'])
+
+# Drop NaN values along columns in the numerical DataFrame
+numerical_df = numerical_df.dropna(axis=1)
+
+plt.figure(figsize=(12, 8))
+fig = sns.heatmap(numerical_df.corr(), annot=True, cmap='rainbow', vmin=-1.0, vmax=1.0)
+plt.xticks(rotation=90)
+plt.show()
+plt.close('all')
+gc.collect()
+~~~
+{: .Python}
+
+
+
+
+
 
 # Plotting with `bokeh`
 
