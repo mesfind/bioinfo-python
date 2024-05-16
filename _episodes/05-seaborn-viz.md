@@ -267,6 +267,31 @@ country_counts
 ~~~
 {: .output}
 
+~~~
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Assuming you have already calculated country_counts
+country_counts = countries.groupby('continent', as_index=False)['country'].count()
+
+# Sort the DataFrame by the count of countries
+country_counts_sorted = country_counts.sort_values(by='country', ascending=False)
+
+# Create horizontal bar plot with sorted order
+plt.figure(figsize=(10, 6))
+sns.barplot(data=country_counts_sorted, y='continent', x='country', color='skyblue')
+plt.xlabel('Number of Countries')
+plt.ylabel('Continent')
+plt.title('Number of Countries in Each Continent')
+plt.show()
+~~~
+{: .python}
+
+
+![](../fig/barplot-horizontal.png)
+
+
+
 ## Continouous data plot
 
 A quick way to analyze the distribution of numerical columns in a DataFrame is to calculate summary statistics (skewness and kurtosis), creates histograms to visualize the distribution, uses box plots to identify outliers, and generates normal probability plots to assess normality. This information can be useful for understanding the characteristics of the data and determining appropriate statistical methods for further analysis. 
@@ -286,14 +311,12 @@ for col in df.select_dtypes(np.number).columns:
     plt.figure(figsize=(14, 4))
     print(f"Skewness of {col}:", df[col].skew())
     print(f"Kurtosis of {col}:", df[col].kurtosis())
-    
     plt.subplot(131)
     sns.histplot(df[col], kde=True)
     plt.subplot(132)
     sns.boxplot(data=df, x=col)
     plt.subplot(133)
     probplot(df[col], dist='norm', rvalue=True, plot=plt)
-    
     plt.suptitle(col)
     plt.show()
 ~~~
@@ -361,10 +384,6 @@ plt.close('all')
 gc.collect()
 ~~~
 {: .Python}
-
-
-
-
 
 
 # Plotting with `seaborn`
