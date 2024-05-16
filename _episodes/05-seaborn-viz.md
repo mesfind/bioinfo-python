@@ -276,22 +276,33 @@ from scipy.stats import probplot
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
+# Set use_inf_as_na to True to handle infinite values
+pd.set_option('mode.use_inf_as_na', True)
+
+# Assuming df is your DataFrame
 for col in df.select_dtypes(np.number).columns:
-    plt.figure(figsize=(14,4))
-    print(f"Skewness of {col}:",df[col].skew())
-    print(f"Kurtosis of {col}:",df[col].kurtosis())
+    plt.figure(figsize=(14, 4))
+    print(f"Skewness of {col}:", df[col].skew())
+    print(f"Kurtosis of {col}:", df[col].kurtosis())
+    
     plt.subplot(131)
-    sns.distplot(df[col])
+    sns.histplot(df[col], kde=True)
     plt.subplot(132)
-    sns.boxplot(df[col])
+    sns.boxplot(data=df, x=col)
     plt.subplot(133)
-    probplot(df[col],dist='norm',rvalue=True,plot=plt)
+    probplot(df[col], dist='norm', rvalue=True, plot=plt)
+    
     plt.suptitle(col)
     plt.show()
 ~~~
 {: .python}
 
+![](histogram-probplot1.png)
+![](histogram-probplot2.png)
+![](histogram-probplot3.png)
+![](histogram-probplot4.png)
 
 
 
