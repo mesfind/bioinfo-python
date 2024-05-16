@@ -214,7 +214,7 @@ plt.show()
 
 The above  code aims to provide a visual representation of the distribution and quantiles of the data using different types of plots for analysis and visualization. It is attempting to visualize a dataset using three different types of plots: a box plot, a histogram with kernel density estimation (KDE), and a Q-Q (quantile-quantile) plot.
 
-![](fig/histogram-qq.png)
+![](../fig/histogram-qq.png)
 
 these plots collectively provide insights into the distributional characteristics, presence of outliers, and conformity to theoretical distributions of the dataset. They are valuable tools for exploratory data analysis, helping researchers and analysts understand the underlying structure and patterns within the data.
 
@@ -299,10 +299,10 @@ for col in df.select_dtypes(np.number).columns:
 ~~~
 {: .python}
 
-![](histogram-probplot1.png)
-![](histogram-probplot2.png)
-![](histogram-probplot3.png)
-![](histogram-probplot4.png)
+![](../fig/histogram-probplot1.png)
+![](../fig/histogram-probplot2.png)
+![](../fig/histogram-probplot3.png)
+![](../fig/histogram-probplot4.png)
 
 
 
