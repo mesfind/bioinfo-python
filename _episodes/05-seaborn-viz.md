@@ -182,6 +182,43 @@ As you can see, we can call functions in the plt module multiple times within a 
 
 NOTE Unless specified in the help function, the order of these function calls doesn't matter. See that the cell below produces the same plot as the one above even though the calls to `plt` functions are in a different order.
 
+~~~
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+
+# Generate some random data for demonstration
+#data = np.random.normal(loc=0, scale=1, size=1000)
+data =df_latest['gdpPercap']
+
+# Create subplots
+fig, axs = plt.subplots(1, 3, figsize=(18, 6))  # Adjusted figsize for better display
+
+# Plot box plot
+axs[0].boxplot(data, vert=False)
+axs[0].set_title('Box Plot')
+
+# Plot histogram with KDE
+sns.histplot(data, kde=True, color='skyblue', ax=axs[1])
+axs[1].set_title('Histogram with Density Plot')
+
+# Plot Q-Q plot
+sm.qqplot(data, line='45', ax=axs[2])
+axs[2].set_title('Q-Q Plot')
+
+plt.tight_layout()
+plt.show()
+~~~
+{: .python}
+
+The above  code aims to provide a visual representation of the distribution and quantiles of the data using different types of plots for analysis and visualization. It is attempting to visualize a dataset using three different types of plots: a box plot, a histogram with kernel density estimation (KDE), and a Q-Q (quantile-quantile) plot.
+
+![](fig/histogram-qq.png)
+
+these plots collectively provide insights into the distributional characteristics, presence of outliers, and conformity to theoretical distributions of the dataset. They are valuable tools for exploratory data analysis, helping researchers and analysts understand the underlying structure and patterns within the data.
+
+
 ## Bar Plots
 
 Next, it might be interesting to get a sense of how many countries per continent we have data for. Let's create a country DataFrame that includes only the unique combinations of country and continent by dropping all duplicate rows using drop_duplicates()
@@ -229,6 +266,94 @@ country_counts
 4   Oceania        2
 ~~~
 {: .output}
+
+## Continouous data plot
+
+A quick way to analyze the distribution of numerical columns in a DataFrame is to calculate summary statistics (skewness and kurtosis), creates histograms to visualize the distribution, uses box plots to identify outliers, and generates normal probability plots to assess normality. This information can be useful for understanding the characteristics of the data and determining appropriate statistical methods for further analysis. 
+
+~~~
+from scipy.stats import probplot
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+for col in df.select_dtypes(np.number).columns:
+    plt.figure(figsize=(14,4))
+    print(f"Skewness of {col}:",df[col].skew())
+    print(f"Kurtosis of {col}:",df[col].kurtosis())
+    plt.subplot(131)
+    sns.distplot(df[col])
+    plt.subplot(132)
+    sns.boxplot(df[col])
+    plt.subplot(133)
+    probplot(df[col],dist='norm',rvalue=True,plot=plt)
+    plt.suptitle(col)
+    plt.show()
+~~~
+{: .python}
+
+
+
+
+### categorical data plot 
+
+A count plot, also known as a bar plot, is a type of plot that displays the count or frequency of each category in a categorical variable. In this case, the 'continent' column is a categorical variable, and the count plot shows the number of occurrences for each continent in the DataFrame
+
+~~~
+import matplotlib.pyplot as plt
+import seaborn as sns
+import gc
+plt.figure(figsize=(10,6))
+sns.countplot(data=df, x='continent')
+plt.xticks(rotation=90)
+plt.show()
+plt.close('all')
+gc.collect()
+~~~
+{: .Python}
+
+
+~~~
+import gc
+df_africa = df[df.continent =='Africa']
+plt.figure(figsize=(10,6))
+sns.countplot(data=df_africa, x='country')
+plt.xticks(rotation=90)
+plt.gca().invert_yaxis()
+plt.gca().invert_xaxis() 
+plt.show()
+plt.close('all')
+gc.collect()
+~~~
+
+
+### HeatMap
+
+A heatmap is a graphical representation of data where the individual values contained in a matrix are represented as colors. It is a powerful tool for visualizing and analyzing complex data, especially when dealing with large datasets. The  heatmap provides a visual representation of the correlations between numerical columns in the DataFrame, helping to identify relationships and patterns in the data.
+
+~~~
+import matplotlib.pyplot as plt
+import seaborn as sns
+import gc
+
+# Filter out only the numerical columns
+numerical_df = df.select_dtypes(include=['float64', 'int64'])
+
+# Drop NaN values along columns in the numerical DataFrame
+numerical_df = numerical_df.dropna(axis=1)
+
+plt.figure(figsize=(12, 8))
+fig = sns.heatmap(numerical_df.corr(), annot=True, cmap='rainbow', vmin=-1.0, vmax=1.0)
+plt.xticks(rotation=90)
+plt.show()
+plt.close('all')
+gc.collect()
+~~~
+{: .Python}
+
+
+
+
 
 
 # Plotting with `seaborn`
@@ -475,76 +600,6 @@ sns.displot(surveys_complete['weight'], color='k', kind="kde",
 {: .python}
 
 ![png](../fig/05-seaborn-distplot-2.png)
-
-## Exploratory Analysis
-
-A quick way to analyze the distribution of numerical columns in a DataFrame is to calculate summary statistics (skewness and kurtosis), creates histograms to visualize the distribution, uses box plots to identify outliers, and generates normal probability plots to assess normality. This information can be useful for understanding the characteristics of the data and determining appropriate statistical methods for further analysis. 
-
-~~~
-from scipy.stats import probplot
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-for col in df.select_dtypes(np.number).columns:
-    plt.figure(figsize=(14,4))
-    print(f"Skewness of {col}:",df[col].skew())
-    print(f"Kurtosis of {col}:",df[col].kurtosis())
-    plt.subplot(131)
-    sns.distplot(df[col])
-    plt.subplot(132)
-    sns.boxplot(df[col])
-    plt.subplot(133)
-    probplot(df[col],dist='norm',rvalue=True,plot=plt)
-    plt.suptitle(col)
-    plt.show()
-~~~
-{: .python}
-
-
-
-
-### Countplot
-
-A count plot, also known as a bar plot, is a type of plot that displays the count or frequency of each category in a categorical variable. In this case, the 'continent' column is a categorical variable, and the count plot shows the number of occurrences for each continent in the DataFrame
-
-~~~
-import matplotlib.pyplot as plt
-import seaborn as sns
-import gc
-plt.figure(figsize=(10,6))
-sns.countplot(data=df, x='continent')
-plt.xticks(rotation=90)
-plt.show()
-plt.close('all')
-gc.collect()
-~~~
-{: .Python}
-
-### HeatMap
-
-A heatmap is a graphical representation of data where the individual values contained in a matrix are represented as colors. It is a powerful tool for visualizing and analyzing complex data, especially when dealing with large datasets. The  heatmap provides a visual representation of the correlations between numerical columns in the DataFrame, helping to identify relationships and patterns in the data.
-
-~~~
-import matplotlib.pyplot as plt
-import seaborn as sns
-import gc
-
-# Filter out only the numerical columns
-numerical_df = df.select_dtypes(include=['float64', 'int64'])
-
-# Drop NaN values along columns in the numerical DataFrame
-numerical_df = numerical_df.dropna(axis=1)
-
-plt.figure(figsize=(12, 8))
-fig = sns.heatmap(numerical_df.corr(), annot=True, cmap='rainbow', vmin=-1.0, vmax=1.0)
-plt.xticks(rotation=90)
-plt.show()
-plt.close('all')
-gc.collect()
-~~~
-{: .Python}
-
 
 
 
