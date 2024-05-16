@@ -349,12 +349,15 @@ gc.collect()
 
 ~~~
 import gc
-df_africa = df[df.continent =='Africa']
-plt.figure(figsize=(10,6))
-sns.countplot(data=df_africa, x='country')
+import seaborn as sns
+import matplotlib.pyplot as plt
+plt.figure(figsize=(10, 10))
+sns.barplot(data=df_africa, y='country', x=df_africa.index,
+            estimator=len, orient='h')
 plt.xticks(rotation=90)
-plt.gca().invert_yaxis()
-plt.gca().invert_xaxis() 
+plt.ylabel('Country')
+plt.xlabel('Count')
+plt.title('Count of Data Entries per Country')
 plt.show()
 plt.close('all')
 gc.collect()
@@ -681,6 +684,7 @@ show(my_fig)
 
 {% include bokeh-html.html %}
 
+
 We can also save this file as an html file that we can share with others or embed in files on the web. To do this, we need to include some other bokeh functions:
 
 ~~~
@@ -700,6 +704,24 @@ out.close()
 {: .python}
 
 If you open the file you created in your web browser, you now have an interactive version of your figure. You can then use this to embed in a website.
+
+~~~
+from bokeh.plotting import figure, show
+from bokeh.models import HexTile
+import pandas as pd
+# Create Bokeh plot
+p = figure(width=800, height=400)
+# Create HexTile glyph
+p.hex_tile(q='weight', r='hindfoot_length',
+           source=surveys_complete, size=20, fill_color='blue',
+           line_color='white')
+# Label axes
+p.xaxis.axis_label = 'Weight'
+p.yaxis.axis_label = 'Hindfoot Length'
+show(p)
+~~~
+{: .python}
+
 
 > ## Take-Home Challenge: More Visualizations in Python
 >
