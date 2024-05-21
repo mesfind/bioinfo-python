@@ -556,3 +556,91 @@ query.description
 {: .python}
  -->
 
+
+
+## Visualizing genomics data  witg geneview
+
+
+geneview is a library for making attractive and informative genomics graphics in Python. It is built on top of matplotlib and tightly integrated with the PyData stack, including support for numpy and pandas data structures. And now it is actively developed.
+
+Some of the features that geneview offers are:
+
+  - High-level abstractions for structuring grids of plots that let you easily build complex visualizations.
+  - Functions for visualizing general genomics plots.
+
+This command will install geneview and all the dependencies.
+~~~
+%%bash
+pip install geneview
+~~~
+{: .python}
+
+We use a PLINK2.x association output data `gwas.csv` which is in [geneview-data](https://github.com/ShujiaHuang/geneview-data) directory, as the input for the plots below. 
+~~~
+import matplotlib.pyplot as plt
+import geneview as gv
+
+# load data
+df = gv.load_dataset("gwas")
+# Plot a basic manhattan plot with horizontal xtick labels and the figure will display in screen.
+ax = gv.manhattanplot(data=df)
+plt.show()
+~~~
+{: .python}
+
+![](../fig/geneview_1.png)
+
+
+Rotate the x-axis tick label by setting xticklabel_kws to avoid label overlap:
+
+~~~
+ax = manhattanplot(data=df, xticklabel_kws={"rotation": "vertical"})
+~~~
+{: .python}
+
+
+Futher graphical parameters can be passed to the manhattanplot() function to control thing like plot title, point character, size, colors, etc. Here is the example:
+
+~~~
+import matplotlib.pyplot as plt
+import geneview as gv
+
+# common parameters for plotting
+plt_params = {
+    "pdf.fonttype": 42,
+    "font.sans-serif": "Arial",
+    "legend.fontsize": 14,
+    "axes.titlesize": 18,
+    "axes.labelsize": 16,
+    "xtick.labelsize": 14,
+    "ytick.labelsize": 14
+}
+plt.rcParams.update(plt_params)
+
+# Create a manhattan plot
+f, ax = plt.subplots(figsize=(12, 4), facecolor="w", edgecolor="k")
+xtick = set(["chr" + i for i in list(map(str, range(1, 10))) + ["11", "13", "15", "18", "21", "X"]])
+_ = gv.manhattanplot(data=df,
+                     marker=".",
+                     sign_marker_p=1e-6,  # Genome wide significant p-value
+                     sign_marker_color="r",
+                     snp="ID",  # The column name of annotation information for top SNPs.
+
+                     title="Test",
+                     xtick_label_set=xtick,
+                  
+                     xlabel="Chromosome",
+                     ylabel=r"$-log_{10}{(P)}$",
+
+                     sign_line_cols=["#D62728", "#2CA02C"],
+                     hline_kws={"linestyle": "--", "lw": 1.3},
+
+                     is_annotate_topsnp=True,
+                     ld_block_size=50000,  # 50000 bp
+                     text_kws={"fontsize": 12,
+                               "arrowprops": dict(arrowstyle="-", color="k", alpha=0.6)},
+                     ax=ax)
+~~~
+{: .python}
+
+![](../fig/geneview_2.png)
