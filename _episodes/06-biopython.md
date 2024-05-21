@@ -21,7 +21,6 @@ Biopython is a freely available package for working with molecular biological da
 In this lesson, we will just cover some basics of working with Biopython. 
 The developers of this package have written a comprehensive [tutorial and cookbook](http://biopython.org/DIST/docs/tutorial/Tutorial.html).
 
-The tutorial we are working with today was written by [Dr. Iddo Friedberg](https://iddo-friedberg.net/) and [Dr. Stuart Brown](https://scholar.google.com/citations?user=ig0QSzAAAAAJ&hl=en)
 
 ## What can Biopython do?
 
@@ -56,15 +55,6 @@ different tools in the package:
 - Integration with BioSQL, a sequence database schema also supported by the BioPerl and BioJava projects.
 
 # Getting Started
-
-## Download Example Files
-
-This lesson will use the example files in the 
-[`biopython`](https://github.com/EEOB-BioData/BCB546-Spring2022/tree/main/course-files/biopython) 
-folder of the course 
-files in the `BCB546-Spring2022` repository. 
-Download these files and make sure they are in the same directory
-where you are creating your Jupyter notebook.
 
 
 
@@ -234,7 +224,7 @@ Seq('GATC')
 
 `SeqIO` enables reading in sequences from FASTA files and storing the data in a `SeqRecord`. Addtionally `SeqIO` provides tools for writing sequence data to a file.
 
-We will read in the example file [`NC_005816.fna`](https://raw.githubusercontent.com/EEOB-BioData/BCB546-Spring2022/main/course-files/biopython/NC_005816.fna) using `SeqIO`.
+We will read in the example file [`NC_005816.fna`](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/NC_005816.fna) using `SeqIO`.
 
 ~~~
 from Bio import SeqIO
@@ -279,7 +269,7 @@ SeqRecord(seq=Seq('TGTAACGAACGGTGCAATAGTGATCCACACCCAACGCCTGAAATCAGATCCAGG...CTG'
 
 Using `SeqIO` we can read in several sequences from a file and store 
 them in a list of `SeqRecord` objects from a file. The file 
-[`example.fasta`](https://raw.githubusercontent.com/EEOB-BioData/BCB546-Spring2022/main/course-files/biopython/example.fasta) looks like this:
+[`example.fasta`](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/example.fasta) looks like this:
 
 ```
 >EAS54_6_R1_2_1_413_324
@@ -391,7 +381,7 @@ help(NCBIWWW.qblast)
 {: .python}
 
 
-Next we can read in a sequence that is stored in a FASTA file called [`test.fasta`](https://raw.githubusercontent.com/EEOB-BioData/BCB546-Spring2022/main/course-files/biopython/test.fasta).
+Next we can read in a sequence that is stored in a FASTA file called [`test.fasta`](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/test.fasta).
 ~~~
 query = SeqIO.read("test.fasta", format="fasta")
 ~~~
@@ -640,7 +630,43 @@ _ = gv.manhattanplot(data=df,
                      text_kws={"fontsize": 12,
                                "arrowprops": dict(arrowstyle="-", color="k", alpha=0.6)},
                      ax=ax)
+plt.show()
 ~~~
 {: .python}
 
 ![](../fig/geneview_2.png)
+
+
+
+### QQ plot with default parameters
+
+The qqplot() function can be used to generate a Q-Q plot to visualize the distribution of association "P-value". The qqplot() function takes a vector of P-values as its the only required argument.
+
+~~~
+
+import matplotlib.pyplot as plt
+import geneview as gv
+
+f, ax = plt.subplots(figsize=(6, 6), facecolor="w", edgecolor="k")
+_ = gv.qqplot(data=df["P"],
+              marker="o",
+              title="Test",
+              xlabel=r"Expected $-log_{10}{(P)}$",
+              ylabel=r"Observed $-log_{10}{(P)}$",
+              ax=ax)
+plt.show()
+~~~
+{: .python}
+
+![](../fig/qq_geneview_1.png)
+
+
+
+### Download the GenBank File
+
+~~~
+import os
+if not os.path.isfile("ls_orchid.gbk"):
+  os.system("wget https://raw.githubusercontent.com/biopython/biopython/master/Doc/examples/ls_orchid.gbk")
+~~~
+{: .python}
