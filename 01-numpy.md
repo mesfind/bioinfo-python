@@ -93,7 +93,7 @@ weight_kg = 55
 Once a variable has a value, we can print it to the screen:
 
 ~~~ {.python}
-print weight_kg
+print(weight_kg)
 ~~~
 ~~~ {.output}
 55
@@ -112,7 +112,7 @@ We can also change a variable's value by assigning it a new one:
 
 ~~~ {.python}
 weight_kg = 57.5
-print 'weight in kilograms is now:', weight_kg
+print('weight in kilograms is now:', weight_kg)
 ~~~
 ~~~ {.output}
 weight in kilograms is now: 57.5
@@ -168,7 +168,7 @@ If we want to check that our data has been loaded,
 we can print the variable's value:
 
 ~~~ {.python}
-print data
+print(data)
 ~~~
 ~~~ {.output}
 [[ 0.  0.  1. ...,  3.  0.  0.]
@@ -186,7 +186,7 @@ First,
 let's ask what [type](reference.html#type) of thing `data` refers to:
 
 ~~~ {.python}
-print type(data)
+print(type(data))
 ~~~
 ~~~ {.output}
 <type 'numpy.ndarray'>
@@ -196,7 +196,7 @@ The output tells us that `data` currently refers to an N-dimensional array creat
 We can see what its [shape](reference.html#shape) is like this:
 
 ~~~ {.python}
-print data.shape
+print(data.shape)
 ~~~
 ~~~ {.output}
 (60, 40)
@@ -325,10 +325,10 @@ will create a new array `doubledata`
 whose elements have the value of two times the value of the corresponding elements in `data`:
 
 ~~~ {.python}
-print 'original:'
-print data[:3, 36:]
-print 'doubledata:'
-print doubledata[:3, 36:]
+print('original:')
+print(data[:3, 36:])
+print('doubledata:'
+print(doubledata[:3, 36:])
 ~~~
 ~~~ {.output}
 original:
@@ -355,8 +355,8 @@ will give you an array where `tripledata[0,0]` will equal `doubledata[0,0]` plus
 and so on for all other elements of the arrays.
 
 ~~~ {.python}
-print 'tripledata:'
-print tripledata[:3, 36:]
+print('tripledata:')
+print(tripledata[:3, 36:])
 ~~~
 ~~~ {.output}
 tripledata:
