@@ -21,12 +21,11 @@ that finds files whose names match a pattern.
 We provide those patterns as strings:
 the character `*` matches zero or more characters,
 while `?` matches any one character.
-We can use this to get the names of all the html files:
+We can use this to get the names of all the HTML files:
 
 ~~~ {.python}
-print glob.glob('*.html')
+print(glob.glob('*.html'))
 ~~~
-
 ~~~ {.output}
 ['01-numpy.html', '02-loop.html', '03-lists.html', '04-files.html', '05-cond.html', '06-func.html', '07-errors.html', '08-defensive.html', '09-debugging.html', '10-cmdline.html', 'index.html', 'LICENSE.html', 'instructors.html', 'README.html', 'discussion.html', 'motivation.html', 'reference.html']
 ~~~
@@ -40,10 +39,14 @@ the "something" we want to do is generate a set of plots for each file in our in
 Let's test it by analyzing the first three files in the list:
 
 ~~~ {.python}
+import numpy as np
+import matplotlib.pyplot as plt
+import glob
+
 filenames = glob.glob('*.csv')
 filenames = filenames[0:3]
 for f in filenames:
-    print f
+    print(f)
 
     data = np.loadtxt(fname=f, delimiter=',')
 
@@ -65,26 +68,23 @@ for f in filenames:
     fig.tight_layout()
     plt.show(fig)
 ~~~
-
 ~~~ {.output}
 inflammation-01.csv
 ~~~
 
-![Analysis of inflammation-01.csv](fig/03-loop_49_1.png)\
-
+![Analysis of inflammation-01.csv](fig/03-loop_49_1.png)
 
 ~~~ {.output}
 inflammation-02.csv
 ~~~
 
-![Analysis of inflammation-02.csv](fig/03-loop_49_3.png)\
-
+![Analysis of inflammation-02.csv](fig/03-loop_49_3.png)
 
 ~~~ {.output}
 inflammation-03.csv
 ~~~
 
-![Analysis of inflammation-03.csv](fig/03-loop_49_5.png)\
+![Analysis of inflammation-03.csv](fig/03-loop_49_5.png)
 
 Sure enough,
 the maxima of the first two data sets show exactly the same ramp as the first,
