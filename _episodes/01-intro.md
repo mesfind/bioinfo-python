@@ -19,7 +19,7 @@ keypoints:
 
 The official [introduction](https://docs.python.org/3.6/tutorial/) to Python states:
 
->Python is an easy to learn, powerful programming language. It has efficient high-level data structures and a simple but effective approach to object-oriented programming. Python’s elegant syntax and dynamic typing, together with its interpreted nature, make it an ideal language for scripting and rapid application development in many areas on most platforms.
+> Python is an easy to learn, powerful programming language. It has efficient high-level data structures and a simple but effective approach to object-oriented programming. Python's elegant syntax and dynamic typing, together with its interpreted nature, make it an ideal language for scripting and rapid application development in many areas on most platforms.
 
 The simplicity of Python really comes from its very clean (i.e., uncluttered) syntax. This makes programming in Python similar to writing [pseudocode](https://en.wikipedia.org/wiki/Pseudocode), which is writing an algorithm in a readable way.
 
@@ -36,7 +36,7 @@ print count
 
 The simple syntax of Python requires very few changes to make it work.
 
-~~~
+~~~python
 seq = 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGACAA'
 count = 0
 for base in seq:
@@ -45,12 +45,9 @@ for base in seq:
 
 print(count)
 ~~~
-{: .python}
-
-~~~
+~~~output
 13
 ~~~
-{: .output}
 
 What are the main differences between the pseudocode and the Python code?
 
@@ -62,21 +59,18 @@ To program in Python you must follow the rules of its syntax. Additionally, it i
 
 You will notice that Python does not use curly braces `{}` to encapsulate the contents of a loop. Instead, loops are started with a colon `:` and all of the lines within the loop are indented. Here's an example:
 
-~~~
+~~~python
 s = "hello"
 capital_s = ""
 for char in s:
-   capital_letter = char.upper()
-   capital_s += capital_letter
+    capital_letter = char.upper()
+    capital_s += capital_letter
 
 print(capital_s)
 ~~~
-{: .python}
-
-~~~
+~~~output
 HELLO
 ~~~
-{: .output}
 
 The code above creates a `for` loop where the loop iterates over the letters in `s`, and changes them from lowercase to uppercase using the string method `.upper()`.
 The capitalized letter is assigned to a variable called `capital_letter`. Then `capital_letter` is appended to the string `capital_s`.
@@ -92,44 +86,33 @@ In Python, as well as many other programming languages, the index of the first i
 
 Using the string `s` from above:
 
-~~~
+~~~python
 print(s[0])
 ~~~
-{: .python}
-
-~~~
+~~~output
 h
 ~~~
-{: .output}
 
 This means that the last element in an array has the index `n-1`, where `n` is the length of the array.
 
-~~~
+~~~python
 n = len(s)
 print(s[n])
 ~~~
-{: .python}
-
-~~~
+~~~output
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 IndexError: string index out of range
 ~~~
-{: .output}
 
 If we try to access index 5 of our string, we get an error. The error indicates that we accessed an element outside of the range of our variable. Instead we need to access index 4:
 
-~~~
+~~~python
 print(s[n - 1])
 ~~~
-{: .python}
-
-~~~
+~~~output
 o
 ~~~
-{: .output}
-
-
 
 # Python vs. R
 
@@ -138,7 +121,7 @@ o
 > Count the number of Gs in the sequence above using a `for` loop. What is the difference between Python (see above) and R (in solution below) implementations?
 >
 > > ## Solution
-> > ~~~
+> > ~~~R
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGACAA'
 > > seq_split <- strsplit(seq, "")[[1]]
 > > count <- 0
@@ -149,7 +132,7 @@ o
 > > }
 > > print(count)
 > > ~~~
-> {: .solution} 
+> {: .solution}
 {: .challenge}
 
 > ## What is the simplest way to count the Gs?
@@ -157,18 +140,20 @@ o
 > Count the number of Gs in the sequence above using either R or Python in a simpler way.
 >
 > > ## Python Solution
-> > ~~~
-> > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
+> > ~~~python
+> > seq = 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > print(seq.count('G'))
 > > ~~~
-> > {: .python}
-> {: .solution}
-> 
-> > ## R Solution
+> > ~~~output
+> > 13
 > > ~~~
+> {: .solution}
+>
+> > ## R Solution
+> > ~~~R
 > > seq <- 'GACTTAATGGGCAATAGGCAAGCACTTGAAAAAGATGCCAACGACATGAAAACACAAGA'
 > > library(stringr)
-> > str_count(seq,'G')
+> > str_count(seq, 'G')
 > > ~~~
 > {: .solution}
 {: .challenge}
@@ -179,11 +164,9 @@ There are a lot of blogs and articles comparing R and Python. Many of these comp
 
 ## Interactive Interpreter
 
-You can run python in various tools. Perhaps the most straightforward is to use the interactive Python interpreter. To enter the Python console, simple open a terminal window and type `python`. On Windows, you will want to launch the Anaconda Prompt application (see the [Anaconda docs](https://docs.anaconda.com/anaconda/user-guide/getting-started/#open-prompt-win) for more info).
+You can run Python in various tools. Perhaps the most straightforward is to use the interactive Python interpreter. To enter the Python console, simply open a terminal window and type `python`. On Windows, you will want to launch the Anaconda Prompt application (see the [Anaconda docs](https://docs.anaconda.com/anaconda/user-guide/getting-started/#open-prompt-win) for more info).
 
-<!-- [In Mac OS X, it is sometimes good to use `pythonw` which is required if you want to use any Python function that requires opening new windows (e.g., plotting).] -->
-
-```
+```bash
 $ python
 ```
 ~~~
@@ -192,112 +175,96 @@ Python 3.8.8 (default, Feb 24 2021, 13:46:16)
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ~~~
-{: .output}
 
 In the console, you will always have `>>>` as the command prompt. Now you can type any Python code and execute it by hitting enter.
 
-~~~
+~~~python
 >>> 2.3 * 14.4
 ~~~
-{: .python}
-
-~~~
+~~~output
 33.12
 ~~~
-{: .output}
 
 Like R, Python makes a handy desktop calculator.
 
 When using the interactive console, it's important to remember that indentation still matters. (In Python, it is common to use `range()` to loop for a specific number of times.)
 
-~~~
+~~~python
 >>> for i in range(5):
 ...
 ~~~
-{: .python}
 
-When you hit enter after a colon `:`, the prompt changes to `...`, indicating that you are within a loop. Enter the loop contents _after indenting_ and end the loop by adding an extra newline. 
+When you hit enter after a colon `:`, the prompt changes to `...`, indicating that you are within a loop. Enter the loop contents _after indenting_ and end the loop by adding an extra newline.
 
-~~~
+~~~python
 >>> for i in range(5):
-...    print(i)
+...     print(i)
 ...
 ~~~
-{: .python}
-
-~~~
+~~~output
 0
 1
 2
 3
 4
 ~~~
-{: .output}
 
 **To exit** the interactive console, type **_control+D_**.
-
 
 ### Executing Scripts
 
 One of the more practical uses of Python in the command line is to execute scripts. Several of the examples above are contained within the script called [`01-intro.py`](https://github.com/EEOB-BioData/BCB546-Spring2022/blob/main/course-files/python/scripts/01-intro.py) (in the `course-files/python/scripts` directory of the course GitHub repository). You can run this whole script from the command line in your terminal:
 
-```
+```bash
 $ python 01-intro.py
 ```
-~~~
+~~~output
 13
 13
 HELLO
 ~~~
-{: .output}
 
 ### Python on the Cluster
 
-Our HPC systems do not use the Anaconda install of Python. Additionally, the default versions of Python that is available globally is Python 2.7. Thus, if you would like to use HPC-Class to interact with Python, it is recommended that you load the Python 3 module after logging on to the cluster (`ssh <ISU Net ID>@hpc-class.its.iastate.edu`).
+Our HPC systems do not use the Anaconda install of Python. Additionally, the default version of Python that is available globally is Python 2.7. Thus, if you would like to use HPC-Class to interact with Python, it is recommended that you load the Python 3 module after logging on to the cluster (`ssh <ISU Net ID>@hpc-class.its.iastate.edu`).
 
-```
+```bash
 $ module load python
 ```
 
 Once you have loaded the Python 3 module, you can open the `python3` interpreter:
 
-```
+```bash
 $ python
 ```
-
 ~~~
 Python 3.7.7 (default, Jun 15 2020, 12:59:09) 
 [GCC 4.8.5 20150623 (Red Hat 4.8.5-36)] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ~~~
-{: .output}
 
 ## IPython Interactive Console
 
-IPython is another interpreter comes with Anaconda that makes typing in code blocks (like loops) easier. It also uses a prompt to distinctly label input and output.
+IPython is another interpreter that comes with Anaconda and makes typing in code blocks (like loops) easier. It also uses a prompt to distinctly label input and output.
 
 Open an IPython console from your terminal window:
 
-```
+```bash
 $ ipython
 ```
 
 You will see that the initial prompt is waiting for input.
 
-~~~
+~~~python
 In [1]: 100 * 20
 ~~~
-{: .python}
-
-~~~
+~~~output
 Out [1]: 2000
 ~~~
-{: .output}
 
-Another great thing about IPython is that you can also use Unix commands like `ls` and `cd`. 
-Additionally, when you create a loop in iPython, it automatically adds the indentation for you. Try the `for` loop from above.
-
+Another great thing about IPython is that you can also use Unix commands like `ls` and `cd`.
+Additionally, when you create a loop in IPython, it automatically adds the indentation for you. Try the `for` loop from above.
 
 **To exit** the interactive console, type **_control+D_**.
 
@@ -305,7 +272,7 @@ Additionally, when you create a loop in iPython, it automatically adds the inden
 
 The Anaconda install also comes with a Python IDE that is similar to RStudio. It is called Spyder. You can open a Spyder instance by executing the command in your terminal window:
 
-```
+```bash
 $ spyder
 ```
 
@@ -317,7 +284,7 @@ Running Python interactively in the console is nice for simple code. But it is p
 
 Start a Jupyter notebook in the terminal:
 
-```
+```bash
 $ jupyter notebook
 ```
 
@@ -325,11 +292,9 @@ This should open your default browser. You can start a new Python notebook by se
 
 ![jupyter browser](../fig/jupyter1.png)
 
-<!-- Note that I have additional options for Jupyter notebooks and can create a notebook for code written in Bash or [RevBayes](http://revbayes.github.io/about.html).  -->
-Note that a [Jupyter kernel](http://jupyter-client.readthedocs.io/en/latest/kernels.html) can be written for any language. If you like working in the Jupyter environment, you may be interested in installing the [Bash kernel](https://github.com/takluyver/bash_kernel) or the [R kernel](https://irkernel.github.io/). 
-<!-- If you develop software that involves a new language, you can also create a Jupyter kernel like we have done for [RevBayes](https://github.com/revbayes/revbayes_kernel). -->
+Note that a [Jupyter kernel](http://jupyter-client.readthedocs.io/en/latest/kernels.html) can be written for any language. If you like working in the Jupyter environment, you may be interested in installing the [Bash kernel](https://github.com/takluyver/bash_kernel) or the [R kernel](https://irkernel.github.io/).
 
-When you select **_New->Python 3_**, new Python 3 Jupyter notebook will open. This now allows you combine Python code with Markdown to fully integrate documentation with your code.
+When you select **_New->Python 3_**, a new Python 3 Jupyter notebook will open. This now allows you to combine Python code with Markdown to fully integrate documentation with your code.
 
 ![jupyter browser](../fig/jupyter2.png)
 
@@ -337,10 +302,11 @@ Each cell in a Jupyter notebook can be executed and you can choose the type of c
 
 > ## Count the Gs using Python in a Jupyter Notebook
 >
-> Replicate one of the solutions give above in a Jupyter notebook. Add some Markdown text to describe your program.
+> Replicate one of the solutions given above in a Jupyter notebook. Add some Markdown text to describe your program.
 >
 > > ## Solution
 > >
 > > ![jupyter browser](../fig/jupyter3.png)
 > {: .solution}
 {: .challenge}
+
