@@ -33,7 +33,7 @@ we need to:
 The good news is,
 doing these things will speed up our programming,
 not slow it down.
-As in real carpentry --- the kind done with lumber --- the time saved
+As in real carpentry — the kind done with lumber — the time saved
 by measuring carefully before cutting a piece of wood
 is much greater than the time that measuring takes.
 
@@ -62,7 +62,7 @@ total = 0.0
 for n in numbers:
     assert n > 0.0, 'Data should only contain positive values'
     total += n
-print 'total is:', total
+print('total is:', total)
 ~~~
 ~~~ {.error}
 ---------------------------------------------------------------------------
@@ -72,7 +72,7 @@ AssertionError                            Traceback (most recent call last)
       3 for n in numbers:
 ----> 4     assert n > 0.0, 'Data should only contain positive values'
       5     total += n
-      6 print 'total is:', total
+      6 print('total is:', total)
 
 AssertionError: Data should only contain positive values
 ~~~
@@ -109,7 +109,7 @@ def normalize_rectangle(rect):
     dx = x1 - x0
     dy = y1 - y0
     if dx > dy:
-        scaled = float(dx) / dy
+        scaled = float(dy) / dx
         upper_x, upper_y = 1.0, scaled
     else:
         scaled = float(dx) / dy
@@ -124,13 +124,13 @@ def normalize_rectangle(rect):
 The preconditions on lines 2, 4, and 5 catch invalid inputs:
 
 ~~~ {.python}
-print normalize_rectangle( (0.0, 1.0, 2.0) ) # missing the fourth coordinate
+print(normalize_rectangle((0.0, 1.0, 2.0))) # missing the fourth coordinate
 ~~~
 ~~~ {.error}
 ---------------------------------------------------------------------------
 AssertionError                            Traceback (most recent call last)
 <ipython-input-21-3a97b1dcab70> in <module>()
-----> 1 print normalize_rectangle( (0.0, 1.0, 2.0) ) # missing the fourth coordinate
+----> 1 print(normalize_rectangle((0.0, 1.0, 2.0))) # missing the fourth coordinate
 
 <ipython-input-20-408dc39f3915> in normalize_rectangle(rect)
       1 def normalize_rectangle(rect):
@@ -143,13 +143,13 @@ AssertionError: Rectangles must contain 4 coordinates
 ~~~
 
 ~~~ {.python}
-print normalize_rectangle( (4.0, 2.0, 1.0, 5.0) ) # X axis inverted
+print(normalize_rectangle((4.0, 2.0, 1.0, 5.0))) # X axis inverted
 ~~~
 ~~~ {.error}
 ---------------------------------------------------------------------------
 AssertionError                            Traceback (most recent call last)
 <ipython-input-22-f05ae7878a45> in <module>()
-----> 1 print normalize_rectangle( (4.0, 2.0, 1.0, 5.0) ) # X axis inverted
+----> 1 print(normalize_rectangle((4.0, 2.0, 1.0, 5.0))) # X axis inverted
 
 <ipython-input-20-408dc39f3915> in normalize_rectangle(rect)
       3     assert len(rect) == 4, 'Rectangles must contain 4 coordinates'
@@ -166,7 +166,7 @@ For example,
 if we normalize a rectangle that is taller than it is wide everything seems OK:
 
 ~~~ {.python}
-print normalize_rectangle( (0.0, 0.0, 1.0, 5.0) )
+print(normalize_rectangle((0.0, 0.0, 1.0, 5.0)))
 ~~~
 ~~~ {.output}
 (0, 0, 0.2, 1.0)
@@ -176,13 +176,13 @@ but if we normalize one that's wider than it is tall,
 the assertion is triggered:
 
 ~~~ {.python}
-print normalize_rectangle( (0.0, 0.0, 5.0, 1.0) )
+print(normalize_rectangle((0.0, 0.0, 5.0, 1.0)))
 ~~~
 ~~~ {.error}
 ---------------------------------------------------------------------------
 AssertionError                            Traceback (most recent call last)
 <ipython-input-24-5f0ef7954aeb> in <module>()
-----> 1 print normalize_rectangle( (0.0, 0.0, 5.0, 1.0) )
+----> 1 print(normalize_rectangle((0.0, 0.0, 5.0, 1.0)))
 
 <ipython-input-20-408dc39f3915> in normalize_rectangle(rect)
      16
@@ -195,7 +195,8 @@ AssertionError: Calculated upper Y coordinate invalid
 ~~~
 
 Re-reading our function,
-we realize that line 10 should divide `dy` by `dx` rather than `dx` by `dy`.
+we realize that line 10 should divide `dy` by `dx` rather than `dx` by `dy`
+when `dx > dy`.
 (You can display line numbers by typing Ctrl-M, then L.)
 If we had left out the assertion at the end of the function,
 we would have created and returned something that had the right shape as a valid answer,
@@ -241,7 +242,7 @@ The range of each time series is represented as a pair of numbers,
 which are the time the interval started and ended.
 The output is the largest range that they all include:
 
-![Overlapping Ranges](fig/python-overlapping-ranges.svg)\
+![Overlapping Ranges](fig/python-overlapping-ranges.svg)
 
 Most novice programmers would solve this problem like this:
 
@@ -249,7 +250,7 @@ Most novice programmers would solve this problem like this:
 2.  Call it interactively on two or three different inputs.
 3.  If it produces the wrong answer, fix the function and re-run that test.
 
-This clearly works --- after all, thousands of scientists are doing it right now --- but
+This clearly works — after all, thousands of scientists are doing it right now — but
 there's a better way:
 
 1.  Write a short function for each test.
