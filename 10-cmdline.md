@@ -38,7 +38,7 @@ $ python readings.py --mean inflammation-01.csv
 5.9
 ~~~
 
-We might also want to look at the minimum of the first four lines
+We might also want to look at the minimum of the first four lines:
 
 ~~~
 $ head -4 inflammation-01.csv | python readings.py --min
@@ -68,7 +68,7 @@ save the following in a text file called `sys-version.py`:
 
 ~~~ {.python}
 import sys
-print 'version is', sys.version
+print('version is', sys.version)
 ~~~
 
 The first line imports a library called `sys`,
@@ -80,17 +80,16 @@ We can run this script from the command line like this:
 ~~~ {.input}
 $ python sys-version.py
 ~~~
-
 ~~~ {.output}
-version is 2.7.5 |Anaconda 1.8.0 (x86_64)| (default, Oct 24 2013, 07:02:20)
-[GCC 4.0.1 (Apple Inc. build 5493)]
+version is 3.9.7 | packaged by conda-forge | (default, Sep 29 2021, 19:15:38)
+[GCC 9.4.0]
 ~~~
 
 Create another file called `argv-list.py` and save the following text to it.
 
 ~~~ {.python}
 import sys
-print 'sys.argv is', sys.argv
+print('sys.argv is', sys.argv)
 ~~~
 
 The strange name `argv` stands for "argument values".
@@ -103,7 +102,6 @@ If we run this program with no arguments:
 ~~~ {.input}
 $ python argv-list.py
 ~~~
-
 ~~~ {.output}
 sys.argv is ['argv-list.py']
 ~~~
@@ -131,7 +129,6 @@ though we can call it whatever we want:
 ~~~ {.input}
 $ cat readings-01.py
 ~~~
-
 ~~~ {.python}
 import sys
 import numpy
@@ -141,7 +138,10 @@ def main():
     filename = sys.argv[1]
     data = numpy.loadtxt(filename, delimiter=',')
     for m in data.mean(axis=1):
-        print m
+        print(m)
+
+if __name__ == '__main__':
+    main()
 ~~~
 
 This function gets the name of the script from `sys.argv[0]`,
@@ -160,7 +160,6 @@ Let's add a call to `main`:
 ~~~ {.input}
 $ cat readings-02.py
 ~~~
-
 ~~~ {.python}
 import sys
 import numpy
@@ -170,9 +169,10 @@ def main():
     filename = sys.argv[1]
     data = numpy.loadtxt(filename, delimiter=',')
     for m in data.mean(axis=1):
-        print m
+        print(m)
 
-main()
+if __name__ == '__main__':
+    main()
 ~~~
 
 and run that:
@@ -180,7 +180,6 @@ and run that:
 ~~~ {.input}
 $ python readings-02.py inflammation-01.csv
 ~~~
-
 ~~~ {.output}
 5.45
 5.425
@@ -313,7 +312,6 @@ Here's our changed program
 ~~~ {.input}
 $ cat readings-03.py
 ~~~
-
 ~~~ {.python}
 import sys
 import numpy
@@ -323,9 +321,10 @@ def main():
     for filename in sys.argv[1:]:
         data = numpy.loadtxt(filename, delimiter=',')
         for m in data.mean(axis=1):
-            print m
+            print(m)
 
-main()
+if __name__ == '__main__':
+    main()
 ~~~
 
 and here it is in action:
@@ -333,7 +332,6 @@ and here it is in action:
 ~~~ {.input}
 $ python readings-03.py small-01.csv small-02.csv
 ~~~
-
 ~~~ {.output}
 0.333333333333
 1.0
@@ -363,7 +361,6 @@ so we could just do this:
 ~~~ {.input}
 $ cat readings-04.py
 ~~~
-
 ~~~ {.python}
 import sys
 import numpy
@@ -384,9 +381,10 @@ def main():
             values = data.max(axis=1)
 
         for m in values:
-            print m
+            print(m)
 
-main()
+if __name__ == '__main__':
+    main()
 ~~~
 
 This works:
@@ -417,7 +415,6 @@ so that the program fails fast:
 ~~~ {.input}
 $ cat readings-05.py
 ~~~
-
 ~~~ {.python}
 import sys
 import numpy
@@ -442,9 +439,10 @@ def process(filename, action):
         values = data.max(axis=1)
 
     for m in values:
-        print m
+        print(m)
 
-main()
+if __name__ == '__main__':
+    main()
 ~~~
 
 This is four lines longer than its predecessor,
@@ -466,7 +464,6 @@ Let's experiment in another script called `count-stdin.py`:
 ~~~ {.input}
 $ cat count-stdin.py
 ~~~
-
 ~~~ {.python}
 import sys
 
@@ -474,20 +471,19 @@ count = 0
 for line in sys.stdin:
     count += 1
 
-print count, 'lines in standard input'
+print(count, 'lines in standard input')
 ~~~
 
 This little program reads lines from a special "file" called `sys.stdin`,
 which is automatically connected to the program's standard input.
-We don't have to open it --- Python and the operating system
-take care of that when the program starts up ---
+We don't have to open it — Python and the operating system
+take care of that when the program starts up —
 but we can do almost anything with it that we could do to a regular file.
 Let's try running it as if it were a regular command-line program:
 
 ~~~ {.input}
 $ python count-stdin.py < small-01.csv
 ~~~
-
 ~~~ {.output}
 2 lines in standard input
 ~~~
@@ -495,10 +491,10 @@ $ python count-stdin.py < small-01.csv
 A common mistake is to try to run something that reads from standard input like this:
 
 ~~~ {.input}
-$ count_stdin.py small-01.csv
+$ python count-stdin.py small-01.csv
 ~~~
 
-i.e., to forget the `<` character that redirect the file to standard input.
+i.e., to forget the `<` character that redirects the file to standard input.
 In this case,
 there's nothing in standard input,
 so the program waits at the start of the loop for someone to type something on the keyboard.
@@ -515,8 +511,10 @@ That leaves `main`:
 ~~~ {.input}
 $ cat readings-06.py
 ~~~
-
 ~~~ {.python}
+import sys
+import numpy
+
 def main():
     script = sys.argv[0]
     action = sys.argv[1]
@@ -528,6 +526,22 @@ def main():
     else:
         for f in filenames:
             process(f, action)
+
+def process(filename, action):
+    data = numpy.loadtxt(filename, delimiter=',')
+
+    if action == '--min':
+        values = data.min(axis=1)
+    elif action == '--mean':
+        values = data.mean(axis=1)
+    elif action == '--max':
+        values = data.max(axis=1)
+
+    for m in values:
+        print(m)
+
+if __name__ == '__main__':
+    main()
 ~~~
 
 Let's try it out:
@@ -535,7 +549,6 @@ Let's try it out:
 ~~~ {.input}
 $ python readings-06.py --mean small-01.csv
 ~~~
-
 ~~~ {.output}
 0.333333333333
 1.0
