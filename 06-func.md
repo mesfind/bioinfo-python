@@ -22,7 +22,7 @@ and didn't want to generate a figure for every single one?
 Commenting out the figure-drawing code is a nuisance.
 Also, what if we want to use that code again,
 on a different dataset or at a different point in our program?
-Cutting and pasting it is going to make our code get very long and very repetative,
+Cutting and pasting it is going to make our code get very long and very repetitive,
 very quickly.
 We'd like a way to package our code so that it is easier to reuse,
 and Python provides for this by letting us define things called 'functions' -
@@ -38,8 +38,8 @@ def fahr_to_kelvin(temp):
 The function definition opens with the word `def`,
 which is followed by the name of the function
 and a parenthesized list of parameter names.
-The [body](reference.html#function-body) of the function --- the
-statements that are executed when it runs --- is indented below the definition line,
+The [body](reference.html#function-body) of the function — the
+statements that are executed when it runs — is indented below the definition line,
 typically by four spaces.
 
 When we call the function,
@@ -52,8 +52,8 @@ Let's try running our function.
 Calling our own function is no different from calling any other function:
 
 ~~~ {.python}
-print 'freezing point of water:', fahr_to_kelvin(32)
-print 'boiling point of water:', fahr_to_kelvin(212)
+print('freezing point of water:', fahr_to_kelvin(32))
+print('boiling point of water:', fahr_to_kelvin(212))
 ~~~
 ~~~ {.output}
 freezing point of water: 273.15
@@ -82,14 +82,14 @@ and printing out the value of each part.
 
 ~~~ {.python}
 # We'll use temp = 212, the boiling point of water, which was incorrect
-print "212 - 32:", 212 - 32
+print("212 - 32:", 212 - 32)
 ~~~
 ~~~ {.output}
 212 - 32: 180
 ~~~
 
 ~~~ {.python}
-print "(212 - 32) * (5/9):", (212 - 32) * (5/9)
+print("(212 - 32) * (5/9):", (212 - 32) * (5/9))
 ~~~
 ~~~ {.output}
 (212 - 32) * (5/9): 0
@@ -116,7 +116,7 @@ If we divide one integer by another,
 we get the quotient without the remainder:
 
 ~~~ {.python}
-print '10/3 is:', 10/3
+print('10/3 is:', 10/3)
 ~~~
 ~~~ {.output}
 10/3 is: 3
@@ -127,7 +127,7 @@ on the other hand,
 the computer creates a floating-point answer:
 
 ~~~ {.python}
-print '10.0/3 is:', 10.0/3
+print('10.0/3 is:', 10.0/3)
 ~~~
 ~~~ {.output}
 10.0/3 is: 3.33333333333
@@ -149,7 +149,7 @@ is to explicitly tell the computer that you desire one.
 This is achieved by [casting](reference.html#typecast) one of the numbers:
 
 ~~~ {.python}
-print 'float(10)/3 is:', float(10)/3
+print('float(10)/3 is:', float(10)/3)
 ~~~
 ~~~ {.output}
 float(10)/3 is: 3.33333333333
@@ -161,8 +161,8 @@ Let's take a look:
 ~~~ {.python}
 a = 10
 b = 3
-print 'a/b is:', a/b
-print 'float(a)/b is:', float(a)/b
+print('a/b is:', a/b)
+print('float(a)/b is:', float(a)/b)
 ~~~
 ~~~ {.output}
 a/b is: 3
@@ -175,8 +175,8 @@ Let's fix our `fahr_to_kelvin` function with this new knowledge:
 def fahr_to_kelvin(temp):
     return ((temp - 32) * (5.0/9.0)) + 273.15
 
-print 'freezing point of water:', fahr_to_kelvin(32)
-print 'boiling point of water:', fahr_to_kelvin(212)
+print('freezing point of water:', fahr_to_kelvin(32))
+print('boiling point of water:', fahr_to_kelvin(212))
 ~~~
 ~~~ {.output}
 freezing point of water: 273.15
@@ -192,7 +192,7 @@ it's easy to turn Kelvin into Celsius:
 def kelvin_to_celsius(temp):
     return temp - 273.15
 
-print 'absolute zero in Celsius:', kelvin_to_celsius(0.0)
+print('absolute zero in Celsius:', kelvin_to_celsius(0.0))
 ~~~
 ~~~ {.output}
 absolute zero in Celsius: -273.15
@@ -210,7 +210,7 @@ def fahr_to_celsius(temp):
     result = kelvin_to_celsius(temp_k)
     return result
 
-print 'freezing point of water in Celsius:', fahr_to_celsius(32.0)
+print('freezing point of water in Celsius:', fahr_to_celsius(32.0))
 ~~~
 ~~~ {.output}
 freezing point of water in Celsius: 0.0
@@ -218,15 +218,15 @@ freezing point of water in Celsius: 0.0
 
 This is our first taste of how larger programs are built:
 we define basic operations,
-then combine them in ever-large chunks to get the effect we want.
-Real-life functions will usually be larger than the ones shown here --- typically half a dozen to a few dozen lines --- but
+then combine them in ever-larger chunks to get the effect we want.
+Real-life functions will usually be larger than the ones shown here — typically half a dozen to a few dozen lines — but
 they shouldn't ever be much longer than that,
 or the next person who reads it won't be able to understand what's going on.
 
 ## Tidying up
 
 Now that we know how to wrap bits of code up in functions,
-we can make our inflammation analyasis easier to read and easier to reuse.
+we can make our inflammation analysis easier to read and easier to reuse.
 First, let's make an `analyze` function that generates our plots:
 
 ~~~ {.python}
@@ -262,11 +262,11 @@ def detect_problems(filename):
     data = np.loadtxt(fname=filename, delimiter=',')
 
     if data.max(axis=0)[0] == 0 and data.max(axis=0)[20] == 20:
-        print 'Suspicious looking maxima!'
+        print('Suspicious looking maxima!')
     elif data.min(axis=0).sum() == 0:
-        print 'Minima add up to zero!'
+        print('Minima add up to zero!')
     else:
-        print 'Seems OK!'
+        print('Seems OK!')
 ~~~
 
 Notice that rather than jumbling this code together in one giant `for` loop,
@@ -275,9 +275,9 @@ We can reproduce the previous analysis with a much simpler `for` loop:
 
 ~~~ {.python}
 for f in filenames[:3]:
-    print f
+    print(f)
     analyze(f)
-    detectProblems(f)
+    detect_problems(f)
 ~~~
 
 By giving our functions human-readable names,
@@ -306,7 +306,7 @@ and then center that around 3:
 
 ~~~ {.python}
 z = numpy.zeros((2,2))
-print center(z, 3)
+print(center(z, 3))
 ~~~
 ~~~ {.output}
 [[ 3.  3.]
@@ -318,7 +318,7 @@ so let's try `center` on our real data:
 
 ~~~ {.python}
 data = numpy.loadtxt(fname='inflammation-01.csv', delimiter=',')
-print center(data, 0)
+print(center(data, 0))
 ~~~
 ~~~ {.output}
 [[-6.14875 -6.14875 -5.14875 ..., -3.14875 -6.14875 -6.14875]
@@ -334,23 +334,23 @@ It's hard to tell from the default output whether the result is correct,
 but there are a few simple tests that will reassure us:
 
 ~~~ {.python}
-print 'original min, mean, and max are:', data.min(), data.mean(), data.max()
+print('original min, mean, and max are:', data.min(), data.mean(), data.max())
 centered = center(data, 0)
-print 'min, mean, and and max of centered data are:', centered.min(), centered.mean(), centered.max()
+print('min, mean, and max of centered data are:', centered.min(), centered.mean(), centered.max())
 ~~~
 ~~~ {.output}
 original min, mean, and max are: 0.0 6.14875 20.0
-min, mean, and and max of centered data are: -6.14875 -3.49054118942e-15 13.85125
+min, mean, and max of centered data are: -6.14875 -3.49054118942e-15 13.85125
 ~~~
 
 That seems almost right:
 the original mean was about 6.1,
-so the lower bound from zero is how about -6.1.
-The mean of the centered data isn't quite zero --- we'll explore why not in the challenges --- but it's pretty close.
+so the lower bound from zero is now about -6.1.
+The mean of the centered data isn't quite zero — we'll explore why not in the challenges — but it's pretty close.
 We can even go further and check that the standard deviation hasn't changed:
 
 ~~~ {.python}
-print 'std dev before and after:', data.std(), centered.std()
+print('std dev before and after:', data.std(), centered.std())
 ~~~
 ~~~ {.output}
 std dev before and after: 4.61383319712 4.61383319712
@@ -361,7 +361,7 @@ but we probably wouldn't notice if they were different in the sixth decimal plac
 Let's do this instead:
 
 ~~~ {.python}
-print 'difference in standard deviations before and after:', data.std() - centered.std()
+print('difference in standard deviations before and after:', data.std() - centered.std())
 ~~~
 ~~~ {.output}
 difference in standard deviations before and after: -3.5527136788e-15
@@ -446,7 +446,8 @@ array([[ 0.,  0.,  1., ...,  3.,  0.,  0.],
        ...,
        [ 0.,  1.,  1., ...,  1.,  1.,  1.],
        [ 0.,  0.,  0., ...,  0.,  2.,  0.],
-       [ 0.,  0.,  1., ...,  1.,  1.,  0.]])~~~
+       [ 0.,  0.,  1., ...,  1.,  1.,  0.]])
+~~~
 
 but we still need to say `delimiter=`:
 
@@ -486,7 +487,7 @@ it works as it did before:
 
 ~~~ {.python}
 test_data = numpy.zeros((2, 2))
-print center(test_data, 3)
+print(center(test_data, 3))
 ~~~
 ~~~ {.output}
 [[ 3.  3.]
@@ -498,10 +499,10 @@ in which case `desired` is automatically assigned the [default value](reference.
 
 ~~~ {.python}
 more_data = 5 + numpy.zeros((2, 2))
-print 'data before centering:'
-print more_data
-print 'centered data:'
-print center(more_data)
+print('data before centering:')
+print(more_data)
+print('centered data:')
+print(center(more_data))
 ~~~
 ~~~ {.output}
 data before centering:
@@ -521,13 +522,13 @@ The example below shows how Python matches values to parameters:
 
 ~~~ {.python}
 def display(a=1, b=2, c=3):
-    print 'a:', a, 'b:', b, 'c:', c
+    print('a:', a, 'b:', b, 'c:', c)
 
-print 'no parameters:'
+print('no parameters:')
 display()
-print 'one parameter:'
+print('one parameter:')
 display(55)
-print 'two parameters:'
+print('two parameters:')
 display(55, 66)
 ~~~
 ~~~ {.output}
@@ -545,7 +546,7 @@ and any that haven't been given a value explicitly get their default value.
 We can override this behavior by naming the value as we pass it in:
 
 ~~~ {.python}
-print 'only setting the value of c'
+print('only setting the value of c')
 display(c=77)
 ~~~
 ~~~ {.output}
@@ -681,7 +682,7 @@ the second parameter in the list.
 > A call to your function should look like this:
 >
 > ~~~ {.python}
-> print fence('name', '*')
+> print(fence('name', '*'))
 > *name*
 > ~~~
 
@@ -695,7 +696,7 @@ the second parameter in the list.
 > A call to your function should look like this:
 >
 > ~~~ {.python}
-> print outer('helium')
+> print(outer('helium'))
 > hm
 > ~~~
 
@@ -728,5 +729,5 @@ the second parameter in the list.
 > f2k(41)
 > f2k(32)
 >
-> print k
+> print(k)
 > ~~~
