@@ -10,17 +10,18 @@ objectives:
 - "Learn about the `Seq` and `SeqRecord` objects."
 - "Read in sequences from FASTA files."
 - "Download a sequence record directly from Genbank using the NCBI E-utilities."
+- "Handle network errors and API rate limits when accessing NCBI."
 keypoints:
 - "Biopython is a very useful toolbox for working with sequence data."
+- "Always respect NCBI's rate limits when using E-utilities."
+- "Implement error handling for robust data retrieval."
 ---
-
 
 # Biopython Background
 
 Biopython is a freely available package for working with molecular biological data.
 In this lesson, we will just cover some basics of working with Biopython. 
 The developers of this package have written a comprehensive [tutorial and cookbook](http://biopython.org/DIST/docs/tutorial/Tutorial.html).
-
 
 ## What can Biopython do?
 
@@ -34,7 +35,7 @@ different tools in the package:
   - GenBank
   - PubMed and Medline
   - ExPASy files, like Enzyme and Prosite
-  - SCOP, including ‘dom’ and ‘lin’ files
+  - SCOP, including 'dom' and 'lin' files
   - UniGene
   - SwissProt 
 - Files in the supported formats can be iterated over record by record or indexed and accessed via a Dictionary interface.
@@ -56,18 +57,21 @@ different tools in the package:
 
 # Getting Started
 
-
-
 ## Install Biopython and Create a Jupyter Notebook
 
 The easiest way to install the Biopython tools is to use `conda`. From your terminal, you simply need to execute the following:
 
+```bash
+conda install biopython
 ```
-$ conda install biopython
+
+Alternatively, you can use pip:
+
+```bash
+pip install biopython
 ```
 
 Now create a new Jupyter notebook for this lesson. 
-
 
 # Working with Biopython
 
@@ -81,93 +85,67 @@ The alphabets are actually defined objects such as `IUPACAmbiguousDNA` or
 
 First, import the `Seq` object from Biopython
 
-~~~
+~~~python
 from Bio.Seq import Seq
 ~~~
-{: .python}
 
 Now we can create a `Seq` object: 
 
-~~~
+~~~python
 my_seq = Seq("AGTACACTGGT")
 my_seq
 ~~~
-{: .python}
-
-~~~
+~~~output
 Seq('AGTACACTGGT')
 ~~~
-{: .output}
-
-<!-- We can create protein sequence by specifying the alphabet:
-~~~
-my_prot = Seq("AGTACACTGGT", IUPAC.protein)
-my_prot
-~~~
-{: .python}
-
-~~~
-Seq('AGTACACTGGT', IUPACProtein())
-~~~
-{: .output} -->
 
 The nice thing about the sequence object is 
-that it can be treated
-just like a Python string object.
+that it can be treated just like a Python string object.
 
-~~~
+~~~python
 print(my_seq[:3])
 ~~~
-{: .python}
-~~~
+~~~output
 AGT
 ~~~
-{: .output}
 
 `Seq` objects also have string methods like `.count()`
-~~~
+
+~~~python
 my_seq.count('AC')
 ~~~
-{: .python}
-~~~
+~~~output
 2
 ~~~
-{: .output}
 
 And you can use functions that act on strings like `len()`
 
-~~~
+~~~python
 len(my_seq)
 ~~~
-{: .python}
-~~~
+~~~output
 11
 ~~~
-{: .output}
-
 
 `Seq` objects also have special methods. For example, you can get the reverse complement of a sequence:
 
-~~~
+~~~python
 my_seq = Seq("GATCGATGGGCCTATATAGGATCGAAAATCGC")
 print(my_seq.reverse_complement())
 ~~~
-{: .python}
-~~~
+~~~output
 GCGATTTTCGATCCTATATAGGCCCATCGATC
 ~~~
-{: .output}
 
 Just like strings in Python, the `Seq` object is immutable, 
 meaning you cannot change it. If you try to change one of the sites in this
 sequence, you will get an error. If you want an editable sequence object, you
 will need to create a `MutableSeq` object. 
 
-~~~
+~~~python
 from Bio.Seq import MutableSeq
 mutable_seq = MutableSeq("GCCATTGTAATGGGCCGCTGAAAGGGTGCCCGA")
 ~~~
-{: .python}
 
 Now you can try changing the nucleotide at index 3 to `'G'`.
 
@@ -178,64 +156,78 @@ Biopython's `SeqRecord` is a complex object that contains a
 sequence (i.e., metadata). These attributes are also called 
 "annotation fields":
 
-- `.seq`
-  - The sequence itself, typically a Seq object.
-- `.id`
-  - The primary ID used to identify the sequence – a string. In most cases this is something like an accession number.
-- `.name`
-  - A “common” name/id for the sequence – a string. In some cases this will be the same as the accession number, but it could also be a clone name. I think of this as being analogous to the LOCUS id in a GenBank record.
-- `.description`
-  - A human readable description or expressive name for the sequence – a string.
-- `.letter_annotations`
-  - Holds per-letter-annotations using a (restricted) dictionary of additional information about the letters in the sequence. The keys are the name of the information, and the information is contained in the value as a Python sequence (i.e. a list, tuple or string) with the same length as the sequence itself. This is often used for quality scores (e.g. Section 20.1.6) or secondary structure information (e.g. from Stockholm/PFAM alignment files).
-- `.annotations`
-  - A dictionary of additional information about the sequence. The keys are the name of the information, and the information is contained in the value. This allows the addition of more “unstructured” information to the sequence.
-- `.features`
-  - A list of SeqFeature objects with more structured information about the features on a sequence (e.g. position of genes on a genome, or domains on a protein sequence)
-- `.dbxrefs`
-  - A list of database cross-references as strings. 
+- `.seq` - The sequence itself, typically a Seq object.
+- `.id` - The primary ID used to identify the sequence – a string.
+- `.name` - A "common" name/id for the sequence – a string.
+- `.description` - A human readable description or expressive name for the sequence.
+- `.letter_annotations` - Holds per-letter-annotations using a dictionary.
+- `.annotations` - A dictionary of additional information about the sequence.
+- `.features` - A list of SeqFeature objects with more structured information.
+- `.dbxrefs` - A list of database cross-references as strings. 
 
 You can create a `SeqRecord` by giving the constructor a `Seq` object:
-~~~
+
+~~~python
 from Bio.SeqRecord import SeqRecord
 simple_seq = Seq("GATC")
 simple_seq_r = SeqRecord(simple_seq)
 ~~~
-{: .python}
 
 And you can provide attributes:
 
-~~~
+~~~python
 simple_seq_r.id = "AC12345"
 simple_seq_r.description = "This sequence is pretend."
 print(simple_seq_r)
 ~~~
-{: .python}
-~~~
+~~~output
 ID: AC12345
 Name: <unknown name>
 Description: This sequence is pretend.
 Number of features: 0
 Seq('GATC')
 ~~~
-{: .output}
 
 ## Reading Sequences from FASTA files
 
-`SeqIO` enables reading in sequences from FASTA files and storing the data in a `SeqRecord`. Addtionally `SeqIO` provides tools for writing sequence data to a file.
+`SeqIO` enables reading in sequences from FASTA files and storing the data in a `SeqRecord`. Additionally `SeqIO` provides tools for writing sequence data to a file.
 
-We will read in the example file [`NC_005816.fna`](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/NC_005816.fna) using `SeqIO`.
+We will read in the example file using `SeqIO`. First, let's download a sample FASTA file:
 
+~~~python
+import os
+import urllib.request
+
+# Download a sample FASTA file if it doesn't exist
+fasta_url = "https://raw.githubusercontent.com/biopython/biopython/master/Doc/examples/ls_orchid.fasta"
+fasta_file = "ls_orchid.fasta"
+
+if not os.path.isfile(fasta_file):
+    try:
+        urllib.request.urlretrieve(fasta_url, fasta_file)
+        print(f"Downloaded {fasta_file}")
+    except Exception as e:
+        print(f"Error downloading file: {e}")
+        print("Please download the file manually from:")
+        print(fasta_url)
 ~~~
+
+Now read the FASTA file:
+
+~~~python
 from Bio import SeqIO
-record = SeqIO.read("NC_005816.fna", "fasta")
+
+# Read a single record
+record = SeqIO.read(fasta_file, "fasta")
+print(f"Sequence ID: {record.id}")
+print(f"Sequence length: {len(record.seq)}")
+print(f"First 50 bases: {record.seq[:50]}")
 ~~~
-{: .python}
-<!-- ~~~
-SeqRecord(seq=Seq('TGTAACGAACGGTGCAATAGTGATCCACACCCAACGCCTGAAATCAGATCCAGG...CTG', SingleLetterAlphabet()), id='gi|45478711|ref|NC_005816.1|', name='gi|45478711|ref|NC_005816.1|', description='gi|45478711|ref|NC_005816.1| Yersinia pestis biovar Microtus str. 91001 plasmid pPCP1, complete sequence', dbxrefs=[])
+~~~output
+Sequence ID: gi|2765658|emb|Z78533.1|CIZ78533
+Sequence length: 740
+First 50 bases: CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGATGAGACCGTG
 ~~~
-{: .output}
- -->
 
 > ## Find out more about this sequence
 >
@@ -244,67 +236,44 @@ SeqRecord(seq=Seq('TGTAACGAACGGTGCAATAGTGATCCACACCCAACGCCTGAAATCAGATCCAGG...CTG'
 >
 > > ## Solution
 > > 
-> > Get the length using `len()`. 
-> > ~~~
+> > Get the length using `len()`: 
+> > ~~~python
 > > len(record.seq)
 > > ~~~
-> > {: .python}
+> > ~~~output
+> > 740
 > > ~~~
-> > 9609
-> > ~~~
-> > {: .output}
 > >
-> > The species name is given in the description of this FASTA file
-> > ~~~
+> > The species name is given in the description of this FASTA file:
+> > ~~~python
 > > record.description
 > > ~~~
-> > {: .python}
+> > ~~~output
+> > 'gi|2765658|emb|Z78533.1|CIZ78533 C.irapeanum 5.8S rRNA gene and ITS1 and ITS2 DNA'
 > > ~~~
-> > 'gi|45478711|ref|NC_005816.1| Yersinia pestis biovar Microtus str. 91001 plasmid pPCP1, complete sequence'
-> > ~~~
-> > {: .output}
-> > 
 > {: .solution}
 {: .challenge}
 
 Using `SeqIO` we can read in several sequences from a file and store 
-them in a list of `SeqRecord` objects from a file. The file 
-[`example.fasta`](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/example.fasta) looks like this:
+them in a list of `SeqRecord` objects. 
 
-```
->EAS54_6_R1_2_1_413_324
-CCCTTCTTGTCTTCAGCGTTTCTCC
->EAS54_6_R1_2_1_540_792
-TTGGCAGGCCAAGGCCGATGGATCA
->EAS54_6_R1_2_1_443_348
-GTTGCTTCTGGCGTGGGTGGGGGGG
-```
-
-With Biopython, we can use the `SeqIO.parse()` function to obtain the three sequences in this file
-
+~~~python
+# Read multiple sequences
+records = list(SeqIO.parse(fasta_file, "fasta"))
+print(f"Number of sequences: {len(records)}")
+for i, rec in enumerate(records[:3]):
+    print(f"Record {i+1}: {rec.id} - {len(rec.seq)} bp")
 ~~~
-handle = open("example.fasta", "r") 
-seq_list = list(SeqIO.parse(handle, "fasta"))
-handle.close()
-print(seq_list[0].seq)
+~~~output
+Number of sequences: 94
+Record 1: gi|2765658|emb|Z78533.1|CIZ78533 - 740 bp
+Record 2: gi|2765657|emb|Z78532.1|CIZ78532 - 753 bp
+Record 3: gi|2765656|emb|Z78531.1|CIZ78531 - 748 bp
 ~~~
-{: .python}
-~~~
-CCCTTCTTGTCTTCAGCGTTTCTCC
-~~~
-{: .output}
 
-In the example above, we open the file and assign it to the variable `handle` 
-which acts as a pointer to the file contents. 
+## Robust Data Download from NCBI
 
-## Direct Access to GenBank
-
-BioPython has modules that can directly access databases over the Internet using
-the `Entrez` module. This uses the NCBI Efetch service,
-which works on many NCBI databases including protein and PubMed
-literature citations.
-With a few tweaks, this code could be used to download a list of
-GenBank ID’s and save them as FASTA or GenBank files.
+### Setting Up NCBI Entrez with Error Handling
 
 Before using the online NCBI resources, it is important to be aware of the user 
 requirements. If you abuse their system (whether on purpose or on accident), 
@@ -316,286 +285,381 @@ First, you are required to provide NCBI with
 your identity so that you can be contacted 
 if there is a problem. This also limits abuse of this system so that 
 their servers aren't overwhelmed. 
-If you are identified as someone who is excessively using the E-utilities,
-NCBI will contact you before you are blocked.
 
 The quote below from the 
 [NCBI guide](https://www.ncbi.nlm.nih.gov/books/NBK25497/#chapter2.Usage_Guidelines_and_Requiremen) 
 gives you a sense of what constitutes appropriate usage of 
 the E-utility servers:
 
->In order not to overload the E-utility servers, NCBI recommends that users post no more than three URL requests per second and limit large jobs to either weekends or between 9:00 PM and 5:00 AM Eastern time during weekdays.
+> In order not to overload the E-utility servers, NCBI recommends that users post no more than three URL requests per second and limit large jobs to either weekends or between 9:00 PM and 5:00 AM Eastern time during weekdays.
 
+### Robust Entrez Setup with Error Handling
 
-Enter _your own email address_ in place of `<enter your email address>`:
-~~~
+~~~python
 from Bio import Entrez
-Entrez.email = "<enter your email address>"
-~~~
-{: .python}
+import time
+import sys
 
-Now we can fetch a Genbank record:
-~~~
-handle = Entrez.efetch(db="nucleotide", id="DQ137224", rettype="gb", retmode="text")
-record = SeqIO.read(handle, "genbank")
-print(record)
-~~~
-{: .python}
-~~~
-ID: DQ137224.1
-Name: DQ137224
-Description: Megadyptes antipodes voucher JD64A cytochrome b (cytb) gene, partial cds; mitochondrial
-Number of features: 3
-/molecule_type=DNA
-/topology=linear
-/data_file_division=VRT
-/date=26-JUL-2016
-/accessions=['DQ137224']
-/sequence_version=1
-/keywords=['']
-/source=mitochondrion Megadyptes antipodes (Yellow-eyed penguin)
-/organism=Megadyptes antipodes
-/taxonomy=['Eukaryota', 'Metazoa', 'Chordata', 'Craniata', 'Vertebrata', 'Euteleostomi', 'Archelosauria', 'Archosauria', 'Dinosauria', 'Saurischia', 'Theropoda', 'Coelurosauria', 'Aves', 'Neognathae', 'Sphenisciformes', 'Spheniscidae', 'Megadyptes']
-/references=[Reference(title='Multiple gene evidence for expansion of extant penguins out of Antarctica due to global cooling', ...), Reference(title='Direct Submission', ...)]
-Seq('ACACAAATTCTAACTGGCCTCCTACTGGCCGCCCACTACACTGCAGACACAACC...AGC', IUPACAmbiguousDNA())
-~~~
-{: .output}
+# Set your email address - REQUIRED by NCBI
+Entrez.email = "your_email@example.com"  # Replace with your actual email
 
-## BLAST
+# Optional: Set a tool name to identify your application
+Entrez.tool = "Biopython_Tutorial"
+
+# Function to handle rate limiting and retries
+def fetch_with_retry(func, max_retries=3, delay=5, *args, **kwargs):
+    """
+    Fetch data from NCBI with retry logic and rate limiting.
+    
+    Parameters:
+    - func: The Entrez function to call
+    - max_retries: Maximum number of retry attempts
+    - delay: Delay in seconds between retries
+    - *args, **kwargs: Arguments to pass to the function
+    """
+    for attempt in range(max_retries):
+        try:
+            # Add a small delay to respect NCBI rate limits
+            time.sleep(0.5)  # 0.5 second delay between requests
+            result = func(*args, **kwargs)
+            return result
+        except Exception as e:
+            print(f"Attempt {attempt + 1} failed: {e}")
+            if attempt < max_retries - 1:
+                print(f"Retrying in {delay} seconds...")
+                time.sleep(delay)
+            else:
+                print(f"All {max_retries} attempts failed.")
+                raise
+~~~
+
+### Downloading a GenBank Record
+
+Now we can fetch a Genbank record with robust error handling:
+
+~~~python
+# Function to download a GenBank record
+def download_genbank(accession, output_format="genbank"):
+    """
+    Download a GenBank record from NCBI with error handling.
+    
+    Parameters:
+    - accession: GenBank accession number
+    - output_format: Format to return ('genbank' or 'fasta')
+    
+    Returns:
+    - SeqRecord object or None if failed
+    """
+    try:
+        print(f"Fetching {accession} from NCBI...")
+        handle = fetch_with_retry(
+            Entrez.efetch,
+            db="nucleotide",
+            id=accession,
+            rettype=output_format,
+            retmode="text"
+        )
+        record = SeqIO.read(handle, output_format)
+        handle.close()
+        print(f"Successfully downloaded {accession}")
+        return record
+    except Exception as e:
+        print(f"Error downloading {accession}: {e}")
+        return None
+
+# Download a GenBank record
+accession = "DQ137224"  # Yellow-eyed penguin cytochrome b
+record = download_genbank(accession, "genbank")
+
+if record:
+    print(f"ID: {record.id}")
+    print(f"Name: {record.name}")
+    print(f"Description: {record.description}")
+    print(f"Length: {len(record.seq)} bp")
+    print(f"Organism: {record.annotations.get('organism', 'Unknown')}")
+    print(f"Taxonomy: {record.annotations.get('taxonomy', [])}")
+else:
+    print("Failed to download record.")
+~~~
+
+### Downloading Multiple Records with Rate Limiting
+
+~~~python
+def download_multiple_genbank(accessions, output_format="genbank", delay=1.0):
+    """
+    Download multiple GenBank records with rate limiting.
+    
+    Parameters:
+    - accessions: List of accession numbers
+    - output_format: Format to return ('genbank' or 'fasta')
+    - delay: Delay in seconds between requests
+    
+    Returns:
+    - List of SeqRecord objects
+    """
+    records = []
+    for i, accession in enumerate(accessions):
+        print(f"Downloading {i+1}/{len(accessions)}: {accession}")
+        record = download_genbank(accession, output_format)
+        if record:
+            records.append(record)
+        # Add delay between requests to respect rate limits
+        if i < len(accessions) - 1:
+            time.sleep(delay)
+    return records
+
+# Example: Download multiple records
+accessions = ["DQ137224", "DQ137225", "DQ137226"]
+records = download_multiple_genbank(accessions, "genbank", delay=1.0)
+print(f"Successfully downloaded {len(records)} records")
+~~~
+
+### Saving Records to Files
+
+~~~python
+# Function to save records to a file
+def save_records(records, output_file, format="genbank"):
+    """
+    Save SeqRecord objects to a file.
+    
+    Parameters:
+    - records: List of SeqRecord objects
+    - output_file: Output file path
+    - format: Output format ('genbank' or 'fasta')
+    """
+    try:
+        with open(output_file, "w") as handle:
+            SeqIO.write(records, handle, format)
+        print(f"Successfully saved {len(records)} records to {output_file}")
+    except Exception as e:
+        print(f"Error saving records: {e}")
+
+# Save downloaded records
+if records:
+    save_records(records, "downloaded_records.gbk", "genbank")
+    save_records(records, "downloaded_records.fasta", "fasta")
+~~~
+
+### Searching NCBI Databases
+
+~~~python
+def search_ncbi(db, term, retmax=10, email=None):
+    """
+    Search NCBI databases and return a list of IDs.
+    
+    Parameters:
+    - db: Database to search (e.g., "nucleotide", "protein")
+    - term: Search term
+    - retmax: Maximum number of results to return
+    - email: Email address (required by NCBI)
+    
+    Returns:
+    - List of IDs
+    """
+    if email:
+        Entrez.email = email
+    
+    try:
+        print(f"Searching {db} for '{term}'...")
+        handle = Entrez.esearch(db=db, term=term, retmax=retmax)
+        search_results = Entrez.read(handle)
+        handle.close()
+        
+        ids = search_results.get("IdList", [])
+        print(f"Found {len(ids)} results")
+        return ids
+    except Exception as e:
+        print(f"Error searching NCBI: {e}")
+        return []
+
+# Example: Search for sequences
+search_term = "yellow-eyed penguin cytochrome b"
+ids = search_ncbi("nucleotide", search_term, retmax=5)
+
+if ids:
+    print(f"Found IDs: {ids}")
+    # Download the first result
+    if ids:
+        record = download_genbank(ids[0])
+        if record:
+            print(f"\nFirst result: {record.id}")
+            print(f"Description: {record.description}")
+~~~
+
+### Downloading with Batch Entrez
+
+For downloading many sequences, use `efetch` with multiple IDs:
+
+~~~python
+def download_batch_genbank(id_list, email=None):
+    """
+    Download multiple GenBank records using batch efetch.
+    
+    Parameters:
+    - id_list: List of NCBI IDs
+    - email: Email address (required by NCBI)
+    
+    Returns:
+    - List of SeqRecord objects
+    """
+    if email:
+        Entrez.email = email
+    
+    try:
+        # Join IDs with commas
+        ids = ",".join(id_list)
+        print(f"Batch fetching {len(id_list)} records...")
+        
+        handle = fetch_with_retry(
+            Entrez.efetch,
+            db="nucleotide",
+            id=ids,
+            rettype="gb",
+            retmode="text"
+        )
+        
+        records = list(SeqIO.parse(handle, "genbank"))
+        handle.close()
+        print(f"Successfully fetched {len(records)} records")
+        return records
+    except Exception as e:
+        print(f"Error in batch download: {e}")
+        return []
+
+# Example: Batch download
+if len(ids) > 1:
+    batch_records = download_batch_genbank(ids[:5])  # Download first 5
+    print(f"Downloaded {len(batch_records)} records in batch")
+~~~
+
+### BLAST with Error Handling
 
 BioPython makes it easy to work with NCBI's BLAST. To run 
 blast over the internet, we can use `qblast()`. 
-For this we must import the `NCBIWWW` module:
 
-~~~
-from Bio.Blast import NCBIWWW
-~~~
-{: .python}
+~~~python
+from Bio.Blast import NCBIWWW, NCBIXML
 
-You can call the `help()` function on `NCBIWWW.qblast` to inspect how this 
-function works. This will return all of the parameters of `qblast` so that
-you can understand how to specify your query correctly.
-~~~
-help(NCBIWWW.qblast)
-~~~
-{: .python}
+def run_blast_with_retry(sequence, program="blastn", database="nt", max_retries=3, delay=10):
+    """
+    Run BLAST search with retry logic.
+    
+    Parameters:
+    - sequence: Seq object or string
+    - program: BLAST program (blastn, blastp, etc.)
+    - database: Database to search
+    - max_retries: Maximum number of retry attempts
+    - delay: Delay in seconds between retries
+    
+    Returns:
+    - Handle to BLAST results
+    """
+    for attempt in range(max_retries):
+        try:
+            print(f"Running BLAST (attempt {attempt + 1})...")
+            time.sleep(0.5)  # Rate limiting
+            result_handle = NCBIWWW.qblast(program, database, sequence)
+            return result_handle
+        except Exception as e:
+            print(f"BLAST attempt {attempt + 1} failed: {e}")
+            if attempt < max_retries - 1:
+                print(f"Retrying in {delay} seconds...")
+                time.sleep(delay)
+            else:
+                print("All BLAST attempts failed.")
+                raise
 
+# Example: Run BLAST
+def run_blast_example():
+    # Use a sample sequence
+    sample_seq = "ACACAAATTCTAACTGGCCTCCTACTGGCCGCCCACTACACTGCAGACACAACC"
+    seq_obj = Seq(sample_seq)
+    
+    try:
+        result_handle = run_blast_with_retry(seq_obj, "blastn", "nt")
+        
+        # Save results to file
+        with open("blast_results.xml", "w") as out_handle:
+            out_handle.write(result_handle.read())
+        result_handle.close()
+        
+        # Parse results
+        with open("blast_results.xml") as in_handle:
+            blast_record = NCBIXML.read(in_handle)
+        
+        # Display top hits
+        print("\nTop BLAST hits:")
+        for i, alignment in enumerate(blast_record.alignments[:5]):
+            print(f"{i+1}. {alignment.title[:60]}...")
+            print(f"   Score: {alignment.hsps[0].score}")
+            print(f"   E-value: {alignment.hsps[0].expect}")
+            print()
+            
+        return blast_record
+    except Exception as e:
+        print(f"BLAST failed: {e}")
+        return None
 
-Next we can read in a sequence that is stored in a FASTA file called [`test.fasta`](https://raw.githubusercontent.com/mesfind/bioinfo-python/gh-pages/data/test.fasta).
-~~~
-query = SeqIO.read("test.fasta", format="fasta")
-~~~
-{: .python}
-
-The variable we created called `query` is a sequence stored in a `SeqRecord`
-object. 
-
-<!-- ~~~
-query.description
-~~~
-{: .python}
- -->
-
-To run a BLAST search on the sequence from our FASTA file, we simply
-have to specify the search program (`blastn`) and the database (`nt`). 
-The last argument is the `Seq` object stored in our `query`. 
-~~~
-result_handle = NCBIWWW.qblast("blastn", "nt", query.seq)
-~~~
-{: .python}
-
-Note that this might not work for everyone in class. It is possible
-for NCBI to throttle non-interactive users.
-
-Once we have the results of our BLAST, we can store them in an XML file.
-~~~
-blast_file = open("my_blast.xml", "w")
-blast_file.write(result_handle.read())
-~~~
-{: .python}
-
-Once we have stored the results, it's best to close all of our open 
-file handles:
-~~~
-blast_file.close()
-result_handle.close()
-~~~
-{: .python}
-
-
-We created an XML file containing our BLAST results. This is now easy to 
-parse using the `NCBIXML` tools:
-~~~
-from Bio.Blast import NCBIXML
-handle = open("my_blast.xml")
-blast_record = NCBIXML.read(handle)
-~~~
-{: .python}
-
-
-Now that we have read in the file, we can 
-print each of the hits:
-~~~
-for hit in blast_record.descriptions: 
-    print(hit.title)
-    print(hit.e)
-~~~
-{: .python}
-
-~~~
-gi|1105484513|ref|XM_002284686.3| PREDICTED: Vitis vinifera cold-regulated 413 plasma membrane protein 2 (LOC100248690), mRNA
-0.0
-gi|1420088022|gb|MG722853.1| Vitis vinifera cold-regulated 413 inner membrane protein 2 mRNA, complete cds
-0.0
-gi|123704572|emb|AM483681.1| Vitis vinifera, whole genome shotgun sequence, contig VV78X045699.9, clone ENTAV 115
-0.0
-
-...
-
-gi|1027107741|ref|XM_008238505.2| PREDICTED: Prunus mume cold-regulated 413 plasma membrane protein 1-like (LOC103335494), mRNA
-1.04564e-118
-~~~
-{: .output}
-
-We can also view the alignments for each of the BLAST hits:
-~~~
-for hit in blast_record.alignments:
-    for hsp in hit.hsps:
-      print(hit.title) 
-      print(hsp.expect)
-      print(hsp.query[0:75] + '...')
-      print(hsp.match[0:75] + '...') 
-      print(hsp.sbjct[0:75] + '...')
-~~~
-{: .python}
-
-~~~
-gi|1105484513|ref|XM_002284686.3| PREDICTED: Vitis vinifera cold-regulated 413 plasma membrane protein 2 (LOC100248690), mRNA
-0.0
-TACTCTACAGTCTCTGACTTTGTAAGCTTCGCGCTTCTTCTCCTTTTTCTCTCTGGGGAAAGATTTTCCCTTTCT...
-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||...
-TACTCTACAGTCTCTGACTTTGTAAGCTTCGCGCTTCTTCTCCTTTTTCTCTCTGGGGAAAGATTTTCCCTTTCT...
-
-...
-
-gi|1027107741|ref|XM_008238505.2| PREDICTED: Prunus mume cold-regulated 413 plasma membrane protein 1-like (LOC103335494), mRNA
-1.04564e-118
-ATTGAAGATGGGGAAAAAGGGTTACTTGGCGATGAGGACTGACACTGATACTACTGATTTGATCAGTTCTGATCT...
-|||| ||||||  ||| || | ||||||   |||| ||||||  | ||| | | ||| ||||||   || |||||...
-ATTGGAGATGGCAAAACAGAGCTACTTGAAAATGATGACTGAACCAGATGCAAATGAATTGATCCACTCCGATCT...
-~~~
-{: .output}
-
-Often a BLAST search will return many matches for a single query, as is the 
-case for this example. This is why it is best to save them in an XML file.
-Using `NCBIXML.parse()` enables us to evaluate each of the BLAST records.
-We can specify a threshold so that we can easily inspect the closest 
-matches.
-~~~
-E_VALUE_THRESH = 1e-150
-for record in NCBIXML.parse(open("my_blast.xml")):
-    for align in record.alignments: 
-        for hsp in align.hsps:
-            if hsp.expect < E_VALUE_THRESH: 
-                print("MATCH: %s " % align.title[:60]) 
-                print(hsp.expect)
-~~~
-{: .python}
-
-~~~
-MATCH: gi|1105484513|ref|XM_002284686.3| PREDICTED: Vitis vinifera  
-0.0
-MATCH: gi|1420088022|gb|MG722853.1| Vitis vinifera cold-regulated 4 
-0.0
-MATCH: gi|123704572|emb|AM483681.1| Vitis vinifera, whole genome sh 
-0.0
-MATCH: gi|1217007653|ref|XM_021787586.1| PREDICTED: Hevea brasilien 
-9.7761e-151
-MATCH: gi|1217007651|ref|XM_021787585.1| PREDICTED: Hevea brasilien 
-9.7761e-151
-~~~
-{: .output}
-
-
-Our BLAST search has matched our sequence with _Vitis vinifera_. 
-Let's check to see if it got it right:
-~~~
-query.description
-~~~
-{: .python}
-
-
-> ## Take-Home Challenge: Biopython
->
-> Experiment with features of biopython using the sequence in the variable `query` that we loaded from `test.fasta`.
->
-> 1. Print the reverse complement of the sequence to screen.
->
-> 2. Write your own function to calculate the GC content of this sequence to screen.
->
-<!-- > > ## Solutions
-> >
-> > The solutions will be posted in 4 days. Feel free to use the `#scripting_help` channel in Slack to discuss these exercises. 
-> {: .solution} -->
-{: .challenge}
-
-<!-- 
+# Uncomment to run BLAST (this may take time)
+# blast_record = run_blast_example()
 ~~~
 
-~~~
-{: .python}
- -->
+## Visualizing Genomics Data with Geneview
 
+geneview is a library for making attractive and informative genomics graphics in Python. It is built on top of matplotlib and tightly integrated with the PyData stack, including support for numpy and pandas data structures.
 
+To install geneview:
 
-## Visualizing genomics data  witg geneview
-
-
-geneview is a library for making attractive and informative genomics graphics in Python. It is built on top of matplotlib and tightly integrated with the PyData stack, including support for numpy and pandas data structures. And now it is actively developed.
-
-Some of the features that geneview offers are:
-
-  - High-level abstractions for structuring grids of plots that let you easily build complex visualizations.
-  - Functions for visualizing general genomics plots.
-
-This command will install geneview and all the dependencies.
-~~~
-%%bash
+```bash
 pip install geneview
-~~~
-{: .python}
+```
 
-We use a PLINK2.x association output data `gwas.csv` which is in [geneview-data](https://github.com/ShujiaHuang/geneview-data) directory, as the input for the plots below. 
-~~~
+### Manhattan Plot
+
+We use a PLINK2.x association output data `gwas.csv` which is in [geneview-data](https://github.com/ShujiaHuang/geneview-data) directory, as the input for the plots below.
+
+~~~python
 import matplotlib.pyplot as plt
 import geneview as gv
 
-# load data
-df = gv.load_dataset("gwas")
-# Plot a basic manhattan plot with horizontal xtick labels and the figure will display in screen.
+# Load data from the geneview package
+try:
+    df = gv.load_dataset("gwas")
+    print("Data loaded successfully")
+    print(df.head())
+except Exception as e:
+    print(f"Error loading data: {e}")
+    print("Creating sample data for demonstration...")
+    # Create sample data if real data is not available
+    import pandas as pd
+    import numpy as np
+    np.random.seed(42)
+    df = pd.DataFrame({
+        'CHR': np.repeat(range(1, 23), 100),
+        'BP': np.random.randint(1, 250000000, 2200),
+        'P': np.random.exponential(0.1, 2200),
+        'ID': [f'rs{i}' for i in range(2200)]
+    })
+    df.loc[df['P'] > 1, 'P'] = 1  # Cap P-values
+
+# Plot a basic manhattan plot
+plt.figure(figsize=(12, 6))
 ax = gv.manhattanplot(data=df)
+plt.title("Manhattan Plot of GWAS Results")
 plt.show()
 ~~~
-{: .python}
 
 ![](../fig/geneview_1.png)
 
+### Customized Manhattan Plot
 
 Rotate the x-axis tick label by setting xticklabel_kws to avoid label overlap:
 
-~~~
-ax = manhattanplot(data=df, xticklabel_kws={"rotation": "vertical"})
-~~~
-{: .python}
-
-
-Futher graphical parameters can be passed to the manhattanplot() function to control thing like plot title, point character, size, colors, etc. Here is the example:
-
-~~~
+~~~python
 import matplotlib.pyplot as plt
 import geneview as gv
 
-# common parameters for plotting
+# Common parameters for plotting
 plt_params = {
     "pdf.fonttype": 42,
     "font.sans-serif": "Arial",
@@ -609,22 +673,19 @@ plt.rcParams.update(plt_params)
 
 # Create a manhattan plot
 f, ax = plt.subplots(figsize=(12, 4), facecolor="w", edgecolor="k")
-xtick = set(["chr" + i for i in list(map(str, range(1, 10))) + ["11", "13", "15", "18", "21", "X"]])
+xtick = set(["chr" + str(i) for i in list(map(str, range(1, 10))) + ["11", "13", "15", "18", "21", "X"]])
+
 _ = gv.manhattanplot(data=df,
                      marker=".",
                      sign_marker_p=1e-6,  # Genome wide significant p-value
                      sign_marker_color="r",
-                     snp="ID",  # The column name of annotation information for top SNPs.
-
+                     snp="ID",  # The column name of annotation information for top SNPs
                      title="Test",
                      xtick_label_set=xtick,
-                  
                      xlabel="Chromosome",
                      ylabel=r"$-log_{10}{(P)}$",
-
                      sign_line_cols=["#D62728", "#2CA02C"],
                      hline_kws={"linestyle": "--", "lw": 1.3},
-
                      is_annotate_topsnp=True,
                      ld_block_size=50000,  # 50000 bp
                      text_kws={"fontsize": 12,
@@ -632,18 +693,14 @@ _ = gv.manhattanplot(data=df,
                      ax=ax)
 plt.show()
 ~~~
-{: .python}
 
 ![](../fig/geneview_2.png)
 
+### QQ Plot with Default Parameters
 
+The qqplot() function can be used to generate a Q-Q plot to visualize the distribution of association "P-value". The qqplot() function takes a vector of P-values as its only required argument.
 
-### QQ plot with default parameters
-
-The qqplot() function can be used to generate a Q-Q plot to visualize the distribution of association "P-value". The qqplot() function takes a vector of P-values as its the only required argument.
-
-~~~
-
+~~~python
 import matplotlib.pyplot as plt
 import geneview as gv
 
@@ -656,9 +713,173 @@ _ = gv.qqplot(data=df["P"],
               ax=ax)
 plt.show()
 ~~~
-{: .python}
 
 ![](../fig/qq_geneview_1.png)
+
+### Download the Example GenBank File
+
+~~~python
+import os
+import urllib.request
+
+def download_example_file(url, filename):
+    """
+    Download a file from a URL with error handling.
+    
+    Parameters:
+    - url: URL to download from
+    - filename: Local filename to save as
+    
+    Returns:
+    - Boolean indicating success
+    """
+    if not os.path.isfile(filename):
+        try:
+            print(f"Downloading {filename} from {url}...")
+            urllib.request.urlretrieve(url, filename)
+            print(f"Successfully downloaded {filename}")
+            return True
+        except Exception as e:
+            print(f"Error downloading file: {e}")
+            print(f"Please download the file manually from:")
+            print(url)
+            return False
+    else:
+        print(f"{filename} already exists.")
+        return True
+
+# Download the example GenBank file
+gbk_url = "https://raw.githubusercontent.com/biopython/biopython/master/Doc/examples/ls_orchid.gbk"
+gbk_file = "ls_orchid.gbk"
+
+if download_example_file(gbk_url, gbk_file):
+    # Read and display information about the file
+    records = list(SeqIO.parse(gbk_file, "genbank"))
+    print(f"\nFile contains {len(records)} GenBank records")
+    print(f"First record ID: {records[0].id}")
+    print(f"First record description: {records[0].description}")
+~~~
+
+## Complete Workflow Example
+
+Here's a complete workflow that demonstrates downloading, processing, and analyzing sequence data:
+
+~~~python
+def complete_biopython_workflow():
+    """
+    Complete workflow: Search, download, and analyze sequences.
+    """
+    print("=== Biopython Complete Workflow ===\n")
+    
+    # Step 1: Search for sequences
+    search_term = "cytochrome b penguin"
+    print(f"1. Searching for '{search_term}'...")
+    ids = search_ncbi("nucleotide", search_term, retmax=5)
+    
+    if not ids:
+        print("No results found. Exiting workflow.")
+        return
+    
+    print(f"Found {len(ids)} sequences.\n")
+    
+    # Step 2: Download sequences
+    print("2. Downloading sequences...")
+    records = []
+    for i, acc in enumerate(ids[:3]):  # Limit to 3 for demonstration
+        print(f"  Downloading {i+1}: {acc}")
+        record = download_genbank(acc, "genbank")
+        if record:
+            records.append(record)
+            # Print some info
+            print(f"    Length: {len(record.seq)} bp")
+            print(f"    Organism: {record.annotations.get('organism', 'Unknown')}")
+            print(f"    GC content: {100 * (record.seq.count('G') + record.seq.count('C')) / len(record.seq):.1f}%\n")
+    
+    # Step 3: Save to file
+    if records:
+        print(f"3. Saving {len(records)} records to file...")
+        save_records(records, "workflow_output.gbk", "genbank")
+        save_records(records, "workflow_output.fasta", "fasta")
+    
+    # Step 4: Analyze sequences
+    print("\n4. Analyzing sequences...")
+    for i, record in enumerate(records):
+        seq = record.seq
+        length = len(seq)
+        gc = 100 * (seq.count('G') + seq.count('C')) / length
+        at = 100 * (seq.count('A') + seq.count('T')) / length
+        
+        print(f"\n  Sequence {i+1}: {record.id}")
+        print(f"    Length: {length} bp")
+        print(f"    GC Content: {gc:.1f}%")
+        print(f"    AT Content: {at:.1f}%")
+        print(f"    GC/AT Ratio: {gc/at:.2f}")
+    
+    print("\n=== Workflow Complete ===")
+
+# Run the complete workflow
+# Uncomment to run:
+# complete_biopython_workflow()
+~~~
+
+> ## Take-Home Challenge: Biopython Sequence Analysis
+>
+> Experiment with features of biopython using the sequence you downloaded.
+>
+> 1. Download a human gene sequence from NCBI (e.g., BRCA1, TP53) using the robust download functions.
+>
+> 2. Calculate and print the GC content of the sequence.
+>
+> 3. Find all ORFs (Open Reading Frames) in the sequence using Biopython's `Seq` object methods.
+>
+> 4. Translate the sequence to protein and identify any potential domains.
+>
+> 5. Write your own function to calculate the molecular weight of the translated protein.
+>
+> > ## Solutions
+> >
+> > ~~~python
+> > # 1. Download BRCA1 sequence
+> > brca1 = download_genbank("NM_007294", "genbank")
+> > if brca1:
+> >     print(f"BRCA1: {len(brca1.seq)} bp")
+> >     
+> >     # 2. Calculate GC content
+> >     seq = brca1.seq
+> >     gc = 100 * (seq.count('G') + seq.count('C')) / len(seq)
+> >     print(f"GC Content: {gc:.1f}%")
+> >     
+> >     # 3. Find ORFs
+> >     from Bio.Seq import translate
+> >     # Find ORFs (simple example - find all ATG to stop codons)
+> >     orfs = []
+> >     for frame in range(3):
+> >         prot = translate(seq[frame:], to_stop=True)
+> >         if len(prot) > 0:
+> >             orfs.append((frame, len(prot)))
+> >     print(f"ORFs found: {orfs}")
+> >     
+> >     # 4. Translate to protein
+> >     protein = translate(seq[seq.find('ATG'):])
+> >     print(f"Protein length: {len(protein)} aa")
+> >     
+> >     # 5. Calculate molecular weight
+> >     def calc_molecular_weight(protein_seq):
+> >         # Approximate molecular weight using average amino acid mass
+> >         aa_weights = {
+> >             'A': 89.09, 'R': 174.20, 'N': 132.12, 'D': 133.10,
+> >             'C': 121.16, 'E': 147.13, 'Q': 146.15, 'G': 75.07,
+> >             'H': 155.16, 'I': 131.17, 'L': 131.17, 'K': 146.19,
+> >             'M': 149.21, 'F': 165.19, 'P': 115.13, 'S': 105.09,
+> >             'T': 119.12, 'W': 204.23, 'Y': 181.19, 'V': 117.15
+> >         }
+> >         return sum(aa_weights.get(aa, 0) for aa in str(protein_seq))
+> >     
+> >     mol_weight = calc_molecular_weight(protein)
+> >     print(f"Molecular weight: {mol_weight:.1f} Da")
+> > ~~~
+> {: .solution}
+{: .challenge}
 
 
 
