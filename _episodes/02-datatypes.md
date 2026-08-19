@@ -687,28 +687,3 @@ import this
 > > 
 > {: .solution}
 {: .challenge}
-
----
-
-## Syllabus
-
-### Introduction to Python & Biological Data
-- Setting up Python environment (Anaconda, Jupyter Notebook)
-- Python fundamentals: variables, data types, operators, and strings
-- Python data structures: lists, dictionaries, loops, and conditional statements
-- Working with biological sequence data (DNA manipulation, nucleotide counting, GC content)
-
-### Python for Sequence Analysis
-- Functions and modular programming for biological analysis
-- File handling and biological data formats (reading and writing text and FASTA files)
-- Introduction to Biopython: FASTA parsing and sequence statistics
-- Sequence analysis: DNA translation, protein sequence generation, sequence alignment, and database retrieval
-
-### Bioinformatics Data Analysis & Visualization
-- Introduction to Pandas and NumPy
-- Creating biological datasets from FASTA files
-- Data cleaning, summarization, and nucleotide composition analysis
-- Biological data visualization (sequence length, GC content, scatter plots)
-- Advanced visualization: GC/AT skew, codon usage, amino acid composition, heatmaps, and ORF analysis
-ed spaces between elements in dictionary definitions
-12. **Fixed triple quotes** - Ensured docstring examples use proper triple quote formatting
